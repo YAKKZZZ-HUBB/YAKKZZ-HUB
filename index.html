@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+<title>⚡ YAKKZZ CALCULATOR — Steal An Egg AFK Speed</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',system-ui,-apple-system,sans-serif; -webkit-tap-highlight-color:transparent; }
+body {
+  min-height:100vh;
+  background: radial-gradient(circle at 20% 20%, #0b1120, #070b14 80%);
+  display:flex; justify-content:center; align-items:flex-start;
+  padding:16px; color:#eef4ff; overflow-x:hidden; position:relative;
+}
+body::before {
+  content:''; position:fixed; inset:0;
+  background: radial-gradient(circle at 80% 30%, rgba(0,200,255,.10), transparent 60%),
+              radial-gradient(circle at 30% 80%, rgba(160,80,255,.10), transparent 60%);
+  pointer-events:none; z-index:0; animation:pulseGlow 8s infinite alternate;
+}
+@keyframes pulseGlow { 0%{opacity:.6} 100%{opacity:1} }
+.app { width:100%; max-width:1000px; position:relative; z-index:1; display:flex; flex-direction:column; gap:18px; padding:6px 0 30px; }
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:rgba(255,255,255,.04); border-radius:10px; }
+::-webkit-scrollbar-thumb { background:#2a6fdb; border-radius:10px; }
+.header { text-align:center; padding:10px 10px 0; }
+.header h1 {
+  font-size:clamp(1.9rem,8vw,3.2rem); font-weight:900; letter-spacing:2px;
+  background:linear-gradient(135deg,#8ecae6,#219ebc,#a06cd5);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text; filter:drop-shadow(0 0 22px rgba(0,180,255,.5));
+  line-height:1.15;
+}
+.header .sub { font-size:clamp(.85rem,3.5vw,1.25rem); font-weight:600; color:#8eb9e0; letter-spacing:2px; margin-top:4px; text-shadow:0 0 12px rgba(0,160,255,.3); }
+.header .desc { font-size:clamp(.7rem,2.8vw,.95rem); color:#a0b8d4; margin-top:8px; opacity:.85; }
+.card {
+  background:rgba(14,24,44,.65);
+  backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(60,140,255,.22);
+  border-radius:28px; padding:22px 20px;
+  box-shadow:0 15px 35px rgba(0,0,0,.6), 0 0 30px rgba(0,120,255,.08) inset;
+  transition:border-color .35s, box-shadow .35s;
+}
+.card:hover { border-color:rgba(0,200,255,.45); box-shadow:0 20px 45px rgba(0,0,0,.7), 0 0 45px rgba(0,180,255,.15) inset; }
+.card-title {
+  font-size:.85rem; font-weight:800; letter-spacing:2px; text-transform:uppercase;
+  color:#7cb8ff; margin-bottom:16px; display:flex; align-items:center; gap:10px;
+  text-shadow:0 0 15px rgba(0,160,255,.4);
+}
+.card-title span { font-size:1.25rem; filter:drop-shadow(0 0 8px rgba(0,180,255,.6)); }
+.input-wrap { display:flex; flex-direction:column; gap:6px; }
+.input-field {
+  background:rgba(0,0,0,.45); border:1.5px solid #1e3a5f; border-radius:18px;
+  padding:16px 20px; font-size:1.3rem; font-weight:700; color:#d6ecff; outline:none;
+  transition:.3s; width:100%; caret-color:#00c8ff; letter-spacing:.5px;
+}
+.input-field:focus { border-color:#00a6ff; box-shadow:0 0 25px rgba(0,160,255,.35); background:rgba(0,20,50,.7); }
+.input-field::placeholder { color:#4a6f8f; font-weight:400; font-size:1rem; }
+.error-msg { color:#ff6b7a; font-size:.72rem; min-height:16px; margin-top:4px; letter-spacing:.3px; font-weight:600; }
+.hint-msg { font-size:.7rem; color:#7aa0c0; margin-top:2px; letter-spacing:.3px; }
+.btn-grid { display:flex; flex-wrap:wrap; gap:8px; margin-top:4px; }
+.btn-grid.tight { gap:7px; }
+.opt-btn {
+  background:rgba(10,30,60,.7); border:1.5px solid #1f4b7a; border-radius:40px;
+  padding:10px 18px; font-size:.82rem; font-weight:800; color:#b0d0f0;
+  cursor:pointer; transition:all .22s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 4px 12px rgba(0,0,0,.4); letter-spacing:.4px;
+  flex:0 0 auto; white-space:nowrap;
+}
+.opt-btn:hover { background:rgba(0,100,200,.35); border-color:#3a8aff; transform:translateY(-2px) scale(1.03); box-shadow:0 0 22px rgba(0,150,255,.45); }
+.opt-btn:active { transform:scale(.97); }
+.opt-btn.active {
+  background:linear-gradient(135deg,#0a4b8a,#1a6fd0);
+  border-color:#5ab0ff; color:#fff;
+  box-shadow:0 0 28px rgba(0,160,255,.6), inset 0 0 12px rgba(100,200,255,.3);
+  transform:scale(1.04);
+}
+  .list-container {
+  display:flex; flex-direction:column; gap:0;
+  background:rgba(15,15,22,.75);
+  border-radius:22px; overflow:hidden;
+  border:1px solid rgba(80,140,220,.25);
+  box-shadow:0 8px 25px rgba(0,0,0,.5), inset 0 0 20px rgba(0,100,255,.05);
+  margin-top:4px;
+  max-height:340px;
+  overflow-y:auto;
+}
+.list-btn {
+  display:flex; justify-content:space-between; align-items:center;
+  width:100%; border-radius:0; border:none;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  background:rgba(28,28,38,.55);
+  padding:16px 20px; font-size:.95rem; font-weight:600;
+  color:#e8eef7; text-align:left; letter-spacing:.3px;
+  box-shadow:none; cursor:pointer; transition:background .2s, box-shadow .2s;
+  flex-shrink:0;
+}
+.list-btn:last-child { border-bottom:none; }
+.list-btn:hover { background:rgba(40,60,100,.7); }
+.list-btn.active {
+  background:linear-gradient(90deg, rgba(20,60,120,.85), rgba(30,80,150,.6));
+  box-shadow:inset 0 0 0 1.5px #4aa8ff, inset 0 0 25px rgba(0,160,255,.15);
+}
+.list-btn .radio {
+  width:22px; height:22px; border-radius:50%;
+  border:2px solid #556; display:inline-block; position:relative;
+  flex-shrink:0; margin-left:14px; transition:.25s;
+}
+.list-btn.active .radio {
+  border-color:#fff;
+  background:radial-gradient(circle, #fff 0 42%, transparent 46%);
+  box-shadow:0 0 15px rgba(0,200,255,.8);
+}
+.result-card {
+  background:linear-gradient(145deg, rgba(8,18,36,.96), rgba(4,10,22,.98));
+  border:1.5px solid rgba(0,180,255,.35);
+  box-shadow:0 0 50px rgba(0,120,255,.18), 0 20px 45px rgba(0,0,0,.85);
+  position:relative; overflow:hidden;
+}
+.result-card::after {
+  content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%;
+  background:conic-gradient(from 0deg, transparent, rgba(0,200,255,.05), transparent 30%);
+  animation:rotateGlow 14s linear infinite; pointer-events:none;
+}
+@keyframes rotateGlow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+.result-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px 18px; position:relative; z-index:1; }
+.result-item { display:flex; flex-direction:column; gap:3px; }
+.result-item .label { font-size:.66rem; font-weight:700; text-transform:uppercase; letter-spacing:1.3px; color:#7aa0c0; }
+.result-item .value {
+  font-size:1.4rem; font-weight:800; color:#c6e2ff;
+  text-shadow:0 0 18px rgba(0,160,255,.35); line-height:1.2; word-break:break-word;
+}
+.result-item.total { grid-column:span 2; margin-top:8px; border-top:1px solid rgba(0,160,255,.25); padding-top:16px; }
+.result-item.total .label { color:#8ab8e0; font-size:.72rem; letter-spacing:1.6px; }
+.result-item.total .value {
+  font-size:clamp(2.3rem,11vw,3.4rem);
+  background:linear-gradient(135deg,#a0d8ff,#4aa8ff,#b07aff);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text; filter:drop-shadow(0 0 22px rgba(0,160,255,.7));
+  text-shadow:none; line-height:1.1; font-weight:900; letter-spacing:-1px;
+}
+.result-item.final {
+  grid-column:span 2; margin-top:8px;
+  border-top:1px solid rgba(160,80,255,.35); padding-top:16px;
+}
+.result-item.final .label { color:#c88aff; font-size:.72rem; letter-spacing:1.6px; }
+.result-item.final .value {
+  font-size:clamp(2.3rem,11vw,3.4rem);
+  background:linear-gradient(135deg,#c8a0ff,#8a5aff,#4aa8ff);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text; filter:drop-shadow(0 0 22px rgba(160,80,255,.7));
+  text-shadow:none; line-height:1.1; font-weight:900; letter-spacing:-1px;
+}
+.action-row { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:4px; }
+.action-btn {
+  flex:1 1 130px; padding:15px 14px; border-radius:60px; border:none;
+  font-weight:800; font-size:.78rem; letter-spacing:1px; text-transform:uppercase;
+  cursor:pointer; transition:all .25s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 8px 20px rgba(0,0,0,.55); position:relative; overflow:hidden;
+}
+.action-btn:active { transform:scale(.95); }
+.action-btn:hover { transform:translateY(-2px); }
+.btn-reset { background:linear-gradient(135deg,#1a1f2e,#2a1f3a); color:#d0aaff; border:1.5px solid #5a3a8a; }
+.btn-reset:hover { background:linear-gradient(135deg,#2a1f4a,#3a2a5a); box-shadow:0 0 28px rgba(160,80,255,.5); }
+.btn-copy-result { background:linear-gradient(135deg,#0a3a6a,#0a5a9a); color:#b0e0ff; border:1.5px solid #1a8aff; }
+.btn-copy-result:hover { background:linear-gradient(135deg,#0a4a8a,#0a6aba); box-shadow:0 0 28px rgba(0,160,255,.6); }
+.toast {
+  position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(120px);
+  background:rgba(10,30,60,.96); backdrop-filter:blur(14px);
+  border:1.5px solid #00a6ff; border-radius:60px;
+  padding:14px 32px; font-weight:700; font-size:.88rem; color:#b0e0ff;
+  box-shadow:0 0 35px rgba(0,160,255,.6); opacity:0;
+  transition:all .45s cubic-bezier(.175,.885,.32,1.275);
+  z-index:999; pointer-events:none; text-align:center; max-width:90vw;
+}
+.toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
+  .gate-overlay {
+  position:fixed; inset:0; z-index:9999;
+  background: radial-gradient(circle at 50% 30%, #0d1b33, #05080f 90%);
+  backdrop-filter: blur(20px);
+  display:flex; justify-content:center; align-items:center;
+  padding:20px; overflow-y:auto;
+}
+.gate-overlay.hidden { display:none !important; }
+.gate-box {
+  width:100%; max-width:420px;
+  background: linear-gradient(145deg, rgba(14,24,44,.95), rgba(6,10,22,.98));
+  border:1.5px solid rgba(0,180,255,.4);
+  border-radius:28px; padding:32px 26px; text-align:center;
+  box-shadow: 0 0 60px rgba(0,120,255,.35), inset 0 0 30px rgba(0,100,255,.08);
+  animation: gatePop .5s cubic-bezier(.175,.885,.32,1.275);
+  margin:auto;
+}
+@keyframes gatePop { from { transform: scale(.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.gate-icon { font-size:3.5rem; margin-bottom:10px; filter: drop-shadow(0 0 20px rgba(0,180,255,.7)); }
+.gate-title {
+  font-size:1.4rem; font-weight:900; letter-spacing:2px;
+  background:linear-gradient(135deg,#8ecae6,#219ebc,#a06cd5);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  filter: drop-shadow(0 0 15px rgba(0,180,255,.6)); margin-bottom:12px;
+}
+.gate-desc { font-size:.85rem; color:#a0b8d4; line-height:1.6; margin-bottom:20px; }
+.gate-desc strong { color:#00d4ff; }
+.gate-btn {
+  display:block; width:100%; padding:14px 18px;
+  border-radius:50px; font-weight:800; font-size:.82rem;
+  letter-spacing:1px; text-transform:uppercase; text-decoration:none;
+  border:none; cursor:pointer; transition: all .25s; margin-bottom:10px;
+}
+.gate-btn:active { transform: scale(.96); }
+.gate-btn:hover { transform: translateY(-2px); }
+.gate-btn-wa { background:linear-gradient(135deg,#0a6b4a,#128c5c); color:#e8fff4; border:1.5px solid #25d366; box-shadow:0 0 25px rgba(37,211,102,.4); }
+.gate-btn-wa:hover { background:linear-gradient(135deg,#128c5c,#1aa86f); box-shadow:0 0 35px rgba(37,211,102,.7); }
+.gate-btn-check { background:linear-gradient(135deg,#0a4b8a,#1a6fd0); color:#fff; border:1.5px solid #5ab0ff; box-shadow:0 0 25px rgba(0,160,255,.5); }
+.gate-btn-check:hover { background:linear-gradient(135deg,#1a6fd0,#3a8aff); box-shadow:0 0 35px rgba(0,160,255,.8); }
+.gate-btn-owner { background:linear-gradient(135deg,#3a1a6a,#5a2aaa); color:#d0b0ff; border:1.5px solid #8a5aff; box-shadow:0 0 20px rgba(160,80,255,.4); font-size:.7rem; padding:10px; }
+.gate-error { color:#ff6b7a; font-size:.78rem; font-weight:600; min-height:18px; margin-bottom:10px; letter-spacing:.3px; }
+.gate-footer { font-size:.7rem; color:#5a7a9a; letter-spacing:1px; margin-top:12px; border-top:1px solid rgba(80,140,220,.2); padding-top:14px; }
+.gate-key-input {
+  width:100%; padding:14px 16px; font-size:1rem; font-weight:700;
+  background:rgba(0,0,0,.5); border:1.5px solid #1e3a5f; border-radius:14px;
+  color:#d6ecff; outline:none; text-align:center; letter-spacing:2px;
+  margin-bottom:10px; text-transform:uppercase;
+}
+.gate-key-input:focus { border-color:#00a6ff; box-shadow:0 0 25px rgba(0,160,255,.35); }
+.owner-panel {
+  position:fixed; inset:0; z-index:10000;
+  background: radial-gradient(circle at 50% 30%, #1a0d33, #05080f 90%);
+  backdrop-filter: blur(20px);
+  display:flex; justify-content:center; align-items:flex-start;
+  padding:20px; overflow-y:auto;
+}
+.owner-panel.hidden { display:none !important; }
+.owner-box {
+  width:100%; max-width:900px;
+  background: linear-gradient(145deg, rgba(20,14,44,.95), rgba(6,10,22,.98));
+  border:1.5px solid rgba(160,80,255,.5);
+  border-radius:28px; padding:26px 22px;
+  box-shadow: 0 0 60px rgba(160,80,255,.4);
+  margin:20px auto;
+}
+.owner-title {
+  font-size:1.4rem; font-weight:900; letter-spacing:2px; text-align:center;
+  background:linear-gradient(135deg,#c8a0ff,#8a5aff,#4aa8ff);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  margin-bottom:6px;
+}
+.owner-sub { text-align:center; color:#a0b8d4; font-size:.8rem; margin-bottom:20px; }
+.stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px; }
+.stat-box { background:rgba(0,0,0,.4); border-radius:16px; padding:14px; border:1px solid #2a3a5a; text-align:center; }
+.stat-box .num { font-size:1.5rem; font-weight:900; color:#c8a0ff; }
+.stat-box .lbl { font-size:.65rem; color:#8aaec0; text-transform:uppercase; letter-spacing:1px; margin-top:2px; }
+.owner-btn {
+  width:100%; padding:14px; border-radius:14px; border:none;
+  font-weight:800; font-size:.85rem; letter-spacing:1px; text-transform:uppercase;
+  cursor:pointer; transition: all .2s; margin-bottom:10px;
+}
+.owner-btn-gen { background:linear-gradient(135deg,#0a6b4a,#128c5c); color:#e8fff4; border:1.5px solid #25d366; }
+.owner-btn-gen:hover { box-shadow:0 0 28px rgba(37,211,102,.6); }
+.owner-btn-back { background:linear-gradient(135deg,#2a1f4a,#3a2a5a); color:#d0aaff; border:1.5px solid #5a3a8a; }
+.owner-btn-back:hover { box-shadow:0 0 28px rgba(160,80,255,.5); }
+.key-result { background:rgba(0,0,0,.5); border:1.5px dashed #5ab0ff; border-radius:14px; padding:18px; text-align:center; margin:14px 0; }
+.key-result .keyval { font-size:1.5rem; font-weight:900; color:#00d4ff; letter-spacing:2px; font-family:monospace; text-shadow:0 0 20px rgba(0,200,255,.6); word-break:break-all; }
+.key-actions { display:flex; gap:8px; margin-top:12px; }
+.key-actions button { flex:1; padding:12px; border-radius:12px; border:none; font-weight:800; font-size:.75rem; letter-spacing:1px; text-transform:uppercase; cursor:pointer; }
+.key-copy { background:linear-gradient(135deg,#0a4b8a,#1a6fd0); color:#fff; }
+.key-wa { background:linear-gradient(135deg,#0a6b4a,#128c5c); color:#fff; }
+.key-list { max-height:300px; overflow-y:auto; margin-top:12px; }
+.key-item { display:flex; justify-content:space-between; align-items:center; padding:10px 12px; background:rgba(0,0,0,.3); border-radius:10px; margin-bottom:6px; font-family:monospace; font-size:.72rem; gap:6px; }
+.key-item .k { color:#8ecae6; letter-spacing:1px; flex:1; word-break:break-all; }
+.key-item .s { padding:3px 8px; border-radius:20px; font-size:.6rem; font-weight:800; flex-shrink:0; }
+.key-item .s.active { background:rgba(37,211,102,.2); color:#5eff9f; }
+.key-item .s.expired { background:rgba(255,80,100,.2); color:#ff88a0; }
+@media (max-width:520px) {
+  .card { padding:18px 15px; border-radius:24px; }
+  .opt-btn { padding:9px 14px; font-size:.74rem; border-radius:30px; }
+  .result-item .value { font-size:1.15rem; }
+  .result-item.total .value, .result-item.final .value { font-size:2rem; }
+  .action-btn { flex:1 1 100%; padding:14px; font-size:.76rem; }
+  .input-field { font-size:1.1rem; padding:14px 16px; }
+  .header h1 { font-size:1.7rem; letter-spacing:1px; }
+  .list-btn { padding:15px 16px; font-size:.88rem; }
+  .list-btn .radio { width:20px; height:20px; margin-left:10px; }
+  .list-container { max-height:290px; }
+}
+@media (min-width:700px) {
+  .result-grid { grid-template-columns:1fr 1fr 1fr 1fr; }
+  .result-item.total { grid-column:span 4; }
+  .result-item.final { grid-column:span 4; }
+}
+.mt-2 { margin-top:10px; }
+.hidden { display:none !important; }
+</style>
+</head>
+<body>
+
+<div id="gateOverlay" class="gate-overlay">
+  <div class="gate-box">
+    <div class="gate-icon">🔒</div>
+    <h2 class="gate-title">AKSES TERKUNCI</h2>
+    <p class="gate-desc">Untuk menggunakan <strong>YAKKZZ CALCULATOR</strong>, ikuti langkah berikut:</p>
+    <a href="https://whatsapp.com/channel/0029VbAVjDXHgZWVGTVHH30r" target="_blank" rel="noopener" class="gate-btn gate-btn-wa">📢 JOIN CHANNEL YAKKZZ</a>
+    <a href="https://wa.me/62895622759784?text=Halo%20Kak%20YAKKZZ%2C%20saya%20sudah%20join%20channel.%20Mohon%20key%20akses%20untuk%20YAKKZZ%20CALCULATOR." target="_blank" rel="noopener" class="gate-btn gate-btn-check">📤 KIRIM BUKTI KE OWNER</a>
+    <div style="margin-top:14px;">
+      <input type="text" id="keyInput" class="gate-key-input" placeholder="MASUKAN KEY" autocomplete="off" />
+      <button id="loginBtn" class="gate-btn gate-btn-check" style="margin-bottom:0;">✅ LOGIN PAKAI KEY</button>
+    </div>
+    <div id="gateError" class="gate-error"></div>
+    <button id="ownerBtn" class="gate-btn gate-btn-owner">👑 OWNER LOGIN</button>
+    <div class="gate-footer">SL YAKKZZ DKK • © 2025</div>
+  </div>
+</div>
+
+<div id="ownerPanel" class="owner-panel hidden">
+  <div class="owner-box">
+    <h2 class="owner-title">👑 OWNER PANEL</h2>
+    <div class="owner-sub">YAKKZZ CALCULATOR — Admin Control</div>
+    <div class="stat-grid">
+      <div class="stat-box"><div class="num" id="statTotal">0</div><div class="lbl">Total Key</div></div>
+      <div class="stat-box"><div class="num" id="statActive">0</div><div class="lbl">Active</div></div>
+      <div class="stat-box"><div class="num" id="statExpired">0</div><div class="lbl">Expired</div></div>
+      <div class="stat-box"><div class="num" id="statUsed">0</div><div class="lbl">Used</div></div>
+    </div>
+    <button id="genKeyBtn" class="owner-btn owner-btn-gen">🎲 GENERATE KEY BARU</button>
+    <div id="keyResult" class="key-result hidden">
+      <div style="font-size:.7rem; color:#8aaec0; letter-spacing:1px; margin-bottom:6px;">KEY BARU — STATUS ACTIVE</div>
+      <div class="keyval" id="newKeyVal">—</div>
+      <div class="key-actions">
+        <button class="key-copy" id="copyKeyBtn">📋 COPY</button>
+        <button class="key-wa" id="sendWaBtn">📤 KIRIM WA</button>
+      </div>
+    </div>
+    <div style="font-size:.75rem; color:#8aaec0; letter-spacing:1px; margin:20px 0 8px;">📋 DAFTAR KEY (10 TERAKHIR)</div>
+    <div class="key-list" id="keyList">
+      <div style="text-align:center; color:#5a7a9a; padding:20px; font-size:.8rem;">Belum ada key</div>
+    </div>
+    <button id="ownerBackBtn" class="owner-btn owner-btn-back" style="margin-top:20px;">🚪 LOGOUT OWNER</button>
+  </div>
+</div>
+<div class="app" id="mainApp" style="display:none;">
+  <header class="header">
+    <h1>⚡ YAKKZZ CALCULATOR</h1>
+    <div class="sub">STEAL AN EGG — AFK SPEED</div>
+    <div class="desc">Calculate your estimated Speed gain while AFK.</div>
+  </header>
+  <div class="card">
+    <div class="card-title"><span>🚀</span> SPEED AWAL</div>
+    <div class="input-wrap">
+      <input type="text" id="startSpeed" class="input-field" placeholder="MASUKAN SPEED SEBELUM AFK" autocomplete="off" inputmode="text" />
+      <div class="hint-msg">Contoh: 50.2B, 1.5M, 58K</div>
+      <div id="startSpeedError" class="error-msg"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title"><span>👟</span> STEPS PER SECOND</div>
+    <div class="input-wrap">
+      <input type="number" id="stepsInput" class="input-field" placeholder="9.6" step="0.1" min="0.1" value="9.6" />
+      <div class="hint-msg">Default: 9.6 • Ubah sesuai kecepatan lari kamu</div>
+      <div id="stepsError" class="error-msg"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title"><span>🏃</span> TREADMILL</div>
+    <div class="list-container" id="treadmillGrid"></div>
+  </div>
+  <div class="card">
+    <div class="card-title"><span>✨</span> TRAIL</div>
+    <div class="list-container" id="trailGrid"></div>
+  </div>
+    <div class="card">
+    <div class="card-title"><span>💎</span> ROBUX MULTIPLIER</div>
+    <div class="btn-grid" id="robuxGrid"></div>
+  </div>
+  <div class="card">
+    <div class="card-title"><span>⏰</span> AFK DURATION</div>
+    <div class="btn-grid tight" id="hourGrid"></div>
+    <div class="btn-grid tight mt-2" id="dayGrid"></div>
+    <div class="btn-grid tight mt-2">
+      <button class="opt-btn" id="customDurationBtn">✏️ CUSTOM</button>
+    </div>
+    <div id="customDurationPanel" class="hidden mt-2">
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <div style="flex:1 1 70px;">
+          <label style="font-size:.65rem; color:#7aa0c0; display:block; margin-bottom:4px; font-weight:700;">HARI</label>
+          <input type="number" id="customDays" class="input-field" placeholder="0" min="0" style="padding:12px 14px; font-size:1.05rem;" />
+        </div>
+        <div style="flex:1 1 70px;">
+          <label style="font-size:.65rem; color:#7aa0c0; display:block; margin-bottom:4px; font-weight:700;">JAM</label>
+          <input type="number" id="customHours" class="input-field" placeholder="0" min="0" style="padding:12px 14px; font-size:1.05rem;" />
+        </div>
+        <div style="flex:1 1 70px;">
+          <label style="font-size:.65rem; color:#7aa0c0; display:block; margin-bottom:4px; font-weight:700;">MENIT</label>
+          <input type="number" id="customMinutes" class="input-field" placeholder="0" min="0" style="padding:12px 14px; font-size:1.05rem;" />
+        </div>
+      </div>
+      <div id="durationError" class="error-msg"></div>
+    </div>
+  </div>
+  <div class="card result-card">
+    <div class="card-title"><span>🔥</span> AFK RESULT</div>
+    <div class="result-grid">
+      <div class="result-item"><span class="label">⚡ Speed / Langkah</span><span class="value" id="resPerStep">—</span></div>
+      <div class="result-item"><span class="label">⚡ Speed / Second</span><span class="value" id="resPerSecond">—</span></div>
+      <div class="result-item"><span class="label">⚡ Speed / Minute</span><span class="value" id="resPerMinute">—</span></div>
+      <div class="result-item"><span class="label">⚡ Speed / Hour</span><span class="value" id="resPerHour">—</span></div>
+      <div class="result-item"><span class="label">⚡ Speed / Day</span><span class="value" id="resPerDay">—</span></div>
+      <div class="result-item"><span class="label">⏰ Duration</span><span class="value" id="resDuration">—</span></div>
+      <div class="result-item total"><span class="label">🔥 Total Gain</span><span class="value" id="resTotal">—</span></div>
+      <div class="result-item final"><span class="label">🚀 Speed Akhir</span><span class="value" id="resFinalSpeed">—</span></div>
+    </div>
+  </div>
+  <div class="action-row">
+    <button class="action-btn btn-reset" id="resetBtn">🔄 RESET</button>
+    <button class="action-btn btn-copy-result" id="copyResultBtn">📋 COPY RESULT</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, getDocs, query, limit } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCh5IbdGGBM2lsFc_-YvkGCE4OnRWkTRVs",
+  authDomain: "yakkzz-calculator.firebaseapp.com",
+  projectId: "yakkzz-calculator",
+  storageBucket: "yakkzz-calculator.firebasestorage.app",
+  messagingSenderId: "812511039578",
+  appId: "1:812511039578:web:3d06e266247a7186cf4863"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+const OWNER_PASSWORD = 'YAKKZZOWN-WEB';
+
+const gateOverlay = document.getElementById('gateOverlay');
+const gateError = document.getElementById('gateError');
+const keyInput = document.getElementById('keyInput');
+const loginBtn = document.getElementById('loginBtn');
+const ownerBtn = document.getElementById('ownerBtn');
+const ownerPanel = document.getElementById('ownerPanel');
+const mainApp = document.getElementById('mainApp');
+const ownerBackBtn = document.getElementById('ownerBackBtn');
+const genKeyBtn = document.getElementById('genKeyBtn');
+const newKeyVal = document.getElementById('newKeyVal');
+const keyResult = document.getElementById('keyResult');
+const copyKeyBtn = document.getElementById('copyKeyBtn');
+const sendWaBtn = document.getElementById('sendWaBtn');
+const keyList = document.getElementById('keyList');
+const statTotal = document.getElementById('statTotal');
+const statActive = document.getElementById('statActive');
+const statExpired = document.getElementById('statExpired');
+const statUsed = document.getElementById('statUsed');
+const toast = document.getElementById('toast');
+
+function showToast(msg) {
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(window._toastTimeout);
+  window._toastTimeout = setTimeout(() => toast.classList.remove('show'), 2500);
+}
+function copyToClipboard(text, successMsg) {
+  navigator.clipboard.writeText(text).then(() => showToast(successMsg)).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    showToast(successMsg);
+  });
+}
+function generateKey() {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  function part(len) { let s=''; for(let i=0;i<len;i++) s+=chars[Math.floor(Math.random()*chars.length)]; return s; }
+  return 'YKZ-' + part(4) + '-' + part(4);
+}
+signInAnonymously(auth).catch(err => console.warn('Auth gagal:', err));
+  const SESSION_KEY = 'yakkzz_session';
+
+async function checkSession() {
+  const session = localStorage.getItem(SESSION_KEY);
+  if (!session) return false;
+  try {
+    const data = JSON.parse(session);
+    if (data.role === 'user' && data.key) {
+      const keyDoc = await getDoc(doc(db, 'keys', data.key));
+      if (keyDoc.exists()) {
+        gateOverlay.classList.add('hidden');
+        mainApp.style.display = 'flex';
+        return true;
+      } else {
+        localStorage.removeItem(SESSION_KEY);
+        return false;
+      }
+    }
+    if (data.role === 'owner') {
+      gateOverlay.classList.add('hidden');
+      ownerPanel.classList.remove('hidden');
+      loadOwnerStats();
+      loadKeyList();
+      return true;
+    }
+  } catch (e) { localStorage.removeItem(SESSION_KEY); }
+  return false;
+}
+
+loginBtn.addEventListener('click', async () => {
+  const key = keyInput.value.trim().toUpperCase();
+  if (!key) { gateError.textContent = 'Masukan key terlebih dahulu.'; return; }
+  gateError.textContent = '⏳ Memverifikasi...';
+  loginBtn.disabled = true;
+  try {
+    const keyDoc = await getDoc(doc(db, 'keys', key));
+    if (!keyDoc.exists()) {
+      gateError.textContent = '❌ Key tidak ditemukan.';
+      loginBtn.disabled = false; return;
+    }
+    const keyData = keyDoc.data();
+    if (keyData.status === 'EXPIRED') {
+      gateError.textContent = '❌ Key sudah expired. Minta key baru.';
+      loginBtn.disabled = false; return;
+    }
+    await updateDoc(doc(db, 'keys', key), { status: 'EXPIRED', usedAt: new Date().toISOString() });
+    localStorage.setItem(SESSION_KEY, JSON.stringify({ role: 'user', key: key }));
+    gateError.textContent = '';
+    showToast('✅ Login berhasil!');
+    gateOverlay.classList.add('hidden');
+    mainApp.style.display = 'flex';
+    setTimeout(() => initCalculator(), 100);
+  } catch (e) {
+    gateError.textContent = '❌ Error: ' + e.message;
+    loginBtn.disabled = false;
+  }
+});
+
+ownerBtn.addEventListener('click', () => {
+  const pwd = prompt('Masukan password owner:');
+  if (pwd === OWNER_PASSWORD) {
+    localStorage.setItem(SESSION_KEY, JSON.stringify({ role: 'owner' }));
+    gateOverlay.classList.add('hidden');
+    ownerPanel.classList.remove('hidden');
+    loadOwnerStats();
+    loadKeyList();
+    showToast('👑 Selamat datang, Owner!');
+  } else if (pwd !== null) { alert('❌ Password salah!'); }
+});
+
+ownerBackBtn.addEventListener('click', () => {
+  localStorage.removeItem(SESSION_KEY);
+  ownerPanel.classList.add('hidden');
+  gateOverlay.classList.remove('hidden');
+  keyInput.value = '';
+  gateError.textContent = '';
+  showToast('🚪 Logout owner');
+});
+
+async function loadOwnerStats() {
+  try {
+    const snap = await getDocs(collection(db, 'keys'));
+    let active = 0, expired = 0;
+    snap.forEach(d => { if (d.data().status === 'ACTIVE') active++; else expired++; });
+    statTotal.textContent = snap.size;
+    statActive.textContent = active;
+    statExpired.textContent = expired;
+    statUsed.textContent = expired;
+  } catch (e) { console.error(e); }
+}
+
+genKeyBtn.addEventListener('click', async () => {
+  genKeyBtn.disabled = true;
+  genKeyBtn.textContent = '⏳ Generating...';
+  try {
+    let key, exists = true, attempts = 0;
+    while (exists && attempts < 5) {
+      key = generateKey();
+      const check = await getDoc(doc(db, 'keys', key));
+      exists = check.exists(); attempts++;
+    }
+    await setDoc(doc(db, 'keys', key), {
+      key: key, status: 'ACTIVE', usedAt: null, createdAt: new Date().toISOString()
+    });
+    newKeyVal.textContent = key;
+    keyResult.classList.remove('hidden');
+    genKeyBtn.textContent = '🎲 GENERATE KEY BARU';
+    genKeyBtn.disabled = false;
+    loadOwnerStats(); loadKeyList();
+    showToast('✅ Key berhasil dibuat!');
+  } catch (e) {
+    genKeyBtn.disabled = false;
+    genKeyBtn.textContent = '🎲 GENERATE KEY BARU';
+    showToast('❌ Gagal: ' + e.message);
+  }
+});
+
+copyKeyBtn.addEventListener('click', () => copyToClipboard(newKeyVal.textContent, '📋 Key di-copy!'));
+sendWaBtn.addEventListener('click', () => {
+  const msg = encodeURIComponent(`Halo! Ini key akses YAKKZZ CALCULATOR kamu:\n\n🔑 ${newKeyVal.textContent}\n\nSimpan key ini. Setelah dipakai login, key langsung expired.`);
+  window.open('https://wa.me/?text=' + msg, '_blank');
+});
+
+async function loadKeyList() {
+  try {
+    const q = query(collection(db, 'keys'), limit(50));
+    const snap = await getDocs(q);
+    if (snap.empty) {
+      keyList.innerHTML = '<div style="text-align:center; color:#5a7a9a; padding:20px; font-size:.8rem;">Belum ada key</div>';
+      return;
+    }
+    const items = [];
+    snap.forEach(d => items.push(d.data()));
+    items.sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
+    keyList.innerHTML = items.slice(0, 10).map(item => `
+      <div class="key-item">
+        <span class="k">${item.key}</span>
+        <span class="s ${item.status === 'ACTIVE' ? 'active' : 'expired'}">${item.status}</span>
+      </div>
+    `).join('');
+  } catch (e) { console.error(e); }
+}
+
+window.addEventListener('load', async () => {
+  const session = localStorage.getItem(SESSION_KEY);
+  if (session) {
+    const data = JSON.parse(session);
+    const ok = await checkSession();
+    if (ok && data.role === 'user') setTimeout(() => initCalculator(), 200);
+  }
+});
+</script>
+<script>
+function initCalculator() {
+  if (window._calcInit) return;
+  window._calcInit = true;
+  const startSpeedInput = document.getElementById('startSpeed');
+  const startSpeedError = document.getElementById('startSpeedError');
+  const stepsInput = document.getElementById('stepsInput');
+  const stepsError = document.getElementById('stepsError');
+  const treadmillGrid = document.getElementById('treadmillGrid');
+  const trailGrid = document.getElementById('trailGrid');
+  const robuxGrid = document.getElementById('robuxGrid');
+  const hourGrid = document.getElementById('hourGrid');
+  const dayGrid = document.getElementById('dayGrid');
+  const customDurationBtn = document.getElementById('customDurationBtn');
+  const customDurationPanel = document.getElementById('customDurationPanel');
+  const customDays = document.getElementById('customDays');
+  const customHours = document.getElementById('customHours');
+  const customMinutes = document.getElementById('customMinutes');
+  const durationError = document.getElementById('durationError');
+  const resPerStep = document.getElementById('resPerStep');
+  const resPerSecond = document.getElementById('resPerSecond');
+  const resPerMinute = document.getElementById('resPerMinute');
+  const resPerHour = document.getElementById('resPerHour');
+  const resPerDay = document.getElementById('resPerDay');
+  const resDuration = document.getElementById('resDuration');
+  const resTotal = document.getElementById('resTotal');
+  const resFinalSpeed = document.getElementById('resFinalSpeed');
+
+  const TREADMILL_OPTIONS = [
+    { value: 2, label: 'Level 1 — +2/sec' },
+    { value: 5, label: 'Level 2 — +5/sec' },
+    { value: 12, label: 'Level 3 — +12/sec' },
+    { value: 30, label: 'Level 4 — +30/sec' },
+    { value: 80, label: 'Level 5 — +80/sec' },
+    { value: 100, label: 'Level 6 — +100/sec' },
+    { value: 200, label: 'Level 7 — +200/sec' },
+    { value: 500, label: 'Level 8 — +500/sec' },
+    { value: 1000, label: 'Level 9 — +1,000/sec' },
+    { value: 2000, label: 'Level 10 — +2,000/sec' },
+  ];
+  const TRAIL_OPTIONS = [
+    { value: 1.5, label: 'Gray Trail — ×1.5' },
+    { value: 2, label: 'Green Trail — ×2' },
+    { value: 2.5, label: 'Blue Trail — ×2.5' },
+    { value: 3, label: 'Purple Trail — ×3' },
+    { value: 3.5, label: 'Golden Trail — ×3.5' },
+    { value: 4, label: 'Red Trail — ×4' },
+    { value: 5, label: 'Galaxy Trail — ×5' },
+    { value: 7, label: 'Secret Trail — ×7' },
+    { value: 10, label: 'Eternal Trail — ×10' },
+    { value: 14, label: 'Divine Trail — ×14' },
+  ];
+  const ROBUX_OPTIONS = [
+    { value: 1, label: 'None' }, { value: 2, label: 'x2' },
+    { value: 4, label: 'x4' }, { value: 8, label: 'x8' },
+    { value: 16, label: 'x16' }, { value: 32, label: 'x32' },
+    { value: 64, label: 'x64' }, { value: 128, label: 'x128' },
+    { value: 256, label: 'x256' }, { value: 512, label: 'x512' },
+    { value: 1024, label: 'x1024' },
+  ];
+  const HOUR_OPTIONS = [1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 24];
+  const DAY_OPTIONS = [1, 2, 3, 5, 7, 14, 30];
+
+  const state = {
+    startSpeed: null, treadmill: null, trail: null, robux: null,
+    stepsPerSec: 9.6, durationType: 'none',
+    presetDuration: { days: 0, hours: 0, minutes: 0 },
+    customDuration: { days: 0, hours: 0, minutes: 0 },
+  };
+
+  function preciseRound(num, decimals) {
+    const factor = Math.pow(10, decimals);
+    return Math.round((num + Number.EPSILON) * factor) / factor;
+  }
+  function parseNumber(str) {
+    if (str === null || str === undefined) return NaN;
+    let s = String(str).trim().toUpperCase().replace(/,/g, '').replace(/\s+/g, '');
+    if (s === '') return NaN;
+    const suffixes = { 'K':1e3, 'M':1e6, 'B':1e9, 'T':1e12, 'Q':1e15, 'QI':1e18 };
+    let multiplier = 1, numPart = s;
+    const twoChar = s.slice(-2), oneChar = s.slice(-1);
+    if (suffixes[twoChar]) { multiplier = suffixes[twoChar]; numPart = s.slice(0, -2); }
+    else if (suffixes[oneChar]) { multiplier = suffixes[oneChar]; numPart = s.slice(0, -1); }
+    const num = parseFloat(numPart);
+    if (isNaN(num) || !isFinite(num)) return NaN;
+    return num * multiplier;
+  }
+  function formatNumber(num) {
+    if (num === null || num === undefined || isNaN(num) || !isFinite(num)) return '0';
+    if (num === 0) return '0';
+    const abs = Math.abs(num), sign = num < 0 ? '-' : '';
+    if (abs < 1) return sign + preciseRound(abs, 3).toString();
+    const units = [
+      { value: 1e18, symbol: 'Qi' }, { value: 1e15, symbol: 'Q' },
+      { value: 1e12, symbol: 'T' }, { value: 1e9, symbol: 'B' },
+      { value: 1e6, symbol: 'M' }, { value: 1e3, symbol: 'K' },
+    ];
+    for (const u of units) {
+      if (abs >= u.value) {
+        const val = abs / u.value;
+        let str;
+        if (val >= 100) str = val.toFixed(0);
+        else if (val >= 10) str = val.toFixed(1);
+        else str = val.toFixed(2);
+        str = str.replace(/\.?0+$/, '');
+        return sign + str + u.symbol;
+      }
+    }
+    return sign + preciseRound(abs, 2).toString();
+  }
+  function getActiveDurationSeconds() {
+    if (state.durationType === 'none') return 0;
+    let d, h, m;
+    if (state.durationType === 'custom') {
+      d = Number(state.customDuration.days) || 0;
+      h = Number(state.customDuration.hours) || 0;
+      m = Number(state.customDuration.minutes) || 0;
+    } else {
+      d = state.presetDuration.days || 0;
+      h = state.presetDuration.hours || 0;
+      m = state.presetDuration.minutes || 0;
+    }
+    return (d * 86400) + (h * 3600) + (m * 60);
+  }
+  function getDurationLabel() {
+    if (state.durationType === 'none') return '—';
+    let d, h, m;
+    if (state.durationType === 'custom') {
+      d = Number(state.customDuration.days) || 0;
+      h = Number(state.customDuration.hours) || 0;
+      m = Number(state.customDuration.minutes) || 0;
+    } else {
+      d = state.presetDuration.days || 0;
+      h = state.presetDuration.hours || 0;
+      m = state.presetDuration.minutes || 0;
+    }
+    const parts = [];
+    if (d > 0) parts.push(d + (d === 1 ? ' Day' : ' Days'));
+    if (h > 0) parts.push(h + (h === 1 ? ' Hour' : ' Hours'));
+    if (m > 0) parts.push(m + (m === 1 ? ' Minute' : ' Minutes'));
+    if (parts.length === 0) return '0 Minutes';
+    return parts.join(' ');
+  }
+    function updateResult() {
+    const rawStart = startSpeedInput.value.trim();
+    const parsedStart = parseNumber(rawStart);
+    if (rawStart === '') startSpeedError.textContent = '';
+    else if (isNaN(parsedStart)) startSpeedError.textContent = 'Format salah. Contoh: 50.2B';
+    else if (parsedStart <= 0) startSpeedError.textContent = 'Speed harus > 0.';
+    else startSpeedError.textContent = '';
+    state.startSpeed = isNaN(parsedStart) ? null : parsedStart;
+
+    const stepsVal = parseFloat(stepsInput.value);
+    if (isNaN(stepsVal) || stepsVal <= 0) {
+      stepsError.textContent = 'Steps harus > 0. Default: 9.6';
+      state.stepsPerSec = 9.6;
+    } else {
+      stepsError.textContent = '';
+      state.stepsPerSec = stepsVal;
+    }
+
+    const totalSeconds = getActiveDurationSeconds();
+    if (state.durationType === 'none') durationError.textContent = '';
+    else if (totalSeconds <= 0) durationError.textContent = 'Durasi harus > 0.';
+    else durationError.textContent = '';
+
+    const allValid =
+      rawStart !== '' && !isNaN(parsedStart) && parsedStart > 0 &&
+      state.treadmill !== null && state.trail !== null && state.robux !== null &&
+      state.durationType !== 'none' && totalSeconds > 0;
+
+    if (!allValid) {
+      resPerStep.textContent = '—'; resPerSecond.textContent = '—';
+      resPerMinute.textContent = '—'; resPerHour.textContent = '—';
+      resPerDay.textContent = '—'; resDuration.textContent = getDurationLabel();
+      resTotal.textContent = '—'; resFinalSpeed.textContent = '—';
+      return;
+    }
+
+    const gainPerStep = state.treadmill * (state.trail + state.robux - 1);
+    const gainPerSecond = gainPerStep * state.stepsPerSec;
+    const perMinute = gainPerSecond * 60;
+    const perHour = gainPerSecond * 3600;
+    const perDay = gainPerSecond * 86400;
+    const totalGain = gainPerSecond * totalSeconds;
+    const finalSpeed = parsedStart + totalGain;
+
+    resPerStep.textContent = formatNumber(gainPerStep);
+    resPerSecond.textContent = formatNumber(gainPerSecond);
+    resPerMinute.textContent = formatNumber(perMinute);
+    resPerHour.textContent = formatNumber(perHour);
+    resPerDay.textContent = formatNumber(perDay);
+    resDuration.textContent = getDurationLabel();
+    resTotal.textContent = formatNumber(totalGain);
+    resFinalSpeed.textContent = formatNumber(finalSpeed);
+  }
+
+  function buildTreadmill() {
+    treadmillGrid.innerHTML = '';
+    TREADMILL_OPTIONS.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'list-btn';
+      btn.innerHTML = `<span>${opt.label}</span><span class="radio"></span>`;
+      btn.addEventListener('click', () => {
+        treadmillGrid.querySelectorAll('.list-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        state.treadmill = opt.value;
+        updateResult();
+      });
+      treadmillGrid.appendChild(btn);
+    });
+  }
+  function buildTrail() {
+    trailGrid.innerHTML = '';
+    TRAIL_OPTIONS.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'list-btn';
+      btn.innerHTML = `<span>${opt.label}</span><span class="radio"></span>`;
+      btn.addEventListener('click', () => {
+        trailGrid.querySelectorAll('.list-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        state.trail = opt.value;
+        updateResult();
+      });
+      trailGrid.appendChild(btn);
+    });
+  }
+  function buildRobux() {
+    robuxGrid.innerHTML = '';
+    ROBUX_OPTIONS.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'opt-btn';
+      btn.textContent = opt.label;
+      btn.addEventListener('click', () => {
+        robuxGrid.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        state.robux = opt.value;
+        updateResult();
+      });
+      robuxGrid.appendChild(btn);
+    });
+  }
+  function buildDuration() {
+    hourGrid.innerHTML = '';
+    HOUR_OPTIONS.forEach(h => {
+      const btn = document.createElement('button');
+      btn.className = 'opt-btn';
+      btn.textContent = h + 'H';
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#hourGrid .opt-btn, #dayGrid .opt-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        customDurationBtn.classList.remove('active');
+        customDurationPanel.classList.add('hidden');
+        state.durationType = 'preset';
+        state.presetDuration = { days: 0, hours: h, minutes: 0 };
+        updateResult();
+      });
+      hourGrid.appendChild(btn);
+    });
+    dayGrid.innerHTML = '';
+    DAY_OPTIONS.forEach(d => {
+      const btn = document.createElement('button');
+      btn.className = 'opt-btn';
+      btn.textContent = d + (d === 1 ? ' Day' : ' Days');
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#hourGrid .opt-btn, #dayGrid .opt-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        customDurationBtn.classList.remove('active');
+        customDurationPanel.classList.add('hidden');
+        state.durationType = 'preset';
+        state.presetDuration = { days: d, hours: 0, minutes: 0 };
+        updateResult();
+      });
+      dayGrid.appendChild(btn);
+    });
+  }
+
+  startSpeedInput.addEventListener('input', updateResult);
+  stepsInput.addEventListener('input', updateResult);
+
+  customDurationBtn.addEventListener('click', () => {
+    document.querySelectorAll('#hourGrid .opt-btn, #dayGrid .opt-btn').forEach(b => b.classList.remove('active'));
+    customDurationBtn.classList.add('active');
+    customDurationPanel.classList.remove('hidden');
+    state.durationType = 'custom';
+    updateResult();
+  });
+  [customDays, customHours, customMinutes].forEach(inp => {
+    inp.addEventListener('input', () => {
+      state.durationType = 'custom';
+      let d = Number(customDays.value) || 0;
+      let h = Number(customHours.value) || 0;
+      let m = Number(customMinutes.value) || 0;
+      if (d < 0) d = 0; if (h < 0) h = 0; if (m < 0) m = 0;
+      state.customDuration = { days: d, hours: h, minutes: m };
+      updateResult();
+    });
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    startSpeedInput.value = '';
+    stepsInput.value = '9.6';
+    state.startSpeed = null;
+    state.treadmill = null;
+    state.trail = null;
+    state.robux = null;
+    state.stepsPerSec = 9.6;
+    state.durationType = 'none';
+    state.presetDuration = { days: 0, hours: 0, minutes: 0 };
+    state.customDuration = { days: 0, hours: 0, minutes: 0 };
+    document.querySelectorAll('.list-btn, .opt-btn').forEach(b => b.classList.remove('active'));
+    customDurationPanel.classList.add('hidden');
+    customDays.value = ''; customHours.value = ''; customMinutes.value = '';
+    updateResult();
+    showToast('🔄 Reset');
+  });
+
+  document.getElementById('copyResultBtn').addEventListener('click', () => {
+    if (resTotal.textContent === '—') { showToast('⚠️ Isi semua input dulu!'); return; }
+    const text = [
+      '⚡ YAKKZZ CALCULATOR — AFK RESULT',
+      '────────────────────────────',
+      `Speed / Langkah: ${resPerStep.textContent}`,
+      `Speed / Second: ${resPerSecond.textContent}`,
+      `Speed / Minute: ${resPerMinute.textContent}`,
+      `Speed / Hour: ${resPerHour.textContent}`,
+      `Speed / Day: ${resPerDay.textContent}`,
+      `Duration: ${resDuration.textContent}`,
+      `Total Gain: ${resTotal.textContent}`,
+      `Speed Akhir: ${resFinalSpeed.textContent}`,
+      '────────────────────────────',
+      'YAKKZZ CALCULATOR',
+    ].join('\n');
+    copyToClipboard(text, '📋 Result di-copy!');
+  });
+
+  buildTreadmill();
+  buildTrail();
+  buildRobux();
+  buildDuration();
+  updateResult();
+}
+window.initCalculator = initCalculator;
+</script>
+
+</body>
+</html>

@@ -40,7 +40,7 @@ body::before { content:''; position:fixed; inset:0; background: radial-gradient(
 .list-btn.active { background:linear-gradient(90deg, rgba(20,60,120,.85), rgba(30,80,150,.6)); box-shadow:inset 0 0 0 1.5px #4aa8ff, inset 0 0 25px rgba(0,160,255,.15); }
 .list-btn .radio { width:22px; height:22px; border-radius:50%; border:2px solid #556; display:inline-block; position:relative; flex-shrink:0; margin-left:14px; transition:.25s; }
 .list-btn.active .radio { border-color:#fff; background:radial-gradient(circle, #fff 0 42%, transparent 46%); box-shadow:0 0 15px rgba(0,200,255,.8); }
-  .result-card { background:linear-gradient(145deg, rgba(8,18,36,.96), rgba(4,10,22,.98)); border:1.5px solid rgba(0,180,255,.35); box-shadow:0 0 50px rgba(0,120,255,.18), 0 20px 45px rgba(0,0,0,.85); position:relative; overflow:hidden; }
+.result-card { background:linear-gradient(145deg, rgba(8,18,36,.96), rgba(4,10,22,.98)); border:1.5px solid rgba(0,180,255,.35); box-shadow:0 0 50px rgba(0,120,255,.18), 0 20px 45px rgba(0,0,0,.85); position:relative; overflow:hidden; }
 .result-card::after { content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%; background:conic-gradient(from 0deg, transparent, rgba(0,200,255,.05), transparent 30%); animation:rotateGlow 14s linear infinite; pointer-events:none; }
 @keyframes rotateGlow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
 .result-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px 18px; position:relative; z-index:1; }
@@ -61,6 +61,8 @@ body::before { content:''; position:fixed; inset:0; background: radial-gradient(
 .btn-reset:hover { background:linear-gradient(135deg,#2a1f4a,#3a2a5a); box-shadow:0 0 28px rgba(160,80,255,.5); }
 .btn-copy-result { background:linear-gradient(135deg,#0a3a6a,#0a5a9a); color:#b0e0ff; border:1.5px solid #1a8aff; }
 .btn-copy-result:hover { background:linear-gradient(135deg,#0a4a8a,#0a6aba); box-shadow:0 0 28px rgba(0,160,255,.6); }
+.btn-logout { background:linear-gradient(135deg,#4a1a1a,#6a2a2a); color:#ff9a9a; border:1.5px solid #a04a4a; }
+.btn-logout:hover { background:linear-gradient(135deg,#6a2a2a,#8a3a3a); box-shadow:0 0 28px rgba(200,80,80,.6); }
 .toast { position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(120px); background:rgba(10,30,60,.96); backdrop-filter:blur(14px); border:1.5px solid #00a6ff; border-radius:60px; padding:14px 32px; font-weight:700; font-size:.88rem; color:#b0e0ff; box-shadow:0 0 35px rgba(0,160,255,.6); opacity:0; transition:all .45s cubic-bezier(.175,.885,.32,1.275); z-index:999; pointer-events:none; text-align:center; max-width:90vw; }
 .toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
 .gate-overlay { position:fixed; inset:0; z-index:9999; background: radial-gradient(circle at 50% 30%, #0d1b33, #05080f 90%); backdrop-filter: blur(20px); display:flex; justify-content:center; align-items:center; padding:20px; overflow-y:auto; }
@@ -95,6 +97,8 @@ body::before { content:''; position:fixed; inset:0; background: radial-gradient(
 .owner-btn { width:100%; padding:14px; border-radius:14px; border:none; font-weight:800; font-size:.85rem; letter-spacing:1px; text-transform:uppercase; cursor:pointer; transition: all .2s; margin-bottom:10px; }
 .owner-btn-gen { background:linear-gradient(135deg,#0a6b4a,#128c5c); color:#e8fff4; border:1.5px solid #25d366; }
 .owner-btn-gen:hover { box-shadow:0 0 28px rgba(37,211,102,.6); }
+.owner-btn-calc { background:linear-gradient(135deg,#0a4b8a,#1a6fd0); color:#fff; border:1.5px solid #5ab0ff; }
+.owner-btn-calc:hover { box-shadow:0 0 28px rgba(0,160,255,.6); }
 .owner-btn-back { background:linear-gradient(135deg,#2a1f4a,#3a2a5a); color:#d0aaff; border:1.5px solid #5a3a8a; }
 .owner-btn-back:hover { box-shadow:0 0 28px rgba(160,80,255,.5); }
 .key-result { background:rgba(0,0,0,.5); border:1.5px dashed #5ab0ff; border-radius:14px; padding:18px; text-align:center; margin:14px 0; }
@@ -109,6 +113,23 @@ body::before { content:''; position:fixed; inset:0; background: radial-gradient(
 .key-item .s { padding:3px 8px; border-radius:20px; font-size:.6rem; font-weight:800; flex-shrink:0; }
 .key-item .s.active { background:rgba(37,211,102,.2); color:#5eff9f; }
 .key-item .s.expired { background:rgba(255,80,100,.2); color:#ff88a0; }
+.loading-overlay { position:fixed; inset:0; z-index:10001; background: rgba(5,8,15,.95); backdrop-filter:blur(20px); display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px; }
+.loading-overlay.hidden { display:none !important; }
+.loading-spinner { width:60px; height:60px; border:4px solid rgba(0,160,255,.2); border-top:4px solid #00d4ff; border-radius:50%; animation: spin 1s linear infinite; box-shadow:0 0 30px rgba(0,200,255,.5); }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.loading-text { font-size:1rem; font-weight:800; letter-spacing:2px; color:#00d4ff; text-transform:uppercase; text-shadow:0 0 20px rgba(0,200,255,.6); animation:pulseText 1.5s infinite alternate; }
+@keyframes pulseText { 0% { opacity:.5; } 100% { opacity:1; } }
+.welcome-overlay { position:fixed; inset:0; z-index:10002; background: radial-gradient(circle at 50% 50%, #0d1b33, #05080f 90%); display:flex; justify-content:center; align-items:center; }
+.welcome-overlay.hidden { display:none !important; }
+.welcome-box { text-align:center; padding:40px 30px; animation: welcomePop 0.8s cubic-bezier(.175,.885,.32,1.275); }
+@keyframes welcomePop { 0% { transform:scale(.5); opacity:0; } 60% { transform:scale(1.1); opacity:1; } 100% { transform:scale(1); opacity:1; } }
+.welcome-icon { font-size:5rem; margin-bottom:20px; filter:drop-shadow(0 0 40px rgba(0,200,255,.8)); animation: iconBounce 1s infinite alternate; }
+@keyframes iconBounce { 0% { transform:translateY(0); } 100% { transform:translateY(-15px); } }
+.welcome-title { font-size:2rem; font-weight:900; letter-spacing:3px; background:linear-gradient(135deg,#a0d8ff,#4aa8ff,#b07aff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; filter:drop-shadow(0 0 30px rgba(0,180,255,.8)); margin-bottom:10px; }
+.welcome-sub { font-size:1.3rem; font-weight:800; letter-spacing:4px; text-transform:uppercase; animation: subFade 1.5s infinite alternate; }
+@keyframes subFade { 0% { opacity:.6; } 100% { opacity:1; } }
+.welcome-sub.owner { background:linear-gradient(135deg,#c8a0ff,#8a5aff,#4aa8ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; filter:drop-shadow(0 0 20px rgba(160,80,255,.8)); }
+.welcome-sub.member { background:linear-gradient(135deg,#a0ffd8,#4affb0,#00d4ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; filter:drop-shadow(0 0 20px rgba(0,200,150,.8)); }
 @media (max-width:520px) {
   .card { padding:18px 15px; border-radius:24px; }
   .opt-btn { padding:9px 14px; font-size:.74rem; border-radius:30px; }
@@ -120,6 +141,8 @@ body::before { content:''; position:fixed; inset:0; background: radial-gradient(
   .list-btn { padding:15px 16px; font-size:.88rem; }
   .list-btn .radio { width:20px; height:20px; margin-left:10px; }
   .list-container { max-height:290px; }
+  .welcome-title { font-size:1.4rem; }
+  .welcome-icon { font-size:3.5rem; }
 }
 @media (min-width:700px) {
   .result-grid { grid-template-columns:1fr 1fr 1fr 1fr; }
@@ -130,7 +153,21 @@ body::before { content:''; position:fixed; inset:0; background: radial-gradient(
 .hidden { display:none !important; }
 </style>
 </head>
+
   <body>
+
+<div id="loadingOverlay" class="loading-overlay hidden">
+  <div class="loading-spinner"></div>
+  <div class="loading-text">Memverifikasi...</div>
+</div>
+
+<div id="welcomeOverlay" class="welcome-overlay hidden">
+  <div class="welcome-box">
+    <div class="welcome-icon" id="welcomeIcon">🎉</div>
+    <div class="welcome-title">SELAMAT DATANG</div>
+    <div class="welcome-sub member" id="welcomeSub">MEMBER</div>
+  </div>
+</div>
 
 <div id="gateOverlay" class="gate-overlay">
   <div class="gate-box">
@@ -172,7 +209,8 @@ body::before { content:''; position:fixed; inset:0; background: radial-gradient(
     <div class="key-list" id="keyList">
       <div style="text-align:center; color:#5a7a9a; padding:20px; font-size:.8rem;">Belum ada key</div>
     </div>
-    <button id="ownerBackBtn" class="owner-btn owner-btn-back" style="margin-top:20px;">🚪 LOGOUT OWNER</button>
+    <button id="ownerCalcBtn" class="owner-btn owner-btn-calc" style="margin-top:20px;">🎯 MASUK CALCULATOR</button>
+    <button id="ownerBackBtn" class="owner-btn owner-btn-back">🚪 LOGOUT OWNER</button>
   </div>
 </div>
 
@@ -182,6 +220,7 @@ body::before { content:''; position:fixed; inset:0; background: radial-gradient(
     <div class="sub">STEAL AN EGG — AFK SPEED</div>
     <div class="desc">Calculate your estimated Speed gain while AFK.</div>
   </header>
+
   <div class="card">
     <div class="card-title"><span>🚀</span> SPEED AWAL</div>
     <div class="input-wrap">
@@ -190,27 +229,43 @@ body::before { content:''; position:fixed; inset:0; background: radial-gradient(
       <div id="startSpeedError" class="error-msg"></div>
     </div>
   </div>
+
+  <div class="card">
+    <div class="card-title"><span>⚡</span> SPEED PER LANGKAH</div>
+    <div class="input-wrap">
+      <input type="text" id="speedPerStep" class="input-field" placeholder="MASUKAN SPEED PER LANGKAH" autocomplete="off" inputmode="text" />
+      <div class="hint-msg">Isi dari game, contoh: 58K, 1.05M</div>
+      <div id="speedPerStepError" class="error-msg"></div>
+    </div>
+  </div>
+
   <div class="card">
     <div class="card-title"><span>👟</span> STEPS PER SECOND</div>
     <div class="input-wrap">
-      <input type="number" id="stepsInput" class="input-field" placeholder="10" step="0.1" min="0.1" value="10" />
-      <div class="hint-msg">Default: 10 • Ubah sesuai kecepatan lari kamu</div>
+      <input type="number" id="stepsInput" class="input-field" placeholder="10.5" step="0.1" min="0.1" value="10.5" />
+      <div class="hint-msg">Default: 10.5 • Ubah sesuai kecepatan lari kamu</div>
       <div id="stepsError" class="error-msg"></div>
     </div>
   </div>
+
   <div class="card">
     <div class="card-title"><span>🏃</span> TREADMILL</div>
     <div class="list-container" id="treadmillGrid"></div>
+    <div id="treadmillError" class="error-msg"></div>
   </div>
+
   <div class="card">
     <div class="card-title"><span>✨</span> TRAIL</div>
     <div class="list-container" id="trailGrid"></div>
+    <div id="trailError" class="error-msg"></div>
   </div>
-  
+
   <div class="card">
     <div class="card-title"><span>💎</span> ROBUX MULTIPLIER</div>
     <div class="btn-grid" id="robuxGrid"></div>
+    <div id="robuxError" class="error-msg"></div>
   </div>
+
   <div class="card">
     <div class="card-title"><span>⏰</span> AFK DURATION</div>
     <div class="btn-grid tight" id="hourGrid"></div>
@@ -236,6 +291,7 @@ body::before { content:''; position:fixed; inset:0; background: radial-gradient(
       <div id="durationError" class="error-msg"></div>
     </div>
   </div>
+
   <div class="card result-card">
     <div class="card-title"><span>🔥</span> AFK RESULT</div>
     <div class="result-grid">
@@ -249,13 +305,17 @@ body::before { content:''; position:fixed; inset:0; background: radial-gradient(
       <div class="result-item final"><span class="label">🚀 Speed Akhir</span><span class="value" id="resFinalSpeed">—</span></div>
     </div>
   </div>
+
   <div class="action-row">
     <button class="action-btn btn-reset" id="resetBtn">🔄 RESET</button>
     <button class="action-btn btn-copy-result" id="copyResultBtn">📋 COPY RESULT</button>
+    <button class="action-btn btn-logout" id="logoutBtn">🚪 LOGOUT</button>
   </div>
 </div>
 <div class="toast" id="toast"></div>
-<script type="module">
+
+
+    <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, getDocs, query, limit } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
@@ -282,6 +342,7 @@ const ownerBtn = document.getElementById('ownerBtn');
 const ownerPanel = document.getElementById('ownerPanel');
 const mainApp = document.getElementById('mainApp');
 const ownerBackBtn = document.getElementById('ownerBackBtn');
+const ownerCalcBtn = document.getElementById('ownerCalcBtn');
 const genKeyBtn = document.getElementById('genKeyBtn');
 const newKeyVal = document.getElementById('newKeyVal');
 const keyResult = document.getElementById('keyResult');
@@ -293,6 +354,10 @@ const statActive = document.getElementById('statActive');
 const statExpired = document.getElementById('statExpired');
 const statUsed = document.getElementById('statUsed');
 const toast = document.getElementById('toast');
+const loadingOverlay = document.getElementById('loadingOverlay');
+const welcomeOverlay = document.getElementById('welcomeOverlay');
+const welcomeIcon = document.getElementById('welcomeIcon');
+const welcomeSub = document.getElementById('welcomeSub');
 
 window.showToast = function(msg) {
   toast.textContent = msg;
@@ -308,13 +373,32 @@ window.copyToClipboard = function(text, msg) {
     window.showToast(msg);
   });
 };
+function showLoading(text) {
+  loadingOverlay.querySelector('.loading-text').textContent = text || 'Memverifikasi...';
+  loadingOverlay.classList.remove('hidden');
+}
+function hideLoading() { loadingOverlay.classList.add('hidden'); }
+function showWelcome(role) {
+  return new Promise((resolve) => {
+    if (role === 'owner') {
+      welcomeIcon.textContent = '👑';
+      welcomeSub.textContent = 'OWNER';
+      welcomeSub.className = 'welcome-sub owner';
+    } else {
+      welcomeIcon.textContent = '🎉';
+      welcomeSub.textContent = 'MEMBER';
+      welcomeSub.className = 'welcome-sub member';
+    }
+    welcomeOverlay.classList.remove('hidden');
+    setTimeout(() => { welcomeOverlay.classList.add('hidden'); resolve(); }, 1800);
+  });
+}
 function generateKey() {
   const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   function part(len) { let s=''; for(let i=0;i<len;i++) s+=chars[Math.floor(Math.random()*chars.length)]; return s; }
   return 'YKZ-' + part(4) + '-' + part(4);
 }
 signInAnonymously(auth).catch(err => console.warn('Auth gagal:', err));
-
 const SESSION_KEY = 'yakkzz_session';
 
 async function checkSession() {
@@ -322,6 +406,13 @@ async function checkSession() {
   if (!session) return false;
   try {
     const data = JSON.parse(session);
+    if (data.role === 'owner') {
+      gateOverlay.classList.add('hidden');
+      ownerPanel.classList.remove('hidden');
+      loadOwnerStats();
+      loadKeyList();
+      return true;
+    }
     if (data.role === 'user' && data.key) {
       const keyDoc = await getDoc(doc(db, 'keys', data.key));
       if (keyDoc.exists()) {
@@ -333,13 +424,6 @@ async function checkSession() {
         return false;
       }
     }
-    if (data.role === 'owner') {
-      gateOverlay.classList.add('hidden');
-      ownerPanel.classList.remove('hidden');
-      loadOwnerStats();
-      loadKeyList();
-      return true;
-    }
   } catch (e) { localStorage.removeItem(SESSION_KEY); }
   return false;
 }
@@ -347,45 +431,57 @@ async function checkSession() {
 loginBtn.addEventListener('click', async () => {
   const key = keyInput.value.trim().toUpperCase();
   if (!key) { gateError.textContent = 'Masukan key terlebih dahulu.'; return; }
-  gateError.textContent = '⏳ Memverifikasi...';
+  gateError.textContent = '';
   loginBtn.disabled = true;
+  showLoading('Memverifikasi Key...');
   try {
     const keyDoc = await getDoc(doc(db, 'keys', key));
     if (!keyDoc.exists()) {
-      gateError.textContent = '❌ Key tidak ditemukan.';
-      loginBtn.disabled = false; return;
+      hideLoading(); gateError.textContent = '❌ Key tidak ditemukan.'; loginBtn.disabled = false; return;
     }
     const keyData = keyDoc.data();
     if (keyData.status === 'EXPIRED') {
-      gateError.textContent = '❌ Key sudah expired. Minta key baru.';
-      loginBtn.disabled = false; return;
+      hideLoading(); gateError.textContent = '❌ Key sudah expired. Minta key baru.'; loginBtn.disabled = false; return;
     }
     await updateDoc(doc(db, 'keys', key), { status: 'EXPIRED', usedAt: new Date().toISOString() });
     localStorage.setItem(SESSION_KEY, JSON.stringify({ role: 'user', key: key }));
-    gateError.textContent = '';
-    window.showToast('✅ Login berhasil!');
+    hideLoading();
+    await showWelcome('member');
     gateOverlay.classList.add('hidden');
     mainApp.style.display = 'flex';
-    setTimeout(() => initCalculator(), 100);
+    setTimeout(() => { if (window.initCalculator) window.initCalculator(); }, 100);
+    window.showToast('✅ Login berhasil!');
   } catch (e) {
+    hideLoading();
     gateError.textContent = '❌ Error: ' + e.message;
     loginBtn.disabled = false;
   }
 });
 
-ownerBtn.addEventListener('click', () => {
+ownerBtn.addEventListener('click', async () => {
   const pwd = prompt('Masukan password owner:');
-  if (pwd === OWNER_PASSWORD) {
-    localStorage.setItem(SESSION_KEY, JSON.stringify({ role: 'owner' }));
-    gateOverlay.classList.add('hidden');
-    ownerPanel.classList.remove('hidden');
-    loadOwnerStats();
-    loadKeyList();
-    window.showToast('👑 Selamat datang, Owner!');
-  } else if (pwd !== null) { alert('❌ Password salah!'); }
+  if (pwd !== OWNER_PASSWORD) { if (pwd !== null) alert('❌ Password salah!'); return; }
+  showLoading('Memverifikasi Owner...');
+  localStorage.setItem(SESSION_KEY, JSON.stringify({ role: 'owner', permanent: true }));
+  hideLoading();
+  await showWelcome('owner');
+  gateOverlay.classList.add('hidden');
+  ownerPanel.classList.remove('hidden');
+  loadOwnerStats();
+  loadKeyList();
+  window.showToast('👑 Selamat datang, Owner!');
+});
+
+ownerCalcBtn.addEventListener('click', () => {
+  ownerPanel.classList.add('hidden');
+  mainApp.style.display = 'flex';
+  window.showToast('🎯 Owner masuk calculator');
+  setTimeout(() => { if (window.initCalculator) window.initCalculator(); }, 100);
 });
 
 ownerBackBtn.addEventListener('click', () => {
+  const konfirmasi = confirm('Logout owner? Kamu harus masukkan password lagi untuk masuk.');
+  if (!konfirmasi) return;
   localStorage.removeItem(SESSION_KEY);
   ownerPanel.classList.add('hidden');
   gateOverlay.classList.remove('hidden');
@@ -463,21 +559,28 @@ window.addEventListener('load', async () => {
   if (session) {
     const data = JSON.parse(session);
     const ok = await checkSession();
-    if (ok && data.role === 'user') setTimeout(() => initCalculator(), 200);
+    if (ok && data.role === 'user') setTimeout(() => { if (window.initCalculator) window.initCalculator(); }, 300);
   }
 });
-</script>
-<script>
+    </script>
+
+
+    <script>
 function initCalculator() {
   if (window._calcInit) return;
   window._calcInit = true;
   const startSpeedInput = document.getElementById('startSpeed');
   const startSpeedError = document.getElementById('startSpeedError');
+  const speedPerStepInput = document.getElementById('speedPerStep');
+  const speedPerStepError = document.getElementById('speedPerStepError');
   const stepsInput = document.getElementById('stepsInput');
   const stepsError = document.getElementById('stepsError');
   const treadmillGrid = document.getElementById('treadmillGrid');
+  const treadmillError = document.getElementById('treadmillError');
   const trailGrid = document.getElementById('trailGrid');
+  const trailError = document.getElementById('trailError');
   const robuxGrid = document.getElementById('robuxGrid');
+  const robuxError = document.getElementById('robuxError');
   const hourGrid = document.getElementById('hourGrid');
   const dayGrid = document.getElementById('dayGrid');
   const customDurationBtn = document.getElementById('customDurationBtn');
@@ -531,8 +634,8 @@ function initCalculator() {
   const DAY_OPTIONS = [1, 2, 3, 5, 7, 14, 30];
 
   const state = {
-    startSpeed: 0, treadmill: null, trail: null, robux: null,
-    stepsPerSec: 10, durationType: 'none',
+    startSpeed: 0, speedPerStep: 0, treadmill: null, trail: null, robux: null,
+    stepsPerSec: 10.5, durationType: 'none',
     presetDuration: { days: 0, hours: 0, minutes: 0 },
     customDuration: { days: 0, hours: 0, minutes: 0 },
   };
@@ -622,28 +725,44 @@ function initCalculator() {
   function updateResult() {
     const rawStart = startSpeedInput.value.trim();
     const parsedStart = parseNumber(rawStart);
-    if (rawStart === '') startSpeedError.textContent = '';
+    if (rawStart === '') startSpeedError.textContent = 'Wajib diisi.';
     else if (isNaN(parsedStart)) startSpeedError.textContent = 'Format salah. Contoh: 50.2B';
-    else if (parsedStart <= 0) startSpeedError.textContent = 'Speed harus > 0.';
+    else if (parsedStart <= 0) startSpeedError.textContent = 'Harus > 0.';
     else startSpeedError.textContent = '';
     state.startSpeed = (isNaN(parsedStart) || parsedStart <= 0) ? 0 : parsedStart;
 
+    const rawStep = speedPerStepInput.value.trim();
+    const parsedStep = parseNumber(rawStep);
+    if (rawStep === '') speedPerStepError.textContent = 'Wajib diisi.';
+    else if (isNaN(parsedStep)) speedPerStepError.textContent = 'Format salah. Contoh: 58K';
+    else if (parsedStep <= 0) speedPerStepError.textContent = 'Harus > 0.';
+    else speedPerStepError.textContent = '';
+    state.speedPerStep = (isNaN(parsedStep) || parsedStep <= 0) ? 0 : parsedStep;
+
     const stepsVal = parseFloat(stepsInput.value);
     if (isNaN(stepsVal) || stepsVal <= 0) {
-      stepsError.textContent = 'Steps harus > 0. Default: 10';
-      state.stepsPerSec = 10;
+      stepsError.textContent = 'Wajib diisi. Default: 10.5';
+      state.stepsPerSec = 10.5;
     } else {
       stepsError.textContent = '';
       state.stepsPerSec = stepsVal;
     }
 
+    if (state.treadmill === null) treadmillError.textContent = 'Wajib dipilih.';
+    else treadmillError.textContent = '';
+    if (state.trail === null) trailError.textContent = 'Wajib dipilih.';
+    else trailError.textContent = '';
+    if (state.robux === null) robuxError.textContent = 'Wajib dipilih.';
+    else robuxError.textContent = '';
+
     const totalSeconds = getActiveDurationSeconds();
-    if (state.durationType === 'none') durationError.textContent = '';
-    else if (totalSeconds <= 0) durationError.textContent = 'Durasi harus > 0.';
+    if (state.durationType === 'none') durationError.textContent = 'Wajib dipilih.';
+    else if (totalSeconds <= 0) durationError.textContent = 'Harus > 0.';
     else durationError.textContent = '';
 
     const allValid =
       rawStart !== '' && !isNaN(parsedStart) && parsedStart > 0 &&
+      rawStep !== '' && !isNaN(parsedStep) && parsedStep > 0 &&
       state.treadmill !== null && state.trail !== null && state.robux !== null &&
       state.durationType !== 'none' && totalSeconds > 0;
 
@@ -655,7 +774,7 @@ function initCalculator() {
       return;
     }
 
-    const gainPerStep = state.treadmill * (state.trail + state.robux - 1);
+    const gainPerStep = state.speedPerStep;
     const gainPerSecond = gainPerStep * state.stepsPerSec;
     const perMinute = gainPerSecond * 60;
     const perHour = gainPerSecond * 3600;
@@ -672,7 +791,8 @@ function initCalculator() {
     resTotal.textContent = formatNumber(totalGain);
     resFinalSpeed.textContent = formatNumber(finalSpeed);
   }
-    function buildTreadmill() {
+
+  function buildTreadmill() {
     treadmillGrid.innerHTML = '';
     TREADMILL_OPTIONS.forEach(opt => {
       const btn = document.createElement('button');
@@ -753,6 +873,7 @@ function initCalculator() {
   }
 
   startSpeedInput.addEventListener('input', updateResult);
+  speedPerStepInput.addEventListener('input', updateResult);
   stepsInput.addEventListener('input', updateResult);
 
   customDurationBtn.addEventListener('click', () => {
@@ -776,18 +897,22 @@ function initCalculator() {
 
   document.getElementById('resetBtn').addEventListener('click', () => {
     startSpeedInput.value = '';
-    stepsInput.value = '10';
+    speedPerStepInput.value = '';
+    stepsInput.value = '10.5';
     state.startSpeed = 0;
+    state.speedPerStep = 0;
     state.treadmill = null;
     state.trail = null;
     state.robux = null;
-    state.stepsPerSec = 10;
+    state.stepsPerSec = 10.5;
     state.durationType = 'none';
     state.presetDuration = { days: 0, hours: 0, minutes: 0 };
     state.customDuration = { days: 0, hours: 0, minutes: 0 };
     document.querySelectorAll('.list-btn, .opt-btn').forEach(b => b.classList.remove('active'));
     customDurationPanel.classList.add('hidden');
     customDays.value = ''; customHours.value = ''; customMinutes.value = '';
+    startSpeedError.textContent = ''; speedPerStepError.textContent = ''; stepsError.textContent = '';
+    durationError.textContent = ''; treadmillError.textContent = ''; trailError.textContent = ''; robuxError.textContent = '';
     updateResult();
     window.showToast('🔄 Reset');
   });
@@ -810,6 +935,17 @@ function initCalculator() {
     ].join('\n');
     window.copyToClipboard(text, '📋 Result di-copy!');
   });
+
+  const logoutBtn = document.getElementById('logoutBtn');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', () => {
+      const konfirmasi = confirm('Yakin mau logout? Key kamu akan expired dan harus minta key baru ke owner.');
+      if (!konfirmasi) return;
+      localStorage.removeItem('yakkzz_session');
+      window.showToast('🚪 Logout berhasil. Sampai jumpa!');
+      setTimeout(() => location.reload(), 800);
+    });
+  }
 
   buildTreadmill();
   buildTrail();

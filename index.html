@@ -7,1155 +7,2123 @@
 <title>YAKKZZ CALCULATOR</title>
 
 <style>
+
+/* ================================
+   RESET
+================================ */
+
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
-    min-height:100vh;
-    font-family:Arial,Helvetica,sans-serif;
-    color:#fff;
-    background:
-        radial-gradient(circle at 20% 0%,rgba(124,58,237,.20),transparent 35%),
-        radial-gradient(circle at 100% 100%,rgba(59,130,246,.12),transparent 35%),
-        #05070d;
-    padding:20px;
+  min-height:100vh;
+  overflow-x:hidden;
+
+  font-family:
+    Inter,
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  color:#fff;
+
+  background:
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(130,70,255,.30),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 0% 80%,
+      rgba(0,190,255,.10),
+      transparent 32%
+    ),
+    #05050a;
 }
+
+
+/* ================================
+   BACKGROUND GRID
+================================ */
+
+body::before{
+  content:"";
+
+  position:fixed;
+  inset:0;
+
+  pointer-events:none;
+
+  opacity:.18;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.035) 1px,
+      transparent 1px
+    );
+
+  background-size:40px 40px;
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      black,
+      transparent 90%
+    );
+
+  animation:gridMove 18s linear infinite;
+}
+
+@keyframes gridMove{
+  from{
+    transform:translateY(0);
+  }
+
+  to{
+    transform:translateY(40px);
+  }
+}
+
+
+/* ================================
+   FLOATING LIGHT
+================================ */
+
+.orb{
+  position:fixed;
+
+  border-radius:50%;
+
+  pointer-events:none;
+
+  filter:blur(2px);
+
+  opacity:.35;
+
+  z-index:0;
+
+  animation:
+    floating 7s ease-in-out infinite;
+}
+
+.orb-one{
+  width:180px;
+  height:180px;
+
+  top:8%;
+  left:-100px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(145,70,255,.7),
+      transparent 70%
+    );
+}
+
+.orb-two{
+  width:220px;
+  height:220px;
+
+  right:-120px;
+  top:48%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(0,190,255,.45),
+      transparent 70%
+    );
+
+  animation-delay:-3s;
+}
+
+@keyframes floating{
+
+  0%,100%{
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+  50%{
+    transform:
+      translateY(-30px)
+      scale(1.08);
+  }
+
+}
+
+
+/* ================================
+   CONTAINER
+================================ */
 
 .container{
-    width:100%;
-    max-width:760px;
-    margin:auto;
+  position:relative;
+  z-index:2;
+
+  width:100%;
+  max-width:680px;
+
+  margin:auto;
+
+  padding:
+    28px 14px 40px;
 }
 
+
+/* ================================
+   HEADER
+================================ */
+
 .header{
-    text-align:center;
-    padding:25px 10px 20px;
+  text-align:center;
+
+  margin-bottom:25px;
+}
+
+.badge{
+  display:inline-flex;
+
+  align-items:center;
+  justify-content:center;
+
+  padding:
+    7px 12px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.10);
+
+  border-radius:999px;
+
+  background:
+    rgba(255,255,255,.04);
+
+  backdrop-filter:
+    blur(15px);
+
+  color:#aaa2b8;
+
+  font-size:9px;
+  font-weight:900;
+
+  letter-spacing:1.4px;
+
+  margin-bottom:13px;
 }
 
 .logo{
-    font-size:30px;
-    font-weight:900;
-    letter-spacing:2px;
+  font-size:
+    clamp(30px,8vw,48px);
+
+  line-height:1;
+
+  font-weight:1000;
+
+  letter-spacing:-2px;
+
+  background:
+    linear-gradient(
+      110deg,
+      #ffffff 10%,
+      #d9c7ff 42%,
+      #9966ff 70%,
+      #ffffff 95%
+    );
+
+  background-size:200% auto;
+
+  -webkit-background-clip:text;
+  background-clip:text;
+
+  color:transparent;
+
+  animation:
+    titleShine 5s linear infinite;
+
+  filter:
+    drop-shadow(
+      0 0 20px
+      rgba(140,80,255,.25)
+    );
 }
 
-.logo span{
-    color:#8b5cf6;
+@keyframes titleShine{
+  to{
+    background-position:
+      200% center;
+  }
 }
 
 .subtitle{
-    margin-top:8px;
-    color:#8d96aa;
-    font-size:13px;
+  margin-top:9px;
+
+  color:#716b7b;
+
+  font-size:11px;
 }
 
+
+/* ================================
+   OWNER BOX
+================================ */
+
+.owner-box{
+  position:relative;
+
+  overflow:hidden;
+
+  padding:18px;
+
+  margin-bottom:18px;
+
+  border:
+    1px solid
+    rgba(139,92,246,.20);
+
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(124,58,237,.13),
+      rgba(255,255,255,.025)
+    );
+
+  backdrop-filter:
+    blur(20px);
+
+  box-shadow:
+    0 15px 50px
+    rgba(0,0,0,.25),
+
+    inset 0 1px 0
+    rgba(255,255,255,.05);
+}
+
+.owner-box::after{
+  content:"";
+
+  position:absolute;
+
+  width:170px;
+  height:170px;
+
+  right:-90px;
+  top:-100px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(154,100,255,.22),
+      transparent 70%
+    );
+
+  pointer-events:none;
+}
+
+.owner-content{
+  position:relative;
+  z-index:2;
+}
+
+.owner-title{
+  font-size:13px;
+
+  font-weight:900;
+
+  margin-bottom:5px;
+}
+
+.owner-text{
+  color:#888190;
+
+  font-size:10px;
+
+  line-height:1.6;
+
+  margin-bottom:14px;
+}
+
+.join-btn{
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  width:100%;
+
+  padding:13px;
+
+  border-radius:13px;
+
+  color:#fff;
+
+  text-decoration:none;
+
+  font-size:11px;
+
+  font-weight:900;
+
+  background:
+    linear-gradient(
+      110deg,
+      #6d28d9,
+      #9333ea,
+      #6d28d9
+    );
+
+  background-size:200% auto;
+
+  box-shadow:
+    0 0 25px
+    rgba(124,58,237,.25);
+
+  animation:
+    buttonShine 4s linear infinite;
+
+  transition:
+    transform .2s,
+    box-shadow .2s;
+}
+
+@keyframes buttonShine{
+  to{
+    background-position:
+      200% center;
+  }
+}
+
+.join-btn:hover{
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 0 35px
+    rgba(124,58,237,.45);
+}
+
+.join-btn:active{
+  transform:scale(.98);
+}
+
+
+/* ================================
+   CARD
+================================ */
+
 .card{
-    background:rgba(12,15,25,.90);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:20px;
-    padding:20px;
-    margin-bottom:16px;
-    box-shadow:0 15px 50px rgba(0,0,0,.25);
+  position:relative;
+
+  overflow:hidden;
+
+  padding:21px;
+
+  margin-bottom:18px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.07);
+
+  border-radius:23px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(22,20,31,.90),
+      rgba(8,8,13,.95)
+    );
+
+  backdrop-filter:
+    blur(22px);
+
+  box-shadow:
+    0 20px 60px
+    rgba(0,0,0,.35),
+
+    inset 0 1px 0
+    rgba(255,255,255,.04);
+
+  animation:
+    cardAppear .6s ease both;
+}
+
+.card::before{
+  content:"";
+
+  position:absolute;
+
+  width:180px;
+  height:180px;
+
+  left:-120px;
+  top:-120px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(139,92,246,.12),
+      transparent 70%
+    );
+
+  pointer-events:none;
+}
+
+@keyframes cardAppear{
+  from{
+    opacity:0;
+    transform:translateY(12px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 .card-title{
-    font-size:17px;
-    font-weight:900;
-    margin-bottom:16px;
+  display:flex;
+
+  align-items:center;
+
+  gap:9px;
+
+  margin-bottom:22px;
+
+  color:#eeeaf4;
+
+  font-size:15px;
+
+  font-weight:950;
 }
 
-.input-group{
-    margin-bottom:15px;
+.card-title::before{
+  content:"";
+
+  width:4px;
+  height:18px;
+
+  border-radius:10px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #c084fc,
+      #7c3aed
+    );
+
+  box-shadow:
+    0 0 12px
+    rgba(139,92,246,.7);
+}
+
+
+/* ================================
+   FIELD
+================================ */
+
+.field{
+  margin-bottom:19px;
+}
+
+.field:last-child{
+  margin-bottom:0;
 }
 
 label{
-    display:block;
-    color:#aeb6c8;
-    font-size:12px;
-    font-weight:700;
-    margin-bottom:7px;
+  display:block;
+
+  margin-bottom:4px;
+
+  color:#d8d3df;
+
+  font-size:12px;
+
+  font-weight:850;
+}
+
+.hint{
+  display:block;
+
+  margin-bottom:8px;
+
+  color:#686370;
+
+  font-size:10px;
+
+  line-height:1.5;
+}
+
+
+/* ================================
+   INPUT
+================================ */
+
+.input-wrap{
+  position:relative;
 }
 
 input,
 select{
-    width:100%;
-    padding:13px 14px;
-    border-radius:11px;
-    border:1px solid rgba(255,255,255,.09);
-    background:#080b13;
-    color:#fff;
-    outline:none;
-    font-size:14px;
+  width:100%;
+
+  padding:14px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.075);
+
+  outline:none;
+
+  border-radius:13px;
+
+  background:
+    rgba(4,4,8,.78);
+
+  color:#fff;
+
+  font-size:14px;
+
+  font-weight:650;
+
+  transition:
+    .25s;
+}
+
+input:hover,
+select:hover{
+  border-color:
+    rgba(255,255,255,.14);
 }
 
 input:focus,
 select:focus{
-    border-color:#8b5cf6;
-    box-shadow:0 0 0 3px rgba(139,92,246,.10);
+  border-color:
+    rgba(139,92,246,.55);
+
+  background:
+    rgba(8,7,14,.96);
+
+  box-shadow:
+    0 0 0 2px
+    rgba(124,58,237,.08),
+
+    0 0 25px
+    rgba(124,58,237,.10);
 }
 
-.grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
+input::placeholder{
+  color:#44414b;
 }
 
-.option-title{
-    color:#aeb6c8;
-    font-size:12px;
-    font-weight:700;
-    margin-bottom:8px;
+
+/* ================================
+   AFK
+================================ */
+
+.afk-row{
+  display:grid;
+
+  grid-template-columns:
+    1fr 115px;
+
+  gap:9px;
 }
 
-.options{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:7px;
-}
 
-.option{
-    border:1px solid rgba(255,255,255,.08);
-    background:#080b13;
-    color:#b8c0d1;
-    padding:10px 5px;
-    border-radius:9px;
-    cursor:pointer;
-    text-align:center;
-    font-size:12px;
-    font-weight:800;
-    transition:.18s;
-}
-
-.option:hover{
-    border-color:#7c3aed;
-    color:#fff;
-}
-
-.option.active{
-    background:rgba(124,58,237,.20);
-    border-color:#8b5cf6;
-    color:#c4b5fd;
-}
-
-.result{
-    border:1px solid rgba(139,92,246,.20);
-    background:
-        linear-gradient(
-            135deg,
-            rgba(124,58,237,.12),
-            rgba(59,130,246,.05)
-        );
-    border-radius:16px;
-    padding:18px;
-}
-
-.result-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-    padding:11px 0;
-    border-bottom:1px solid rgba(255,255,255,.06);
-}
-
-.result-row:last-child{
-    border-bottom:0;
-}
-
-.result-label{
-    color:#8e97aa;
-    font-size:12px;
-}
-
-.result-value{
-    font-weight:900;
-    font-size:15px;
-    text-align:right;
-}
-
-.result-main{
-    font-size:25px;
-    color:#c4b5fd;
-}
+/* ================================
+   BUTTON
+================================ */
 
 .calculate-btn{
-    width:100%;
-    border:0;
-    padding:14px;
-    border-radius:12px;
-    margin-top:15px;
-    background:linear-gradient(135deg,#7c3aed,#6366f1);
-    color:#fff;
-    font-weight:900;
-    cursor:pointer;
-    font-size:14px;
+  width:100%;
+
+  padding:15px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.15);
+
+  border-radius:14px;
+
+  background:
+    linear-gradient(
+      110deg,
+      #ffffff,
+      #e9dcff,
+      #ffffff
+    );
+
+  background-size:200% auto;
+
+  color:#09070d;
+
+  font-size:13px;
+
+  font-weight:1000;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 0 30px
+    rgba(255,255,255,.08);
+
+  transition:
+    transform .2s,
+    box-shadow .2s;
+
+  animation:
+    calculateShine 5s linear infinite;
+}
+
+@keyframes calculateShine{
+  to{
+    background-position:
+      200% center;
+  }
 }
 
 .calculate-btn:hover{
-    opacity:.9;
-    transform:translateY(-1px);
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 0 35px
+    rgba(196,165,255,.3);
 }
 
-.notice{
-    text-align:center;
-    color:#9ca3b5;
-    font-size:12px;
-    line-height:1.7;
+.calculate-btn:active{
+  transform:scale(.98);
 }
 
-.notice strong{
-    color:#c4b5fd;
+
+/* ================================
+   PART 2
+================================ */
+
+    /* ================================
+   RESULT GRID
+================================ */
+
+.result-grid{
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:10px;
 }
 
-.owner-box{
-    text-align:center;
-    border:1px solid rgba(255,255,255,.07);
-    background:#090c14;
+.result{
+  position:relative;
+
+  overflow:hidden;
+
+  min-height:120px;
+
+  padding:15px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.065);
+
+  border-radius:17px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.035),
+      rgba(255,255,255,.012)
+    );
+
+  transition:
+    transform .25s,
+    border-color .25s;
 }
 
-.owner-box h3{
-    font-size:16px;
-    margin-bottom:8px;
+.result:hover{
+  transform:translateY(-2px);
+
+  border-color:
+    rgba(139,92,246,.25);
 }
 
-.owner-box p{
-    color:#8e97aa;
-    font-size:12px;
-    line-height:1.6;
-    margin-bottom:14px;
+.result::after{
+  content:"";
+
+  position:absolute;
+
+  width:80px;
+  height:80px;
+
+  right:-40px;
+  bottom:-40px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(139,92,246,.13),
+      transparent 70%
+    );
 }
 
-.join-btn{
-    display:inline-block;
-    text-decoration:none;
-    background:#7c3aed;
-    color:#fff;
-    padding:11px 18px;
-    border-radius:10px;
-    font-size:12px;
-    font-weight:900;
+.result-icon{
+  font-size:17px;
+
+  margin-bottom:13px;
 }
+
+.result-label{
+  margin-bottom:5px;
+
+  color:#706b78;
+
+  font-size:9px;
+
+  font-weight:900;
+
+  letter-spacing:.8px;
+}
+
+.result-value{
+  color:#f5f1fa;
+
+  font-size:20px;
+
+  font-weight:1000;
+
+  letter-spacing:-.5px;
+
+  word-break:break-word;
+
+  text-shadow:
+    0 0 18px
+    rgba(190,160,255,.18);
+}
+
+
+/* ================================
+   FINAL RESULT
+================================ */
+
+.result.final{
+  grid-column:
+    1 / -1;
+
+  min-height:145px;
+
+  padding:19px;
+
+  border-color:
+    rgba(139,92,246,.24);
+
+  background:
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(139,92,246,.16),
+      transparent 40%
+    ),
+
+    linear-gradient(
+      145deg,
+      rgba(124,58,237,.10),
+      rgba(255,255,255,.025)
+    );
+
+  box-shadow:
+    inset 0 1px 0
+    rgba(255,255,255,.04),
+
+    0 0 35px
+    rgba(124,58,237,.06);
+}
+
+.final-top{
+  display:flex;
+
+  align-items:center;
+  justify-content:space-between;
+
+  color:#9b93a6;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:.8px;
+}
+
+.live{
+  padding:5px 8px;
+
+  border:
+    1px solid
+    rgba(139,92,246,.18);
+
+  border-radius:999px;
+
+  color:#d9c8ff;
+
+  background:
+    rgba(139,92,246,.12);
+
+  font-size:8px;
+}
+
+.final-value{
+  margin-top:12px;
+
+  color:transparent;
+
+  font-size:
+    clamp(30px,8vw,46px);
+
+  font-weight:1000;
+
+  letter-spacing:-1.5px;
+
+  word-break:break-word;
+
+  background:
+    linear-gradient(
+      100deg,
+      #fff,
+      #d8c3ff,
+      #fff
+    );
+
+  -webkit-background-clip:text;
+  background-clip:text;
+
+  text-shadow:
+    0 0 30px
+    rgba(157,108,255,.12);
+}
+
+.final-line{
+  width:100%;
+  height:2px;
+
+  margin-top:16px;
+
+  border-radius:10px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(139,92,246,.7),
+      transparent
+    );
+
+  box-shadow:
+    0 0 12px
+    rgba(139,92,246,.25);
+}
+
+
+/* ================================
+   FORMULA
+================================ */
+
+.formula{
+  display:flex;
+
+  flex-direction:column;
+
+  gap:9px;
+}
+
+.formula-row{
+  display:flex;
+
+  flex-direction:column;
+
+  gap:5px;
+
+  padding:11px 12px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.045);
+
+  border-radius:12px;
+
+  background:
+    rgba(255,255,255,.025);
+}
+
+.formula-row span{
+  color:#716b79;
+
+  font-size:9px;
+
+  font-weight:900;
+
+  text-transform:uppercase;
+
+  letter-spacing:.6px;
+}
+
+.formula-row code{
+  color:#c8c0d3;
+
+  font-family:
+    monospace;
+
+  font-size:10px;
+
+  line-height:1.5;
+}
+
+.formula-note{
+  padding-top:5px;
+
+  color:#77717f;
+
+  font-size:10px;
+
+  text-align:center;
+}
+
+
+/* ================================
+   FOOTER
+================================ */
 
 .footer{
-    text-align:center;
-    color:#555e72;
-    font-size:11px;
-    padding:10px 0 20px;
+  padding:
+    2px 0 15px;
+
+  color:#5e5965;
+
+  font-size:10px;
+
+  text-align:center;
 }
 
-@media(max-width:520px){
+.footer-line{
+  width:70px;
+  height:1px;
 
-    body{
-        padding:12px;
-    }
+  margin:
+    0 auto 12px;
 
-    .logo{
-        font-size:25px;
-    }
-
-    .card{
-        padding:16px;
-    }
-
-    .grid{
-        grid-template-columns:1fr;
-    }
-
-    .options{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .result-main{
-        font-size:21px;
-    }
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #6d28d9,
+      transparent
+    );
 }
+
+.footer small{
+  display:block;
+
+  margin-top:4px;
+
+  color:#403c46;
+
+  font-size:9px;
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media(max-width:480px){
+
+  .container{
+    padding:
+      22px 10px 35px;
+  }
+
+  .card{
+    padding:17px;
+
+    border-radius:20px;
+  }
+
+  .logo{
+    font-size:29px;
+  }
+
+  .result{
+    min-height:115px;
+  }
+
+  .result-value{
+    font-size:18px;
+  }
+
+  .result.final{
+    min-height:135px;
+  }
+
+  .afk-row{
+    grid-template-columns:
+      1fr 105px;
+  }
+
+}
+
+
+/* ================================
+   VERY SMALL SCREEN
+================================ */
+
+@media(max-width:350px){
+
+  .result-grid{
+    grid-template-columns:
+      1fr;
+  }
+
+  .result.final{
+    grid-column:
+      auto;
+  }
+
+}
+
+
+/* ================================
+   HTML CONTENT
+================================ */
+
 </style>
 </head>
 
 <body>
 
+<div class="orb orb-one"></div>
+<div class="orb orb-two"></div>
+
+
 <div class="container">
 
-    <header class="header">
 
-        <div class="logo">
-            YAKKZZ <span>CALCULATOR</span>
-        </div>
+  <header class="header">
 
-        <div class="subtitle">
-            Steal An Egg • Speed & AFK Calculator
-        </div>
+    <div class="badge">
+      ⚡ STEAL AN EGG • CALCULATOR
+    </div>
 
-    </header>
+    <div class="logo">
+      YAKKZZ
+    </div>
+
+    <div class="subtitle">
+      Speed & AFK Calculator
+    </div>
+
+  </header>
 
 
-    <!-- ============================================
-         OWNER NOTICE
-         ============================================ -->
+  <!-- OWNER -->
 
-    <div class="card owner-box">
+  <section class="owner-box">
 
-        <h3>
-            ❤️ SUPPORT OWNER
-        </h3>
+    <div class="owner-content">
 
-        <p>
-            Jangan lupa join SL Owner dan hargai
-            owner yang sudah menyediakan calculator ini.
-        </p>
+      <div class="owner-title">
+        ❤️ SUPPORT OWNER
+      </div>
 
-        <a
-            class="join-btn"
-            href="https://whatsapp.com/channel/0029VbAVjDXHgZWVGTVHH30r"
-            target="_blank"
+      <div class="owner-text">
+        Jangan lupa join SL Owner dan hargai owner.
+      </div>
+
+      <a
+        class="join-btn"
+        href="https://whatsapp.com/channel/0029VbAVjDXHgZWVGTVHH30r"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        JOIN SL OWNER
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- CALCULATOR -->
+
+  <section class="card">
+
+    <div class="card-title">
+      ⚡ SPEED CALCULATOR
+    </div>
+
+
+    <!-- SPEED AWAL -->
+
+    <div class="field">
+
+      <label for="startSpeed">
+        Speed Awal
+      </label>
+
+      <span class="hint">
+        Masukkan speed kamu saat ini
+      </span>
+
+      <div class="input-wrap">
+
+        <input
+          id="startSpeed"
+          type="text"
+          inputmode="decimal"
+          autocomplete="off"
         >
-            JOIN SL OWNER
-        </a>
+
+      </div>
 
     </div>
 
 
-    <!-- ============================================
-         INPUT SPEED
-         ============================================ -->
+    <!-- TREADMILL -->
 
-    <div class="card">
+    <div class="field">
 
-        <div class="card-title">
-            ⚡ SPEED CALCULATOR
-        </div>
+      <label for="treadmill">
+        Treadmill
+      </label>
 
-        <div class="input-group">
+      <span class="hint">
+        Masukkan nilai treadmill yang digunakan
+      </span>
 
-            <label>
-                Speed Awal
-            </label>
+      <div class="input-wrap">
 
-            <input
-                type="text"
-                id="startSpeed"
-                placeholder="Contoh: 58K"
-                autocomplete="off"
-            >
-
-        </div>
-
-
-        <div class="grid">
-
-            <div>
-
-                <div class="option-title">
-                    Treadmill
-                </div>
-
-                <input
-                    type="text"
-                    id="treadmill"
-                    placeholder="Contoh: 2000"
-                    autocomplete="off"
-                >
-
-            </div>
-
-
-            <div>
-
-                <div class="option-title">
-                    Trail
-                </div>
-
-                <input
-                    type="text"
-                    id="trail"
-                    placeholder="Contoh: 29"
-                    autocomplete="off"
-                >
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- ============================================
-         ROBUX MULTIPLIER
-         ============================================ -->
-
-    <div class="card">
-
-        <div class="card-title">
-            💎 Robux Multiplier
-        </div>
-
-        <div class="options" id="robuxOptions">
-
-            <button
-                class="option active"
-                data-value="1"
-            >
-                DEFAULT
-            </button>
-
-            <button
-                class="option"
-                data-value="2"
-            >
-                ×2
-            </button>
-
-            <button
-                class="option"
-                data-value="4"
-            >
-                ×4
-            </button>
-
-            <button
-                class="option"
-                data-value="6"
-            >
-                ×6
-            </button>
-
-            <button
-                class="option"
-                data-value="8"
-            >
-                ×8
-            </button>
-
-            <button
-                class="option"
-                data-value="10"
-            >
-                ×10
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- ============================================
-         AFK
-         ============================================ -->
-
-    <div class="card">
-
-        <div class="card-title">
-            💤 Waktu AFK
-        </div>
-
-        <div class="grid">
-
-            <div>
-
-                <label>
-                    Durasi
-                </label>
-
-                <input
-                    type="number"
-                    id="afkAmount"
-                    value="7"
-                    min="1"
-                    placeholder="Contoh: 7"
-                >
-
-            </div>
-
-
-            <div>
-
-                <label>
-                    Satuan
-                </label>
-
-                <select id="afkUnit">
-
-                    <option value="hour">
-                        Jam
-                    </option>
-
-                    <option value="day">
-                        Hari
-                    </option>
-
-                </select>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- ============================================
-         PART 2 LANJUT DI SINI
-         ============================================ -->
-
-      <!-- ============================================
-         HASIL PERHITUNGAN
-         ============================================ -->
-
-    <div class="card">
-
-        <div class="card-title">
-            📊 HASIL PERHITUNGAN
-        </div>
-
-        <div class="result">
-
-            <div class="result-row">
-
-                <div class="result-label">
-                    Speed / Langkah
-                </div>
-
-                <div
-                    class="result-value"
-                    id="speedPerStep"
-                >
-                    0
-                </div>
-
-            </div>
-
-
-            <div class="result-row">
-
-                <div class="result-label">
-                    Speed / Detik
-                </div>
-
-                <div
-                    class="result-value"
-                    id="speedPerSecond"
-                >
-                    0
-                </div>
-
-            </div>
-
-
-            <div class="result-row">
-
-                <div class="result-label">
-                    Durasi AFK
-                </div>
-
-                <div
-                    class="result-value"
-                    id="durationResult"
-                >
-                    0
-                </div>
-
-            </div>
-
-
-            <div class="result-row">
-
-                <div class="result-label">
-                    Total Speed Didapat
-                </div>
-
-                <div
-                    class="result-value"
-                    id="totalGain"
-                >
-                    0
-                </div>
-
-            </div>
-
-
-            <div class="result-row">
-
-                <div class="result-label">
-                    Speed Akhir
-                </div>
-
-                <div
-                    class="result-value result-main"
-                    id="finalSpeed"
-                >
-                    0
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <button
-            class="calculate-btn"
-            id="calculateBtn"
+        <input
+          id="treadmill"
+          type="text"
+          inputmode="decimal"
+          autocomplete="off"
         >
-            ⚡ HITUNG SPEED
-        </button>
+
+      </div>
 
     </div>
 
 
-    <!-- ============================================
-         INFO RUMUS
-         ============================================ -->
+    <!-- TRAIL -->
 
-    <div class="card">
+    <div class="field">
 
-        <div class="card-title">
-            🧮 Cara Perhitungan
+      <label for="trail">
+        Trail
+      </label>
+
+      <span class="hint">
+        Masukkan nilai trail yang digunakan
+      </span>
+
+      <div class="input-wrap">
+
+        <input
+          id="trail"
+          type="text"
+          inputmode="decimal"
+          autocomplete="off"
+        >
+
+      </div>
+
+    </div>
+
+
+    <!-- MULTIPLAYER -->
+
+    <div class="field">
+
+      <label for="multiplayer">
+        Robux Multiplayer
+      </label>
+
+      <span class="hint">
+        Masukkan multiplier multiplayer yang dimiliki
+      </span>
+
+      <div class="input-wrap">
+
+        <input
+          id="multiplayer"
+          type="number"
+          min="2"
+          step="1"
+          inputmode="numeric"
+          autocomplete="off"
+        >
+
+      </div>
+
+      <span class="hint">
+        Kosongkan jika tidak memiliki multiplayer
+      </span>
+
+    </div>
+
+
+    <!-- AFK -->
+
+    <div class="field">
+
+      <label for="afkAmount">
+        Durasi AFK
+      </label>
+
+      <span class="hint">
+        Masukkan berapa lama kamu akan AFK
+      </span>
+
+      <div class="afk-row">
+
+        <input
+          id="afkAmount"
+          type="number"
+          min="0"
+          step="0.1"
+          inputmode="decimal"
+        >
+
+        <select id="afkUnit">
+
+          <option value="hour">
+            Jam
+          </option>
+
+          <option value="day">
+            Hari
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <button
+      id="calculateBtn"
+      class="calculate-btn"
+      type="button"
+    >
+      ⚡ HITUNG SPEED
+    </button>
+
+  </section>
+
+
+<!-- PART 3 LANJUT DI SINI -->
+
+      <!-- HASIL -->
+
+  <section class="card">
+
+    <div class="card-title">
+      📊 HASIL PERHITUNGAN
+    </div>
+
+
+    <div class="result-grid">
+
+
+      <div class="result">
+
+        <div class="result-icon">
+          ⚡
         </div>
 
-        <div class="notice">
+        <div class="result-label">
+          SPEED / LANGKAH
+        </div>
 
-            <strong>Speed / Langkah</strong>
-            =
-            Treadmill × (Trail + Robux − 1)
+        <div
+          id="speedPerStep"
+          class="result-value"
+        >
+          0
+        </div>
 
-            <br><br>
+      </div>
 
-            <strong>Speed / Detik</strong>
-            =
-            Speed / Langkah × Steps
 
-            <br><br>
+      <div class="result">
 
-            <strong>Total Gain</strong>
-            =
-            Speed / Detik × Durasi AFK
+        <div class="result-icon">
+          🚀
+        </div>
 
-            <br><br>
+        <div class="result-label">
+          SPEED / DETIK
+        </div>
 
-            <strong>Speed Akhir</strong>
-            =
-            Speed Awal + Total Gain
+        <div
+          id="speedPerSecond"
+          class="result-value"
+        >
+          0
+        </div>
+
+      </div>
+
+
+      <div class="result">
+
+        <div class="result-icon">
+          💤
+        </div>
+
+        <div class="result-label">
+          DURASI AFK
+        </div>
+
+        <div
+          id="durationResult"
+          class="result-value"
+        >
+          0
+        </div>
+
+      </div>
+
+
+      <div class="result">
+
+        <div class="result-icon">
+          📈
+        </div>
+
+        <div class="result-label">
+          TOTAL GAIN
+        </div>
+
+        <div
+          id="totalGain"
+          class="result-value"
+        >
+          0
+        </div>
+
+      </div>
+
+
+      <div class="result final">
+
+        <div class="final-top">
+
+          <span>
+            🏆 SPEED AKHIR
+          </span>
+
+          <span class="live">
+            LIVE
+          </span>
 
         </div>
 
+
+        <div
+          id="finalSpeed"
+          class="final-value"
+        >
+          0
+        </div>
+
+
+        <div class="final-line"></div>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- RUMUS -->
+
+  <section class="card">
+
+    <div class="card-title">
+      🧮 RUMUS PERHITUNGAN
     </div>
 
 
-    <!-- ============================================
-         FOOTER
-         ============================================ -->
+    <div class="formula">
 
-    <div class="footer">
 
-        🤖 YAKKZZ CALCULATOR
+      <div class="formula-row">
 
-        <br>
+        <span>
+          Speed / Langkah
+        </span>
 
-        Steal An Egg Speed Calculator
+        <code>
+          Treadmill × (Trail + Multiplayer − 1)
+        </code>
+
+      </div>
+
+
+      <div class="formula-row">
+
+        <span>
+          Speed / Detik
+        </span>
+
+        <code>
+          Speed / Langkah × Steps
+        </code>
+
+      </div>
+
+
+      <div class="formula-row">
+
+        <span>
+          Total Gain
+        </span>
+
+        <code>
+          Speed / Detik × Durasi
+        </code>
+
+      </div>
+
+
+      <div class="formula-row">
+
+        <span>
+          Speed Akhir
+        </span>
+
+        <code>
+          Speed Awal + Total Gain
+        </code>
+
+      </div>
+
+
+      <div class="formula-note">
+        Multiplayer kosong otomatis dihitung sebagai ×1
+      </div>
+
 
     </div>
 
+  </section>
 
-    <!-- ============================================
-         JAVASCRIPT — PART 3 LANJUT DI SINI
-         ============================================ -->
 
-    <script>
+  <!-- FOOTER -->
 
-        /* ============================================
-           ELEMENT
-           ============================================ */
+  <footer class="footer">
 
-        const startSpeedInput =
-            document.getElementById("startSpeed");
+    <div class="footer-line"></div>
 
-        const treadmillInput =
-            document.getElementById("treadmill");
+    <div>
+      ⚡ YAKKZZ CALCULATOR
+    </div>
 
-        const trailInput =
-            document.getElementById("trail");
+    <small>
+      Steal An Egg Speed Calculator
+    </small>
 
-        const afkAmountInput =
-            document.getElementById("afkAmount");
+  </footer>
 
-        const afkUnitInput =
-            document.getElementById("afkUnit");
-
-        const calculateBtn =
-            document.getElementById("calculateBtn");
-
-        const speedPerStepEl =
-            document.getElementById("speedPerStep");
-
-        const speedPerSecondEl =
-            document.getElementById("speedPerSecond");
-
-        const durationResultEl =
-            document.getElementById("durationResult");
-
-        const totalGainEl =
-            document.getElementById("totalGain");
-
-        const finalSpeedEl =
-            document.getElementById("finalSpeed");
-
-
-        /* ============================================
-           DEFAULT VALUE
-           ============================================ */
-
-        let selectedRobux = 1;
-
-
-        /* ============================================
-           ROBUX BUTTON
-           ============================================ */
-
-        const robuxButtons =
-            document.querySelectorAll(
-                "#robuxOptions .option"
-            );
-
-
-        robuxButtons.forEach(
-            button => {
-
-                button.addEventListener(
-                    "click",
-                    () => {
-
-                        robuxButtons.forEach(
-                            btn => {
-
-                                btn.classList.remove(
-                                    "active"
-                                );
-
-                            }
-                        );
-
-
-                        button.classList.add(
-                            "active"
-                        );
-
-
-                        selectedRobux =
-                            Number(
-                                button.dataset.value
-                            );
-
-
-                        calculate();
-
-                    }
-                );
-
-            }
-        );
-
-
-        /* ============================================
-           PART 3 LANJUT DI SINI
-           ============================================ */
-
-              /* ============================================
-           FORMAT ANGKA
-           ============================================ */
-
-        function formatNumber(value){
-
-            if(!Number.isFinite(value)){
-                return "0";
-            }
-
-            const abs =
-                Math.abs(value);
-
-
-            if(abs >= 1e12){
-
-                return (
-                    value / 1e12
-                ).toFixed(2)
-                .replace(/\.00$/,"")
-                + "T";
-
-            }
-
-
-            if(abs >= 1e9){
-
-                return (
-                    value / 1e9
-                ).toFixed(2)
-                .replace(/\.00$/,"")
-                + "B";
-
-            }
-
-
-            if(abs >= 1e6){
-
-                return (
-                    value / 1e6
-                ).toFixed(2)
-                .replace(/\.00$/,"")
-                + "M";
-
-            }
-
-
-            if(abs >= 1e3){
-
-                return (
-                    value / 1e3
-                ).toFixed(2)
-                .replace(/\.00$/,"")
-                + "K";
-
-            }
-
-
-            return Math.floor(value)
-                .toLocaleString("id-ID");
-
-        }
-
-
-        /* ============================================
-           PARSE ANGKA
-           ============================================ */
-
-        function parseNumber(value){
-
-            if(value === null || value === undefined){
-                return 0;
-            }
-
-            let text =
-                String(value)
-                .trim()
-                .toUpperCase()
-                .replace(/,/g,"");
-
-
-            if(!text){
-                return 0;
-            }
-
-
-            let multiplier = 1;
-
-
-            if(text.endsWith("K")){
-
-                multiplier = 1e3;
-
-                text =
-                    text.slice(0,-1);
-
-            }
-            else if(text.endsWith("M")){
-
-                multiplier = 1e6;
-
-                text =
-                    text.slice(0,-1);
-
-            }
-            else if(text.endsWith("B")){
-
-                multiplier = 1e9;
-
-                text =
-                    text.slice(0,-1);
-
-            }
-            else if(text.endsWith("T")){
-
-                multiplier = 1e12;
-
-                text =
-                    text.slice(0,-1);
-
-            }
-
-
-            const number =
-                parseFloat(text);
-
-
-            if(!Number.isFinite(number)){
-                return 0;
-            }
-
-
-            return number * multiplier;
-
-        }
-
-
-        /* ============================================
-           HITUNG DURASI AFK
-           ============================================ */
-
-        function getDurationSeconds(){
-
-            const amount =
-                Number(
-                    afkAmountInput.value
-                );
-
-
-            if(
-                !Number.isFinite(amount) ||
-                amount <= 0
-            ){
-
-                return 0;
-
-            }
-
-
-            if(
-                afkUnitInput.value ===
-                "day"
-            ){
-
-                return amount *
-                    24 *
-                    60 *
-                    60;
-
-            }
-
-
-            return amount *
-                60 *
-                60;
-
-        }
-
-
-        /* ============================================
-           RUMUS UTAMA
-           ============================================ */
-
-        function calculate(){
-
-            const treadmill =
-                parseNumber(
-                    treadmillInput.value
-                );
-
-
-            const trail =
-                parseNumber(
-                    trailInput.value
-                );
-
-
-            const startSpeed =
-                parseNumber(
-                    startSpeedInput.value
-                );
-
-
-            /*
-             * DEFAULT ROBUX = ×1
-             *
-             * Pilihan yang ditampilkan:
-             * ×2, ×4, ×6, ×8, ×10
-             *
-             * Kalau DEFAULT:
-             * multiplier = 1
-             */
-
-            const robux =
-                selectedRobux || 1;
-
-
-            /*
-             * SPEED / LANGKAH
-             *
-             * Treadmill ×
-             * (Trail + Robux - 1)
-             */
-
-            const speedPerStep =
-                treadmill *
-                (trail + robux - 1);
-
-
-            /*
-             * STEPS
-             *
-             * Nilai default 1 langkah/detik.
-             *
-             * Bisa diubah di bagian
-             * STEPS CONFIG.
-             */
-
-            const stepsPerSecond = 1;
-
-
-            /*
-             * SPEED / DETIK
-             */
-
-            const speedPerSecond =
-                speedPerStep *
-                stepsPerSecond;
-
-
-            /*
-             * DURASI AFK
-             */
-
-            const durationSeconds =
-                getDurationSeconds();
-
-
-            /*
-             * TOTAL SPEED DIDAPAT
-             */
-
-            const gain =
-                speedPerSecond *
-                durationSeconds;
-
-
-            /*
-             * SPEED AKHIR
-             */
-
-            const finalSpeed =
-                startSpeed +
-                gain;
-
-
-            /* ========================================
-               TAMPILKAN HASIL
-               ======================================== */
-
-            speedPerStepEl.textContent =
-                formatNumber(
-                    speedPerStep
-                );
-
-
-            speedPerSecondEl.textContent =
-                formatNumber(
-                    speedPerSecond
-                );
-
-
-            if(
-                afkUnitInput.value ===
-                "day"
-            ){
-
-                durationResultEl.textContent =
-                    afkAmountInput.value +
-                    " hari";
-
-            }else{
-
-                durationResultEl.textContent =
-                    afkAmountInput.value +
-                    " jam";
-
-            }
-
-
-            totalGainEl.textContent =
-                formatNumber(
-                    gain
-                );
-
-
-            finalSpeedEl.textContent =
-                formatNumber(
-                    finalSpeed
-                );
-
-        }
-
-
-        /* ============================================
-           AUTO CALCULATE
-           ============================================ */
-
-        [
-            startSpeedInput,
-            treadmillInput,
-            trailInput,
-            afkAmountInput,
-            afkUnitInput
-        ].forEach(
-            element => {
-
-                element.addEventListener(
-                    "input",
-                    calculate
-                );
-
-                element.addEventListener(
-                    "change",
-                    calculate
-                );
-
-            }
-        );
-
-
-        /* ============================================
-           BUTTON HITUNG
-           ============================================ */
-
-        calculateBtn.addEventListener(
-            "click",
-            calculate
-        );
-
-
-        /* ============================================
-           HITUNG AWAL
-           ============================================ */
-
-        calculate();
-
-
-        /* ============================================
-           PART 4 LANJUT DI SINI
-           ============================================ */
-
-              /* ============================================
-           FINAL INIT
-           ============================================ */
-
-        document.addEventListener(
-            "DOMContentLoaded",
-            () => {
-
-                calculate();
-
-            }
-        );
-
-
-        /* ============================================
-           CONSOLE INFO
-           ============================================ */
-
-        console.log(
-            "YAKKZZ CALCULATOR READY ⚡"
-        );
-
-    </script>
 
 </div>
+
+
+<script>
+
+
+/* ==========================================
+   ELEMENT
+========================================== */
+
+const startSpeedInput =
+  document.getElementById(
+    "startSpeed"
+  );
+
+const treadmillInput =
+  document.getElementById(
+    "treadmill"
+  );
+
+const trailInput =
+  document.getElementById(
+    "trail"
+  );
+
+const multiplayerInput =
+  document.getElementById(
+    "multiplayer"
+  );
+
+const afkAmountInput =
+  document.getElementById(
+    "afkAmount"
+  );
+
+const afkUnitInput =
+  document.getElementById(
+    "afkUnit"
+  );
+
+const calculateBtn =
+  document.getElementById(
+    "calculateBtn"
+  );
+
+const speedPerStepEl =
+  document.getElementById(
+    "speedPerStep"
+  );
+
+const speedPerSecondEl =
+  document.getElementById(
+    "speedPerSecond"
+  );
+
+const durationResultEl =
+  document.getElementById(
+    "durationResult"
+  );
+
+const totalGainEl =
+  document.getElementById(
+    "totalGain"
+  );
+
+const finalSpeedEl =
+  document.getElementById(
+    "finalSpeed"
+  );
+
+
+/* ==========================================
+   PARSE NUMBER
+========================================== */
+
+function parseNumber(value){
+
+  if(
+    value === null ||
+    value === undefined
+  ){
+    return 0;
+  }
+
+
+  let text =
+    String(value)
+      .trim()
+      .toUpperCase()
+      .replace(/,/g,"")
+      .replace(/\s/g,"");
+
+
+  if(!text){
+    return 0;
+  }
+
+
+  let multiplier = 1;
+
+
+  if(text.endsWith("Q")){
+
+    multiplier = 1e15;
+
+    text =
+      text.slice(0,-1);
+
+  }
+
+  else if(text.endsWith("T")){
+
+    multiplier = 1e12;
+
+    text =
+      text.slice(0,-1);
+
+  }
+
+  else if(text.endsWith("B")){
+
+    multiplier = 1e9;
+
+    text =
+      text.slice(0,-1);
+
+  }
+
+  else if(text.endsWith("M")){
+
+    multiplier = 1e6;
+
+    text =
+      text.slice(0,-1);
+
+  }
+
+  else if(text.endsWith("K")){
+
+    multiplier = 1e3;
+
+    text =
+      text.slice(0,-1);
+
+  }
+
+
+  const number =
+    Number(text);
+
+
+  if(
+    !Number.isFinite(number)
+  ){
+    return 0;
+  }
+
+
+  return number * multiplier;
+
+}
+
+
+/* ==========================================
+   FORMAT NUMBER
+========================================== */
+
+function formatNumber(value){
+
+  if(
+    !Number.isFinite(value)
+  ){
+    return "0";
+  }
+
+
+  const abs =
+    Math.abs(value);
+
+
+  if(abs >= 1e15){
+
+    return (
+      value / 1e15
+    )
+    .toFixed(2)
+    .replace(/\.00$/,"")
+    + "Q";
+
+  }
+
+
+  if(abs >= 1e12){
+
+    return (
+      value / 1e12
+    )
+    .toFixed(2)
+    .replace(/\.00$/,"")
+    + "T";
+
+  }
+
+
+  if(abs >= 1e9){
+
+    return (
+      value / 1e9
+    )
+    .toFixed(2)
+    .replace(/\.00$/,"")
+    + "B";
+
+  }
+
+
+  if(abs >= 1e6){
+
+    return (
+      value / 1e6
+    )
+    .toFixed(2)
+    .replace(/\.00$/,"")
+    + "M";
+
+  }
+
+
+  if(abs >= 1e3){
+
+    return (
+      value / 1e3
+    )
+    .toFixed(2)
+    .replace(/\.00$/,"")
+    + "K";
+
+  }
+
+
+  return Math.floor(value)
+    .toLocaleString("id-ID");
+
+}
+
+
+/* ==========================================
+   AFK → SECONDS
+========================================== */
+
+function getDurationSeconds(){
+
+  const amount =
+    Number(
+      afkAmountInput.value
+    );
+
+
+  if(
+    !Number.isFinite(amount) ||
+    amount <= 0
+  ){
+    return 0;
+  }
+
+
+  if(
+    afkUnitInput.value === "day"
+  ){
+
+    return (
+      amount *
+      24 *
+      60 *
+      60
+    );
+
+  }
+
+
+  return (
+    amount *
+    60 *
+    60
+  );
+
+}
+
+
+/* ==========================================
+   FORMAT DURATION
+========================================== */
+
+function formatDuration(seconds){
+
+  if(
+    !Number.isFinite(seconds) ||
+    seconds <= 0
+  ){
+    return "0 detik";
+  }
+
+
+  let remaining =
+    Math.floor(seconds);
+
+
+  const days =
+    Math.floor(
+      remaining / 86400
+    );
+
+  remaining %= 86400;
+
+
+  const hours =
+    Math.floor(
+      remaining / 3600
+    );
+
+  remaining %= 3600;
+
+
+  const minutes =
+    Math.floor(
+      remaining / 60
+    );
+
+
+  const secs =
+    remaining % 60;
+
+
+  const parts = [];
+
+
+  if(days > 0){
+    parts.push(
+      days + " hari"
+    );
+  }
+
+
+  if(hours > 0){
+    parts.push(
+      hours + " jam"
+    );
+  }
+
+
+  if(minutes > 0){
+    parts.push(
+      minutes + " menit"
+    );
+  }
+
+
+  if(secs > 0){
+    parts.push(
+      secs + " detik"
+    );
+  }
+
+
+  return parts.join(" ");
+
+}
+
+
+/* ==========================================
+   CALCULATE
+========================================== */
+
+function calculate(){
+
+  const treadmill =
+    parseNumber(
+      treadmillInput.value
+    );
+
+
+  const trail =
+    parseNumber(
+      trailInput.value
+    );
+
+
+  const startSpeed =
+    parseNumber(
+      startSpeedInput.value
+    );
+
+
+  /*
+   * MULTIPLAYER
+   *
+   * Kosong = ×1
+   */
+
+  let multiplayer =
+    Number(
+      multiplayerInput.value
+    );
+
+
+  if(
+    !Number.isFinite(multiplayer) ||
+    multiplayer < 2
+  ){
+
+    multiplayer = 1;
+
+  }
+
+
+  /*
+   * SPEED / LANGKAH
+   */
+
+  const speedPerStep =
+    treadmill *
+    (
+      trail +
+      multiplayer -
+      1
+    );
+
+
+  /*
+   * STEPS
+   *
+   * Untuk versi kalkulator ini
+   * digunakan 1 step per detik.
+   */
+
+  const stepsPerSecond = 1;
+
+
+  /*
+   * SPEED / DETIK
+   */
+
+  const speedPerSecond =
+    speedPerStep *
+    stepsPerSecond;
+
+
+  /*
+   * DURASI
+   */
+
+  const durationSeconds =
+    getDurationSeconds();
+
+
+  /*
+   * TOTAL GAIN
+   */
+
+  const totalGain =
+    speedPerSecond *
+    durationSeconds;
+
+
+  /*
+   * SPEED AKHIR
+   */
+
+  const finalSpeed =
+    startSpeed +
+    totalGain;
+
+
+  /*
+   * UPDATE HASIL
+   */
+
+  speedPerStepEl.textContent =
+    formatNumber(
+      speedPerStep
+    );
+
+
+  speedPerSecondEl.textContent =
+    formatNumber(
+      speedPerSecond
+    );
+
+
+  durationResultEl.textContent =
+    formatDuration(
+      durationSeconds
+    );
+
+
+  totalGainEl.textContent =
+    formatNumber(
+      totalGain
+    );
+
+
+  finalSpeedEl.textContent =
+    formatNumber(
+      finalSpeed
+    );
+
+}
+
+
+/* ==========================================
+   AUTO CALCULATE
+========================================== */
+
+const autoInputs = [
+
+  startSpeedInput,
+
+  treadmillInput,
+
+  trailInput,
+
+  multiplayerInput,
+
+  afkAmountInput
+
+];
+
+
+autoInputs.forEach(input=>{
+
+  input.addEventListener(
+    "input",
+    calculate
+  );
+
+});
+
+
+afkUnitInput.addEventListener(
+  "change",
+  calculate
+);
+
+
+calculateBtn.addEventListener(
+  "click",
+  calculate
+);
+
+
+/* ==========================================
+   PART 4
+========================================== */
+
+    /* ==========================================
+   INITIAL CALCULATION
+========================================== */
+
+calculate();
+
+
+/* ==========================================
+   READY
+========================================== */
+
+console.log(
+  "⚡ YAKKZZ CALCULATOR READY"
+);
+
+</script>
 
 </body>
 </html>

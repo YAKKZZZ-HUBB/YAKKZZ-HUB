@@ -1,40 +1,22 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#05050b">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
-<meta
-    name="theme-color"
-    content="#06070b"
->
-
-<title>
-    YAKKZZ CALCULATOR — Steal An Egg
-</title>
+<title>YAKKZZ CALCULATOR — Steal An Egg</title>
 
 <style>
 
+/* =====================================================
+   RESET
+===================================================== */
+
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
-}
-
-:root{
-    --bg:#05060a;
-    --card:rgba(15,17,27,.84);
-    --border:rgba(255,255,255,.08);
-    --text:#f5f7ff;
-    --muted:#858da1;
-    --red:#ff1744;
-    --red2:#d90035;
-    --green:#31f7a1;
+    box-sizing:border-box;
 }
 
 html{
@@ -43,54 +25,53 @@ html{
 
 body{
     min-height:100vh;
-    color:var(--text);
+    overflow-x:hidden;
+    font-family:Arial,Helvetica,sans-serif;
+    color:#fff;
 
     background:
         radial-gradient(
-            circle at 50% -10%,
-            rgba(255,23,68,.18),
-            transparent 38%
-        ),
-        radial-gradient(
-            circle at 100% 100%,
-            rgba(90,40,255,.10),
+            circle at 50% 15%,
+            rgba(255,0,55,.12),
             transparent 35%
         ),
-        var(--bg);
+        radial-gradient(
+            circle at 15% 80%,
+            rgba(80,40,255,.10),
+            transparent 30%
+        ),
+        #03040a;
+}
 
-    font-family:
-        Inter,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-
-    overflow-x:hidden;
+button,
+input,
+select{
+    font-family:inherit;
 }
 
 .hidden{
-    display:none !important;
+    display:none!important;
 }
 
-/* =========================
-   BACKGROUND
-========================= */
+/* =====================================================
+   BACKGROUND GRID
+===================================================== */
 
-.bg-grid{
+body::before{
+    content:"";
     position:fixed;
     inset:0;
     pointer-events:none;
-    opacity:.22;
+    z-index:-5;
 
     background-image:
         linear-gradient(
-            rgba(255,255,255,.035) 1px,
+            rgba(255,255,255,.025) 1px,
             transparent 1px
         ),
         linear-gradient(
             90deg,
-            rgba(255,255,255,.035) 1px,
+            rgba(255,255,255,.025) 1px,
             transparent 1px
         );
 
@@ -99,233 +80,319 @@ body{
     mask-image:
         linear-gradient(
             to bottom,
-            black,
-            transparent 92%
-        );
-
-    -webkit-mask-image:
-        linear-gradient(
-            to bottom,
-            black,
-            transparent 92%
+            #000,
+            transparent 95%
         );
 }
 
-.bg-glow{
+/* =====================================================
+   AMBIENT GLOW
+===================================================== */
+
+body::after{
+    content:"";
     position:fixed;
-    width:400px;
-    height:400px;
-    border-radius:50%;
-    filter:blur(110px);
-    opacity:.10;
+
+    width:700px;
+    height:700px;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
     pointer-events:none;
+    z-index:-6;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,0,55,.055),
+            transparent 68%
+        );
 }
 
-.glow-1{
-    top:-220px;
-    left:-180px;
-    background:#ff1744;
-}
-
-.glow-2{
-    right:-200px;
-    bottom:-220px;
-    background:#713cff;
-}
-
-/* =========================
-   CONTAINER
-========================= */
+/* =====================================================
+   MAIN CONTAINER
+===================================================== */
 
 .container{
-    width:min(
-        680px,
-        calc(100% - 20px)
-    );
-
+    width:min(920px,calc(100% - 24px));
     margin:auto;
 
     padding:
-        25px 0 45px;
-
-    position:relative;
-    z-index:2;
+        24px
+        0
+        50px;
 }
 
-/* =========================
+/* =====================================================
    HERO
-========================= */
+===================================================== */
 
 .hero{
+    position:relative;
     text-align:center;
-    margin-bottom:22px;
+
+    padding:
+        25px
+        10px
+        32px;
 }
 
 .badge{
     display:inline-flex;
+    align-items:center;
+    justify-content:center;
 
     padding:
-        7px 13px;
-
-    border-radius:999px;
+        8px
+        14px;
 
     border:
         1px solid
-        rgba(255,23,68,.25);
+        rgba(255,0,60,.35);
+
+    border-radius:999px;
 
     background:
-        rgba(255,23,68,.07);
+        rgba(255,0,60,.07);
 
-    color:#ff7791;
+    color:#ff476d;
 
     font-size:10px;
     font-weight:900;
 
-    letter-spacing:1.2px;
-
-    margin-bottom:14px;
+    letter-spacing:1.5px;
 
     box-shadow:
         0 0 25px
-        rgba(255,23,68,.08);
+        rgba(255,0,60,.08);
 }
 
 .hero h1{
+    margin-top:18px;
+
     font-size:
-        clamp(
-            32px,
-            9vw,
-            52px
-        );
+        clamp(34px,7vw,62px);
 
-    line-height:.95;
+    line-height:1;
 
-    letter-spacing:-2px;
+    font-weight:1000;
 
-    font-weight:950;
+    letter-spacing:-2.5px;
 
-    text-transform:uppercase;
+    text-shadow:
+        0 0 15px
+        rgba(255,0,60,.35),
 
-    background:
-        linear-gradient(
-            180deg,
-            #fff 25%,
-            #ff3158 100%
-        );
+        0 0 50px
+        rgba(255,0,60,.12);
+}
 
-    -webkit-background-clip:text;
-    background-clip:text;
-
-    color:transparent;
+.hero h1 span{
+    color:#ff174f;
 }
 
 .hero p{
-    margin-top:10px;
+    max-width:650px;
 
-    color:var(--muted);
+    margin:
+        15px
+        auto
+        0;
+
+    color:#777b8f;
 
     font-size:12px;
+
+    line-height:1.7;
 }
 
-/* =========================
-   EYES
-========================= */
+/* =====================================================
+   BIG CENTER EYES
+===================================================== */
 
-.eye-zone{
-    height:30px;
+.eyes{
+    position:fixed;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    width:100%;
+
+    height:150px;
 
     display:flex;
-    justify-content:center;
+
     align-items:center;
+    justify-content:center;
 
-    gap:12px;
+    gap:90px;
 
-    margin-bottom:2px;
+    pointer-events:none;
+
+    z-index:-1;
 }
 
 .eye{
-    width:17px;
-    height:17px;
+    position:relative;
 
-    border-radius:50%;
+    width:125px;
+    height:48px;
+
+    border-radius:
+        50%
+        50%
+        45%
+        45%;
 
     background:
         radial-gradient(
-            circle at 35% 30%,
-            #fff 0 10%,
-            #ff4a69 13% 34%,
-            #7a001d 38% 60%,
-            #170008 65%
+            ellipse at center,
+            #ff5275 0%,
+            #ff174f 35%,
+            #ff003d 55%,
+            rgba(255,0,61,.25) 78%,
+            transparent 100%
         );
 
     box-shadow:
-        0 0 10px
-        rgba(255,23,68,.65),
+        0 0 12px
+        rgba(255,0,61,.95),
 
-        0 0 25px
-        rgba(255,23,68,.25);
+        0 0 35px
+        rgba(255,0,61,.75),
+
+        0 0 80px
+        rgba(255,0,61,.38);
+
+    opacity:.55;
 
     animation:
-        eyeBlink 5s infinite;
+        eyeBlink
+        5s
+        infinite;
 }
 
 .eye:nth-child(2){
-    animation-delay:.12s;
+    animation-delay:.08s;
 }
+
+/* pupil */
+
+.eye::after{
+    content:"";
+
+    position:absolute;
+
+    width:24px;
+    height:24px;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:#020208;
+
+    box-shadow:
+        0 0 7px
+        rgba(0,0,0,.9),
+
+        inset 0 0 6px
+        rgba(255,255,255,.12);
+}
+
+/* upper eyelid */
+
+.eye::before{
+    content:"";
+
+    position:absolute;
+
+    left:-6px;
+    right:-6px;
+
+    top:-9px;
+
+    height:20px;
+
+    border-top:
+        4px solid
+        rgba(255,0,61,.8);
+
+    border-radius:50%;
+
+    filter:
+        drop-shadow(
+            0 0 7px
+            rgba(255,0,61,.8)
+        );
+}
+
+/* blinking */
 
 @keyframes eyeBlink{
 
     0%,
-    42%,
-    46%,
+    41%,
+    45%,
     100%{
         transform:scaleY(1);
-        opacity:1;
+        opacity:.55;
     }
 
-    44%{
-        transform:scaleY(.08);
-        opacity:.75;
+    43%{
+        transform:scaleY(.05);
+        opacity:.25;
     }
 }
 
-/* =========================
-   CARD
-========================= */
+/* =====================================================
+   GLASS CARD
+===================================================== */
 
 .card{
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.055),
-            rgba(255,255,255,.015)
-        ),
-        var(--card);
+    position:relative;
 
     border:
         1px solid
-        var(--border);
+        rgba(255,255,255,.075);
 
-    border-radius:23px;
+    border-radius:22px;
 
-    backdrop-filter:
-        blur(20px);
-
-    -webkit-backdrop-filter:
-        blur(20px);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.06),
+            rgba(255,255,255,.018)
+        );
 
     box-shadow:
-        0 20px 70px
-        rgba(0,0,0,.50);
+        0 20px 65px
+        rgba(0,0,0,.38),
+
+        inset 0 1px 0
+        rgba(255,255,255,.04);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
 }
 
-.calculator{
-    padding:18px;
-}
+/* =====================================================
+   INPUT CARD
+===================================================== */
 
-/* =========================
-   SECTION
-========================= */
+.input-card{
+    padding:22px;
+}
 
 .section-title{
     display:flex;
@@ -333,89 +400,97 @@ body{
 
     gap:10px;
 
-    margin-bottom:18px;
+    margin-bottom:20px;
 }
 
 .section-icon{
-    width:36px;
-    height:36px;
+    width:38px;
+    height:38px;
 
     display:grid;
     place-items:center;
 
-    border-radius:11px;
-
-    background:
-        rgba(255,23,68,.10);
+    border-radius:12px;
 
     border:
         1px solid
-        rgba(255,23,68,.18);
+        rgba(255,0,60,.22);
+
+    background:
+        rgba(255,0,60,.08);
+
+    box-shadow:
+        0 0 20px
+        rgba(255,0,60,.07);
 }
 
 .section-title h2{
-    font-size:14px;
+    font-size:16px;
     font-weight:900;
 }
 
-.section-title span{
+.section-title small{
     display:block;
 
-    color:var(--muted);
+    margin-top:4px;
+
+    color:#73778a;
 
     font-size:10px;
-
-    margin-top:2px;
 }
 
-/* =========================
-   INPUT
-========================= */
+/* =====================================================
+   INPUT GRID
+===================================================== */
 
-.input-group{
-    margin-bottom:14px;
-}
-
-.input-label{
-    display:flex;
-    justify-content:space-between;
-
-    margin-bottom:7px;
-}
-
-.input-label label{
-    color:#dce1ec;
-
-    font-size:11px;
-    font-weight:850;
-}
-
-.required{
-    color:#ff6682;
-
-    font-size:9px;
-    font-weight:900;
-}
-
-.input-row{
-    display:flex;
-    gap:9px;
-}
-
-.time-row{
+.input-grid{
     display:grid;
 
     grid-template-columns:
-        1fr 1fr;
+        repeat(2,minmax(0,1fr));
 
-    gap:9px;
+    gap:15px;
 }
 
-input,
-select{
+.field{
+    min-width:0;
+}
 
+.field.full{
+    grid-column:1/-1;
+}
+
+.field label{
+    display:block;
+
+    margin:
+        0
+        0
+        8px
+        2px;
+
+    color:#c2c5d0;
+
+    font-size:11px;
+    font-weight:900;
+
+    letter-spacing:.3px;
+}
+
+.input-wrap{
+    position:relative;
+}
+
+.input-wrap input,
+.input-wrap select{
     width:100%;
     height:52px;
+
+    padding:
+        0
+        15px;
+
+    outline:none;
 
     border:
         1px solid
@@ -423,102 +498,270 @@ select{
 
     border-radius:14px;
 
-    outline:none;
-
     background:
-        rgba(255,255,255,.035);
+        rgba(0,0,0,.27);
 
     color:#fff;
 
-    padding:
-        0 14px;
-
-    font-size:13px;
-    font-weight:650;
-
     transition:
-        .2s ease;
+        border-color .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
 }
 
-input::placeholder{
-    color:#626a7c;
-    font-weight:500;
+.input-wrap input::placeholder{
+    color:#505568;
 }
 
-input:focus,
-select:focus{
-
+.input-wrap input:focus,
+.input-wrap select:focus{
     border-color:
-        rgba(255,23,68,.65);
+        rgba(255,0,60,.55);
 
     background:
-        rgba(255,23,68,.04);
+        rgba(255,255,255,.025);
 
     box-shadow:
         0 0 0 3px
-        rgba(255,23,68,.07),
+        rgba(255,0,60,.06),
 
-        0 0 28px
-        rgba(255,23,68,.07);
+        0 0 25px
+        rgba(255,0,60,.08);
 }
 
-select{
-    appearance:none;
-    -webkit-appearance:none;
+.input-wrap select{
+    cursor:pointer;
 }
 
-select option{
-    background:#11131b;
+.input-wrap select option{
+    background:#080a12;
     color:#fff;
 }
 
-.hint{
-    display:block;
+/* =====================================================
+   AFK GRID
+===================================================== */
 
-    color:#606879;
+.time-grid{
+    display:grid;
 
-    font-size:9px;
+    grid-template-columns:
+        1fr
+        130px;
 
-    margin-top:6px;
-
-    line-height:1.4;
+    gap:10px;
 }
 
-.afk-input{
-    flex:1;
+/* =====================================================
+   START TIME
+===================================================== */
+
+.start-time{
+    display:grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    gap:10px;
 }
 
-.afk-unit{
-    width:110px;
-}
+.start-time input{
+    text-align:center;
 
-/* =========================
-   TIME BADGE
-========================= */
-
-.time-input-wrap{
-    position:relative;
-}
-
-.time-input-wrap input{
-    padding-right:52px;
-}
-
-.time-label{
-    position:absolute;
-
-    right:13px;
-    top:50%;
-
-    transform:
-        translateY(-50%);
-
-    color:#626a7c;
-
-    font-size:8px;
+    font-size:20px;
     font-weight:900;
 
-    pointer-events:none;
+    letter-spacing:1px;
+}
+
+/* =====================================================
+   NOTE
+===================================================== */
+
+.note{
+    margin-top:15px;
+
+    padding:
+        12px
+        14px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.05);
+
+    border-radius:13px;
+
+    background:
+        rgba(255,255,255,.015);
+
+    color:#73778a;
+
+    font-size:10px;
+
+    line-height:1.65;
+}
+
+.note strong{
+    color:#aeb1be;
+}
+
+/* =====================================================
+   OWNER
+===================================================== */
+
+.owner-notice{
+    margin-top:18px;
+
+    text-align:center;
+}
+
+.owner-notice p{
+    margin-bottom:10px;
+
+    color:#85899a;
+
+    font-size:11px;
+}
+
+.join-btn{
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    min-height:45px;
+
+    padding:
+        0
+        22px;
+
+    border:
+        1px solid
+        rgba(255,0,60,.4);
+
+    border-radius:13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,0,60,.18),
+            rgba(130,0,35,.08)
+        );
+
+    color:#fff;
+
+    text-decoration:none;
+
+    font-size:11px;
+    font-weight:900;
+
+    letter-spacing:.6px;
+
+    box-shadow:
+        0 0 25px
+        rgba(255,0,60,.08);
+
+    transition:.2s ease;
+}
+
+.join-btn:hover{
+    transform:translateY(-2px);
+
+    border-color:#ff174f;
+
+    box-shadow:
+        0 8px 30px
+        rgba(255,0,60,.17),
+
+        0 0 35px
+        rgba(255,0,60,.10);
+}
+
+.join-btn:active{
+    transform:scale(.97);
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:650px){
+
+    .container{
+        width:
+            calc(100% - 16px);
+
+        padding-top:15px;
+    }
+
+    .hero{
+        padding:
+            20px
+            6px
+            25px;
+    }
+
+    .hero h1{
+        font-size:37px;
+        letter-spacing:-1.7px;
+    }
+
+    .hero p{
+        font-size:11px;
+    }
+
+    .input-card{
+        padding:16px;
+        border-radius:18px;
+    }
+
+    .input-grid{
+        grid-template-columns:1fr;
+        gap:12px;
+    }
+
+    .field.full{
+        grid-column:auto;
+    }
+
+    .time-grid{
+        grid-template-columns:1fr;
+    }
+
+    .eyes{
+        gap:45px;
+    }
+
+    .eye{
+        width:78px;
+        height:29px;
+    }
+
+    .eye::after{
+        width:15px;
+        height:15px;
+    }
+
+    .eye::before{
+        border-top-width:3px;
+    }
+}
+
+@media(max-width:390px){
+
+    .hero h1{
+        font-size:31px;
+    }
+
+    .eyes{
+        gap:30px;
+    }
+
+    .eye{
+        width:65px;
+        height:25px;
+    }
 }
 
 </style>
@@ -526,1998 +769,1771 @@ select option{
 
 <body>
 
-<div class="bg-grid"></div>
+<!-- =====================================================
+     BIG CENTER EYES
+===================================================== -->
 
-<div class="bg-glow glow-1"></div>
-<div class="bg-glow glow-2"></div>
+<div class="eyes">
+    <div class="eye"></div>
+    <div class="eye"></div>
+</div>
 
-<main class="container">
 
-<header class="hero">
+<div class="container">
 
-    <div class="eye-zone">
+    <!-- =================================================
+         HERO
+    ================================================== -->
 
-        <div class="eye"></div>
-        <div class="eye"></div>
+    <header class="hero">
 
-    </div>
-
-    <div class="badge">
-        ⚡ STEAL AN EGG
-    </div>
-
-    <h1>
-        YAKKZZ<br>
-        CALCULATOR
-    </h1>
-
-    <p>
-        Hitung estimasi Speed & AFK secara otomatis
-    </p>
-
-</header>
-
-<section class="card calculator">
-
-    <div class="section-title">
-
-        <div class="section-icon">
-            🥚
+        <div class="badge">
+            ⚡ STEAL AN EGG
         </div>
 
-        <div>
+        <h1>
+            YAKKZZ <span>CALCULATOR</span>
+        </h1>
 
-            <h2>
-                TRAINING SETUP
-            </h2>
+        <p>
+            Hitung estimasi Speed Akhir dan hasil AFK
+            berdasarkan setup yang kamu gunakan.
+        </p>
 
-            <span>
-                Hasil dihitung otomatis dari input
-            </span>
+    </header>
 
-        </div>
 
-    </div>
+    <!-- =================================================
+         INPUT CARD
+    ================================================== -->
 
-    <!-- SPEED AWAL -->
+    <section class="card input-card">
 
-    <div class="input-group">
+        <div class="section-title">
 
-        <div class="input-label">
-
-            <label for="speedAwal">
-                Speed Awal
-            </label>
-
-            <span class="required">
-                WAJIB
-            </span>
-
-        </div>
-
-        <input
-            id="speedAwal"
-            type="text"
-            inputmode="text"
-            autocomplete="off"
-            spellcheck="false"
-            placeholder="Masukkan speed kamu saat ini"
-        >
-
-        <small class="hint">
-            Bisa menggunakan K, M, B, T, atau Q
-        </small>
-
-    </div>
-
-    <!-- TREADMILL -->
-
-    <div class="input-group">
-
-        <div class="input-label">
-
-            <label for="treadmill">
-                Treadmill
-            </label>
-
-            <span class="required">
-                WAJIB
-            </span>
-
-        </div>
-
-        <input
-            id="treadmill"
-            type="text"
-            inputmode="text"
-            autocomplete="off"
-            spellcheck="false"
-            placeholder="Masukkan nilai treadmill yang kamu gunakan"
-        >
-
-        <small class="hint">
-            Masukkan nilai treadmill yang kamu gunakan
-        </small>
-
-    </div>
-
-    <!-- TRAIL -->
-
-    <div class="input-group">
-
-        <div class="input-label">
-
-            <label for="trail">
-                Trail
-            </label>
-
-            <span class="required">
-                WAJIB
-            </span>
-
-        </div>
-
-        <input
-            id="trail"
-            type="text"
-            inputmode="text"
-            autocomplete="off"
-            spellcheck="false"
-            placeholder="Masukkan nilai trail yang kamu gunakan"
-        >
-
-        <small class="hint">
-            Masukkan nilai trail yang kamu gunakan
-        </small>
-
-    </div>
-
-    <!-- MULTIPLAYER -->
-
-    <div class="input-group">
-
-        <div class="input-label">
-
-            <label for="multiplayer">
-                Robux Multiplayer
-            </label>
-
-        </div>
-
-        <input
-            id="multiplayer"
-            type="text"
-            inputmode="text"
-            autocomplete="off"
-            spellcheck="false"
-            placeholder="Masukkan multiplier multiplayer yang kamu miliki"
-        >
-
-        <small class="hint">
-            Kosongkan jika tidak memiliki multiplayer
-        </small>
-
-    </div>
-
-    <!-- START TIME -->
-
-    <div class="input-group">
-
-        <div class="input-label">
-
-            <label>
-                AFK Mulai Dari
-            </label>
-
-            <span class="required">
-                WAJIB
-            </span>
-
-        </div>
-
-        <div class="time-row">
-
-            <div class="time-input-wrap">
-
-                <input
-                    id="startHour"
-                    type="text"
-                    inputmode="numeric"
-                    autocomplete="off"
-                    maxlength="2"
-                    placeholder="Masukkan jam mulai"
-                >
-
-                <span class="time-label">
-                    JAM
-                </span>
-
+            <div class="section-icon">
+                ⚙️
             </div>
 
-            <div class="time-input-wrap">
+            <div>
+                <h2>INPUT CALCULATOR</h2>
 
-                <input
-                    id="startMinute"
-                    type="text"
-                    inputmode="numeric"
-                    autocomplete="off"
-                    maxlength="2"
-                    placeholder="Masukkan menit mulai"
-                >
-
-                <span class="time-label">
-                    MENIT
-                </span>
-
+                <small>
+                    Masukkan setup yang kamu gunakan
+                </small>
             </div>
 
         </div>
 
-        <small class="hint">
-            Masukkan jam dan menit saat mulai AFK
-        </small>
 
-    </div>
+        <div class="input-grid">
 
-    <!-- AFK DURATION -->
 
-    <div class="input-group">
+            <!-- SPEED AWAL -->
 
-        <div class="input-label">
+            <div class="field full">
 
-            <label>
-                Durasi AFK
-            </label>
+                <label for="speedAwal">
+                    SPEED AWAL
+                </label>
 
-            <span class="required">
-                WAJIB
-            </span>
+                <div class="input-wrap">
+
+                    <input
+                        id="speedAwal"
+                        type="text"
+                        inputmode="decimal"
+                        autocomplete="off"
+                        placeholder="Masukkan speed kamu saat ini"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- TREADMILL -->
+
+            <div class="field">
+
+                <label for="treadmill">
+                    TREADMILL
+                </label>
+
+                <div class="input-wrap">
+
+                    <input
+                        id="treadmill"
+                        type="text"
+                        inputmode="decimal"
+                        autocomplete="off"
+                        placeholder="Masukkan nilai treadmill yang kamu gunakan"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- TRAIL -->
+
+            <div class="field">
+
+                <label for="trail">
+                    TRAIL
+                </label>
+
+                <div class="input-wrap">
+
+                    <input
+                        id="trail"
+                        type="text"
+                        inputmode="decimal"
+                        autocomplete="off"
+                        placeholder="Masukkan nilai trail yang kamu gunakan"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- MULTIPLAYER -->
+
+            <div class="field full">
+
+                <label for="multiplayer">
+                    ROBUX MULTIPLAYER
+                </label>
+
+                <div class="input-wrap">
+
+                    <input
+                        id="multiplayer"
+                        type="text"
+                        inputmode="decimal"
+                        autocomplete="off"
+                        placeholder="Masukkan multiplier multiplayer yang kamu miliki"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- DURASI AFK -->
+
+            <div class="field full">
+
+                <label for="afkAmount">
+                    DURASI AFK
+                </label>
+
+                <div class="time-grid">
+
+                    <div class="input-wrap">
+
+                        <input
+                            id="afkAmount"
+                            type="text"
+                            inputmode="decimal"
+                            autocomplete="off"
+                            placeholder="Masukkan berapa lama kamu akan AFK"
+                        >
+
+                    </div>
+
+                    <div class="input-wrap">
+
+                        <select id="afkUnit">
+
+                            <option value="hours">
+                                Jam
+                            </option>
+
+                            <option value="days">
+                                Hari
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- AFK MULAI -->
+
+            <div class="field full">
+
+                <label>
+                    AFK MULAI DARI
+                </label>
+
+                <div class="start-time">
+
+                    <div class="input-wrap">
+
+                        <input
+                            id="startHour"
+                            type="number"
+                            min="0"
+                            max="23"
+                            inputmode="numeric"
+                            placeholder="21"
+                        >
+
+                    </div>
+
+                    <div class="input-wrap">
+
+                        <input
+                            id="startMinute"
+                            type="number"
+                            min="0"
+                            max="59"
+                            inputmode="numeric"
+                            placeholder="30"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
 
         </div>
 
-        <div class="input-row">
 
-            <input
-                id="afkValue"
-                class="afk-input"
-                type="text"
-                inputmode="decimal"
-                autocomplete="off"
-                placeholder="Masukkan berapa lama kamu akan AFK"
-            >
+        <div class="note">
 
-            <select
-                id="afkUnit"
-                class="afk-unit"
-            >
+            <strong>Catatan:</strong>
 
-                <option value="hours">
-                    Jam
-                </option>
-
-                <option value="days">
-                    Hari
-                </option>
-
-            </select>
+            Multiplayer dikosongkan berarti internalnya
+            menggunakan multiplier ×1.
+            Nilainya bebas, misalnya 2, 4, 16, 128,
+            500, 1000, dan seterusnya.
 
         </div>
 
-    </div>
 
-</section>
+        <div class="owner-notice">
+
+            <p>
+                Jangan lupa join SL Owner, hargai owner ❤️
+            </p>
+
+            <a
+                class="join-btn"
+                href="https://whatsapp.com/channel/0029VbAVjDXHgZWVGTVHH30r"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                JOIN SL OWNER
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- ===== BAGIAN 2 DITEMPEL DI SINI ===== -->
 
 
+        <!-- =================================================
+         RESULT CARD
+    ================================================== -->
 
     <section
-    id="resultSection"
-    class="card result-card hidden"
->
+        id="resultSection"
+        class="card result-card hidden"
+    >
 
-    <div class="result-top">
+        <!-- =================================================
+             RESULT HEADER
+        ================================================== -->
 
-        <div>
+        <div class="result-header">
 
-            <span class="result-label">
-                SPEED AKHIR
-            </span>
+            <div>
+
+                <div class="result-label">
+                    ⚡ HASIL PERHITUNGAN
+                </div>
+
+                <div class="result-sub">
+                    Estimasi berdasarkan setup kamu
+                </div>
+
+            </div>
 
             <div
-                id="finalSpeed"
+                id="calibrationBadge"
+                class="calibration-badge"
+            >
+                KALIBRASI --
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             SPEED AKHIR
+        ================================================== -->
+
+        <div class="final-speed-box">
+
+            <div class="final-speed-label">
+                SPEED AKHIR
+            </div>
+
+            <div
+                id="speedAkhir"
                 class="final-speed"
             >
-                0
+                --
+            </div>
+
+            <div
+                id="endTimeText"
+                class="end-time"
+            >
+                --
             </div>
 
         </div>
 
-        <div class="result-icon">
-            🚀
-        </div>
 
-    </div>
+        <!-- =================================================
+             QUICK RESULT
+        ================================================== -->
 
-    <div class="divider"></div>
+        <div class="quick-grid">
 
-    <div class="result-grid">
 
-        <div class="result-item">
+            <!-- SPEED PER STEP -->
 
-            <span>
-                SPEED PER STEP
-            </span>
+            <div class="quick-card">
 
-            <strong id="speedPerStep">
-                -
-            </strong>
+                <div class="quick-icon">
+                    🏃
+                </div>
 
-        </div>
+                <div class="quick-info">
 
-        <div class="result-item">
+                    <span>
+                        SPEED PER STEP
+                    </span>
 
-            <span>
-                RATE
-            </span>
+                    <strong id="speedPerStep">
+                        --
+                    </strong>
 
-            <strong id="trainingRate">
-                -
-            </strong>
+                </div>
 
-        </div>
+            </div>
 
-        <div class="result-item">
 
-            <span>
-                MULAI AFK
-            </span>
+            <!-- DURASI -->
 
-            <strong id="resultStart">
-                -
-            </strong>
+            <div class="quick-card">
 
-        </div>
+                <div class="quick-icon">
+                    ⏱️
+                </div>
 
-        <div class="result-item">
+                <div class="quick-info">
 
-            <span>
-                SELESAI AFK
-            </span>
+                    <span>
+                        DURASI AFK
+                    </span>
 
-            <strong id="resultEnd">
-                -
-            </strong>
+                    <strong id="afkResult">
+                        --
+                    </strong>
+
+                </div>
+
+            </div>
+
 
         </div>
 
-    </div>
 
-    <div class="result-item duration-result">
-
-        <span>
-            DURASI AFK
-        </span>
-
-        <strong id="resultDuration">
-            -
-        </strong>
-
-    </div>
-
-    <!-- ESTIMASI -->
-
-    <div class="estimate-box">
+        <!-- =================================================
+             ESTIMASI PENDEK
+        ================================================== -->
 
         <div class="estimate-title">
 
+            <div class="estimate-line"></div>
+
             <span>
-                ⏱️
+                ESTIMASI HASIL
             </span>
 
-            <h3>
-                ESTIMASI
-            </h3>
+            <div class="estimate-line"></div>
 
         </div>
 
-        <div class="estimate-row">
 
-            <div class="estimate-item">
+        <div class="estimate-grid">
 
-                <span>
-                    Per Menit
-                </span>
+
+            <!-- MENIT -->
+
+            <div class="estimate-card">
+
+                <div class="estimate-card-top">
+
+                    <span class="estimate-icon">
+                        ⏱
+                    </span>
+
+                    <span>
+                        PER MENIT
+                    </span>
+
+                </div>
 
                 <strong id="perMinute">
-                    -
+                    --
                 </strong>
 
             </div>
 
-            <div class="estimate-item">
 
-                <span>
-                    Per Jam
-                </span>
+            <!-- JAM -->
+
+            <div class="estimate-card">
+
+                <div class="estimate-card-top">
+
+                    <span class="estimate-icon">
+                        🕐
+                    </span>
+
+                    <span>
+                        PER JAM
+                    </span>
+
+                </div>
 
                 <strong id="perHour">
-                    -
+                    --
                 </strong>
 
             </div>
 
+
         </div>
 
-    </div>
 
-    <!-- 2-30 HARI -->
+        <!-- =================================================
+             2 - 30 HARI
+        ================================================== -->
 
-    <div class="estimate-box">
+        <div class="days-title">
 
-        <div class="estimate-title">
+            <div class="estimate-line"></div>
 
             <span>
-                📅
+                ESTIMASI 2–30 HARI
             </span>
 
-            <h3>
-                ESTIMASI 2–30 HARI
-            </h3>
+            <div class="estimate-line"></div>
 
         </div>
 
+
         <div
-            id="dailyEstimates"
-            class="daily-list"
+            id="daysList"
+            class="days-list"
         ></div>
 
-    </div>
 
-</section>
+        <!-- =================================================
+             WARNING / INFO
+        ================================================== -->
 
-<!-- =========================
-     OWNER
-========================= -->
+        <div
+            id="resultNote"
+            class="result-note"
+        >
+            Estimasi dapat berubah mengikuti kondisi
+            permainan dan setup yang digunakan.
+        </div>
 
-<section class="owner-card">
+    </section>
 
-    <div class="owner-icon">
-        ❤️
-    </div>
 
-    <p>
-        Jangan lupa join SL Owner, hargai owner ❤️
-    </p>
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
 
-    <a
-        href="https://whatsapp.com/channel/0029VbAVjDXHgZWVGTVHH30r"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="owner-button"
-    >
-        JOIN SL OWNER
-    </a>
+    <footer class="footer">
 
-</section>
+        <div class="footer-brand">
+            ⚡ YAKKZZ CALCULATOR
+        </div>
 
-<footer>
+        <div class="footer-text">
+            Steal An Egg • AFK Speed Calculator
+        </div>
 
-    <span>
-        YAKKZZ CALCULATOR
-    </span>
+        <div class="footer-owner">
+            🤖 Yakkzz
+        </div>
 
-    <span>
-        •
-    </span>
+    </footer>
 
-    <span>
-        STEAL AN EGG
-    </span>
 
-</footer>
+</div>
+
 
 <style>
 
-/* =========================
-   RESULT
-========================= */
+/* =====================================================
+   RESULT CARD
+===================================================== */
 
 .result-card{
-    margin-top:15px;
-
-    padding:18px;
+    margin-top:18px;
+    padding:22px;
 
     overflow:hidden;
 
     animation:
-        resultIn .3s ease;
+        resultAppear
+        .45s
+        ease;
 }
 
-@keyframes resultIn{
+@keyframes resultAppear{
 
     from{
         opacity:0;
-        transform:
-            translateY(10px);
+        transform:translateY(12px);
     }
 
     to{
         opacity:1;
-        transform:
-            translateY(0);
+        transform:translateY(0);
     }
 
 }
 
-.result-top{
-    display:flex;
 
+/* =====================================================
+   RESULT HEADER
+===================================================== */
+
+.result-header{
+    display:flex;
+    align-items:center;
     justify-content:space-between;
 
-    align-items:center;
+    gap:15px;
 
-    gap:12px;
+    margin-bottom:18px;
 }
 
 .result-label{
-    display:block;
+    color:#fff;
 
-    color:#858da1;
+    font-size:15px;
+    font-weight:1000;
+
+    letter-spacing:.4px;
+}
+
+.result-sub{
+    margin-top:4px;
+
+    color:#666b7d;
+
+    font-size:10px;
+}
+
+.calibration-badge{
+    flex-shrink:0;
+
+    padding:
+        8px
+        11px;
+
+    border:
+        1px solid
+        rgba(255,0,60,.32);
+
+    border-radius:10px;
+
+    background:
+        rgba(255,0,60,.07);
+
+    color:#ff456c;
 
     font-size:9px;
+    font-weight:1000;
 
+    letter-spacing:.8px;
+
+    box-shadow:
+        0 0 18px
+        rgba(255,0,60,.06);
+}
+
+
+/* =====================================================
+   FINAL SPEED
+===================================================== */
+
+.final-speed-box{
+    position:relative;
+
+    padding:
+        28px
+        18px;
+
+    text-align:center;
+
+    border:
+        1px solid
+        rgba(255,0,60,.13);
+
+    border-radius:19px;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(255,0,60,.10),
+            transparent 65%
+        ),
+        rgba(0,0,0,.22);
+
+    overflow:hidden;
+}
+
+.final-speed-box::before{
+    content:"";
+
+    position:absolute;
+
+    left:10%;
+    right:10%;
+    top:0;
+
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,0,60,.65),
+            transparent
+        );
+
+    box-shadow:
+        0 0 15px
+        rgba(255,0,60,.4);
+}
+
+.final-speed-label{
+    color:#6f7385;
+
+    font-size:10px;
     font-weight:900;
 
-    letter-spacing:1.5px;
-
-    margin-bottom:7px;
+    letter-spacing:1.8px;
 }
 
 .final-speed{
-    font-size:
-        clamp(
-            38px,
-            10vw,
-            58px
-        );
-
-    line-height:1;
-
-    font-weight:950;
-
-    letter-spacing:-2px;
+    margin-top:10px;
 
     color:#fff;
 
-    text-shadow:
-        0 0 25px
-        rgba(255,23,68,.32),
+    font-size:
+        clamp(39px,9vw,68px);
 
-        0 0 55px
-        rgba(255,23,68,.13);
+    line-height:1;
+
+    font-weight:1000;
+
+    letter-spacing:-2px;
+
+    text-shadow:
+        0 0 12px
+        rgba(255,0,60,.35),
+
+        0 0 40px
+        rgba(255,0,60,.12);
 }
 
-.result-icon{
-    width:52px;
-    height:52px;
+.end-time{
+    min-height:16px;
+
+    margin-top:12px;
+
+    color:#ff456c;
+
+    font-size:11px;
+    font-weight:900;
+}
+
+
+/* =====================================================
+   QUICK GRID
+===================================================== */
+
+.quick-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
+
+    gap:12px;
+
+    margin-top:13px;
+}
+
+.quick-card{
+    display:flex;
+    align-items:center;
+
+    gap:11px;
+
+    min-height:70px;
+
+    padding:
+        12px
+        13px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.055);
+
+    border-radius:15px;
+
+    background:
+        rgba(255,255,255,.018);
+}
+
+.quick-icon{
+    width:38px;
+    height:38px;
 
     display:grid;
     place-items:center;
 
     flex-shrink:0;
 
-    border-radius:16px;
+    border-radius:11px;
 
     background:
-        rgba(255,23,68,.08);
+        rgba(255,0,60,.07);
 
     border:
         1px solid
-        rgba(255,23,68,.16);
-
-    font-size:22px;
+        rgba(255,0,60,.14);
 }
 
-.divider{
-    height:1px;
-
-    margin:18px 0;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.10),
-            transparent
-        );
+.quick-info{
+    min-width:0;
 }
 
-/* =========================
-   RESULT GRID
-========================= */
-
-.result-grid{
-    display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:9px;
-}
-
-.result-item{
-    padding:13px;
-
-    border-radius:14px;
-
-    background:
-        rgba(255,255,255,.025);
-
-    border:
-        1px solid
-        rgba(255,255,255,.05);
-}
-
-.result-item span{
+.quick-info span{
     display:block;
 
-    color:#737b8e;
+    color:#666b7d;
 
     font-size:8px;
-
-    font-weight:850;
-
-    letter-spacing:.8px;
-
-    margin-bottom:6px;
-}
-
-.result-item strong{
-    color:#f3f5fb;
-
-    font-size:16px;
-
-    font-weight:900;
-
-    word-break:break-word;
-}
-
-.duration-result{
-    margin-top:9px;
-}
-
-/* =========================
-   RATE
-========================= */
-
-#trainingRate{
-    color:var(--green);
-
-    text-shadow:
-        0 0 15px
-        rgba(49,247,161,.15);
-}
-
-/* =========================
-   ESTIMATE
-========================= */
-
-.estimate-box{
-    margin-top:11px;
-
-    padding:14px;
-
-    border-radius:16px;
-
-    background:
-        rgba(255,255,255,.022);
-
-    border:
-        1px solid
-        rgba(255,255,255,.05);
-}
-
-.estimate-title{
-    display:flex;
-
-    align-items:center;
-
-    gap:7px;
-
-    margin-bottom:11px;
-}
-
-.estimate-title span{
-    font-size:15px;
-}
-
-.estimate-title h3{
-    font-size:10px;
-
     font-weight:900;
 
     letter-spacing:.7px;
 }
 
-.estimate-row{
+.quick-info strong{
+    display:block;
+
+    margin-top:5px;
+
+    color:#fff;
+
+    font-size:17px;
+    font-weight:1000;
+
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+
+/* =====================================================
+   SECTION TITLES
+===================================================== */
+
+.estimate-title,
+.days-title{
+    display:flex;
+    align-items:center;
+
+    gap:10px;
+
+    margin:
+        23px
+        0
+        12px;
+
+    color:#656a7c;
+
+    font-size:9px;
+    font-weight:1000;
+
+    letter-spacing:1px;
+}
+
+.estimate-line{
+    flex:1;
+
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.07)
+        );
+}
+
+.estimate-line:last-child{
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.07),
+            transparent
+        );
+}
+
+
+/* =====================================================
+   ESTIMATE GRID
+===================================================== */
+
+.estimate-grid{
     display:grid;
 
     grid-template-columns:
-        1fr 1fr;
+        repeat(2,minmax(0,1fr));
 
-    gap:8px;
+    gap:12px;
 }
 
-.estimate-item{
-    padding:11px;
+.estimate-card{
+    min-height:95px;
 
-    border-radius:12px;
+    padding:15px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.055);
+
+    border-radius:15px;
 
     background:
-        rgba(0,0,0,.18);
+        rgba(255,255,255,.018);
 }
 
-.estimate-item span{
-    display:block;
-
-    color:#737b8e;
-
-    font-size:8px;
-
-    margin-bottom:5px;
-}
-
-.estimate-item strong{
-    display:block;
-
-    color:var(--green);
-
-    font-size:17px;
-
-    font-weight:950;
-
-    word-break:break-word;
-}
-
-/* =========================
-   DAILY
-========================= */
-
-.daily-list{
+.estimate-card-top{
     display:flex;
+    align-items:center;
 
+    gap:7px;
+
+    color:#686d80;
+
+    font-size:9px;
+    font-weight:900;
+
+    letter-spacing:.7px;
+}
+
+.estimate-icon{
+    font-size:14px;
+}
+
+.estimate-card strong{
+    display:block;
+
+    margin-top:13px;
+
+    color:#fff;
+
+    font-size:21px;
+    font-weight:1000;
+}
+
+
+/* =====================================================
+   DAYS LIST
+===================================================== */
+
+.days-list{
+    display:flex;
     flex-direction:column;
 
-    gap:6px;
+    gap:8px;
 
-    max-height:400px;
+    max-height:620px;
 
     overflow-y:auto;
 
-    scrollbar-width:thin;
+    padding-right:3px;
 }
 
-.daily-row{
-    display:flex;
+.days-list::-webkit-scrollbar{
+    width:4px;
+}
+
+.days-list::-webkit-scrollbar-track{
+    background:transparent;
+}
+
+.days-list::-webkit-scrollbar-thumb{
+    background:
+        rgba(255,0,60,.25);
+
+    border-radius:99px;
+}
+
+.day-row{
+    display:grid;
+
+    grid-template-columns:
+        65px
+        1fr
+        auto;
 
     align-items:center;
 
-    justify-content:space-between;
+    gap:10px;
 
-    min-height:42px;
+    min-height:55px;
 
-    padding:8px 10px;
-
-    border-radius:10px;
-
-    background:
-        rgba(255,255,255,.025);
+    padding:
+        9px
+        12px;
 
     border:
         1px solid
         rgba(255,255,255,.045);
 
-    transition:.2s ease;
-}
+    border-radius:13px;
 
-.daily-row:hover{
     background:
-        rgba(255,23,68,.055);
+        rgba(255,255,255,.015);
 
-    border-color:
-        rgba(255,23,68,.12);
+    transition:
+        .2s ease;
 }
 
-.daily-row .day{
-    color:#858da1;
+.day-row:hover{
+    border-color:
+        rgba(255,0,60,.18);
+
+    background:
+        rgba(255,0,60,.025);
+}
+
+.day-number{
+    color:#ff456c;
+
+    font-size:11px;
+    font-weight:1000;
+
+    letter-spacing:.5px;
+}
+
+.day-duration{
+    color:#717587;
 
     font-size:9px;
-
-    font-weight:850;
 }
 
-.daily-row .speed{
+.day-value{
     color:#fff;
 
-    font-size:12px;
+    font-size:14px;
+    font-weight:1000;
 
-    font-weight:950;
+    text-align:right;
 }
 
-/* =========================
-   OWNER
-========================= */
 
-.owner-card{
-    margin-top:15px;
+/* =====================================================
+   RESULT NOTE
+===================================================== */
 
-    padding:20px 17px;
+.result-note{
+    margin-top:14px;
 
-    text-align:center;
-
-    border-radius:22px;
+    padding:
+        11px
+        13px;
 
     border:
         1px solid
-        rgba(255,23,68,.16);
+        rgba(255,255,255,.045);
+
+    border-radius:12px;
 
     background:
-        radial-gradient(
-            circle at 50% 0%,
-            rgba(255,23,68,.10),
-            transparent 65%
-        ),
-        rgba(13,15,24,.72);
+        rgba(255,255,255,.012);
 
-    box-shadow:
-        0 20px 60px
-        rgba(0,0,0,.42);
+    color:#5e6375;
+
+    font-size:9px;
+
+    line-height:1.6;
+
+    text-align:center;
 }
 
-.owner-icon{
-    font-size:23px;
 
-    margin-bottom:8px;
-
-    animation:
-        heartPulse 1.8s
-        ease-in-out
-        infinite;
-}
-
-@keyframes heartPulse{
-
-    0%,
-    100%{
-        transform:scale(1);
-    }
-
-    50%{
-        transform:scale(1.12);
-    }
-
-}
-
-.owner-card p{
-    color:#c5cad7;
-
-    font-size:11px;
-
-    font-weight:750;
-
-    margin-bottom:13px;
-}
-
-.owner-button{
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    min-height:47px;
-
-    width:100%;
-
-    border-radius:13px;
-
-    text-decoration:none;
-
-    color:#fff;
-
-    font-size:11px;
-
-    font-weight:950;
-
-    letter-spacing:.6px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--red),
-            var(--red2)
-        );
-
-    box-shadow:
-        0 10px 28px
-        rgba(255,23,68,.22);
-
-    transition:.2s ease;
-}
-
-.owner-button:hover{
-    transform:
-        translateY(-2px);
-
-    box-shadow:
-        0 14px 35px
-        rgba(255,23,68,.30);
-}
-
-.owner-button:active{
-    transform:
-        scale(.98);
-}
-
-/* =========================
+/* =====================================================
    FOOTER
-========================= */
+===================================================== */
 
-footer{
-    display:flex;
+.footer{
+    padding:
+        27px
+        10px
+        10px;
 
-    justify-content:center;
+    text-align:center;
+}
 
-    gap:8px;
+.footer-brand{
+    color:#ff174f;
 
-    margin-top:22px;
-
-    color:#4e5565;
-
-    font-size:8px;
-
-    font-weight:850;
+    font-size:11px;
+    font-weight:1000;
 
     letter-spacing:1px;
+
+    text-shadow:
+        0 0 12px
+        rgba(255,0,60,.25);
 }
 
-/* =========================
-   MOBILE
-========================= */
+.footer-text{
+    margin-top:6px;
 
-@media(max-width:520px){
+    color:#464a5a;
 
-    .container{
-        width:
-            calc(100% - 16px);
+    font-size:9px;
+}
 
-        padding-top:20px;
-    }
+.footer-owner{
+    margin-top:10px;
 
-    .calculator,
+    color:#3f4352;
+
+    font-size:9px;
+}
+
+
+/* =====================================================
+   MOBILE RESULT
+===================================================== */
+
+@media(max-width:650px){
+
     .result-card{
-        padding:15px;
+        padding:16px;
 
-        border-radius:19px;
+        border-radius:18px;
     }
 
-    .result-grid{
+    .result-header{
+        align-items:flex-start;
+    }
+
+    .result-label{
+        font-size:13px;
+    }
+
+    .calibration-badge{
+        font-size:8px;
+        padding:7px 8px;
+    }
+
+    .final-speed{
+        font-size:45px;
+    }
+
+    .quick-card{
+        min-height:65px;
+
+        padding:
+            10px;
+            10px;
+    }
+
+    .quick-info strong{
+        font-size:15px;
+    }
+
+    .day-row{
         grid-template-columns:
-            1fr;
+            55px
+            1fr
+            auto;
+    }
+
+    .day-value{
+        font-size:12px;
+    }
+
+}
+
+@media(max-width:390px){
+
+    .quick-grid,
+    .estimate-grid{
+        grid-template-columns:1fr;
     }
 
     .final-speed{
         font-size:40px;
     }
 
-    .afk-unit{
-        width:100px;
+    .day-row{
+        grid-template-columns:
+            50px
+            1fr
+            auto;
+
+        gap:6px;
     }
 
 }
 
 </style>
 
-
+<!-- ===== BAGIAN 3 DITEMPEL DI SINI ===== -->
 
     <script>
 
-/* =========================================================
-   YAKKZZ CALCULATOR ENGINE
-   =========================================================
+/* =====================================================
+   YAKKZZ CALCULATOR
+   STEAL AN EGG
+===================================================== */
 
-   RATE ENGINE:
-   - Tidak memakai rate tetap.
-   - Tidak ada input rate.
-   - Rate dihasilkan dari setup user.
-   - Setiap perubahan input akan menghitung ulang rate.
-   ========================================================= */
+"use strict";
 
 
-/* =========================
+/* =====================================================
+   ELEMENT
+===================================================== */
+
+const $ = (id) => document.getElementById(id);
+
+const speedAwalEl   = $("speedAwal");
+const treadmillEl   = $("treadmill");
+const trailEl       = $("trail");
+const multiplayerEl = $("multiplayer");
+
+const afkAmountEl = $("afkAmount");
+const afkUnitEl   = $("afkUnit");
+
+const startHourEl   = $("startHour");
+const startMinuteEl = $("startMinute");
+
+const resultSection   = $("resultSection");
+const speedAkhirEl    = $("speedAkhir");
+const speedPerStepEl  = $("speedPerStep");
+const afkResultEl     = $("afkResult");
+const calibrationEl   = $("calibrationBadge");
+
+const perMinuteEl = $("perMinute");
+const perHourEl   = $("perHour");
+const daysListEl  = $("daysList");
+const endTimeEl   = $("endTimeText");
+
+
+/* =====================================================
    CONFIG
-========================= */
+===================================================== */
 
 const CONFIG = {
 
-    minDay:2,
-
-    maxDay:30,
-
     /*
-     * Batas rate hanya untuk menjaga hasil
-     * agar model tidak menghasilkan angka
-     * yang tidak masuk akal pada input ekstrem.
+     * Data pengujian dasar yang sudah kita punya.
      *
-     * Ini BUKAN rate default.
+     * Setup:
+     * Treadmill  = 2000
+     * Trail      = 14
+     * Multiplayer = 16
+     * Speed/step = 58K
+     *
+     * Ini dipakai sebagai anchor awal,
+     * BUKAN rate tetap untuk semua setup.
      */
 
-    minimumDynamicRate:0.1,
+    anchor: {
+        treadmill: 2000,
+        trail: 14,
+        multiplayer: 16,
+        calibration: 4.31
+    },
 
-    maximumDynamicRate:1000
+    minCalibration: 0.5,
+    maxCalibration: 25,
 
+    secondsMinute: 60,
+    secondsHour: 3600,
+    hoursDay: 24,
+
+    minDays: 2,
+    maxDays: 30
 };
 
 
-/* =========================
-   ELEMENT
-========================= */
+/* =====================================================
+   NUMBER PARSER
+===================================================== */
 
-const speedAwalEl =
-    document.getElementById(
-        "speedAwal"
-    );
+/*
+ * Bisa membaca:
+ *
+ * 55000
+ * 55K
+ * 55k
+ * 1.5M
+ * 30.3B
+ * 2T
+ * 1Q
+ *
+ * K = ribu
+ * M = juta
+ * B = miliar
+ * T = triliun
+ * Q = quadrillion
+ */
 
-const treadmillEl =
-    document.getElementById(
-        "treadmill"
-    );
+function parseValue(value){
 
-const trailEl =
-    document.getElementById(
-        "trail"
-    );
-
-const multiplayerEl =
-    document.getElementById(
-        "multiplayer"
-    );
-
-const startHourEl =
-    document.getElementById(
-        "startHour"
-    );
-
-const startMinuteEl =
-    document.getElementById(
-        "startMinute"
-    );
-
-const afkValueEl =
-    document.getElementById(
-        "afkValue"
-    );
-
-const afkUnitEl =
-    document.getElementById(
-        "afkUnit"
-    );
-
-const resultSection =
-    document.getElementById(
-        "resultSection"
-    );
-
-const finalSpeedEl =
-    document.getElementById(
-        "finalSpeed"
-    );
-
-const speedPerStepEl =
-    document.getElementById(
-        "speedPerStep"
-    );
-
-const trainingRateEl =
-    document.getElementById(
-        "trainingRate"
-    );
-
-const resultStartEl =
-    document.getElementById(
-        "resultStart"
-    );
-
-const resultEndEl =
-    document.getElementById(
-        "resultEnd"
-    );
-
-const resultDurationEl =
-    document.getElementById(
-        "resultDuration"
-    );
-
-const perMinuteEl =
-    document.getElementById(
-        "perMinute"
-    );
-
-const perHourEl =
-    document.getElementById(
-        "perHour"
-    );
-
-const dailyEstimatesEl =
-    document.getElementById(
-        "dailyEstimates"
-    );
-
-
-/* =========================
-   PARSE NUMBER
-========================= */
-
-function parseNumber(value){
-
-    if(
-        value === null ||
-        value === undefined
-    ){
-        return 0;
-    }
-
-    let text =
-        String(value)
-        .trim()
-        .replace(/\s+/g,"");
-
-    if(text === ""){
-        return 0;
-    }
-
-    let multiplier = 1;
-
-    const last =
-        text
-        .slice(-1)
-        .toUpperCase();
-
-    const units = {
-
-        K:1e3,
-        M:1e6,
-        B:1e9,
-        T:1e12,
-        Q:1e15
-
-    };
-
-    if(
-        Object.prototype.hasOwnProperty.call(
-            units,
-            last
-        )
-    ){
-
-        multiplier =
-            units[last];
-
-        text =
-            text.slice(0,-1);
-
-    }
-
-    /*
-     * Support angka:
-     * 11.3
-     * 11,3
-     */
-
-    if(
-        text.includes(",") &&
-        text.includes(".")
-    ){
-
-        const comma =
-            text.lastIndexOf(",");
-
-        const dot =
-            text.lastIndexOf(".");
-
-        if(comma > dot){
-
-            text =
-                text
-                .replace(/\./g,"")
-                .replace(",", ".");
-
-        }
-        else{
-
-            text =
-                text
-                .replace(/,/g,"");
-
-        }
-
-    }
-    else if(
-        text.includes(",")
-    ){
-
-        text =
-            text.replace(",", ".");
-
-    }
-
-    const number =
-        Number(text);
-
-    if(
-        !Number.isFinite(number)
-    ){
+    if(value === null || value === undefined){
         return NaN;
     }
 
-    return number * multiplier;
+    let text = String(value)
+        .trim()
+        .replace(/\s+/g,"")
+        .replace(/,/g,"");
+
+    if(!text){
+        return NaN;
+    }
+
+    /*
+     * Support angka Indonesia:
+     * 30,3B
+     * 30.3B
+     *
+     * Kalau ada koma dan titik sekaligus,
+     * koma dianggap pemisah ribuan.
+     */
+
+    if(text.includes(",") && !text.includes(".")){
+        text = text.replace(",",".");
+    }
+
+    const match = text.match(
+        /^([+-]?(?:\d+(?:\.\d*)?|\.\d+))([KMBTQ])?$/i
+    );
+
+    if(!match){
+        return NaN;
+    }
+
+    const number = Number(match[1]);
+
+    if(!Number.isFinite(number)){
+        return NaN;
+    }
+
+    const suffix = (match[2] || "").toUpperCase();
+
+    const multiplierMap = {
+
+        "": 1,
+
+        K: 1e3,
+
+        M: 1e6,
+
+        B: 1e9,
+
+        T: 1e12,
+
+        Q: 1e15
+
+    };
+
+    return number * multiplierMap[suffix];
 }
 
 
-/* =========================
+/* =====================================================
    FORMAT NUMBER
-========================= */
+===================================================== */
 
 function formatNumber(value){
 
-    if(
-        !Number.isFinite(value)
-    ){
-        return "0";
+    if(!Number.isFinite(value)){
+        return "--";
     }
 
-    const abs =
-        Math.abs(value);
+    const absolute = Math.abs(value);
 
     const units = [
 
-        {
-            value:1e15,
-            suffix:"Q"
-        },
+        { value:1e15, suffix:"Q" },
 
-        {
-            value:1e12,
-            suffix:"T"
-        },
+        { value:1e12, suffix:"T" },
 
-        {
-            value:1e9,
-            suffix:"B"
-        },
+        { value:1e9,  suffix:"B" },
 
-        {
-            value:1e6,
-            suffix:"M"
-        },
+        { value:1e6,  suffix:"M" },
 
-        {
-            value:1e3,
-            suffix:"K"
-        }
+        { value:1e3,  suffix:"K" }
 
     ];
 
-    for(
-        const unit of units
-    ){
+    for(const unit of units){
 
-        if(abs >= unit.value){
+        if(absolute >= unit.value){
 
-            const result =
-                value /
-                unit.value;
+            let n = value / unit.value;
 
             let decimals = 2;
 
-            if(
-                Math.abs(result) >= 100
-            ){
-
-                decimals = 2;
-
+            if(Math.abs(n) >= 100){
+                decimals = 0;
             }
-            else if(
-                Math.abs(result) >= 10
-            ){
-
-                decimals = 2;
-
+            else if(Math.abs(n) >= 10){
+                decimals = 1;
             }
 
-            return removeZeros(
-                result.toFixed(
-                    decimals
-                )
-            ) +
-            unit.suffix;
+            return cleanDecimal(n,decimals) + unit.suffix;
         }
     }
 
-    if(
-        Number.isInteger(value)
-    ){
-
+    if(Number.isInteger(value)){
         return String(value);
-
     }
 
-    return removeZeros(
-        value.toFixed(2)
-    );
+    return cleanDecimal(value,2);
 }
 
 
-function removeZeros(value){
+/* =====================================================
+   DECIMAL CLEANER
+===================================================== */
 
-    return String(value)
-        .replace(
-            /\.0+$/,
-            ""
-        )
-        .replace(
-            /(\.\d*?)0+$/,
-            "$1"
-        );
-}
+function cleanDecimal(number,decimals=2){
 
-
-/* =========================
-   INPUT FILTER
-========================= */
-
-function setupStatInput(input){
-
-    input.addEventListener(
-        "input",
-        function(){
-
-            this.value =
-                this.value.replace(
-                    /[^0-9.,KMBTQkmbtq]/g,
-                    ""
-                );
-
-            calculate();
-
+    return Number(
+        number.toFixed(decimals)
+    ).toLocaleString(
+        "en-US",
+        {
+            maximumFractionDigits:decimals,
+            useGrouping:false
         }
     );
-
 }
 
 
-function setupTimeInput(input){
+/* =====================================================
+   FORMAT CALIBRATION
+===================================================== */
 
-    input.addEventListener(
-        "input",
-        function(){
+function formatCalibration(value){
 
-            this.value =
-                this.value.replace(
-                    /[^0-9]/g,
-                    ""
-                );
+    if(!Number.isFinite(value)){
+        return "--";
+    }
 
-            calculate();
+    /*
+     * Calibration ditampilkan tanpa "/detik".
+     */
 
-        }
+    if(value >= 100){
+        return cleanDecimal(value,0);
+    }
+
+    if(value >= 10){
+        return cleanDecimal(value,2);
+    }
+
+    return cleanDecimal(value,2);
+}
+
+
+/* =====================================================
+   MULTIPLAYER
+===================================================== */
+
+function getMultiplier(){
+
+    const value = parseValue(
+        multiplayerEl.value
     );
 
+    /*
+     * Kosong = x1 secara internal.
+     *
+     * x1 TIDAK ditampilkan sebagai pilihan.
+     */
+
+    if(!Number.isFinite(value)){
+        return 1;
+    }
+
+    if(value <= 0){
+        return 1;
+    }
+
+    return value;
 }
 
 
-function setupAfkInput(input){
+/* =====================================================
+   GET INPUT
+===================================================== */
 
-    input.addEventListener(
-        "input",
-        function(){
+function getInputs(){
 
-            this.value =
-                this.value.replace(
-                    /[^0-9.,]/g,
-                    ""
-                );
-
-            calculate();
-
-        }
+    const speedAwal = parseValue(
+        speedAwalEl.value
     );
 
-}
+    const treadmill = parseValue(
+        treadmillEl.value
+    );
 
+    const trail = parseValue(
+        trailEl.value
+    );
 
-setupStatInput(
-    speedAwalEl
-);
+    const multiplayer = getMultiplier();
 
-setupStatInput(
-    treadmillEl
-);
-
-setupStatInput(
-    trailEl
-);
-
-setupStatInput(
-    multiplayerEl
-);
-
-setupTimeInput(
-    startHourEl
-);
-
-setupTimeInput(
-    startMinuteEl
-);
-
-setupAfkInput(
-    afkValueEl
-);
-
-
-afkUnitEl.addEventListener(
-    "change",
-    calculate
-);
-
-
-/* =========================
-   GET SETUP
-========================= */
-
-function getSetup(){
-
-    const speedAwal =
-        parseNumber(
-            speedAwalEl.value
-        );
-
-    const treadmill =
-        parseNumber(
-            treadmillEl.value
-        );
-
-    const trail =
-        parseNumber(
-            trailEl.value
-        );
-
-    const multiplayerText =
-        multiplayerEl.value.trim();
-
-    const multiplayer =
-        multiplayerText === ""
-            ? 1
-            : parseNumber(
-                multiplayerText
-            );
+    const afkAmount = parseValue(
+        afkAmountEl.value
+    );
 
     return {
-
         speedAwal,
-
         treadmill,
-
         trail,
-
-        multiplayer
-
+        multiplayer,
+        afkAmount
     };
 }
 
 
-/* =========================
+/* =====================================================
    SPEED PER STEP
-========================= */
+===================================================== */
 
-function getSpeedPerStep(){
+/*
+ * FORMULA YANG DIPAKAI:
+ *
+ * Treadmill × (Trail + Multiplayer − 1)
+ *
+ * Contoh:
+ *
+ * 2000 × (14 + 16 − 1)
+ * = 2000 × 29
+ * = 58000
+ *
+ * = 58K / step
+ */
 
-    const setup =
-        getSetup();
-
-    if(
-        !Number.isFinite(
-            setup.treadmill
-        ) ||
-        !Number.isFinite(
-            setup.trail
-        ) ||
-        !Number.isFinite(
-            setup.multiplayer
-        )
-    ){
-
-        return NaN;
-
-    }
-
-    if(
-        setup.treadmill <= 0 ||
-        setup.trail <= 0 ||
-        setup.multiplayer < 1
-    ){
-
-        return NaN;
-
-    }
-
-    /*
-     * Working model untuk nilai speed
-     * yang diperoleh pada satu step.
-     *
-     * Bukan input rate.
-     */
-
-    return setup.treadmill *
-        (
-            setup.trail +
-            setup.multiplayer -
-            1
-        );
-}
-
-
-/* =========================================================
-   DYNAMIC RATE ENGINE
-   =========================================================
-
-   Rate dihitung dari INPUT.
-
-   Tidak ada:
-   - 9.8
-   - 11.1
-   - referenceRate
-   - trainingStepsPerSecond tetap
-
-   Engine mengambil hubungan relatif antar input:
-   treadmill + trail + multiplayer.
-
-   Rate dibuat non-linear agar perubahan setup
-   tidak menghasilkan lonjakan linear yang ekstrem.
-========================================================= */
-
-function getTrainingRate(){
-
-    const setup =
-        getSetup();
-
-    const treadmill =
-        setup.treadmill;
-
-    const trail =
-        setup.trail;
-
-    const multiplayer =
-        setup.multiplayer;
+function calculateSpeedPerStep(
+    treadmill,
+    trail,
+    multiplayer
+){
 
     if(
         !Number.isFinite(treadmill) ||
         !Number.isFinite(trail) ||
         !Number.isFinite(multiplayer)
     ){
-
         return NaN;
-
     }
+
+    const bonus =
+        trail +
+        multiplayer -
+        1;
 
     if(
         treadmill <= 0 ||
-        trail <= 0 ||
-        multiplayer < 1
+        bonus <= 0
     ){
-
         return NaN;
-
     }
 
-
-    /*
-     * NORMALISASI INPUT
-     *
-     * Menggunakan logaritma supaya:
-     *
-     * 2
-     * 16
-     * 128
-     * 500
-     * 1000
-     *
-     * tidak membuat rate meledak.
-     */
-
-    const treadmillPower =
-        Math.log10(
-            treadmill + 1
-        );
-
-    const trailPower =
-        Math.log10(
-            trail + 1
-        );
-
-    const multiplayerPower =
-        Math.log10(
-            multiplayer + 1
-        );
+    return treadmill * bonus;
+}
 
 
-    /*
-     * INTENSITY
-     *
-     * Semua komponen input ikut menentukan
-     * rate.
-     */
+/* =====================================================
+   ADAPTIVE CALIBRATION ENGINE
+===================================================== */
 
-    const inputIntensity =
-        treadmillPower +
-        trailPower +
-        multiplayerPower;
+/*
+ * PENTING:
+ *
+ * Tidak menggunakan:
+ *
+ * calibration = 4.31
+ *
+ * untuk semua input.
+ *
+ * Calibration dihitung ulang berdasarkan setup.
+ *
+ * Kita menggunakan:
+ *
+ * 1. Treadmill factor
+ * 2. Trail + multiplayer factor
+ * 3. Effective speed-per-step factor
+ *
+ * Kemudian factor tersebut diproses secara logaritmik
+ * agar multiplier besar tidak membuat hasil meledak.
+ */
 
-
-    /*
-     * Kombinasi setup.
-     *
-     * Nilai speed-per-step juga ikut dipakai
-     * sebagai indikator keseluruhan setup.
-     */
-
-    const stepValue =
-        getSpeedPerStep();
+function calculateCalibration(
+    treadmill,
+    trail,
+    multiplayer,
+    speedPerStep
+){
 
     if(
-        !Number.isFinite(stepValue) ||
-        stepValue <= 0
+        !Number.isFinite(treadmill) ||
+        !Number.isFinite(trail) ||
+        !Number.isFinite(multiplayer) ||
+        !Number.isFinite(speedPerStep)
     ){
-
         return NaN;
+    }
 
+    const anchor =
+        CONFIG.anchor;
+
+    const currentBonus =
+        trail +
+        multiplayer -
+        1;
+
+    const anchorBonus =
+        anchor.trail +
+        anchor.multiplayer -
+        1;
+
+    if(
+        treadmill <= 0 ||
+        currentBonus <= 0 ||
+        speedPerStep <= 0
+    ){
+        return NaN;
     }
 
 
-    const stepPower =
-        Math.log10(
-            stepValue + 1
+    /*
+     * Normalisasi setup.
+     */
+
+    const treadmillRatio =
+        treadmill /
+        anchor.treadmill;
+
+    const bonusRatio =
+        currentBonus /
+        anchorBonus;
+
+    const stepRatio =
+        speedPerStep /
+        (
+            anchor.treadmill *
+            anchorBonus
         );
 
 
     /*
-     * ENGINE CORE
+     * Logarithmic compression.
      *
-     * Rate bukan angka konstan.
-     * Rate berubah mengikuti keseluruhan input.
-     *
-     * Pangkat kecil menjaga perubahan tetap
-     * halus pada angka besar.
+     * Tujuannya supaya input multiplayer
+     * sangat besar tidak menghasilkan
+     * calibration yang tidak masuk akal.
      */
 
-    let rate =
-        Math.pow(
-            inputIntensity + 1,
-            1.35
-        ) *
-        Math.pow(
-            stepPower + 1,
-            0.75
+    const treadmillComponent =
+        Math.log1p(
+            Math.max(treadmillRatio,0.000001)
+        );
+
+    const bonusComponent =
+        Math.log1p(
+            Math.max(bonusRatio,0.000001)
+        );
+
+    const stepComponent =
+        Math.log1p(
+            Math.max(stepRatio,0.000001)
         );
 
 
     /*
-     * NORMALISASI INTERNAL.
+     * Bobot adaptif.
      *
-     * Ini bukan rate default.
-     *
-     * Faktor ini mengubah skala hasil engine
-     * supaya satuannya menjadi step/detik.
+     * Setup step tetap menjadi faktor utama,
+     * sedangkan treadmill dan bonus ikut
+     * mempengaruhi calibration.
      */
 
-    rate =
-        rate / 5.25;
+    const weighted =
+        (
+            treadmillComponent * 0.25
+        ) +
+        (
+            bonusComponent * 0.25
+        ) +
+        (
+            stepComponent * 0.50
+        );
 
 
     /*
-     * Terapkan batas keamanan hanya pada hasil.
+     * Anchor weighted.
+     *
+     * Pada setup anchor,
+     * calibration tetap mendekati 4.31.
      */
 
-    rate =
-        Math.max(
-            CONFIG.minimumDynamicRate,
-            Math.min(
-                CONFIG.maximumDynamicRate,
-                rate
+    const anchorWeighted =
+        (
+            Math.log1p(1) * 0.25
+        ) +
+        (
+            Math.log1p(1) * 0.25
+        ) +
+        (
+            Math.log1p(1) * 0.50
+        );
+
+
+    /*
+     * Rasio terhadap anchor.
+     */
+
+    let ratio =
+        weighted /
+        anchorWeighted;
+
+
+    /*
+     * Soft adjustment.
+     *
+     * Bukan fixed rate.
+     */
+
+    ratio =
+        Math.sqrt(
+            Math.max(ratio,0.000001)
+        );
+
+
+    let calibration =
+        anchor.calibration *
+        ratio;
+
+
+    /*
+     * Safety supaya angka ekstrem tidak
+     * menghancurkan hasil.
+     */
+
+    calibration =
+        Math.min(
+            CONFIG.maxCalibration,
+            Math.max(
+                CONFIG.minCalibration,
+                calibration
             )
         );
 
-
-    return rate;
+    return calibration;
 }
 
 
-/* =========================
-   GAIN PER SECOND
-========================= */
+/* =====================================================
+   AFK HOURS
+===================================================== */
 
-function getGainPerSecond(){
+function getAfkHours(){
 
-    const speedPerStep =
-        getSpeedPerStep();
-
-    const rate =
-        getTrainingRate();
-
-    if(
-        !Number.isFinite(
-            speedPerStep
-        ) ||
-        !Number.isFinite(
-            rate
-        )
-    ){
-
-        return NaN;
-
-    }
-
-    return (
-        speedPerStep *
-        rate
-    );
-}
-
-
-
-        /* =========================
-   AFK SECONDS
-========================= */
-
-function getAfkSeconds(){
-
-    const value =
-        parseNumber(
-            afkValueEl.value
+    const amount =
+        parseValue(
+            afkAmountEl.value
         );
 
     if(
-        !Number.isFinite(value) ||
-        value <= 0
+        !Number.isFinite(amount) ||
+        amount <= 0
     ){
-
         return NaN;
-
     }
 
     if(
         afkUnitEl.value === "days"
     ){
-
-        return value *
-            24 *
-            60 *
-            60;
-
+        return amount *
+            CONFIG.hoursPerDay;
     }
 
-    return value *
-        60 *
-        60;
+    return amount;
 }
 
 
-/* =========================
-   START TIME
-========================= */
+/* =====================================================
+   FIXED DAYS
+===================================================== */
 
-function getStartTime(){
-
-    const hour =
-        Number(
-            startHourEl.value
-        );
-
-    const minute =
-        Number(
-            startMinuteEl.value
-        );
-
-    if(
-        !Number.isInteger(hour) ||
-        !Number.isInteger(minute)
-    ){
-
-        return null;
-
-    }
-
-    if(
-        hour < 0 ||
-        hour > 23
-    ){
-
-        return null;
-
-    }
-
-    if(
-        minute < 0 ||
-        minute > 59
-    ){
-
-        return null;
-
-    }
-
-    return {
-
-        hour,
-        minute
-
-    };
-}
-
-
-/* =========================
-   CLOCK
-========================= */
-
-function formatClock(
-    totalMinutes
-){
-
-    totalMinutes =
-        (
-            totalMinutes %
-            1440 +
-            1440
-        ) %
-        1440;
-
-    const hour =
-        Math.floor(
-            totalMinutes / 60
-        );
-
-    const minute =
-        Math.floor(
-            totalMinutes % 60
-        );
-
-    return (
-
-        String(hour)
-        .padStart(2,"0")
-
-    ) +
-    ":" +
-    (
-
-        String(minute)
-        .padStart(2,"0")
-
-    );
-}
-
-
-/* =========================
-   END TIME
-========================= */
-
-function getEndTime(){
-
-    const start =
-        getStartTime();
-
-    const afkSeconds =
-        getAfkSeconds();
-
-    if(
-        !start ||
-        !Number.isFinite(
-            afkSeconds
-        )
-    ){
-
-        return null;
-
-    }
-
-    const startMinutes =
-        start.hour * 60 +
-        start.minute;
-
-    const durationMinutes =
-        afkSeconds / 60;
-
-    const endTotal =
-        startMinutes +
-        durationMinutes;
-
-    const daysPassed =
-        Math.floor(
-            endTotal / 1440
-        );
-
-    return {
-
-        text:
-            formatClock(
-                endTotal
-            ),
-
-        daysPassed
-
-    };
-}
-
-
-/* =========================
-   DURATION TEXT
-========================= */
-
-function getDurationText(){
-
-    const value =
-        parseNumber(
-            afkValueEl.value
-        );
-
-    if(
-        !Number.isFinite(value) ||
-        value <= 0
-    ){
-
-        return "-";
-
-    }
-
-    return (
-
-        removeZeros(
-            value.toFixed(2)
-        )
-
-    ) +
-    " " +
-    (
-        afkUnitEl.value === "days"
-            ? "hari"
-            : "jam"
-    );
-}
-
-
-/* =========================
-   DAILY ESTIMATES
-========================= */
-
-function generateDailyEstimates(
+function calculateDays(
     speedAwal,
     gainPerSecond
 ){
 
-    dailyEstimatesEl.innerHTML = "";
+    const result = [];
 
     for(
-        let day =
-            CONFIG.minDay;
-
-        day <=
-            CONFIG.maxDay;
-
+        let day = CONFIG.minDays;
+        day <= CONFIG.maxDays;
         day++
     ){
 
         const seconds =
             day *
-            24 *
-            60 *
-            60;
+            CONFIG.hoursPerDay *
+            CONFIG.secondsHour;
 
         const gain =
             gainPerSecond *
@@ -2527,366 +2543,803 @@ function generateDailyEstimates(
             speedAwal +
             gain;
 
+        result.push({
+            day,
+            finalSpeed
+        });
+    }
+
+    return result;
+}
+
+
+/* =====================================================
+   END TIME
+===================================================== */
+
+function calculateEndTime(
+    afkHours
+){
+
+    const hour =
+        Number(startHourEl.value);
+
+    const minute =
+        Number(startMinuteEl.value);
+
+    if(
+        !Number.isFinite(hour) ||
+        !Number.isFinite(minute) ||
+        hour < 0 ||
+        hour > 23 ||
+        minute < 0 ||
+        minute > 59 ||
+        !Number.isFinite(afkHours)
+    ){
+        return null;
+    }
+
+    const start =
+        new Date();
+
+    start.setHours(
+        hour,
+        minute,
+        0,
+        0
+    );
+
+    const end =
+        new Date(
+            start.getTime() +
+            afkHours *
+            60 *
+            60 *
+            1000
+        );
+
+    return {
+        start,
+        end
+    };
+}
+
+
+/* =====================================================
+   FORMAT TIME
+===================================================== */
+
+function formatTime(date){
+
+    if(!date){
+        return "--";
+    }
+
+    const hh =
+        String(
+            date.getHours()
+        ).padStart(2,"0");
+
+    const mm =
+        String(
+            date.getMinutes()
+        ).padStart(2,"0");
+
+    return `${hh}:${mm}`;
+}
+
+
+/* =====================================================
+   FORMAT AFK
+===================================================== */
+
+function formatDuration(hours){
+
+    if(!Number.isFinite(hours)){
+        return "--";
+    }
+
+    const totalMinutes =
+        Math.round(
+            hours * 60
+        );
+
+    const h =
+        Math.floor(
+            totalMinutes / 60
+        );
+
+    const m =
+        totalMinutes % 60;
+
+    if(h === 0){
+        return `${m} menit`;
+    }
+
+    if(m === 0){
+        return `${h} jam`;
+    }
+
+    return `${h} jam ${m} menit`;
+}
+
+
+/* =====================================================
+   RENDER DAYS
+===================================================== */
+
+function renderDays(
+    speedAwal,
+    gainPerSecond
+){
+
+    daysListEl.innerHTML = "";
+
+    const days =
+        calculateDays(
+            speedAwal,
+            gainPerSecond
+        );
+
+    for(const item of days){
+
         const row =
-            document.createElement(
-                "div"
-            );
+            document.createElement("div");
 
         row.className =
-            "daily-row";
+            "day-row";
 
         row.innerHTML = `
 
-            <span class="day">
-                ${day} HARI
-            </span>
+            <div class="day-number">
+                ${item.day} HARI
+            </div>
 
-            <strong class="speed">
-                ${formatNumber(
-                    finalSpeed
-                )}
-            </strong>
+            <div class="day-duration">
+                AFK ${item.day} × 24 JAM
+            </div>
+
+            <div class="day-value">
+                ${formatNumber(item.finalSpeed)}
+            </div>
 
         `;
 
-        dailyEstimatesEl.appendChild(
-            row
-        );
-
+        daysListEl.appendChild(row);
     }
 }
 
 
-/* =========================
-   MAIN CALCULATOR
-========================= */
+/* =====================================================
+   CLEAR RESULT
+===================================================== */
+
+function clearResult(){
+
+    resultSection.classList.add(
+        "hidden"
+    );
+
+    speedAkhirEl.textContent =
+        "--";
+
+    speedPerStepEl.textContent =
+        "--";
+
+    afkResultEl.textContent =
+        "--";
+
+    calibrationEl.textContent =
+        "KALIBRASI --";
+
+    perMinuteEl.textContent =
+        "--";
+
+    perHourEl.textContent =
+        "--";
+
+    endTimeEl.textContent =
+        "--";
+
+    daysListEl.innerHTML =
+        "";
+}
+
+
+/* =====================================================
+   MAIN CALCULATION
+===================================================== */
 
 function calculate(){
 
-    const setup =
-        getSetup();
+    const {
+        speedAwal,
+        treadmill,
+        trail,
+        multiplayer,
+        afkAmount
+    } = getInputs();
 
-    const afkSeconds =
-        getAfkSeconds();
 
-    const start =
-        getStartTime();
-
-
-    /* =========================
-       VALIDASI
-    ========================= */
-
-    if(
-        !Number.isFinite(
-            setup.speedAwal
-        ) ||
-        setup.speedAwal < 0
-    ){
-
-        resultSection.classList.add(
-            "hidden"
-        );
-
-        return;
-
-    }
-
+    /*
+     * Validasi dasar.
+     */
 
     if(
-        !Number.isFinite(
-            setup.treadmill
-        ) ||
-        setup.treadmill <= 0
+        !Number.isFinite(speedAwal) ||
+        speedAwal < 0
     ){
-
-        resultSection.classList.add(
-            "hidden"
-        );
-
+        clearResult();
         return;
-
     }
-
 
     if(
-        !Number.isFinite(
-            setup.trail
-        ) ||
-        setup.trail <= 0
+        !Number.isFinite(treadmill) ||
+        treadmill <= 0
     ){
-
-        resultSection.classList.add(
-            "hidden"
-        );
-
+        clearResult();
         return;
-
     }
-
 
     if(
-        !Number.isFinite(
-            setup.multiplayer
-        ) ||
-        setup.multiplayer < 1
+        !Number.isFinite(trail) ||
+        trail <= 0
     ){
-
-        resultSection.classList.add(
-            "hidden"
-        );
-
+        clearResult();
         return;
-
     }
-
 
     if(
-        !Number.isFinite(
-            afkSeconds
-        ) ||
-        afkSeconds <= 0
+        !Number.isFinite(afkAmount) ||
+        afkAmount <= 0
     ){
-
-        resultSection.classList.add(
-            "hidden"
-        );
-
+        clearResult();
         return;
-
     }
 
 
-    if(!start){
-
-        resultSection.classList.add(
-            "hidden"
-        );
-
-        return;
-
-    }
-
-
-    /* =========================
-       SPEED PER STEP
-    ========================= */
+    /*
+     * Speed per step.
+     */
 
     const speedPerStep =
-        getSpeedPerStep();
+        calculateSpeedPerStep(
+            treadmill,
+            trail,
+            multiplayer
+        );
 
     if(
-        !Number.isFinite(
-            speedPerStep
-        ) ||
+        !Number.isFinite(speedPerStep) ||
         speedPerStep <= 0
     ){
-
-        resultSection.classList.add(
-            "hidden"
-        );
-
+        clearResult();
         return;
-
     }
 
 
-    /* =========================
-       DYNAMIC RATE
-    ========================= */
+    /*
+     * Adaptive calibration.
+     */
 
-    const rate =
-        getTrainingRate();
+    const calibration =
+        calculateCalibration(
+            treadmill,
+            trail,
+            multiplayer,
+            speedPerStep
+        );
 
     if(
-        !Number.isFinite(rate) ||
-        rate <= 0
+        !Number.isFinite(calibration)
     ){
-
-        resultSection.classList.add(
-            "hidden"
-        );
-
+        clearResult();
         return;
-
     }
 
 
-    /* =========================
-       GAIN
-    ========================= */
+    /*
+     * Durasi AFK.
+     */
+
+    const afkHours =
+        getAfkHours();
+
+    if(
+        !Number.isFinite(afkHours) ||
+        afkHours <= 0
+    ){
+        clearResult();
+        return;
+    }
+
+
+    /*
+     * Gain per second.
+     *
+     * Calibration dipakai sebagai
+     * cadence model internal.
+     */
 
     const gainPerSecond =
-        getGainPerSecond();
-
-    if(
-        !Number.isFinite(
-            gainPerSecond
-        ) ||
-        gainPerSecond <= 0
-    ){
-
-        resultSection.classList.add(
-            "hidden"
-        );
-
-        return;
-
-    }
+        speedPerStep *
+        calibration;
 
 
-    /* =========================
-       TOTAL GAIN
-    ========================= */
+    /*
+     * Total gain.
+     */
+
+    const afkSeconds =
+        afkHours *
+        CONFIG.secondsHour;
 
     const totalGain =
         gainPerSecond *
         afkSeconds;
 
 
-    /* =========================
-       FINAL SPEED
-    ========================= */
+    /*
+     * Speed akhir.
+     */
 
-    const finalSpeed =
-        setup.speedAwal +
+    const speedAkhir =
+        speedAwal +
         totalGain;
 
 
-    /* =========================
-       END TIME
-    ========================= */
+    /*
+     * Hasil per menit dan jam.
+     */
 
-    const end =
-        getEndTime();
+    const gainPerMinute =
+        gainPerSecond *
+        CONFIG.secondsMinute;
 
-
-    /* =========================
-       SHOW RESULT
-    ========================= */
-
-    finalSpeedEl.textContent =
-        formatNumber(
-            finalSpeed
-        );
+    const gainPerHour =
+        gainPerSecond *
+        CONFIG.secondsHour;
 
 
-    speedPerStepEl.textContent =
-        formatNumber(
-            speedPerStep
-        ) +
-        " / step";
-
-
-    trainingRateEl.textContent =
-        removeZeros(
-            rate.toFixed(2)
-        ) +
-        " / detik";
-
-
-    resultStartEl.textContent =
-        formatClock(
-            start.hour * 60 +
-            start.minute
-        );
-
-
-    if(end){
-
-        resultEndEl.textContent =
-            end.text +
-            (
-                end.daysPassed > 0
-                    ? " • besok"
-                    : ""
-            );
-
-    }
-    else{
-
-        resultEndEl.textContent =
-            "-";
-
-    }
-
-
-    resultDurationEl.textContent =
-        getDurationText();
-
-
-    /* =========================
-       PER MINUTE
-    ========================= */
-
-    perMinuteEl.textContent =
-        "+" +
-        formatNumber(
-            gainPerSecond *
-            60
-        );
-
-
-    /* =========================
-       PER HOUR
-    ========================= */
-
-    perHourEl.textContent =
-        "+" +
-        formatNumber(
-            gainPerSecond *
-            3600
-        );
-
-
-    /* =========================
-       DAILY
-    ========================= */
-
-    generateDailyEstimates(
-        setup.speedAwal,
-        gainPerSecond
-    );
-
+    /*
+     * Tampilkan hasil.
+     */
 
     resultSection.classList.remove(
         "hidden"
     );
 
+    speedAkhirEl.textContent =
+        formatNumber(
+            speedAkhir
+        );
+
+    speedPerStepEl.textContent =
+        `${formatNumber(speedPerStep)} / step`;
+
+    afkResultEl.textContent =
+        formatDuration(
+            afkHours
+        );
+
+    calibrationEl.textContent =
+        `KALIBRASI ${formatCalibration(calibration)}`;
+
+    perMinuteEl.textContent =
+        formatNumber(
+            gainPerMinute
+        );
+
+    perHourEl.textContent =
+        formatNumber(
+            gainPerHour
+        );
+
+
+    /*
+     * Jam selesai.
+     */
+
+    const time =
+        calculateEndTime(
+            afkHours
+        );
+
+    if(time){
+
+        endTimeEl.textContent =
+            `SELESAI ${formatTime(time.end)}`;
+
+    }
+    else{
+
+        endTimeEl.textContent =
+            "";
+
+    }
+
+
+    /*
+     * Estimasi 2–30 hari.
+     */
+
+    renderDays(
+        speedAwal,
+        gainPerSecond
+    );
 }
 
 
-/* =========================
-   LIVE CALCULATION
-========================= */
+/* =====================================================
+   INPUT LISTENER
+===================================================== */
 
-[
+const allInputs = [
+
     speedAwalEl,
     treadmillEl,
     trailEl,
     multiplayerEl,
+    afkAmountEl,
+    afkUnitEl,
     startHourEl,
-    startMinuteEl,
-    afkValueEl
-].forEach(
-    function(input){
+    startMinuteEl
 
-        input.addEventListener(
-            "input",
-            calculate
-        );
+];
+
+
+for(const input of allInputs){
+
+    input.addEventListener(
+        "input",
+        calculate
+    );
+
+    input.addEventListener(
+        "change",
+        calculate
+    );
+}
+
+
+/* =====================================================
+   NORMALIZE TIME INPUT
+===================================================== */
+
+startHourEl.addEventListener(
+    "input",
+    () => {
+
+        let value =
+            Number(
+                startHourEl.value
+            );
+
+        if(value > 23){
+            startHourEl.value = 23;
+        }
+
+        if(value < 0){
+            startHourEl.value = 0;
+        }
+
+        calculate();
+    }
+);
+
+
+startMinuteEl.addEventListener(
+    "input",
+    () => {
+
+        let value =
+            Number(
+                startMinuteEl.value
+            );
+
+        if(value > 59){
+            startMinuteEl.value = 59;
+        }
+
+        if(value < 0){
+            startMinuteEl.value = 0;
+        }
+
+        calculate();
+    }
+);
+
+
+/* =====================================================
+   INPUT CLEANUP
+===================================================== */
+
+/*
+ * Tetap membolehkan:
+ *
+ * 55B
+ * 30.3B
+ * 580K
+ * 1.5M
+ *
+ * Huruf suffix tidak dihapus.
+ */
+
+function sanitizeValueInput(input){
+
+    input.addEventListener(
+        "blur",
+        () => {
+
+            let value =
+                input.value
+                    .trim()
+                    .replace(/\s+/g,"");
+
+            if(!value){
+                calculate();
+                return;
+            }
+
+            /*
+             * K/M/B/T/Q diperbolehkan.
+             */
+
+            value =
+                value.replace(
+                    /[^0-9.,KMBTQkmbtq+-]/g,
+                    ""
+                );
+
+            input.value =
+                value;
+
+            calculate();
+        }
+    );
+}
+
+
+sanitizeValueInput(speedAwalEl);
+sanitizeValueInput(treadmillEl);
+sanitizeValueInput(trailEl);
+sanitizeValueInput(multiplayerEl);
+sanitizeValueInput(afkAmountEl);
+
+
+/* =====================================================
+   ENTER KEY
+===================================================== */
+
+for(const input of allInputs){
+
+    input.addEventListener(
+        "keydown",
+        event => {
+
+            if(
+                event.key === "Enter"
+            ){
+                                event.preventDefault();
+
+                calculate();
+            }
+
+        }
+    );
+}
+
+
+/* =====================================================
+   FINAL AUTO CALCULATION
+===================================================== */
+
+/*
+ * Jalankan sekali saat halaman pertama kali
+ * selesai dimuat.
+ */
+
+calculate();
+
+
+/* =====================================================
+   WINDOW RESIZE / VISIBILITY
+===================================================== */
+
+/*
+ * Kalau user kembali ke tab setelah lama AFK,
+ * hasil tetap dihitung ulang berdasarkan input
+ * yang sedang aktif.
+ */
+
+document.addEventListener(
+    "visibilitychange",
+    () => {
+
+        if(
+            document.visibilityState === "visible"
+        ){
+            calculate();
+        }
 
     }
 );
 
 
-/* =========================
-   START
-========================= */
+/* =====================================================
+   PROTECTION
+===================================================== */
 
-calculate();
+/*
+ * Mencegah form melakukan submit/reload
+ * apabila seluruh calculator berada di dalam <form>.
+ */
 
-</script>
+document.addEventListener(
+    "submit",
+    event => {
+
+        event.preventDefault();
+
+        calculate();
+
+    }
+);
+
+
+/* =====================================================
+   INPUT ERROR HANDLING
+===================================================== */
+
+/*
+ * Jika user memasukkan format yang tidak valid,
+ * hasil dikosongkan sampai input diperbaiki.
+ */
+
+function validateSuffix(value){
+
+    if(
+        value === null ||
+        value === undefined
+    ){
+        return false;
+    }
+
+    const clean =
+        String(value)
+            .trim()
+            .replace(/\s+/g,"");
+
+    if(!clean){
+        return false;
+    }
+
+    return /^[+-]?(?:\d+(?:[.,]\d*)?|[.,]\d+)[KMBTQ]?$/i
+        .test(clean);
+}
+
+
+/* =====================================================
+   VISUAL INPUT STATE
+===================================================== */
+
+const suffixInputs = [
+
+    speedAwalEl,
+    treadmillEl,
+    trailEl,
+    multiplayerEl,
+    afkAmountEl
+
+];
+
+
+for(const input of suffixInputs){
+
+    input.addEventListener(
+        "input",
+        () => {
+
+            const value =
+                input.value.trim();
+
+            /*
+             * Kosong tidak dianggap error.
+             */
+
+            if(!value){
+
+                input.classList.remove(
+                    "input-error"
+                );
+
+                return;
+            }
+
+
+            /*
+             * Format valid.
+             */
+
+            if(validateSuffix(value)){
+
+                input.classList.remove(
+                    "input-error"
+                );
+
+            }
+
+            /*
+             * Format belum valid.
+             */
+
+            else{
+
+                input.classList.add(
+                    "input-error"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   INITIAL STATE
+===================================================== */
+
+clearResult();
+
+
+/*
+ * Hitung ulang setelah semua element
+ * benar-benar tersedia.
+ */
+
+setTimeout(
+    () => {
+
+        calculate();
+
+    },
+    50
+);
+
+
+/* =====================================================
+   END OF JAVASCRIPT
+===================================================== */
+
+
+        <!-- =====================================================
+     FOOTER / FINAL
+===================================================== -->
+
+<footer class="site-footer">
+
+    <div class="footer-line"></div>
+
+    <div class="footer-brand">
+        ⚡ YAKKZZ CALCULATOR
+    </div>
+
+    <div class="footer-sub">
+        STEAL AN EGG • AFK SPEED CALCULATOR
+    </div>
+
+    <div class="footer-copy">
+        © 2026 YAKKZZ • All Rights Reserved
+    </div>
+
+</footer>
+
+
+<!-- =====================================================
+     FINAL HTML
+===================================================== -->
 
 </body>
 </html>

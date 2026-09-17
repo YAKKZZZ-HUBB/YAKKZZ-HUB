@@ -16,16 +16,16 @@
 
 :root{
     --bg:#03040a;
-    --card:rgba(11,13,23,.78);
-    --card2:rgba(18,20,34,.72);
-    --border:rgba(255,255,255,.09);
-    --text:#f5f7ff;
-    --muted:#858ba2;
+    --panel:#10121b;
+    --panel2:#151722;
+    --input:#080a11;
+    --border:rgba(255,255,255,.075);
+    --text:#f4f5fa;
+    --muted:#777d91;
+    --muted2:#50566a;
     --red:#ff174f;
-    --red2:#ff3b6b;
-    --blue:#5d7cff;
-    --green:#39e58c;
-    --shadow:0 25px 80px rgba(0,0,0,.55);
+    --red2:#ff4d78;
+    --redDark:#a90032;
 }
 
 html{
@@ -34,13 +34,27 @@ html{
 
 body{
     min-height:100vh;
-    overflow-x:hidden;
-    background:
-        radial-gradient(circle at 50% 0%,rgba(255,23,79,.10),transparent 28%),
-        radial-gradient(circle at 0% 50%,rgba(93,124,255,.07),transparent 30%),
-        var(--bg);
     color:var(--text);
-    font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(255,23,79,.13),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 0% 45%,
+            rgba(80,100,255,.06),
+            transparent 30%
+        ),
+        #03040a;
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    overflow-x:hidden;
 }
 
 /* BACKGROUND GRID */
@@ -50,63 +64,98 @@ body::before{
     position:fixed;
     inset:0;
     pointer-events:none;
-    z-index:-4;
+    z-index:-5;
     background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+        linear-gradient(
+            rgba(255,255,255,.022) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.022) 1px,
+            transparent 1px
+        );
     background-size:42px 42px;
-    mask-image:linear-gradient(to bottom,black,transparent 90%);
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black 0%,
+            black 55%,
+            transparent 100%
+        );
 }
+
+/* RED ATMOSPHERE */
 
 body::after{
     content:"";
     position:fixed;
-    width:500px;
-    height:500px;
+    width:520px;
+    height:520px;
     left:50%;
-    top:50%;
+    top:48%;
     transform:translate(-50%,-50%);
-    background:radial-gradient(circle,rgba(255,23,79,.045),transparent 68%);
-    filter:blur(30px);
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,23,79,.045),
+            transparent 68%
+        );
+    filter:blur(35px);
+    pointer-events:none;
+    z-index:-4;
+}
+
+/* MOVING LIGHT */
+
+.bg-light{
+    position:fixed;
+    width:350px;
+    height:350px;
+    left:-180px;
+    top:20%;
+    border-radius:50%;
+    background:rgba(255,23,79,.025);
+    filter:blur(70px);
+    animation:floatLight 12s ease-in-out infinite;
     pointer-events:none;
     z-index:-3;
 }
 
-/* MOVING GRID */
+@keyframes floatLight{
+    0%,100%{
+        transform:translate(0,0);
+    }
 
-.grid-flow{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:-2;
-    opacity:.25;
-    background:
-        linear-gradient(115deg,transparent 45%,rgba(255,23,79,.08) 50%,transparent 55%);
-    background-size:220% 220%;
-    animation:gridMove 9s linear infinite;
+    50%{
+        transform:translate(
+            calc(100vw + 250px),
+            120px
+        );
+    }
 }
 
-@keyframes gridMove{
-    from{background-position:0% 0%}
-    to{background-position:220% 220%}
-}
-
-/* CONTAINER */
+/* MAIN */
 
 .container{
-    width:min(940px,calc(100% - 28px));
+    width:min(920px,calc(100% - 28px));
     margin:auto;
-    padding:34px 0 60px;
+    padding:28px 0 50px;
 }
 
 /* GLASS */
 
 .glass{
     background:
-        linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018)),
-        var(--card);
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.012)
+        ),
+        rgba(14,16,25,.82);
     border:1px solid var(--border);
-    box-shadow:var(--shadow);
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.42);
     backdrop-filter:blur(22px);
     -webkit-backdrop-filter:blur(22px);
 }
@@ -118,56 +167,80 @@ body::after{
 }
 
 ::-webkit-scrollbar-track{
-    background:#05060b;
+    background:#03040a;
 }
 
 ::-webkit-scrollbar-thumb{
-    background:#272b3b;
-    border-radius:20px;
+    background:#272b38;
+    border-radius:50px;
 }
 
 ::-webkit-scrollbar-thumb:hover{
-    background:#3b4054;
+    background:#3b4050;
 }
 
-/* SELECTION */
-
 ::selection{
-    background:rgba(255,23,79,.3);
+    background:rgba(255,23,79,.28);
     color:white;
 }
 </style>
 
-<div class="grid-flow"></div>
+</head>
 
- <style>
+<body>
 
-/* RED EYES */
+<div class="bg-light"></div>
+
+
+    <style>
+
+/* =========================================================
+   RED EYES
+========================================================= */
 
 .eyes{
     position:fixed;
+    width:190px;
+    height:80px;
     left:50%;
     top:50%;
     transform:translate(-50%,-50%);
-    width:190px;
-    height:80px;
     z-index:-1;
     pointer-events:none;
-    opacity:.9;
     filter:
         drop-shadow(0 0 8px rgba(255,0,50,.9))
-        drop-shadow(0 0 28px rgba(255,0,50,.5))
-        drop-shadow(0 0 65px rgba(255,0,50,.25));
+        drop-shadow(0 0 28px rgba(255,0,50,.45))
+        drop-shadow(0 0 65px rgba(255,0,50,.18));
+    opacity:.82;
 }
 
 .eye{
     position:absolute;
+    top:22px;
     width:76px;
     height:34px;
-    top:22px;
-    background:linear-gradient(90deg,#7a001f,#ff174f,#7a001f);
+    background:
+        linear-gradient(
+            90deg,
+            #76001d,
+            #ff174f 50%,
+            #76001d
+        );
     border-radius:100% 0 100% 0;
-    animation:blink 4.8s infinite;
+}
+
+.eye::before{
+    content:"";
+    position:absolute;
+    inset:4px;
+    border-radius:inherit;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.12),
+            transparent
+        );
 }
 
 .eye::after{
@@ -179,49 +252,53 @@ body::after{
     top:50%;
     transform:translate(-50%,-50%);
     border-radius:50%;
-    background:#070008;
-    box-shadow:0 0 12px #ff174f;
+    background:#050006;
+    box-shadow:
+        0 0 8px #ff174f,
+        0 0 18px #ff174f;
 }
 
 .eye.left{
     left:10px;
     transform:rotate(18deg);
+    animation:blinkLeft 5s infinite;
 }
 
 .eye.right{
     right:10px;
     transform:scaleX(-1) rotate(18deg);
+    animation:blinkRight 5s infinite;
 }
 
-@keyframes blink{
-    0%,44%,48%,100%{
-        transform:scaleY(1);
-    }
-    46%{
-        transform:scaleY(.08);
-    }
-}
+@keyframes blinkLeft{
 
-.eye.right{
-    animation-name:blinkRight;
+    0%,43%,48%,100%{
+        transform:rotate(18deg) scaleY(1);
+    }
+
+    45%{
+        transform:rotate(18deg) scaleY(.08);
+    }
 }
 
 @keyframes blinkRight{
-    0%,44%,48%,100%{
+
+    0%,43%,48%,100%{
         transform:scaleX(-1) rotate(18deg) scaleY(1);
     }
-    46%{
+
+    45%{
         transform:scaleX(-1) rotate(18deg) scaleY(.08);
     }
 }
 
-/* HEADER */
+/* =========================================================
+   HERO
+========================================================= */
 
 .hero{
-    position:relative;
     text-align:center;
-    padding:24px 18px 28px;
-    margin-bottom:18px;
+    padding:20px 12px 25px;
 }
 
 .status{
@@ -229,14 +306,13 @@ body::after{
     align-items:center;
     gap:8px;
     padding:7px 12px;
-    border:1px solid rgba(255,23,79,.2);
     border-radius:999px;
-    background:rgba(255,23,79,.055);
-    color:#ff6d91;
-    font-size:11px;
-    font-weight:800;
-    letter-spacing:1.8px;
-    text-transform:uppercase;
+    border:1px solid rgba(255,23,79,.18);
+    background:rgba(255,23,79,.05);
+    color:#ff6588;
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:1.7px;
 }
 
 .status-dot{
@@ -245,81 +321,43 @@ body::after{
     border-radius:50%;
     background:#ff174f;
     box-shadow:0 0 12px #ff174f;
-    animation:pulse 1.5s infinite;
+    animation:statusPulse 1.5s infinite;
 }
 
-@keyframes pulse{
-    50%{opacity:.35;transform:scale(.65)}
+@keyframes statusPulse{
+
+    50%{
+        opacity:.3;
+        transform:scale(.6);
+    }
 }
 
 .hero h1{
-    margin-top:17px;
-    font-size:clamp(28px,7vw,52px);
+    margin-top:16px;
+    font-size:clamp(30px,7vw,52px);
     line-height:1;
-    font-weight:950;
+    font-weight:1000;
     letter-spacing:-2.5px;
 }
 
 .hero h1 span{
-    background:linear-gradient(110deg,#fff,#ffb4c5 35%,#ff174f 75%);
+    background:
+        linear-gradient(
+            110deg,
+            #ffffff 10%,
+            #ffb4c5 40%,
+            #ff174f 85%
+        );
     -webkit-background-clip:text;
     background-clip:text;
     color:transparent;
 }
 
 .hero p{
-    max-width:580px;
-    margin:13px auto 0;
+    margin-top:12px;
     color:var(--muted);
-    font-size:13px;
-    line-height:1.7;
-}
-
-/* NOTICE */
-
-.notice{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
-    padding:14px 16px;
-    margin-bottom:16px;
-    border-radius:17px;
-    border:1px solid rgba(255,23,79,.16);
-    background:linear-gradient(90deg,rgba(255,23,79,.07),rgba(255,255,255,.025));
-}
-
-.notice-text{
     font-size:12px;
-    color:#dfe2ed;
-}
-
-.notice-text b{
-    color:#ff6d91;
-}
-
-.join-btn{
-    flex-shrink:0;
-    border:0;
-    border-radius:12px;
-    padding:11px 15px;
-    color:white;
-    font-weight:900;
-    font-size:11px;
-    letter-spacing:.4px;
-    cursor:pointer;
-    background:linear-gradient(135deg,#ff174f,#b80032);
-    box-shadow:0 10px 28px rgba(255,23,79,.22);
-    transition:.2s;
-}
-
-.join-btn:hover{
-    transform:translateY(-2px);
-    box-shadow:0 14px 35px rgba(255,23,79,.32);
-}
-
-.join-btn:active{
-    transform:scale(.97);
+    line-height:1.6;
 }
 
 </style>
@@ -332,6 +370,7 @@ body::after{
 <main class="container">
 
 <section class="hero">
+
     <div class="status">
         <span class="status-dot"></span>
         CALCULATOR ONLINE
@@ -342,89 +381,195 @@ body::after{
     </h1>
 
     <p>
-        Steal An Egg AFK Speed Calculator
+        Steal An Egg • AFK Speed Calculator
     </p>
+
 </section>
 
-<div class="notice glass">
-    <div class="notice-text">
-        Jangan lupa join SL Owner, <b>hargai owner ❤️</b>
-    </div>
 
-    <button class="join-btn" onclick="joinOwner()">
-        JOIN SL OWNER
-    </button>
-</div>
+    <style>
 
+/* =========================================================
+   JOIN
+========================================================= */
 
- <style>
+.notice{
+    padding:14px;
+    margin-bottom:16px;
+    border-radius:20px;
+    border:1px solid rgba(255,23,79,.14);
+    background:
+        linear-gradient(
+            100deg,
+            rgba(255,23,79,.075),
+            rgba(255,255,255,.018)
+        );
+}
+
+.notice-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+}
+
+.notice-text{
+    color:#d7dae5;
+    font-size:11px;
+    font-weight:700;
+}
+
+.notice-text b{
+    color:#ff6689;
+}
+
+.join-btn{
+    flex-shrink:0;
+    min-width:145px;
+    height:43px;
+    border:0;
+    border-radius:13px;
+    color:white;
+    background:
+        linear-gradient(
+            135deg,
+            #ff174f,
+            #cf003d
+        );
+    box-shadow:
+        0 10px 30px rgba(255,23,79,.22);
+    font-size:11px;
+    font-weight:950;
+    letter-spacing:.5px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.join-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:
+        0 14px 36px rgba(255,23,79,.3);
+}
+
+.join-btn:active{
+    transform:scale(.97);
+}
+
+/* =========================================================
+   SECTION
+========================================================= */
 
 .section{
-    border-radius:22px;
-    padding:20px;
-    margin-bottom:16px;
     position:relative;
     overflow:hidden;
+    padding:20px;
+    margin-bottom:16px;
+    border-radius:22px;
 }
 
 .section::before{
     content:"";
     position:absolute;
-    left:0;
     top:0;
-    width:100%;
+    left:12%;
+    width:76%;
     height:1px;
-    background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,23,79,.5),
-        transparent
-    );
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,23,79,.45),
+            transparent
+        );
 }
 
 .section-title{
     display:flex;
     align-items:center;
-    gap:10px;
-    margin-bottom:18px;
+    gap:11px;
+    margin-bottom:19px;
 }
 
 .section-icon{
-    width:35px;
-    height:35px;
+    width:37px;
+    height:37px;
     display:grid;
     place-items:center;
-    border-radius:11px;
-    background:rgba(255,23,79,.09);
-    border:1px solid rgba(255,23,79,.16);
+    flex-shrink:0;
+    border-radius:12px;
+    background:rgba(255,23,79,.075);
+    border:1px solid rgba(255,23,79,.15);
     color:#ff5279;
-    font-size:15px;
+    font-size:16px;
 }
 
 .section-title h2{
     font-size:14px;
-    font-weight:900;
-    letter-spacing:.5px;
+    font-weight:950;
+    letter-spacing:.4px;
 }
 
 .section-title small{
     display:block;
-    color:#686e84;
-    font-size:10px;
-    margin-top:3px;
-    font-weight:600;
+    margin-top:4px;
+    color:#62687b;
+    font-size:9px;
+    font-weight:650;
 }
 
-/* INPUT GRID */
+</style>
+
+<div class="notice glass">
+
+    <div class="notice-inner">
+
+        <div class="notice-text">
+            Jangan lupa join SL Owner,
+            <b>hargai owner ❤️</b>
+        </div>
+
+        <button
+            class="join-btn"
+            onclick="joinOwner()"
+        >
+            JOIN SL OWNER
+        </button>
+
+    </div>
+
+</div>
+
+<section class="section glass">
+
+    <div class="section-title">
+
+        <div class="section-icon">
+            ⚡
+        </div>
+
+        <div>
+            <h2>SETUP SPEED</h2>
+            <small>
+                Masukkan data karakter kamu
+            </small>
+        </div>
+
+    </div>
+
+    <style>
+
+/* =========================================================
+   INPUT
+========================================================= */
 
 .input-grid{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:repeat(2,minmax(0,1fr));
     gap:13px;
 }
 
 .field{
-    position:relative;
+    min-width:0;
 }
 
 .field.full{
@@ -434,66 +579,67 @@ body::after{
 .field label{
     display:block;
     margin-bottom:8px;
+    color:#969caf;
     font-size:10px;
-    color:#9ca2b7;
-    font-weight:800;
-    letter-spacing:.8px;
+    font-weight:900;
+    letter-spacing:.9px;
     text-transform:uppercase;
-}
-
-.input-wrap{
-    position:relative;
-}
-
-.input-wrap .mini-icon{
-    position:absolute;
-    left:13px;
-    top:50%;
-    transform:translateY(-50%);
-    color:#676d83;
-    font-size:12px;
-    pointer-events:none;
 }
 
 input{
     width:100%;
-    height:50px;
+    height:51px;
     padding:0 14px;
-    border-radius:14px;
-    border:1px solid rgba(255,255,255,.075);
     outline:none;
-    background:rgba(2,4,10,.58);
-    color:#fff;
+    border-radius:15px;
+    border:1px solid rgba(255,255,255,.065);
+    background:#080a11;
+    color:#f4f5fa;
+    font-family:inherit;
     font-size:14px;
-    font-weight:700;
+    font-weight:750;
     transition:.2s;
 }
 
-input.has-icon{
-    padding-left:36px;
-}
-
 input::placeholder{
-    color:#4f556a;
-    font-weight:500;
+    color:#4e5468;
+    font-weight:550;
 }
 
 input:focus{
-    border-color:rgba(255,23,79,.6);
-    background:rgba(255,23,79,.035);
+    border-color:rgba(255,23,79,.58);
+    background:#0a0b13;
     box-shadow:
-        0 0 0 3px rgba(255,23,79,.07),
-        0 0 25px rgba(255,23,79,.06);
+        0 0 0 3px rgba(255,23,79,.065),
+        0 0 25px rgba(255,23,79,.055);
+}
+
+.speed-wrap{
+    position:relative;
+}
+
+.speed-wrap span{
+    position:absolute;
+    left:14px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#667087;
+    font-size:12px;
+    pointer-events:none;
+}
+
+.speed-wrap input{
+    padding-left:37px;
 }
 
 .field-note{
     margin-top:7px;
-    color:#555b70;
+    color:#555b6d;
     font-size:9px;
     line-height:1.4;
 }
 
-/* DATE/TIME */
+/* DATE TIME */
 
 input[type="date"],
 input[type="time"]{
@@ -502,400 +648,460 @@ input[type="time"]{
 
 input[type="date"]::-webkit-calendar-picker-indicator,
 input[type="time"]::-webkit-calendar-picker-indicator{
+    opacity:.55;
     filter:invert(1);
-    opacity:.5;
 }
 
-/* SPEED STEP */
+/* =========================================================
+   SPEED STEP
+========================================================= */
 
 .step-box{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
     margin-top:14px;
     padding:15px 16px;
     border-radius:16px;
+    border:1px solid rgba(255,23,79,.11);
     background:
-        linear-gradient(110deg,rgba(255,23,79,.075),rgba(255,255,255,.02));
-    border:1px solid rgba(255,23,79,.12);
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
+        linear-gradient(
+            110deg,
+            rgba(255,23,79,.075),
+            rgba(255,255,255,.015)
+        );
 }
 
 .step-label{
-    color:#777d91;
+    color:#747b90;
     font-size:10px;
-    font-weight:800;
+    font-weight:900;
+    letter-spacing:1.2px;
     text-transform:uppercase;
-    letter-spacing:1px;
 }
 
 .step-value{
-    font-size:21px;
-    font-weight:950;
     color:#fff;
+    font-size:21px;
+    font-weight:1000;
 }
 
 .step-value span{
     color:#ff5279;
     font-size:11px;
-    margin-left:3px;
 }
 
-/* FOOTNOTE */
-
-.calibration-badge{
+.calibration{
     display:inline-flex;
-    margin-top:13px;
+    margin-top:12px;
     padding:6px 9px;
     border-radius:8px;
     background:rgba(255,255,255,.035);
-    color:#656b80;
+    color:#5d6376;
     font-size:9px;
-    font-weight:700;
+    font-weight:800;
 }
 
 </style>
 
-<section class="section glass">
+<div class="input-grid">
 
-    <div class="section-title">
-        <div class="section-icon">⚡</div>
-        <div>
-            <h2>SETUP SPEED</h2>
-            <small>Masukkan data karakter kamu</small>
-        </div>
-    </div>
+    <div class="field full">
 
-    <div class="input-grid">
+        <label>Speed Awal</label>
 
-        <div class="field full">
-            <label>Speed Awal</label>
-            <div class="input-wrap">
-                <span class="mini-icon">◆</span>
-                <input
-                    id="speedAwal"
-                    class="has-icon"
-                    type="text"
-                    placeholder="Masukkan speed kamu saat ini"
-                    autocomplete="off"
-                >
-            </div>
-        </div>
+        <div class="speed-wrap">
+            <span>◆</span>
 
-        <div class="field">
-            <label>Treadmill</label>
-            <div class="input-wrap">
-                <input
-                    id="treadmill"
-                    type="text"
-                    placeholder="Masukkan nilai treadmill yang kamu gunakan"
-                    autocomplete="off"
-                >
-            </div>
-        </div>
-
-        <div class="field">
-            <label>Trail</label>
-            <div class="input-wrap">
-                <input
-                    id="trail"
-                    type="text"
-                    placeholder="Masukkan nilai trail yang kamu gunakan"
-                    autocomplete="off"
-                >
-            </div>
-        </div>
-
-        <div class="field full">
-            <label>Robux Multiplayer</label>
-            <div class="input-wrap">
-                <input
-                    id="multiplayer"
-                    type="text"
-                    placeholder="Masukkan multiplier multiplayer yang kamu miliki"
-                    autocomplete="off"
-                >
-            </div>
-            <div class="field-note">
-                Kosongkan jika tidak memiliki multiplayer
-            </div>
+            <input
+                id="speedAwal"
+                type="text"
+                placeholder="Masukkan speed kamu saat ini"
+                autocomplete="off"
+            >
         </div>
 
     </div>
 
-    <div class="step-box">
-        <div class="step-label">Speed Per Step</div>
-        <div class="step-value">
-            <span id="speedStep">0</span>
-            <span>/ step</span>
-        </div>
+    <div class="field">
+
+        <label>Treadmill</label>
+
+        <input
+            id="treadmill"
+            type="text"
+            placeholder="Masukkan nilai treadmill yang kamu gunakan"
+            autocomplete="off"
+        >
+
     </div>
 
-    <div class="calibration-badge">
-        KALIBRASI 11.67
+    <div class="field">
+
+        <label>Trail</label>
+
+        <input
+            id="trail"
+            type="text"
+            placeholder="Masukkan nilai trail yang kamu gunakan"
+            autocomplete="off"
+        >
+
     </div>
+
+    <div class="field full">
+
+        <label>Robux Multiplayer</label>
+
+        <input
+            id="multiplayer"
+            type="text"
+            placeholder="Masukkan multiplier multiplayer yang kamu miliki"
+            autocomplete="off"
+        >
+
+        <div class="field-note">
+            Kosongkan jika tidak memiliki multiplayer
+        </div>
+
+    </div>
+
+</div>
+
+<div class="step-box">
+
+    <div class="step-label">
+        Speed Per Step
+    </div>
+
+    <div class="step-value">
+        <span id="speedStep">0</span>
+        <span>/ step</span>
+    </div>
+
+</div>
+
+<div class="calibration">
+    KALIBRASI 11.67
+</div>
 
 </section>
 
- <section class="section glass">
+    <section class="section glass">
 
     <div class="section-title">
-        <div class="section-icon">◷</div>
+
+        <div class="section-icon">
+            ◷
+        </div>
+
         <div>
             <h2>AFK CONFIGURATION</h2>
-            <small>Tentukan waktu mulai dan durasi AFK</small>
+            <small>
+                Tentukan waktu mulai dan durasi AFK
+            </small>
         </div>
+
     </div>
 
     <div class="input-grid">
 
         <div class="field">
+
             <label>Tanggal Mulai</label>
+
             <input
                 id="startDate"
                 type="date"
             >
+
         </div>
 
         <div class="field">
+
             <label>AFK Mulai Dari</label>
+
             <input
                 id="startTime"
                 type="time"
             >
+
         </div>
 
         <div class="field">
+
             <label>Durasi AFK Hari</label>
+
             <input
                 id="afkDays"
                 type="text"
                 placeholder="Masukkan jumlah hari"
                 autocomplete="off"
             >
+
         </div>
 
         <div class="field">
+
             <label>Durasi AFK Jam</label>
+
             <input
                 id="afkHours"
                 type="text"
                 placeholder="Masukkan jumlah jam"
                 autocomplete="off"
             >
-        </div>
 
-    </div>
-
- </section>
-
- <style>
-
-.result-card{
-    position:relative;
-    overflow:hidden;
-    padding:25px 20px;
-    border-radius:24px;
-    margin-bottom:16px;
-    background:
-        radial-gradient(circle at 50% 0%,rgba(255,23,79,.13),transparent 48%),
-        linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018)),
-        rgba(10,12,20,.84);
-}
-
-.result-card::after{
-    content:"";
-    position:absolute;
-    width:240px;
-    height:240px;
-    right:-120px;
-    bottom:-150px;
-    background:rgba(255,23,79,.08);
-    filter:blur(50px);
-    border-radius:50%;
-}
-
-.result-head{
-    text-align:center;
-}
-
-.result-caption{
-    color:#777d91;
-    font-size:10px;
-    font-weight:900;
-    letter-spacing:2.5px;
-}
-
-.final-speed{
-    margin-top:8px;
-    font-size:clamp(40px,12vw,72px);
-    line-height:1;
-    font-weight:1000;
-    letter-spacing:-3px;
-    background:linear-gradient(
-        180deg,
-        #ffffff 15%,
-        #ff6689 55%,
-        #ff174f 100%
-    );
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-    filter:drop-shadow(0 0 22px rgba(255,23,79,.18));
-    word-break:break-word;
-}
-
-.result-sub{
-    margin-top:9px;
-    color:#6d7388;
-    font-size:11px;
-}
-
-.finish-box{
-    margin-top:22px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-}
-
-.info-box{
-    padding:14px;
-    border-radius:15px;
-    background:rgba(255,255,255,.027);
-    border:1px solid rgba(255,255,255,.06);
-}
-
-.info-label{
-    color:#5f6579;
-    font-size:9px;
-    text-transform:uppercase;
-    font-weight:800;
-    letter-spacing:.8px;
-}
-
-.info-value{
-    margin-top:6px;
-    font-size:13px;
-    font-weight:850;
-    color:#e8eaf2;
-}
-
-</style>
-
-<section class="result-card glass">
-
-    <div class="result-head">
-        <div class="result-caption">
-            SPEED AKHIR
-        </div>
-
-        <div class="final-speed" id="finalSpeed">
-            0
-        </div>
-
-        <div class="result-sub">
-            Estimasi speed setelah AFK
-        </div>
-    </div>
-
-    <div class="finish-box">
-
-        <div class="info-box">
-            <div class="info-label">
-                Durasi AFK
-            </div>
-
-            <div class="info-value" id="durationText">
-                0 jam
-            </div>
-        </div>
-
-        <div class="info-box">
-            <div class="info-label">
-                Selesai
-            </div>
-
-            <div class="info-value" id="finishText">
-                —
-            </div>
         </div>
 
     </div>
 
 </section>
 
- <style>
+    <style>
+
+/* =========================================================
+   RESULT
+========================================================= */
+
+.result-card{
+    position:relative;
+    overflow:hidden;
+    padding:26px 20px 21px;
+    margin-bottom:16px;
+    border-radius:25px;
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(255,23,79,.13),
+            transparent 48%
+        ),
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.01)
+        ),
+        #10121b;
+}
+
+.result-card::before{
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    left:50%;
+    top:-210px;
+    transform:translateX(-50%);
+    border-radius:50%;
+    background:rgba(255,23,79,.08);
+    filter:blur(70px);
+}
+
+.result-content{
+    position:relative;
+    z-index:1;
+}
+
+.result-caption{
+    text-align:center;
+    color:#777d91;
+    font-size:10px;
+    font-weight:950;
+    letter-spacing:3px;
+}
+
+.final-speed{
+    margin-top:9px;
+    text-align:center;
+    color:#ff4d78;
+    font-size:clamp(44px,11vw,72px);
+    line-height:1;
+    font-weight:1000;
+    letter-spacing:-3px;
+    background:
+        linear-gradient(
+            180deg,
+            #fff 10%,
+            #ff7191 50%,
+            #ff174f 100%
+        );
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    filter:
+        drop-shadow(
+            0 0 22px rgba(255,23,79,.18)
+        );
+    word-break:break-word;
+}
+
+.result-sub{
+    margin-top:10px;
+    text-align:center;
+    color:#62687c;
+    font-size:10px;
+}
+
+.result-info{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:23px;
+}
+
+.info-box{
+    padding:14px;
+    border-radius:16px;
+    border:1px solid rgba(255,255,255,.055);
+    background:rgba(255,255,255,.023);
+}
+
+.info-label{
+    color:#5e6478;
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:.9px;
+    text-transform:uppercase;
+}
+
+.info-value{
+    margin-top:7px;
+    color:#e9ebf2;
+    font-size:13px;
+    font-weight:900;
+}
+
+</style>
+
+<section class="result-card glass">
+
+    <div class="result-content">
+
+        <div class="result-caption">
+            SPEED AKHIR
+        </div>
+
+        <div
+            class="final-speed"
+            id="finalSpeed"
+        >
+            0
+        </div>
+
+        <div class="result-sub">
+            Estimasi speed setelah AFK
+        </div>
+
+        <div class="result-info">
+
+            <div class="info-box">
+
+                <div class="info-label">
+                    Durasi AFK
+                </div>
+
+                <div
+                    class="info-value"
+                    id="durationText"
+                >
+                    0 jam
+                </div>
+
+            </div>
+
+            <div class="info-box">
+
+                <div class="info-label">
+                    Selesai
+                </div>
+
+                <div
+                    class="info-value"
+                    id="finishText"
+                >
+                    —
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+    <style>
+
+/* =========================================================
+   ESTIMATE
+========================================================= */
 
 .estimator{
-    border-radius:22px;
     padding:20px;
     margin-bottom:16px;
+    border-radius:22px;
 }
 
 .estimate-header{
     display:flex;
+    align-items:flex-end;
     justify-content:space-between;
-    align-items:end;
     gap:15px;
     margin-bottom:15px;
 }
 
 .estimate-header h2{
     font-size:14px;
-    font-weight:900;
+    font-weight:950;
 }
 
 .estimate-header p{
     margin-top:4px;
-    color:#656b80;
+    color:#5f6578;
     font-size:9px;
 }
 
 .estimate-tag{
     color:#ff5279;
     font-size:9px;
-    font-weight:900;
+    font-weight:950;
     letter-spacing:1px;
 }
 
 .estimate-list{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:repeat(2,minmax(0,1fr));
     gap:9px;
 }
 
 .estimate-item{
     padding:13px;
     border-radius:14px;
-    background:rgba(255,255,255,.025);
-    border:1px solid rgba(255,255,255,.055);
+    border:1px solid rgba(255,255,255,.05);
+    background:rgba(255,255,255,.022);
     transition:.18s;
 }
 
 .estimate-item:hover{
-    border-color:rgba(255,23,79,.22);
+    border-color:rgba(255,23,79,.2);
     background:rgba(255,23,79,.035);
     transform:translateY(-1px);
 }
 
 .estimate-day{
-    color:#777d91;
+    color:#70768a;
     font-size:9px;
-    font-weight:800;
-    text-transform:uppercase;
+    font-weight:850;
+    letter-spacing:.5px;
 }
 
 .estimate-value{
     margin-top:5px;
-    color:#f2f3f7;
+    color:#f0f1f5;
     font-size:15px;
     font-weight:950;
-}
-
-.estimate-value small{
-    color:#62687b;
-    font-size:9px;
-    font-weight:700;
+    word-break:break-word;
 }
 
 </style>
@@ -905,8 +1111,13 @@ input[type="time"]::-webkit-calendar-picker-indicator{
     <div class="estimate-header">
 
         <div>
+
             <h2>AFK ESTIMATES</h2>
-            <p>Perkiraan speed akhir berdasarkan durasi</p>
+
+            <p>
+                Perkiraan speed akhir berdasarkan durasi
+            </p>
+
         </div>
 
         <div class="estimate-tag">
@@ -915,78 +1126,284 @@ input[type="time"]::-webkit-calendar-picker-indicator{
 
     </div>
 
-    <div class="estimate-list" id="estimateList"></div>
+    <div
+        class="estimate-list"
+        id="estimateList"
+    ></div>
 
 </section>
 
- <script>
+    <style>
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:650px){
+
+    .container{
+        width:calc(100% - 18px);
+        padding-top:16px;
+        padding-bottom:35px;
+    }
+
+    .hero{
+        padding:18px 8px 22px;
+    }
+
+    .hero h1{
+        font-size:32px;
+        letter-spacing:-1.8px;
+    }
+
+    .hero p{
+        font-size:11px;
+    }
+
+    .notice{
+        padding:13px;
+    }
+
+    .notice-inner{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .notice-text{
+        text-align:center;
+        line-height:1.5;
+    }
+
+    .join-btn{
+        width:100%;
+        height:45px;
+    }
+
+    .section{
+        padding:17px;
+        border-radius:20px;
+    }
+
+    .input-grid{
+        grid-template-columns:1fr;
+        gap:12px;
+    }
+
+    .field.full{
+        grid-column:auto;
+    }
+
+    input{
+        height:52px;
+        font-size:14px;
+    }
+
+    .step-box{
+        padding:15px;
+    }
+
+    .step-value{
+        font-size:19px;
+    }
+
+    .eyes{
+        width:140px;
+        height:60px;
+        opacity:.58;
+    }
+
+    .eye{
+        width:58px;
+        height:27px;
+        top:17px;
+    }
+
+    .eye::after{
+        width:10px;
+        height:10px;
+    }
+
+    .result-card{
+        padding:25px 16px 18px;
+    }
+
+    .final-speed{
+        font-size:48px;
+        letter-spacing:-2px;
+    }
+
+    .result-info{
+        grid-template-columns:1fr;
+    }
+
+    .estimate-list{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+}
+
+/* SMALL PHONE */
+
+@media(max-width:370px){
+
+    .container{
+        width:calc(100% - 14px);
+    }
+
+    .hero h1{
+        font-size:28px;
+    }
+
+    .section-title h2{
+        font-size:13px;
+    }
+
+    .final-speed{
+        font-size:42px;
+    }
+
+    .estimate-list{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+
+    <style>
+
+.footer{
+    padding:5px 0 0;
+    text-align:center;
+    color:#444a5c;
+    font-size:9px;
+    line-height:1.7;
+}
+
+.footer strong{
+    color:#686e82;
+}
+
+</style>
+
+<footer class="footer">
+
+    <strong>
+        YAKKZZ CALCULATOR
+    </strong>
+
+    <br>
+
+    Steal An Egg • AFK Speed Estimator
+
+</footer>
+
+    <script>
 
 /* =========================================================
    YAKKZZ CALCULATOR
-   CONFIGURATION
+   FINAL VERSION
+========================================================= */
+
+
+/* =========================================================
+   CONFIG
 ========================================================= */
 
 const CALIBRATION = 11.67;
 
+
 /* =========================================================
-   ELEMENTS
+   ELEMENT
 ========================================================= */
 
-const speedAwalInput = document.getElementById("speedAwal");
-const treadmillInput = document.getElementById("treadmill");
-const trailInput = document.getElementById("trail");
-const multiplayerInput = document.getElementById("multiplayer");
+const speedAwalInput =
+    document.getElementById("speedAwal");
 
-const startDateInput = document.getElementById("startDate");
-const startTimeInput = document.getElementById("startTime");
+const treadmillInput =
+    document.getElementById("treadmill");
 
-const afkDaysInput = document.getElementById("afkDays");
-const afkHoursInput = document.getElementById("afkHours");
+const trailInput =
+    document.getElementById("trail");
 
-const speedStepOutput = document.getElementById("speedStep");
-const finalSpeedOutput = document.getElementById("finalSpeed");
+const multiplayerInput =
+    document.getElementById("multiplayer");
 
-const durationOutput = document.getElementById("durationText");
-const finishOutput = document.getElementById("finishText");
+const startDateInput =
+    document.getElementById("startDate");
 
-const estimateList = document.getElementById("estimateList");
+const startTimeInput =
+    document.getElementById("startTime");
+
+const afkDaysInput =
+    document.getElementById("afkDays");
+
+const afkHoursInput =
+    document.getElementById("afkHours");
+
+const speedStepOutput =
+    document.getElementById("speedStep");
+
+const finalSpeedOutput =
+    document.getElementById("finalSpeed");
+
+const durationOutput =
+    document.getElementById("durationText");
+
+const finishOutput =
+    document.getElementById("finishText");
+
+const estimateList =
+    document.getElementById("estimateList");
+
 
 /* =========================================================
-   NUMBER PARSER
+   PARSE NUMBER
    SUPPORT:
-   K / M / B / T / Q
+   1000
+   580K
+   1.5M
+   55.5B
+   2T
+   1Q
 ========================================================= */
 
 function parseNumber(value){
 
-    if(value === null || value === undefined){
+    if(
+        value === null ||
+        value === undefined
+    ){
         return 0;
     }
 
-    let text = String(value)
-        .trim()
-        .replace(/,/g,"")
-        .replace(/\s+/g,"");
+    let text =
+        String(value)
+            .trim()
+            .replace(/,/g,"")
+            .replace(/\s+/g,"")
+            .toUpperCase();
 
     if(!text){
         return 0;
     }
 
-    text = text.toUpperCase();
-
-    const match = text.match(/^(-?[\d.]+)([KMBTQ])?$/);
+    const match =
+        text.match(
+            /^(-?[\d.]+)([KMBTQ])?$/
+        );
 
     if(!match){
         return 0;
     }
 
-    const number = Number(match[1]);
+    const number =
+        Number(match[1]);
 
     if(!Number.isFinite(number)){
         return 0;
     }
 
-    const suffix = match[2] || "";
+    const suffix =
+        match[2] || "";
 
     const multipliers = {
         K:1e3,
@@ -996,70 +1413,114 @@ function parseNumber(value){
         Q:1e15
     };
 
-    return number * (multipliers[suffix] || 1);
+    return number *
+        (multipliers[suffix] || 1);
 }
 
+
 /* =========================================================
-   FORMAT LARGE NUMBER
+   FORMAT NUMBER
 ========================================================= */
 
 function formatNumber(value){
 
-    if(!Number.isFinite(value)){
+    if(
+        !Number.isFinite(value)
+    ){
         return "0";
     }
 
-    const abs = Math.abs(value);
+    const abs =
+        Math.abs(value);
 
     if(abs >= 1e15){
-        return cleanDecimal(value / 1e15) + "Q";
+        return cleanDecimal(
+            value / 1e15
+        ) + "Q";
     }
 
     if(abs >= 1e12){
-        return cleanDecimal(value / 1e12) + "T";
+        return cleanDecimal(
+            value / 1e12
+        ) + "T";
     }
 
     if(abs >= 1e9){
-        return cleanDecimal(value / 1e9) + "B";
+        return cleanDecimal(
+            value / 1e9
+        ) + "B";
     }
 
     if(abs >= 1e6){
-        return cleanDecimal(value / 1e6) + "M";
+        return cleanDecimal(
+            value / 1e6
+        ) + "M";
     }
 
     if(abs >= 1e3){
-        return cleanDecimal(value / 1e3) + "K";
+        return cleanDecimal(
+            value / 1e3
+        ) + "K";
     }
 
     return cleanDecimal(value);
 }
 
+
+/* =========================================================
+   DECIMAL CLEANER
+========================================================= */
+
 function cleanDecimal(value){
 
-    if(!Number.isFinite(value)){
+    if(
+        !Number.isFinite(value)
+    ){
         return "0";
     }
 
-    return Number(value.toFixed(6))
-        .toLocaleString("en-US",{
+    return Number(
+        value.toFixed(6)
+    ).toLocaleString(
+        "en-US",
+        {
             maximumFractionDigits:6
-        });
+        }
+    );
 }
 
+
 /* =========================================================
-   DATE DEFAULT
+   DEFAULT DATE + TIME
 ========================================================= */
 
 function setDefaultDateTime(){
 
-    const now = new Date();
+    const now =
+        new Date();
 
-    const year = now.getFullYear();
-    const month = String(now.getMonth()+1).padStart(2,"0");
-    const day = String(now.getDate()).padStart(2,"0");
+    const year =
+        now.getFullYear();
 
-    const hour = String(now.getHours()).padStart(2,"0");
-    const minute = String(now.getMinutes()).padStart(2,"0");
+    const month =
+        String(
+            now.getMonth() + 1
+        ).padStart(2,"0");
+
+    const day =
+        String(
+            now.getDate()
+        ).padStart(2,"0");
+
+    const hour =
+        String(
+            now.getHours()
+        ).padStart(2,"0");
+
+    const minute =
+        String(
+            now.getMinutes()
+        ).padStart(2,"0");
 
     startDateInput.value =
         `${year}-${month}-${day}`;
@@ -1068,9 +1529,6 @@ function setDefaultDateTime(){
         `${hour}:${minute}`;
 }
 
-setDefaultDateTime();
-
-  <script>
 
 /* =========================================================
    SPEED PER STEP
@@ -1078,24 +1536,31 @@ setDefaultDateTime();
 
 function calculateSpeedPerStep(){
 
-    const treadmill = parseNumber(
-        treadmillInput.value
-    );
+    const treadmill =
+        parseNumber(
+            treadmillInput.value
+        );
 
-    const trail = parseNumber(
-        trailInput.value
-    );
+    const trail =
+        parseNumber(
+            trailInput.value
+        );
 
     let multiplayer;
+
+    /*
+       KOSONG = ×1 INTERNAL
+    */
 
     if(
         multiplayerInput.value.trim() === ""
     ){
         multiplayer = 1;
     }else{
-        multiplayer = parseNumber(
-            multiplayerInput.value
-        );
+        multiplayer =
+            parseNumber(
+                multiplayerInput.value
+            );
     }
 
     if(
@@ -1107,25 +1572,34 @@ function calculateSpeedPerStep(){
     }
 
     /*
-       RUMUS:
+       SPEED PER STEP
        Treadmill × (Trail + Multiplayer − 1)
     */
 
     return treadmill *
-        (trail + multiplayer - 1);
+        (
+            trail +
+            multiplayer -
+            1
+        );
 }
 
+
 /* =========================================================
-   TOTAL AFK HOURS
+   TOTAL HOURS
 ========================================================= */
 
 function getTotalHours(){
 
     const days =
-        parseNumber(afkDaysInput.value);
+        parseNumber(
+            afkDaysInput.value
+        );
 
     const hours =
-        parseNumber(afkHoursInput.value);
+        parseNumber(
+            afkHoursInput.value
+        );
 
     return Math.max(
         0,
@@ -1133,67 +1607,21 @@ function getTotalHours(){
     );
 }
 
+
 /* =========================================================
-   TOTAL AFK SECONDS
+   TOTAL SECONDS
 ========================================================= */
 
 function getTotalSeconds(){
 
-    return getTotalHours() * 60 * 60;
+    return getTotalHours() *
+        60 *
+        60;
 }
 
-/* =========================================================
-   MAIN CALCULATION
-========================================================= */
-
-function calculate(){
-
-    const speedAwal =
-        parseNumber(speedAwalInput.value);
-
-    const speedPerStep =
-        calculateSpeedPerStep();
-
-    const totalSeconds =
-        getTotalSeconds();
-
-    /* DISPLAY SPEED / STEP */
-
-    speedStepOutput.textContent =
-        formatNumber(speedPerStep);
-
-    /* GAIN */
-
-    const gain =
-        speedPerStep *
-        CALIBRATION *
-        totalSeconds;
-
-    /* FINAL SPEED */
-
-    const finalSpeed =
-        speedAwal + gain;
-
-    finalSpeedOutput.textContent =
-        formatNumber(finalSpeed);
-
-    /* DURATION */
-
-    durationOutput.textContent =
-        formatDuration(getTotalHours());
-
-    /* FINISH */
-
-    finishOutput.textContent =
-        calculateFinishTime();
-
-    /* ESTIMATES */
-
-    renderEstimates(speedAwal,speedPerStep);
-}
 
 /* =========================================================
-   DURATION FORMAT
+   DURATION DISPLAY
 ========================================================= */
 
 function formatDuration(totalHours){
@@ -1203,12 +1631,17 @@ function formatDuration(totalHours){
     }
 
     const days =
-        Math.floor(totalHours / 24);
+        Math.floor(
+            totalHours / 24
+        );
 
     const hours =
         totalHours % 24;
 
-    if(days > 0 && hours > 0){
+    if(
+        days > 0 &&
+        hours > 0
+    ){
         return `${days} hari ${hours} jam`;
     }
 
@@ -1218,7 +1651,7 @@ function formatDuration(totalHours){
 
     return `${hours} jam`;
 }
-  <script>
+
 
 /* =========================================================
    FINISH DATE
@@ -1243,16 +1676,30 @@ function calculateFinishTime(){
         return "—";
     }
 
-    const [
-        year,
-        month,
-        day
-    ] = dateValue.split("-").map(Number);
+    const dateParts =
+        dateValue
+            .split("-")
+            .map(Number);
 
-    const [
-        hour,
-        minute
-    ] = timeValue.split(":").map(Number);
+    const timeParts =
+        timeValue
+            .split(":")
+            .map(Number);
+
+    const year =
+        dateParts[0];
+
+    const month =
+        dateParts[1];
+
+    const day =
+        dateParts[2];
+
+    const hour =
+        timeParts[0];
+
+    const minute =
+        timeParts[1];
 
     const start =
         new Date(
@@ -1267,33 +1714,41 @@ function calculateFinishTime(){
     const finish =
         new Date(
             start.getTime() +
-            totalHours * 60 * 60 * 1000
+            totalHours *
+            60 *
+            60 *
+            1000
         );
 
     const dd =
-        String(finish.getDate())
-        .padStart(2,"0");
+        String(
+            finish.getDate()
+        ).padStart(2,"0");
 
     const mm =
-        String(finish.getMonth()+1)
-        .padStart(2,"0");
+        String(
+            finish.getMonth() + 1
+        ).padStart(2,"0");
 
     const yyyy =
         finish.getFullYear();
 
     const hh =
-        String(finish.getHours())
-        .padStart(2,"0");
+        String(
+            finish.getHours()
+        ).padStart(2,"0");
 
     const min =
-        String(finish.getMinutes())
-        .padStart(2,"0");
+        String(
+            finish.getMinutes()
+        ).padStart(2,"0");
 
     return `${dd}/${mm}/${yyyy} • ${hh}:${min}`;
 }
 
+
 /* =========================================================
-   2 — 30 DAYS ESTIMATE
+   2–30 DAYS
 ========================================================= */
 
 function renderEstimates(
@@ -1303,17 +1758,22 @@ function renderEstimates(
 
     estimateList.innerHTML = "";
 
-    if(
-        speedAwal <= 0 ||
-        speedPerStep <= 0
+    for(
+        let day = 2;
+        day <= 30;
+        day++
     ){
-        for(let day=2;day<=30;day++){
 
-            const item =
-                document.createElement("div");
+        const item =
+            document.createElement("div");
 
-            item.className =
-                "estimate-item";
+        item.className =
+            "estimate-item";
+
+        if(
+            speedAwal <= 0 ||
+            speedPerStep <= 0
+        ){
 
             item.innerHTML = `
                 <div class="estimate-day">
@@ -1325,48 +1785,129 @@ function renderEstimates(
                 </div>
             `;
 
-            estimateList.appendChild(item);
+        }else{
+
+            const seconds =
+                day *
+                24 *
+                60 *
+                60;
+
+            const gain =
+                speedPerStep *
+                CALIBRATION *
+                seconds;
+
+            const finalSpeed =
+                speedAwal +
+                gain;
+
+            item.innerHTML = `
+                <div class="estimate-day">
+                    ${day} HARI
+                </div>
+
+                <div class="estimate-value">
+                    ${formatNumber(finalSpeed)}
+                </div>
+            `;
         }
-
-        return;
-    }
-
-    for(let day=2;day<=30;day++){
-
-        const seconds =
-            day * 24 * 60 * 60;
-
-        const gain =
-            speedPerStep *
-            CALIBRATION *
-            seconds;
-
-        const final =
-            speedAwal + gain;
-
-        const item =
-            document.createElement("div");
-
-        item.className =
-            "estimate-item";
-
-        item.innerHTML = `
-            <div class="estimate-day">
-                ${day} HARI
-            </div>
-
-            <div class="estimate-value">
-                ${formatNumber(final)}
-            </div>
-        `;
 
         estimateList.appendChild(item);
     }
 }
-  <script>
+
 
 /* =========================================================
-   INPUT LISTENER
+   MAIN CALCULATOR
+========================================================= */
+
+function calculate(){
+
+    const speedAwal =
+        parseNumber(
+            speedAwalInput.value
+        );
+
+    const speedPerStep =
+        calculateSpeedPerStep();
+
+    const totalSeconds =
+        getTotalSeconds();
+
+    /*
+       SPEED PER STEP
+    */
+
+    speedStepOutput.textContent =
+        formatNumber(
+            speedPerStep
+        );
+
+    /*
+       GAIN
+    */
+
+    const gain =
+        speedPerStep *
+        CALIBRATION *
+        totalSeconds;
+
+    /*
+       SPEED AKHIR
+    */
+
+    const finalSpeed =
+        speedAwal +
+        gain;
+
+    finalSpeedOutput.textContent =
+        formatNumber(
+            finalSpeed
+        );
+
+    /*
+       DURASI
+    */
+
+    durationOutput.textContent =
+        formatDuration(
+            getTotalHours()
+        );
+
+    /*
+       FINISH
+    */
+
+    finishOutput.textContent =
+        calculateFinishTime();
+
+    /*
+       ESTIMATES
+    */
+
+    renderEstimates(
+        speedAwal,
+        speedPerStep
+    );
+}
+
+
+/* =========================================================
+   JOIN OWNER
+========================================================= */
+
+function joinOwner(){
+
+    window.open(
+        "https://whatsapp.com/channel/0029VbAVjDXHgZWVGTVHH30r",
+        "_blank"
+    );
+}
+
+
+/* =========================================================
+   AUTO CALCULATE
 ========================================================= */
 
 const allInputs = [
@@ -1384,154 +1925,34 @@ const allInputs = [
 
 ];
 
-allInputs.forEach(input => {
+allInputs.forEach(
+    function(input){
 
-    input.addEventListener(
-        "input",
-        calculate
-    );
+        input.addEventListener(
+            "input",
+            calculate
+        );
 
-    input.addEventListener(
-        "change",
-        calculate
-    );
+        input.addEventListener(
+            "change",
+            calculate
+        );
 
-});
+    }
+);
 
-/* =========================================================
-   JOIN OWNER
-========================================================= */
-
-function joinOwner(){
-
-    window.open(
-        "https://whatsapp.com/channel/0029VbAVjDXHgZWVGTVHH30r",
-        "_blank"
-    );
-
-}
 
 /* =========================================================
-   INITIAL CALCULATION
+   START
 ========================================================= */
+
+setDefaultDateTime();
 
 calculate();
 
 </script>
 
-<style>
-
-/* FOOTER */
-
-.footer{
-    text-align:center;
-    padding:12px 0 0;
-    color:#4e5468;
-    font-size:9px;
-    line-height:1.7;
-}
-
-.footer strong{
-    color:#777d91;
-}
-
-/* MOBILE */
-
-@media(max-width:650px){
-
-    .container{
-        width:min(100% - 18px,940px);
-        padding-top:18px;
-        padding-bottom:35px;
-    }
-
-    .hero{
-        padding:22px 10px 24px;
-    }
-
-    .hero h1{
-        letter-spacing:-1.7px;
-    }
-
-    .notice{
-        align-items:stretch;
-        flex-direction:column;
-    }
-
-    .join-btn{
-        width:100%;
-        height:43px;
-    }
-
-    .section{
-        padding:16px;
-        border-radius:19px;
-    }
-
-    .input-grid{
-        grid-template-columns:1fr;
-        gap:12px;
-    }
-
-    .field.full{
-        grid-column:auto;
-    }
-
-    .finish-box{
-        grid-template-columns:1fr;
-    }
-
-    .estimate-list{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .final-speed{
-        font-size:48px;
-        letter-spacing:-2px;
-    }
-
-    .eyes{
-        width:140px;
-        height:60px;
-        opacity:.65;
-    }
-
-    .eye{
-        width:58px;
-        height:27px;
-        top:17px;
-    }
-
-    .eye::after{
-        width:10px;
-        height:10px;
-    }
-}
-
-@media(max-width:370px){
-
-    .estimate-list{
-        grid-template-columns:1fr;
-    }
-
-    .hero h1{
-        font-size:27px;
-    }
-
-    .final-speed{
-        font-size:42px;
-    }
-}
-
-</style>
-
-<footer class="footer">
-    <strong>YAKKZZ CALCULATOR</strong><br>
-    Steal An Egg • AFK Speed Estimator
-</footer>
-
 </main>
 
 </body>
 </html>
- 

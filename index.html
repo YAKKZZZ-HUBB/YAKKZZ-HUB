@@ -2,1638 +2,2736 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#050507">
-<title>YAKKZZ CALCULATOR — Steal An Egg AFK</title>
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<meta
+    name="theme-color"
+    content="#06070c"
+>
+
+<meta
+    name="description"
+    content="YAKKZZ Calculator — Steal An Egg AFK Speed Calculator"
+>
+
+<title>YAKKZZ CALCULATOR — Steal An Egg</title>
 
 <style>
+
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 :root{
-  --bg:#030407;
-  --panel:rgba(13,15,22,.72);
-  --panel2:rgba(18,20,29,.82);
-  --line:rgba(255,255,255,.09);
-  --text:#f5f5f7;
-  --muted:#8d92a1;
-  --red:#ff1744;
-  --red2:#ff003c;
-  --purple:#7c3cff;
-  --cyan:#00d9ff;
+    --bg:#05060a;
+    --bg2:#090b12;
+
+    --card:rgba(13,15,23,.78);
+    --card2:rgba(18,20,30,.88);
+
+    --line:rgba(255,255,255,.075);
+    --line2:rgba(255,255,255,.12);
+
+    --text:#f7f8ff;
+    --muted:#858a9d;
+    --muted2:#626879;
+
+    --red:#ff1648;
+    --red2:#ff426a;
+    --red-dark:#b9002e;
+
+    --green:#19e68c;
+    --blue:#4f8cff;
+
+    --radius:22px;
 }
 
 html{
-  scroll-behavior:smooth;
+    scroll-behavior:smooth;
 }
 
 body{
-  min-height:100vh;
-  overflow-x:hidden;
-  color:var(--text);
-  background:
-    radial-gradient(circle at 50% -10%,rgba(124,60,255,.18),transparent 35%),
-    radial-gradient(circle at 0% 40%,rgba(255,23,68,.08),transparent 30%),
-    var(--bg);
-  font-family:Inter,Segoe UI,Arial,sans-serif;
+    min-height:100vh;
+
+    color:var(--text);
+
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(255,22,72,.18),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 0% 45%,
+            rgba(79,140,255,.07),
+            transparent 27%
+        ),
+        linear-gradient(
+            180deg,
+            #05060a 0%,
+            #07080d 55%,
+            #05060a 100%
+        );
+
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    overflow-x:hidden;
 }
 
-/* animated grid */
+/* subtle grid */
+
 body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-3;
-  opacity:.18;
-  background-image:
-    linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
-  background-size:42px 42px;
-  mask-image:linear-gradient(to bottom,black,transparent 90%);
-  animation:gridMove 18s linear infinite;
-}
+    content:"";
 
-@keyframes gridMove{
-  from{transform:translateY(0)}
-  to{transform:translateY(42px)}
+    position:fixed;
+    inset:0;
+
+    pointer-events:none;
+
+    opacity:.14;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        );
+
+    background-size:42px 42px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent 90%
+        );
+
+    z-index:0;
 }
 
 /* ambient glow */
-body::after{
-  content:"";
-  position:fixed;
-  width:420px;
-  height:420px;
-  left:50%;
-  top:38%;
-  transform:translate(-50%,-50%);
-  background:radial-gradient(circle,rgba(255,0,55,.075),transparent 68%);
-  pointer-events:none;
-  z-index:-2;
+
+.ambient{
+    position:fixed;
+
+    width:420px;
+    height:420px;
+
+    border-radius:50%;
+
+    background:rgba(255,22,72,.055);
+
+    filter:blur(100px);
+
+    pointer-events:none;
+
+    z-index:0;
+
+    animation:
+        ambientMove 8s ease-in-out infinite alternate;
 }
 
-/* particles */
-.particle{
-  position:fixed;
-  width:2px;
-  height:2px;
-  border-radius:50%;
-  background:#fff;
-  opacity:.35;
-  pointer-events:none;
-  animation:floatParticle linear infinite;
+.ambient.one{
+    top:-180px;
+    left:-150px;
 }
 
-@keyframes floatParticle{
-  from{transform:translateY(110vh);opacity:0}
-  15%{opacity:.4}
-  85%{opacity:.3}
-  to{transform:translateY(-10vh);opacity:0}
+.ambient.two{
+    right:-200px;
+    bottom:-180px;
+
+    background:rgba(79,140,255,.045);
+
+    animation-delay:2s;
 }
 
-a{
-  color:inherit;
-  text-decoration:none;
-}
+@keyframes ambientMove{
+    from{
+        transform:translate3d(0,0,0) scale(1);
+    }
 
-button,input{
-  font:inherit;
-}
-
-button{
-  border:0;
+    to{
+        transform:translate3d(25px,18px,0) scale(1.08);
+    }
 }
 
 .container{
-  width:min(940px,calc(100% - 28px));
-  margin:auto;
-}
-    /* =========================
-   CENTER EYES HUD
-========================= */
+    width:min(920px,calc(100% - 28px));
 
-.eye-hud{
-  position:fixed;
-  z-index:0;
-  left:50%;
-  top:50%;
-  width:155px;
-  height:65px;
-  transform:translate(-50%,-50%);
-  pointer-events:none;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  opacity:.24;
-  filter:drop-shadow(0 0 18px rgba(255,0,45,.8));
-}
-
-.eye{
-  width:56px;
-  height:30px;
-  position:relative;
-  border-radius:70% 10%;
-  background:linear-gradient(135deg,transparent 42%,#ff1744 44%,#ff1744 57%,transparent 59%);
-  transform:rotate(18deg);
-  animation:blink 4.8s infinite;
-}
-
-.eye:last-child{
-  transform:rotate(-18deg) scaleX(-1);
-}
-
-.eye::after{
-  content:"";
-  position:absolute;
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:#ff1744;
-  box-shadow:
-    0 0 8px #ff1744,
-    0 0 20px #ff1744,
-    0 0 35px rgba(255,0,55,.9);
-  left:23px;
-  top:10px;
-}
-
-@keyframes blink{
-  0%,44%,48%,100%{
-    transform:rotate(18deg) scaleY(1);
-  }
-  46%{
-    transform:rotate(18deg) scaleY(.05);
-  }
-}
-
-.eye:last-child{
-  animation-name:blinkRight;
-}
-
-@keyframes blinkRight{
-  0%,44%,48%,100%{
-    transform:rotate(-18deg) scaleX(-1) scaleY(1);
-  }
-  46%{
-    transform:rotate(-18deg) scaleX(-1) scaleY(.05);
-  }
-}
-
-/* =========================
-   TOP NAV
-========================= */
-
-.topbar{
-  position:relative;
-  z-index:5;
-  padding:22px 0 10px;
-}
-
-.nav{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:13px 16px;
-  border:1px solid var(--line);
-  border-radius:18px;
-  background:rgba(8,9,14,.62);
-  backdrop-filter:blur(18px);
-  box-shadow:
-    0 12px 50px rgba(0,0,0,.35),
-    inset 0 1px rgba(255,255,255,.04);
-}
-
-.logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-weight:900;
-  letter-spacing:1.5px;
-}
-
-.logo-mark{
-  width:32px;
-  height:32px;
-  display:grid;
-  place-items:center;
-  border-radius:10px;
-  background:linear-gradient(145deg,#ff1744,#790019);
-  box-shadow:0 0 22px rgba(255,23,68,.35);
-  font-size:15px;
-}
-
-.logo span{
-  color:#fff;
-}
-
-.status{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  color:#9fa5b5;
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:1px;
-  text-transform:uppercase;
-}
-
-.status-dot{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#32ff82;
-  box-shadow:0 0 12px #32ff82;
-  animation:pulseDot 1.6s infinite;
-}
-
-@keyframes pulseDot{
-  50%{opacity:.35;transform:scale(.7)}
-}
-    /* =========================
-   HERO
-========================= */
-
-.hero{
-  position:relative;
-  z-index:2;
-  text-align:center;
-  padding:58px 0 42px;
-}
-
-.hero-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:8px 13px;
-  border:1px solid rgba(255,23,68,.25);
-  border-radius:999px;
-  background:rgba(255,23,68,.06);
-  color:#ff718c;
-  font-size:10px;
-  font-weight:900;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  box-shadow:0 0 25px rgba(255,0,55,.08);
-}
-
-.hero h1{
-  margin-top:18px;
-  font-size:clamp(36px,8vw,76px);
-  line-height:.95;
-  font-weight:950;
-  letter-spacing:-3px;
-  background:linear-gradient(
-    100deg,
-    #fff 10%,
-    #fff 40%,
-    #ff1744 65%,
-    #7c3cff 90%
-  );
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  filter:drop-shadow(0 0 28px rgba(255,23,68,.13));
-}
-
-.hero p{
-  max-width:560px;
-  margin:18px auto 0;
-  color:#858b9a;
-  line-height:1.7;
-  font-size:14px;
-}
-
-.calibration{
-  margin:20px auto 0;
-  display:inline-flex;
-  align-items:center;
-  gap:9px;
-  padding:8px 13px;
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:10px;
-  background:rgba(255,255,255,.025);
-  color:#aeb3c0;
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:1.4px;
-}
-
-.calibration strong{
-  color:#ff365c;
-  text-shadow:0 0 12px rgba(255,23,68,.55);
-}
-
-/* =========================
-   NOTICE
-========================= */
-
-.notice{
-  position:relative;
-  z-index:2;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:16px;
-  margin-bottom:20px;
-  padding:16px 17px;
-  border:1px solid rgba(255,23,68,.18);
-  border-radius:18px;
-  background:
-    linear-gradient(100deg,rgba(255,23,68,.075),rgba(124,60,255,.04)),
-    rgba(12,13,19,.7);
-  backdrop-filter:blur(18px);
-  box-shadow:0 16px 50px rgba(0,0,0,.25);
-}
-
-.notice-text{
-  color:#c7cad3;
-  font-size:12px;
-  line-height:1.5;
-}
-
-.notice-text b{
-  color:#fff;
-}
-
-.join-btn{
-  flex:none;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:42px;
-  padding:0 16px;
-  border-radius:12px;
-  background:linear-gradient(135deg,#ff1744,#bd002b);
-  color:white;
-  font-size:10px;
-  font-weight:950;
-  letter-spacing:1px;
-  box-shadow:
-    0 0 24px rgba(255,23,68,.22),
-    inset 0 1px rgba(255,255,255,.2);
-  transition:.2s ease;
-}
-
-.join-btn:hover{
-  transform:translateY(-2px);
-  box-shadow:
-    0 0 35px rgba(255,23,68,.4),
-    inset 0 1px rgba(255,255,255,.2);
-}
-    /* =========================
-   SECTION / GLASS CARD
-========================= */
-
-.section-card{
-  position:relative;
-  z-index:2;
-  margin-bottom:18px;
-  padding:20px;
-  border:1px solid var(--line);
-  border-radius:22px;
-  background:
-    linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.012)),
-    var(--panel);
-  backdrop-filter:blur(20px);
-  box-shadow:
-    0 20px 70px rgba(0,0,0,.3),
-    inset 0 1px rgba(255,255,255,.04);
-}
-
-.section-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:17px;
-}
-
-.section-title{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-size:12px;
-  font-weight:950;
-  letter-spacing:1.6px;
-  text-transform:uppercase;
-}
-
-.section-icon{
-  width:30px;
-  height:30px;
-  display:grid;
-  place-items:center;
-  border-radius:9px;
-  background:rgba(255,23,68,.1);
-  border:1px solid rgba(255,23,68,.15);
-  color:#ff3159;
-  box-shadow:0 0 18px rgba(255,23,68,.08);
-}
-
-.section-sub{
-  color:#656b7a;
-  font-size:9px;
-  font-weight:800;
-  letter-spacing:1px;
-  text-transform:uppercase;
-}
-
-.input-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:13px;
-}
-
-.field{
-  position:relative;
-}
-
-.field.full{
-  grid-column:1/-1;
-}
-
-.field label{
-  display:block;
-  margin:0 0 8px 2px;
-  color:#9297a5;
-  font-size:10px;
-  font-weight:850;
-  letter-spacing:.9px;
-  text-transform:uppercase;
-}
-
-.input-wrap{
-  position:relative;
-}
-
-.input-wrap::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:13px;
-  pointer-events:none;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.025);
-}
-
-.field input{
-  width:100%;
-  height:50px;
-  outline:none;
-  border:1px solid rgba(255,255,255,.075);
-  border-radius:13px;
-  background:rgba(4,5,9,.72);
-  color:#f5f5f7;
-  padding:0 14px;
-  font-size:14px;
-  font-weight:700;
-  transition:.2s ease;
-}
-
-.field input::placeholder{
-  color:#4f5461;
-  font-weight:500;
-}
-
-.field input:focus{
-  border-color:rgba(255,23,68,.55);
-  background:rgba(12,8,12,.85);
-  box-shadow:
-    0 0 0 3px rgba(255,23,68,.07),
-    0 0 28px rgba(255,23,68,.08);
-}
-
-.field-hint{
-  margin:7px 2px 0;
-  color:#555b68;
-  font-size:9px;
-  line-height:1.4;
-}
-
-/* date/time */
-input[type="date"],
-input[type="time"]{
-  color-scheme:dark;
-}
-
-/* =========================
-   SPEED RESULT
-========================= */
-
-.speed-result{
-  position:relative;
-  overflow:hidden;
-  text-align:center;
-  padding:30px 18px 27px;
-  border:1px solid rgba(255,23,68,.2);
-  border-radius:24px;
-  background:
-    radial-gradient(circle at 50% 100%,rgba(255,23,68,.11),transparent 55%),
-    linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.01)),
-    rgba(11,12,18,.78);
-}
-
-.speed-result::before{
-  content:"";
-  position:absolute;
-  left:20%;
-  right:20%;
-  top:-1px;
-  height:1px;
-  background:linear-gradient(90deg,transparent,#ff1744,transparent);
-  box-shadow:0 0 20px #ff1744;
-}
-
-.result-label{
-  color:#777d8b;
-  font-size:10px;
-  font-weight:900;
-  letter-spacing:2px;
-}
-
-.final-speed{
-  margin:9px 0 8px;
-  font-size:clamp(42px,10vw,74px);
-  line-height:1;
-  font-weight:950;
-  letter-spacing:-3px;
-  color:#fff;
-  text-shadow:
-    0 0 20px rgba(255,23,68,.35),
-    0 0 55px rgba(255,23,68,.15);
-  transition:.25s ease;
-}
-
-.final-speed.bump{
-  transform:scale(1.025);
-}
-
-.step-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  padding:8px 12px;
-  border-radius:999px;
-  border:1px solid rgba(255,23,68,.22);
-  background:rgba(255,23,68,.06);
-  color:#ff5471;
-  font-size:11px;
-  font-weight:950;
-  letter-spacing:.4px;
-}
-
-.step-badge span{
-  color:#8c92a0;
-  font-size:9px;
-  font-weight:800;
-}
-    /* =========================
-   TIME RESULT
-========================= */
-
-.time-card{
-  position:relative;
-  z-index:2;
-  margin-top:18px;
-  padding:18px;
-  border:1px solid var(--line);
-  border-radius:20px;
-  background:rgba(12,13,19,.72);
-  backdrop-filter:blur(18px);
-}
-
-.time-head{
-  color:#777d8b;
-  font-size:9px;
-  font-weight:900;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  margin-bottom:14px;
-}
-
-.timeline{
-  display:grid;
-  grid-template-columns:1fr 35px 1fr;
-  align-items:center;
-}
-
-.time-point{
-  padding:13px;
-  border:1px solid rgba(255,255,255,.06);
-  border-radius:14px;
-  background:rgba(255,255,255,.018);
-}
-
-.time-point small{
-  display:block;
-  margin-bottom:5px;
-  color:#626876;
-  font-size:8px;
-  font-weight:900;
-  letter-spacing:1px;
-}
-
-.time-point strong{
-  display:block;
-  color:#e9eaf0;
-  font-size:12px;
-  line-height:1.5;
-}
-
-.time-point.end{
-  text-align:right;
-}
-
-.timeline-line{
-  height:1px;
-  background:linear-gradient(90deg,#ff1744,#7c3cff);
-  box-shadow:0 0 12px rgba(255,23,68,.35);
-}
-
-/* =========================
-   2-30 DAY ESTIMATES
-========================= */
-
-.estimates{
-  position:relative;
-  z-index:2;
-  margin-top:18px;
-}
-
-.estimate-grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:10px;
-}
-
-.estimate-item{
-  min-height:78px;
-  padding:13px;
-  border:1px solid rgba(255,255,255,.065);
-  border-radius:15px;
-  background:rgba(255,255,255,.018);
-  transition:.2s ease;
-}
-
-.estimate-item:hover{
-  transform:translateY(-2px);
-  border-color:rgba(255,23,68,.2);
-  background:rgba(255,23,68,.035);
-}
-
-.estimate-day{
-  color:#656b78;
-  font-size:8px;
-  font-weight:900;
-  letter-spacing:1px;
-  text-transform:uppercase;
-}
-
-.estimate-value{
-  margin-top:7px;
-  color:#f0f1f5;
-  font-size:15px;
-  font-weight:950;
-  letter-spacing:-.3px;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-.footer{
-  position:relative;
-  z-index:2;
-  padding:28px 0 38px;
-  text-align:center;
-  color:#505663;
-  font-size:9px;
-  letter-spacing:1px;
-}
-
-.footer b{
-  color:#737987;
-}
-
-    /* =========================
-   MOBILE
-========================= */
-
-@media(max-width:680px){
-
-  .container{
-    width:min(100% - 18px,940px);
-  }
-
-  .topbar{
-    padding-top:12px;
-  }
-
-  .nav{
-    padding:11px 12px;
-    border-radius:15px;
-  }
-
-  .logo{
-    font-size:11px;
-  }
-
-  .logo-mark{
-    width:29px;
-    height:29px;
-    border-radius:9px;
-  }
-
-  .status{
-    font-size:8px;
-  }
-
-  .hero{
-    padding:43px 0 30px;
-  }
-
-  .hero h1{
-    font-size:42px;
-    letter-spacing:-2px;
-  }
-
-  .hero p{
-    padding:0 10px;
-    font-size:12px;
-  }
-
-  .calibration{
-    font-size:8px;
-  }
-
-  .notice{
-    align-items:stretch;
-    flex-direction:column;
-    gap:12px;
-    padding:14px;
-    border-radius:16px;
-  }
-
-  .join-btn{
-    width:100%;
-  }
-
-  .section-card{
-    padding:15px;
-    border-radius:19px;
-  }
-
-  .input-grid{
-    grid-template-columns:1fr;
-    gap:12px;
-  }
-
-  .field.full{
-    grid-column:auto;
-  }
-
-  .section-head{
-    margin-bottom:14px;
-  }
-
-  .section-sub{
-    display:none;
-  }
-
-  .speed-result{
-    padding:25px 13px 23px;
-    border-radius:20px;
-  }
-
-  .final-speed{
-    font-size:50px;
-    letter-spacing:-2px;
-  }
-
-  .timeline{
-    grid-template-columns:1fr;
-    gap:8px;
-  }
-
-  .timeline-line{
-    width:1px;
-    height:15px;
     margin:auto;
-    background:linear-gradient(#ff1744,#7c3cff);
-  }
 
-  .time-point.end{
-    text-align:left;
-  }
+    position:relative;
 
-  .estimate-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
+    z-index:2;
+}
 
-  .eye-hud{
-    width:108px;
-    height:44px;
-    opacity:.18;
-  }
+/* scrollbar */
 
-  .eye{
-    width:39px;
-    height:21px;
-  }
-
-  .eye::after{
+::-webkit-scrollbar{
     width:7px;
-    height:7px;
-    left:16px;
-    top:7px;
-  }
 }
 
-@media(max-width:380px){
-
-  .hero h1{
-    font-size:35px;
-  }
-
-  .final-speed{
-    font-size:43px;
-  }
-
-  .estimate-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .estimate-value{
-    font-size:13px;
-  }
+::-webkit-scrollbar-track{
+    background:#05060a;
 }
 
-/* accessibility */
-@media(prefers-reduced-motion:reduce){
-  *,
-  *::before,
-  *::after{
-    animation-duration:.001ms!important;
-    animation-iteration-count:1!important;
-    scroll-behavior:auto!important;
-  }
+::-webkit-scrollbar-thumb{
+    background:#242633;
+    border-radius:20px;
 }
+
 </style>
 </head>
 
 <body>
 
-<div class="eye-hud" aria-hidden="true">
-  <div class="eye"></div>
-  <div class="eye"></div>
-</div>
+<div class="ambient one"></div>
+<div class="ambient two"></div>
 
-<script>
-for(let i=0;i<26;i++){
-  const p=document.createElement("div");
-  p.className="particle";
-  p.style.left=(Math.random()*100)+"vw";
-  p.style.animationDuration=(8+Math.random()*14)+"s";
-  p.style.animationDelay=(-Math.random()*18)+"s";
-  p.style.opacity=(.15+Math.random()*.35);
-  document.body.appendChild(p);
+<div class="container">
+
+  <style>
+
+/* =========================
+   NAV
+========================= */
+
+nav{
+    height:74px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
-</script>
 
-    <div class="topbar">
-  <div class="container">
-    <nav class="nav">
-      <div class="logo">
-        <div class="logo-mark">Y</div>
-        <span>YAKKZZ</span>
-      </div>
+.logo{
+    font-size:19px;
+    font-weight:950;
 
-      <div class="status">
+    letter-spacing:2px;
+}
+
+.logo span{
+    color:var(--red);
+
+    text-shadow:
+        0 0 18px rgba(255,22,72,.45);
+}
+
+.status{
+    display:flex;
+    align-items:center;
+    gap:7px;
+
+    padding:7px 11px;
+
+    border-radius:999px;
+
+    border:1px solid rgba(25,230,140,.14);
+
+    background:rgba(25,230,140,.045);
+
+    color:#91a69e;
+
+    font-size:9px;
+    font-weight:800;
+
+    letter-spacing:1px;
+}
+
+.status-dot{
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:var(--green);
+
+    box-shadow:
+        0 0 10px rgba(25,230,140,.8);
+
+    animation:
+        statusPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes statusPulse{
+
+    0%,100%{
+        opacity:.45;
+    }
+
+    50%{
+        opacity:1;
+    }
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    position:relative;
+
+    text-align:center;
+
+    padding:
+        47px
+        0
+        32px;
+}
+
+.hero-badge{
+    display:inline-flex;
+
+    align-items:center;
+    gap:7px;
+
+    padding:8px 13px;
+
+    border:1px solid rgba(255,22,72,.2);
+
+    background:rgba(255,22,72,.055);
+
+    border-radius:999px;
+
+    color:#ff718d;
+
+    font-size:9px;
+    font-weight:900;
+
+    letter-spacing:1.7px;
+}
+
+.hero h1{
+    margin-top:19px;
+
+    font-size:
+        clamp(38px,8vw,68px);
+
+    line-height:.94;
+
+    letter-spacing:-3px;
+
+    font-weight:1000;
+}
+
+.hero h1 span{
+    color:var(--red);
+
+    text-shadow:
+        0 0 35px rgba(255,22,72,.28);
+}
+
+.hero-description{
+    max-width:590px;
+
+    margin:
+        18px
+        auto
+        0;
+
+    color:var(--muted);
+
+    font-size:13px;
+
+    line-height:1.75;
+}
+
+.calibration-pill{
+    display:inline-flex;
+
+    align-items:center;
+
+    margin-top:19px;
+
+    padding:8px 13px;
+
+    border-radius:10px;
+
+    border:1px solid var(--line);
+
+    background:rgba(255,255,255,.025);
+
+    color:#777d90;
+
+    font-size:9px;
+
+    font-weight:800;
+
+    letter-spacing:1.1px;
+}
+
+.calibration-pill strong{
+    color:#fff;
+
+    margin-left:5px;
+}
+
+
+/* =========================
+   EYES
+========================= */
+
+.eyes{
+    position:fixed;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    width:150px;
+    height:62px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    z-index:1;
+
+    pointer-events:none;
+
+    opacity:.25;
+
+    filter:
+        drop-shadow(
+            0 0 22px
+            rgba(255,0,45,.7)
+        );
+}
+
+.eye{
+    width:55px;
+    height:55px;
+
+    border-radius:50%;
+
+    border:
+        3px solid
+        rgba(255,30,55,.9);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,30,55,.95) 0 12%,
+            rgba(115,0,25,.85) 13% 27%,
+            rgba(12,0,4,.98) 28% 100%
+        );
+
+    position:relative;
+
+    animation:
+        eyeBlink 4.4s infinite;
+}
+
+.eye.right{
+    animation-delay:.04s;
+}
+
+.pupil{
+    position:absolute;
+
+    width:11px;
+    height:11px;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:#020203;
+
+    box-shadow:
+        0 0 13px
+        rgba(255,23,68,.9);
+}
+
+@keyframes eyeBlink{
+
+    0%,
+    43%,
+    47%,
+    100%{
+        transform:scaleY(1);
+    }
+
+    45%{
+        transform:scaleY(.07);
+    }
+}
+
+</style>
+
+
+<nav>
+
+    <div class="logo">
+        YAKKZZ<span>.</span>
+    </div>
+
+    <div class="status">
         <i class="status-dot"></i>
         CALCULATOR ONLINE
-      </div>
-    </nav>
-  </div>
+    </div>
+
+</nav>
+
+
+<div class="eyes">
+
+    <div class="eye">
+        <div class="pupil"></div>
+    </div>
+
+    <div class="eye right">
+        <div class="pupil"></div>
+    </div>
+
 </div>
 
-<main class="container">
 
-  <section class="hero">
+<section class="hero">
+
     <div class="hero-badge">
-      ⚡ STEAL AN EGG • AFK ENGINE
+        ⚡ STEAL AN EGG • AFK CALCULATOR
     </div>
 
-    <h1>YAKKZZ<br>CALCULATOR</h1>
+    <h1>
+        YAKKZZ
+        <span>CALCULATOR</span>
+    </h1>
 
-    <p>
-      Kalkulator estimasi speed AFK untuk membantu
-      menghitung perkembangan speed berdasarkan setup kamu.
+    <p class="hero-description">
+        Hitung estimasi Speed Akhir kamu berdasarkan
+        Speed Awal, Treadmill, Trail, Multiplayer,
+        dan durasi AFK secara otomatis.
     </p>
 
-    <div class="calibration">
-      <span>CALIBRATION</span>
-      <strong>12.81</strong>
+    <div class="calibration-pill">
+        KALIBRASI
+        <strong>11</strong>
     </div>
-  </section>
 
-  <section class="notice">
-    <div class="notice-text">
-      Jangan lupa join SL Owner, hargai owner ❤️
+</section>
+
+  <style>
+
+/* =========================
+   OWNER NOTICE
+========================= */
+
+.notice{
+    position:relative;
+    z-index:3;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:16px;
+
+    margin-bottom:18px;
+
+    padding:15px 16px;
+
+    border-radius:16px;
+
+    border:
+        1px solid
+        rgba(255,22,72,.16);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,22,72,.07),
+            rgba(255,255,255,.018)
+        );
+
+    box-shadow:
+        inset 0 1px 0
+        rgba(255,255,255,.025);
+}
+
+.notice-content{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+}
+
+.notice-title{
+    font-size:12px;
+    font-weight:900;
+}
+
+.notice-subtitle{
+    color:#767c8f;
+
+    font-size:9px;
+}
+
+.join-button{
+    flex-shrink:0;
+
+    text-decoration:none;
+
+    padding:11px 15px;
+
+    border-radius:11px;
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff1648,
+            #bd002f
+        );
+
+    font-size:9px;
+
+    font-weight:950;
+
+    letter-spacing:.8px;
+
+    box-shadow:
+        0 0 22px
+        rgba(255,22,72,.22);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.join-button:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 7px 30px
+        rgba(255,22,72,.3);
+}
+
+
+/* =========================
+   MAIN CARD
+========================= */
+
+.card{
+    position:relative;
+
+    z-index:3;
+
+    margin-bottom:18px;
+
+    padding:22px;
+
+    border-radius:var(--radius);
+
+    border:1px solid var(--line);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(18,20,30,.86),
+            rgba(10,11,18,.78)
+        );
+
+    backdrop-filter:blur(20px);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.24),
+        inset 0 1px 0
+        rgba(255,255,255,.035);
+}
+
+.section-heading{
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:20px;
+}
+
+.section-icon{
+    width:40px;
+    height:40px;
+
+    display:grid;
+    place-items:center;
+
+    flex-shrink:0;
+
+    border-radius:12px;
+
+    color:#fff;
+
+    background:
+        rgba(255,22,72,.09);
+
+    border:
+        1px solid
+        rgba(255,22,72,.15);
+}
+
+.section-icon.blue{
+    background:
+        rgba(79,140,255,.08);
+
+    border-color:
+        rgba(79,140,255,.16);
+}
+
+.section-heading h2{
+    font-size:15px;
+
+    font-weight:900;
+}
+
+.section-heading p{
+    margin-top:3px;
+
+    color:var(--muted);
+
+    font-size:10px;
+}
+
+
+/* =========================
+   FORM GRID
+========================= */
+
+.form-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:14px;
+}
+
+.field{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+}
+
+.field label{
+    color:#bfc3d2;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    letter-spacing:.2px;
+}
+
+.field input{
+    width:100%;
+
+    height:49px;
+
+    border-radius:13px;
+
+    outline:none;
+
+    border:
+        1px solid
+        rgba(255,255,255,.075);
+
+    background:
+        rgba(0,0,0,.28);
+
+    color:#fff;
+
+    padding:
+        0 14px;
+
+    font-size:12px;
+
+    transition:
+        border .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+}
+
+.field input:hover{
+    background:
+        rgba(255,255,255,.025);
+}
+
+.field input:focus{
+    border-color:
+        rgba(255,22,72,.55);
+
+    background:
+        rgba(255,22,72,.025);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(255,22,72,.06),
+        0 0 24px
+        rgba(255,22,72,.07);
+}
+
+.field input::placeholder{
+    color:#555b6d;
+}
+
+.field small{
+    color:#606779;
+
+    font-size:8px;
+
+    line-height:1.4;
+}
+
+</style>
+
+
+<div class="notice">
+
+    <div class="notice-content">
+
+        <div class="notice-title">
+            ❤️ Jangan lupa join SL Owner
+        </div>
+
+        <div class="notice-subtitle">
+            hargai owner ❤️
+        </div>
+
     </div>
 
     <a
-      class="join-btn"
-      href="https://whatsapp.com/channel/0029VbAVjDXHgZWVGTVHH30r"
-      target="_blank"
-      rel="noopener noreferrer"
+        class="join-button"
+        href="https://whatsapp.com/channel/0029VbAVjDXHgZWVGTVHH30r"
+        target="_blank"
+        rel="noopener noreferrer"
     >
-      JOIN SL OWNER
+        JOIN SL OWNER
     </a>
-  </section>
 
-  <section class="section-card">
+</div>
 
-    <div class="section-head">
-      <div class="section-title">
-        <div class="section-icon">⚡</div>
-        SPEED SETUP
-      </div>
 
-      <div class="section-sub">INPUT DATA</div>
+<section class="card">
+
+    <div class="section-heading">
+
+        <div class="section-icon">
+            ⚡
+        </div>
+
+        <div>
+
+            <h2>
+                Speed Setup
+            </h2>
+
+            <p>
+                Masukkan statistik speed kamu
+            </p>
+
+        </div>
+
     </div>
 
-    <div class="input-grid">
 
-      <div class="field">
-        <label>Speed Awal</label>
+    <div class="form-grid">
 
-        <div class="input-wrap">
-          <input
-            id="speedAwal"
-            type="text"
-            placeholder="Masukkan speed kamu saat ini"
-            autocomplete="off"
-          >
+
+        <div class="field">
+
+            <label>
+                SPEED AWAL
+            </label>
+
+            <input
+                id="speedAwal"
+                type="text"
+                autocomplete="off"
+                placeholder="Masukkan speed kamu saat ini"
+            >
+
+            <small>
+                Contoh format: K, M, B, T
+            </small>
+
         </div>
 
-        <div class="field-hint">
-          Bisa menggunakan K / M / B / T / Q
-        </div>
-      </div>
 
-      <div class="field">
-        <label>Treadmill</label>
+        <div class="field">
 
-        <div class="input-wrap">
-          <input
-            id="treadmill"
-            type="text"
-            placeholder="Masukkan nilai treadmill yang kamu gunakan"
-            autocomplete="off"
-          >
-        </div>
+            <label>
+                TREADMILL
+            </label>
 
-        <div class="field-hint">
-          Masukkan nilai treadmill
-        </div>
-      </div>
+            <input
+                id="treadmill"
+                type="text"
+                autocomplete="off"
+                placeholder="Masukkan nilai treadmill yang kamu gunakan"
+            >
 
-      <div class="field">
-        <label>Trail</label>
-
-        <div class="input-wrap">
-          <input
-            id="trail"
-            type="text"
-            placeholder="Masukkan nilai trail yang kamu gunakan"
-            autocomplete="off"
-          >
         </div>
 
-        <div class="field-hint">
-          Masukkan nilai trail
-        </div>
-      </div>
 
-      <div class="field">
-        <label>Robux Multiplayer</label>
+        <div class="field">
 
-        <div class="input-wrap">
-          <input
-            id="multiplayer"
-            type="text"
-            placeholder="Masukkan multiplier multiplayer yang kamu miliki"
-            autocomplete="off"
-          >
+            <label>
+                TRAIL
+            </label>
+
+            <input
+                id="trail"
+                type="text"
+                autocomplete="off"
+                placeholder="Masukkan nilai trail yang kamu gunakan"
+            >
+
         </div>
 
-        <div class="field-hint">
-          Kosongkan jika tidak memiliki multiplayer
+
+        <div class="field">
+
+            <label>
+                ROBUX MULTIPLAYER
+            </label>
+
+            <input
+                id="multiplayer"
+                type="text"
+                autocomplete="off"
+                placeholder="Masukkan multiplier multiplayer yang kamu miliki"
+            >
+
+            <small>
+                Kosongkan jika tidak memiliki multiplayer
+            </small>
+
         </div>
-      </div>
+
 
     </div>
-  </section>
-    <section class="section-card">
 
-    <div class="section-head">
-      <div class="section-title">
-        <div class="section-icon">◷</div>
-        AFK SETUP
-      </div>
+</section>
 
-      <div class="section-sub">TIME CONTROL</div>
+  <section class="card">
+
+    <div class="section-heading">
+
+        <div class="section-icon blue">
+            ⏱
+        </div>
+
+        <div>
+
+            <h2>
+                AFK Setup
+            </h2>
+
+            <p>
+                Tentukan waktu mulai dan durasi AFK
+            </p>
+
+        </div>
+
     </div>
 
-    <div class="input-grid">
 
-      <div class="field">
-        <label>Tanggal Mulai</label>
+    <div class="form-grid">
 
-        <div class="input-wrap">
-          <input
-            id="startDate"
-            type="date"
-          >
+
+        <div class="field">
+
+            <label>
+                TANGGAL MULAI
+            </label>
+
+            <input
+                id="tanggal"
+                type="date"
+            >
+
+            <small>
+                Tanggal awal AFK
+            </small>
+
         </div>
 
-        <div class="field-hint">
-          Pilih tanggal mulai AFK
-        </div>
-      </div>
 
-      <div class="field">
-        <label>AFK Mulai Dari</label>
+        <div class="field">
 
-        <div class="input-wrap">
-          <input
-            id="startTime"
-            type="time"
-          >
-        </div>
+            <label>
+                AFK MULAI DARI
+            </label>
 
-        <div class="field-hint">
-          Masukkan jam mulai AFK
-        </div>
-      </div>
+            <input
+                id="jamMulai"
+                type="time"
+            >
 
-      <div class="field">
-        <label>Durasi AFK Hari</label>
+            <small>
+                Jam awal AFK
+            </small>
 
-        <div class="input-wrap">
-          <input
-            id="afkDays"
-            type="text"
-            placeholder="Masukkan jumlah hari"
-            autocomplete="off"
-          >
         </div>
 
-        <div class="field-hint">
-          Contoh: 6
-        </div>
-      </div>
 
-      <div class="field">
-        <label>Durasi AFK Jam</label>
+        <div class="field">
 
-        <div class="input-wrap">
-          <input
-            id="afkHours"
-            type="text"
-            placeholder="Masukkan jumlah jam"
-            autocomplete="off"
-          >
+            <label>
+                DURASI AFK HARI
+            </label>
+
+            <input
+                id="durasiHari"
+                type="text"
+                autocomplete="off"
+                placeholder="Masukkan jumlah hari"
+            >
+
         </div>
 
-        <div class="field-hint">
-          Contoh: 16
+
+        <div class="field">
+
+            <label>
+                DURASI AFK JAM
+            </label>
+
+            <input
+                id="durasiJam"
+                type="text"
+                autocomplete="off"
+                placeholder="Masukkan jumlah jam"
+            >
+
         </div>
-      </div>
+
 
     </div>
-  </section>
 
-  <section class="speed-result">
+</section>
+
+
+<style>
+
+/* =========================
+   RESULT CARD
+========================= */
+
+.result-card{
+    position:relative;
+
+    z-index:3;
+
+    overflow:hidden;
+
+    margin-bottom:18px;
+
+    padding:32px 20px;
+
+    text-align:center;
+
+    border-radius:24px;
+
+    border:
+        1px solid
+        rgba(255,22,72,.19);
+
+    background:
+        radial-gradient(
+            circle at 50% -20%,
+            rgba(255,22,72,.13),
+            transparent 58%
+        ),
+        rgba(13,15,23,.86);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.28),
+        inset 0 1px 0
+        rgba(255,255,255,.04);
+}
+
+.result-card::after{
+    content:"";
+
+    position:absolute;
+
+    left:15%;
+    right:15%;
+    bottom:-60px;
+
+    height:120px;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,22,72,.08);
+
+    filter:blur(45px);
+
+    pointer-events:none;
+}
+
+.result-label{
+    position:relative;
+    z-index:2;
+
+    color:#777d90;
+
+    font-size:9px;
+
+    font-weight:950;
+
+    letter-spacing:2px;
+}
+
+.big-result{
+    position:relative;
+    z-index:2;
+
+    margin-top:10px;
+
+    color:#fff;
+
+    font-size:
+        clamp(48px,11vw,82px);
+
+    line-height:1;
+
+    font-weight:1000;
+
+    letter-spacing:-4px;
+
+    word-break:break-word;
+
+    text-shadow:
+        0 0 32px
+        rgba(255,22,72,.2);
+}
+
+.step-result{
+    position:relative;
+    z-index:2;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    margin-top:13px;
+
+    padding:8px 13px;
+
+    border-radius:999px;
+
+    color:#ff7892;
+
+    background:
+        rgba(255,22,72,.065);
+
+    border:
+        1px solid
+        rgba(255,22,72,.14);
+
+    font-size:11px;
+
+    font-weight:900;
+}
+
+.result-info{
+    position:relative;
+    z-index:2;
+
+    width:min(510px,100%);
+
+    margin:
+        21px
+        auto
+        0;
+}
+
+.result-row{
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    gap:15px;
+
+    padding:
+        12px
+        0;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.05);
+
+    color:#747a8d;
+
+    font-size:10px;
+}
+
+.result-row strong{
+    color:#dfe2ec;
+
+    text-align:right;
+
+    font-size:10px;
+}
+
+</style>
+
+
+<section class="result-card">
 
     <div class="result-label">
-      SPEED AKHIR
+        SPEED AKHIR
     </div>
 
     <div
-      id="finalSpeed"
-      class="final-speed"
+        id="speedAkhir"
+        class="big-result"
     >
-      —
+        0
     </div>
 
-    <div class="step-badge">
-      <span>SPEED PER STEP</span>
-      <b id="speedPerStep">—</b>
+    <div
+        id="speedPerStep"
+        class="step-result"
+    >
+        0 / step
     </div>
 
-  </section>
 
-  <section class="time-card">
+    <div class="result-info">
 
-    <div class="time-head">
-      AFK TIMELINE
+        <div class="result-row">
+
+            <span>
+                DURASI AFK
+            </span>
+
+            <strong id="durasiText">
+                0 jam
+            </strong>
+
+        </div>
+
+
+        <div class="result-row">
+
+            <span>
+                MULAI
+            </span>
+
+            <strong id="mulaiText">
+                -
+            </strong>
+
+        </div>
+
+
+        <div class="result-row">
+
+            <span>
+                SELESAI
+            </span>
+
+            <strong id="selesaiText">
+                -
+            </strong>
+
+        </div>
+
     </div>
+
+</section>
+
+  <style>
+
+.timeline-card{
+    position:relative;
+
+    z-index:3;
+
+    margin-bottom:18px;
+
+    padding:21px;
+
+    border-radius:var(--radius);
+
+    border:1px solid var(--line);
+
+    background:var(--card);
+
+    backdrop-filter:blur(18px);
+
+    box-shadow:
+        0 20px 55px
+        rgba(0,0,0,.2);
+}
+
+.timeline-header{
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    gap:15px;
+
+    margin-bottom:22px;
+}
+
+.timeline-header h2{
+    font-size:15px;
+}
+
+.timeline-header p{
+    margin-top:3px;
+
+    color:var(--muted);
+
+    font-size:10px;
+}
+
+.auto-badge{
+    display:flex;
+
+    align-items:center;
+
+    color:#7b8b84;
+
+    font-size:8px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+}
+
+.auto-dot{
+    width:6px;
+    height:6px;
+
+    margin-right:5px;
+
+    border-radius:50%;
+
+    background:var(--green);
+
+    box-shadow:
+        0 0 9px
+        rgba(25,230,140,.8);
+}
+
+.timeline{
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+}
+
+.timeline-item{
+    flex:1;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+}
+
+.timeline-dot{
+    width:12px;
+    height:12px;
+
+    flex-shrink:0;
+
+    border-radius:50%;
+
+    background:var(--red);
+
+    box-shadow:
+        0 0 14px
+        rgba(255,22,72,.6);
+}
+
+.timeline-dot.end{
+    background:var(--blue);
+
+    box-shadow:
+        0 0 14px
+        rgba(79,140,255,.6);
+}
+
+.timeline-content span{
+    display:block;
+
+    color:#656b7c;
+
+    font-size:7px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+}
+
+.timeline-content strong{
+    display:block;
+
+    margin-top:4px;
+
+    color:#e3e5ee;
+
+    font-size:11px;
+}
+
+.timeline-line{
+    flex:1;
+
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--red),
+            var(--blue)
+        );
+
+    opacity:.32;
+}
+
+</style>
+
+
+<section class="timeline-card">
+
+    <div class="timeline-header">
+
+        <div>
+
+            <h2>
+                AFK Timeline
+            </h2>
+
+            <p>
+                Waktu mulai sampai selesai
+            </p>
+
+        </div>
+
+        <div class="auto-badge">
+
+            <i class="auto-dot"></i>
+
+            AUTO
+
+        </div>
+
+    </div>
+
 
     <div class="timeline">
 
-      <div class="time-point">
-        <small>MULAI</small>
-        <strong id="displayStart">—</strong>
-      </div>
 
-      <div class="timeline-line"></div>
+        <div class="timeline-item">
 
-      <div class="time-point end">
-        <small>SELESAI</small>
-        <strong id="displayFinish">—</strong>
-      </div>
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-content">
+
+                <span>
+                    MULAI AFK
+                </span>
+
+                <strong id="timelineStart">
+                    -
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="timeline-line"></div>
+
+
+        <div class="timeline-item">
+
+            <div class="timeline-dot end"></div>
+
+            <div class="timeline-content">
+
+                <span>
+                    SELESAI AFK
+                </span>
+
+                <strong id="timelineEnd">
+                    -
+                </strong>
+
+            </div>
+
+        </div>
+
 
     </div>
 
-  </section>
+</section>
 
-  <section class="section-card estimates">
+  <style>
 
-    <div class="section-head">
-      <div class="section-title">
-        <div class="section-icon">↗</div>
-        ESTIMASI 2–30 HARI
-      </div>
+.estimate-card{
+    position:relative;
 
-      <div class="section-sub">
-        AUTO ESTIMATE
-      </div>
+    z-index:3;
+
+    margin-bottom:18px;
+
+    padding:21px;
+
+    border-radius:var(--radius);
+
+    border:1px solid var(--line);
+
+    background:var(--card);
+
+    backdrop-filter:blur(18px);
+
+    box-shadow:
+        0 20px 55px
+        rgba(0,0,0,.2);
+}
+
+.estimate-heading{
+    margin-bottom:17px;
+}
+
+.estimate-heading h2{
+    font-size:15px;
+}
+
+.estimate-heading p{
+    margin-top:3px;
+
+    color:var(--muted);
+
+    font-size:10px;
+}
+
+.estimate-list{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:9px;
+}
+
+.estimate-item{
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    gap:12px;
+
+    padding:12px 13px;
+
+    border-radius:12px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.045);
+
+    background:
+        rgba(255,255,255,.018);
+
+    transition:
+        background .2s ease,
+        border .2s ease,
+        transform .2s ease;
+}
+
+.estimate-item:hover{
+    transform:translateY(-1px);
+
+    background:
+        rgba(255,255,255,.03);
+
+    border-color:
+        rgba(255,22,72,.11);
+}
+
+.estimate-item span{
+    color:#777d8e;
+
+    font-size:9px;
+}
+
+.estimate-item strong{
+    color:#e9ebf4;
+
+    font-size:10px;
+
+    font-weight:900;
+}
+
+
+/* footer */
+
+footer{
+    position:relative;
+
+    z-index:3;
+
+    padding:
+        14px
+        0
+        32px;
+
+    text-align:center;
+}
+
+.footer-logo{
+    font-size:12px;
+
+    font-weight:950;
+
+    letter-spacing:2px;
+}
+
+.footer-logo span{
+    color:var(--red);
+}
+
+.footer-text{
+    margin-top:6px;
+
+    color:#4f5565;
+
+    font-size:7px;
+
+    letter-spacing:1.2px;
+}
+
+</style>
+
+
+<section class="estimate-card">
+
+    <div class="estimate-heading">
+
+        <h2>
+            Estimasi AFK
+        </h2>
+
+        <p>
+            Perkiraan Speed Akhir untuk beberapa durasi
+        </p>
+
     </div>
+
 
     <div
-      id="estimateGrid"
-      class="estimate-grid"
+        id="estimateList"
+        class="estimate-list"
     ></div>
 
-  </section>
+</section>
 
-</main>
 
-<footer class="footer">
-  YAKKZZ CALCULATOR • <b>STEAL AN EGG</b>
+<footer>
+
+    <div class="footer-logo">
+        YAKKZZ<span>.</span> CALCULATOR
+    </div>
+
+    <div class="footer-text">
+        STEAL AN EGG • AFK SPEED CALCULATOR
+    </div>
+
 </footer>
-<script>
+
+
+  <style>
+
+@media(max-width:700px){
+
+    .container{
+        width:
+            min(
+                100% - 18px,
+                920px
+            );
+    }
+
+    nav{
+        height:64px;
+    }
+
+    .logo{
+        font-size:16px;
+    }
+
+    .status{
+        font-size:7px;
+        padding:6px 9px;
+    }
+
+    .hero{
+        padding:
+            34px
+            0
+            25px;
+    }
+
+    .hero-badge{
+        font-size:8px;
+        padding:7px 10px;
+    }
+
+    .hero h1{
+        font-size:39px;
+
+        letter-spacing:-2px;
+    }
+
+    .hero-description{
+        font-size:11px;
+
+        max-width:360px;
+    }
+
+    .calibration-pill{
+        font-size:8px;
+    }
+
+    .notice{
+        padding:12px;
+
+        border-radius:14px;
+    }
+
+    .notice-title{
+        font-size:10px;
+    }
+
+    .notice-subtitle{
+        font-size:8px;
+    }
+
+    .join-button{
+        padding:
+            10px
+            11px;
+
+        font-size:7px;
+    }
+
+    .card,
+    .result-card,
+    .timeline-card,
+    .estimate-card{
+        padding:17px;
+
+        border-radius:18px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .section-heading{
+        margin-bottom:17px;
+    }
+
+    .section-heading h2{
+        font-size:14px;
+    }
+
+    .section-heading p{
+        font-size:9px;
+    }
+
+    .field input{
+        height:47px;
+
+        font-size:11px;
+    }
+
+    .big-result{
+        font-size:50px;
+
+        letter-spacing:-2.5px;
+    }
+
+    .result-row{
+        font-size:9px;
+    }
+
+    .result-row strong{
+        font-size:9px;
+    }
+
+    .timeline{
+        flex-direction:column;
+
+        align-items:stretch;
+
+        gap:10px;
+    }
+
+    .timeline-line{
+        width:1px;
+
+        height:22px;
+
+        flex:none;
+
+        margin-left:5px;
+
+        background:
+            linear-gradient(
+                180deg,
+                var(--red),
+                var(--blue)
+            );
+    }
+
+    .estimate-list{
+        grid-template-columns:1fr;
+    }
+
+    .eyes{
+        width:108px;
+        height:45px;
+
+        opacity:.18;
+    }
+
+    .eye{
+        width:40px;
+        height:40px;
+
+        border-width:2px;
+    }
+
+    .pupil{
+        width:8px;
+        height:8px;
+    }
+}
+
+
+@media(max-width:380px){
+
+    .hero h1{
+        font-size:34px;
+    }
+
+    .big-result{
+        font-size:43px;
+    }
+
+    .status{
+        display:none;
+    }
+
+    .notice{
+        gap:8px;
+    }
+
+    .join-button{
+        padding:
+            9px
+            9px;
+    }
+}
+
+</style>
+
+
+  <script>
+
+"use strict";
+
+
 /* =====================================================
-   YAKKZZ CALCULATOR ENGINE
-   CALIBRATION FINAL = 12.81
+   FIXED CALIBRATION
 ===================================================== */
 
-const CALIBRATION = 12.81;
+const CALIBRATION = 11;
 
-/* =========================
+
+/* =====================================================
    ELEMENTS
-========================= */
+===================================================== */
 
-const speedAwalEl   = document.getElementById("speedAwal");
-const treadmillEl   = document.getElementById("treadmill");
-const trailEl       = document.getElementById("trail");
-const multiplayerEl = document.getElementById("multiplayer");
+const speedAwalEl =
+    document.getElementById("speedAwal");
 
-const startDateEl   = document.getElementById("startDate");
-const startTimeEl   = document.getElementById("startTime");
-const afkDaysEl     = document.getElementById("afkDays");
-const afkHoursEl    = document.getElementById("afkHours");
+const treadmillEl =
+    document.getElementById("treadmill");
 
-const finalSpeedEl  = document.getElementById("finalSpeed");
-const speedStepEl   = document.getElementById("speedPerStep");
+const trailEl =
+    document.getElementById("trail");
 
-const displayStartEl  = document.getElementById("displayStart");
-const displayFinishEl = document.getElementById("displayFinish");
+const multiplayerEl =
+    document.getElementById("multiplayer");
 
-const estimateGridEl = document.getElementById("estimateGrid");
+const tanggalEl =
+    document.getElementById("tanggal");
 
-/* =========================
-   NUMBER PARSER
-========================= */
+const jamMulaiEl =
+    document.getElementById("jamMulai");
+
+const durasiHariEl =
+    document.getElementById("durasiHari");
+
+const durasiJamEl =
+    document.getElementById("durasiJam");
+
+const speedAkhirEl =
+    document.getElementById("speedAkhir");
+
+const speedPerStepEl =
+    document.getElementById("speedPerStep");
+
+const durasiTextEl =
+    document.getElementById("durasiText");
+
+const mulaiTextEl =
+    document.getElementById("mulaiText");
+
+const selesaiTextEl =
+    document.getElementById("selesaiText");
+
+const timelineStartEl =
+    document.getElementById("timelineStart");
+
+const timelineEndEl =
+    document.getElementById("timelineEnd");
+
+const estimateListEl =
+    document.getElementById("estimateList");
+
+
+/* =====================================================
+   PARSE NUMBER
+
+   Supports:
+
+   60
+   60K
+   1.5M
+   55.5B
+   2T
+   1Q
+===================================================== */
 
 function parseNumber(value){
 
-  if(value === null || value === undefined){
-    return 0;
-  }
+    if(
+        value === null ||
+        value === undefined
+    ){
+        return 0;
+    }
 
-  let str = String(value)
-    .trim()
-    .replace(/,/g,"")
-    .replace(/\s+/g,"");
+    let text =
+        String(value)
+            .trim()
+            .replace(/,/g,"")
+            .replace(/\s+/g,"");
 
-  if(!str){
-    return 0;
-  }
+    if(!text){
+        return 0;
+    }
 
-  const match = str.match(/^(-?[\d.]+)([KMBTQ])?$/i);
 
-  if(!match){
-    const plain = Number(str.replace(/[^\d.-]/g,""));
-    return Number.isFinite(plain) ? plain : 0;
-  }
+    const match =
+        text.match(
+            /^(-?[\d.]+)([KMBTQ])?$/i
+        );
 
-  const number = Number(match[1]);
 
-  if(!Number.isFinite(number)){
-    return 0;
-  }
+    if(!match){
 
-  const suffix = (match[2] || "").toUpperCase();
+        const plain =
+            Number(
+                text.replace(
+                    /[^\d.-]/g,
+                    ""
+                )
+            );
 
-  const multipliers = {
-    K: 1e3,
-    M: 1e6,
-    B: 1e9,
-    T: 1e12,
-    Q: 1e15
-  };
+        return Number.isFinite(plain)
+            ? plain
+            : 0;
+    }
 
-  return number * (multipliers[suffix] || 1);
+
+    const number =
+        Number(match[1]);
+
+
+    if(!Number.isFinite(number)){
+        return 0;
+    }
+
+
+    const suffix =
+        (
+            match[2] || ""
+        ).toUpperCase();
+
+
+    const multiplier = {
+
+        "":1,
+
+        "K":1e3,
+
+        "M":1e6,
+
+        "B":1e9,
+
+        "T":1e12,
+
+        "Q":1e15
+
+    }[suffix];
+
+
+    return number * multiplier;
 }
 
-/* =========================
-   FORMAT NUMBER
-========================= */
+
+/* =====================================================
+   FORMAT SHORT
+===================================================== */
 
 function formatShort(value){
 
-  if(!Number.isFinite(value)){
-    return "—";
-  }
-
-  const abs = Math.abs(value);
-
-  const units = [
-    {v:1e15,s:"Q"},
-    {v:1e12,s:"T"},
-    {v:1e9,s:"B"},
-    {v:1e6,s:"M"},
-    {v:1e3,s:"K"}
-  ];
-
-  for(const unit of units){
-
-    if(abs >= unit.v){
-
-      let n = value / unit.v;
-
-      let digits = 2;
-
-      if(Math.abs(n) >= 100){
-        digits = 0;
-      }else if(Math.abs(n) >= 10){
-        digits = 1;
-      }
-
-      n = Number(n.toFixed(digits));
-
-      return n.toLocaleString("en-US",{
-        maximumFractionDigits:digits
-      }) + unit.s;
+    if(
+        !Number.isFinite(value)
+    ){
+        return "0";
     }
-  }
 
-  return Number(value.toFixed(2)).toLocaleString("en-US",{
-    maximumFractionDigits:2
-  });
+
+    const abs =
+        Math.abs(value);
+
+
+    if(abs >= 1e15){
+
+        return (
+            cleanDecimal(
+                value / 1e15
+            )
+            + "Q"
+        );
+    }
+
+
+    if(abs >= 1e12){
+
+        return (
+            cleanDecimal(
+                value / 1e12
+            )
+            + "T"
+        );
+    }
+
+
+    if(abs >= 1e9){
+
+        return (
+            cleanDecimal(
+                value / 1e9
+            )
+            + "B"
+        );
+    }
+
+
+    if(abs >= 1e6){
+
+        return (
+            cleanDecimal(
+                value / 1e6
+            )
+            + "M"
+        );
+    }
+
+
+    if(abs >= 1e3){
+
+        return (
+            cleanDecimal(
+                value / 1e3
+            )
+            + "K"
+        );
+    }
+
+
+    return cleanDecimal(value);
 }
 
-/* =========================
-   FORMAT SPEED PER STEP
-========================= */
 
-function formatStep(value){
+function cleanDecimal(value){
 
-  if(!Number.isFinite(value) || value <= 0){
-    return "—";
-  }
+    if(
+        !Number.isFinite(value)
+    ){
+        return "0";
+    }
 
-  return formatShort(value);
+
+    return Number(
+        value.toFixed(3)
+    ).toString();
 }
 
-/* =========================
+
+/* =====================================================
    DATE FORMAT
-========================= */
+===================================================== */
 
 function formatDateTime(date){
 
-  if(!(date instanceof Date) || Number.isNaN(date.getTime())){
-    return "—";
-  }
+    if(
+        !(date instanceof Date) ||
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+        return "-";
+    }
 
-  const dd = String(date.getDate()).padStart(2,"0");
-  const mm = String(date.getMonth()+1).padStart(2,"0");
-  const yyyy = date.getFullYear();
 
-  const hh = String(date.getHours()).padStart(2,"0");
-  const min = String(date.getMinutes()).padStart(2,"0");
+    const dd =
+        String(
+            date.getDate()
+        ).padStart(2,"0");
 
-  return `${dd}/${mm}/${yyyy} • ${hh}:${min}`;
+
+    const mm =
+        String(
+            date.getMonth()+1
+        ).padStart(2,"0");
+
+
+    const yyyy =
+        date.getFullYear();
+
+
+    const hh =
+        String(
+            date.getHours()
+        ).padStart(2,"0");
+
+
+    const minute =
+        String(
+            date.getMinutes()
+        ).padStart(2,"0");
+
+
+    return (
+        `${dd}/${mm}/${yyyy} ` +
+        `${hh}:${minute}`
+    );
 }
 
-/* =========================
-   CALCULATE SPEED PER STEP
-========================= */
 
-function calculateSpeedPerStep(){
-
-  const treadmill = parseNumber(treadmillEl.value);
-  const trail = parseNumber(trailEl.value);
-
-  const multiplayerRaw = parseNumber(multiplayerEl.value);
-
-  /*
-    Multiplayer kosong = 1
-    Jangan tampilkan x1 ke user.
-  */
-  const multiplayer =
-    multiplayerEl.value.trim() === ""
-      ? 1
-      : multiplayerRaw;
-
-  if(
-    treadmill <= 0 ||
-    trail <= 0 ||
-    multiplayer <= 0
-  ){
-    return 0;
-  }
-
-  /*
-    FORMULA:
-    Treadmill × (Trail + Multiplayer − 1)
-  */
-
-  return treadmill * (
-    trail + multiplayer - 1
-  );
-}
-
-/* =========================
-   TOTAL AFK HOURS
-========================= */
-
-function calculateTotalHours(){
-
-  const days = parseNumber(afkDaysEl.value);
-  const hours = parseNumber(afkHoursEl.value);
-
-  return Math.max(0,(days * 24) + hours);
-}
-
-/* =========================
-   START DATE
-========================= */
+/* =====================================================
+   GET START DATE
+===================================================== */
 
 function getStartDate(){
 
-  const dateValue = startDateEl.value;
-  const timeValue = startTimeEl.value;
-
-  if(!dateValue || !timeValue){
-    return null;
-  }
-
-  const [year,month,day] =
-    dateValue.split("-").map(Number);
-
-  const [hour,minute] =
-    timeValue.split(":").map(Number);
-
-  const date = new Date(
-    year,
-    month - 1,
-    day,
-    hour,
-    minute,
-    0,
-    0
-  );
-
-  if(Number.isNaN(date.getTime())){
-    return null;
-  }
-
-  return date;
-}
-
-/* =========================
-   FINAL SPEED
-========================= */
-
-function calculateFinalSpeed(){
-
-  const speedAwal = parseNumber(speedAwalEl.value);
-  const speedPerStep = calculateSpeedPerStep();
-  const totalHours = calculateTotalHours();
-
-  if(
-    speedAwal <= 0 ||
-    speedPerStep <= 0 ||
-    totalHours <= 0
-  ){
-    return 0;
-  }
-
-  const totalSeconds =
-    totalHours * 60 * 60;
-
-  const gain =
-    speedPerStep *
-    CALIBRATION *
-    totalSeconds;
-
-  return speedAwal + gain;
-}
-   /* =========================
-   ESTIMATE 2–30 DAYS
-========================= */
-
-function renderEstimates(){
-
-  estimateGridEl.innerHTML = "";
-
-  const speedAwal = parseNumber(speedAwalEl.value);
-  const speedPerStep = calculateSpeedPerStep();
-
-  if(
-    speedAwal <= 0 ||
-    speedPerStep <= 0
-  ){
-    for(let day=2;day<=30;day++){
-
-      const item = document.createElement("div");
-      item.className = "estimate-item";
-
-      item.innerHTML = `
-        <div class="estimate-day">${day} HARI</div>
-        <div class="estimate-value">—</div>
-      `;
-
-      estimateGridEl.appendChild(item);
+    if(
+        !tanggalEl.value ||
+        !jamMulaiEl.value
+    ){
+        return null;
     }
 
-    return;
-  }
 
-  for(let day=2;day<=30;day++){
+    const dateParts =
+        tanggalEl.value.split("-");
 
-    const seconds =
-      day * 24 * 60 * 60;
 
-    const gain =
-      speedPerStep *
-      CALIBRATION *
-      seconds;
+    const timeParts =
+        jamMulaiEl.value.split(":");
 
-    const final =
-      speedAwal + gain;
-
-    const item = document.createElement("div");
-    item.className = "estimate-item";
-
-    item.innerHTML = `
-      <div class="estimate-day">${day} HARI</div>
-      <div class="estimate-value">${formatShort(final)}</div>
-    `;
-
-    estimateGridEl.appendChild(item);
-  }
-}
-
-/* =========================
-   MAIN UPDATE
-========================= */
-
-let previousFinal = 0;
-
-function updateCalculator(){
-
-  const speedPerStep =
-    calculateSpeedPerStep();
-
-  const totalHours =
-    calculateTotalHours();
-
-  const finalSpeed =
-    calculateFinalSpeed();
-
-  /* speed per step */
-  speedStepEl.textContent =
-    speedPerStep > 0
-      ? `${formatStep(speedPerStep)} / step`
-      : "—";
-
-  /* final speed */
-  if(finalSpeed > 0){
-
-    finalSpeedEl.textContent =
-      formatShort(finalSpeed);
 
     if(
-      previousFinal > 0 &&
-      Math.abs(finalSpeed - previousFinal) > 0
+        dateParts.length !== 3 ||
+        timeParts.length < 2
     ){
-      finalSpeedEl.classList.remove("bump");
-
-      void finalSpeedEl.offsetWidth;
-
-      finalSpeedEl.classList.add("bump");
-
-      setTimeout(()=>{
-        finalSpeedEl.classList.remove("bump");
-      },250);
+        return null;
     }
 
-  }else{
 
-    finalSpeedEl.textContent = "—";
-  }
+    const year =
+        Number(dateParts[0]);
 
-  previousFinal = finalSpeed;
+    const month =
+        Number(dateParts[1]) - 1;
 
-  /* timeline */
+    const day =
+        Number(dateParts[2]);
 
-  const startDate = getStartDate();
+    const hour =
+        Number(timeParts[0]);
 
-  if(startDate && totalHours > 0){
+    const minute =
+        Number(timeParts[1]);
 
-    const finishDate =
-      new Date(
-        startDate.getTime() +
-        totalHours * 60 * 60 * 1000
-      );
 
-    displayStartEl.textContent =
-      formatDateTime(startDate);
+    const date =
+        new Date(
+            year,
+            month,
+            day,
+            hour,
+            minute,
+            0,
+            0
+        );
 
-    displayFinishEl.textContent =
-      formatDateTime(finishDate);
 
-  }else{
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+        return null;
+    }
 
-    displayStartEl.textContent = "—";
-    displayFinishEl.textContent = "—";
-  }
 
-  renderEstimates();
+    return date;
 }
-
-/* =========================
-   INPUT LISTENERS
-========================= */
-
-const allInputs = [
-  speedAwalEl,
-  treadmillEl,
-  trailEl,
-  multiplayerEl,
-  startDateEl,
-  startTimeEl,
-  afkDaysEl,
-  afkHoursEl
-];
-
-allInputs.forEach(input => {
-
-  input.addEventListener("input",updateCalculator);
-  input.addEventListener("change",updateCalculator);
-
-});
-
-/* =========================
-   ENTER KEY
-========================= */
-
-allInputs.forEach(input => {
-
-  input.addEventListener("keydown",event => {
-
-    if(event.key === "Enter"){
-      event.preventDefault();
-      updateCalculator();
-      input.blur();
-    }
-
-  });
-
-});
-
-/* =========================
-   INITIAL
-========================= */
-
-updateCalculator();
 
 </script>
 
+
+  <script>
+
+/* =====================================================
+   CALCULATE
+===================================================== */
+
+function calculate(){
+
+    /* -----------------------------------------------
+       SPEED AWAL
+    ------------------------------------------------ */
+
+    const speedAwal =
+        parseNumber(
+            speedAwalEl.value
+        );
+
+
+    /* -----------------------------------------------
+       SPEED COMPONENTS
+    ------------------------------------------------ */
+
+    const treadmill =
+        parseNumber(
+            treadmillEl.value
+        );
+
+
+    const trail =
+        parseNumber(
+            trailEl.value
+        );
+
+
+    /*
+       Multiplayer kosong
+       = internal x1
+    */
+
+    const multiplayer =
+        multiplayerEl.value.trim() === ""
+            ? 1
+            : parseNumber(
+                multiplayerEl.value
+            );
+
+
+    /* -----------------------------------------------
+       SPEED / STEP
+
+       Treadmill ×
+       (Trail + Multiplayer - 1)
+    ------------------------------------------------ */
+
+    const speedPerStep =
+        treadmill *
+        (
+            trail +
+            multiplayer -
+            1
+        );
+
+
+    /* -----------------------------------------------
+       DURASI
+    ------------------------------------------------ */
+
+    const hari =
+        Math.max(
+            0,
+            parseNumber(
+                durasiHariEl.value
+            )
+        );
+
+
+    const jam =
+        Math.max(
+            0,
+            parseNumber(
+                durasiJamEl.value
+            )
+        );
+
+
+    /*
+       Total hours
+    */
+
+    const totalHours =
+        (hari * 24) +
+        jam;
+
+
+    /*
+       Total seconds
+    */
+
+    const totalSeconds =
+        totalHours *
+        60 *
+        60;
+
+
+    /* -----------------------------------------------
+       GAIN
+
+       Speed/Step × 11 × detik
+    ------------------------------------------------ */
+
+    const gain =
+        speedPerStep *
+        CALIBRATION *
+        totalSeconds;
+
+
+    /* -----------------------------------------------
+       SPEED AKHIR
+
+       Speed Awal + Gain
+    ------------------------------------------------ */
+
+    const speedAkhir =
+        speedAwal +
+        gain;
+
+
+    /* -----------------------------------------------
+       OUTPUT SPEED
+    ------------------------------------------------ */
+
+    speedPerStepEl.textContent =
+        `${formatShort(speedPerStep)} / step`;
+
+
+    speedAkhirEl.textContent =
+        formatShort(speedAkhir);
+
+
+    /* -----------------------------------------------
+       OUTPUT DURASI
+    ------------------------------------------------ */
+
+    if(totalHours <= 0){
+
+        durasiTextEl.textContent =
+            "0 jam";
+
+    }else{
+
+        const totalMinutes =
+            Math.round(
+                totalHours * 60
+            );
+
+
+        const days =
+            Math.floor(
+                totalMinutes / 1440
+            );
+
+
+        const remaining =
+            totalMinutes % 1440;
+
+
+        const hours =
+            Math.floor(
+                remaining / 60
+            );
+
+
+        const minutes =
+            remaining % 60;
+
+
+        const parts = [];
+
+
+        if(days > 0){
+
+            parts.push(
+                `${days} hari`
+            );
+
+        }
+
+
+        if(hours > 0){
+
+            parts.push(
+                `${hours} jam`
+            );
+
+        }
+
+
+        if(minutes > 0){
+
+            parts.push(
+                `${minutes} menit`
+            );
+
+        }
+
+
+        durasiTextEl.textContent =
+            parts.join(" ");
+    }
+
+
+    /* -----------------------------------------------
+       TIMELINE
+    ------------------------------------------------ */
+
+    const startDate =
+        getStartDate();
+
+
+    if(
+        startDate &&
+        totalHours > 0
+    ){
+
+        const endDate =
+            new Date(
+                startDate.getTime() +
+                totalHours *
+                60 *
+                60 *
+                1000
+            );
+
+
+        const startFormatted =
+            formatDateTime(
+                startDate
+            );
+
+
+        const endFormatted =
+            formatDateTime(
+                endDate
+            );
+
+
+        mulaiTextEl.textContent =
+            startFormatted;
+
+
+        selesaiTextEl.textContent =
+            endFormatted;
+
+
+        timelineStartEl.textContent =
+            startFormatted;
+
+
+        timelineEndEl.textContent =
+            endFormatted;
+
+    }else{
+
+        mulaiTextEl.textContent =
+            "-";
+
+
+        selesaiTextEl.textContent =
+            "-";
+
+
+        timelineStartEl.textContent =
+            "-";
+
+
+        timelineEndEl.textContent =
+            "-";
+    }
+
+
+    /* -----------------------------------------------
+       ESTIMATES
+    ------------------------------------------------ */
+
+    buildEstimates(
+        speedAwal,
+        speedPerStep
+    );
+}
+
+</script>
+
+
+  <script>
+
+/* =====================================================
+   ESTIMATE 2 - 30 DAYS
+===================================================== */
+
+function buildEstimates(
+    speedAwal,
+    speedPerStep
+){
+
+    estimateListEl.innerHTML = "";
+
+
+    if(speedPerStep <= 0){
+        return;
+    }
+
+
+    for(
+        let day = 2;
+        day <= 30;
+        day++
+    ){
+
+        /*
+           Hari → detik
+
+           1 hari =
+           24 × 60 × 60
+        */
+
+        const seconds =
+            day *
+            24 *
+            60 *
+            60;
+
+
+        /*
+           Gain =
+           Speed/Step × 11 × detik
+        */
+
+        const gain =
+            speedPerStep *
+            CALIBRATION *
+            seconds;
+
+
+        /*
+           Final =
+           Speed Awal + Gain
+        */
+
+        const finalSpeed =
+            speedAwal +
+            gain;
+
+
+        const item =
+            document.createElement(
+                "div"
+            );
+
+
+        item.className =
+            "estimate-item";
+
+
+        item.innerHTML = `
+            <span>
+                AFK ${day} Hari
+            </span>
+
+            <strong>
+                ${formatShort(finalSpeed)}
+            </strong>
+        `;
+
+
+        estimateListEl.appendChild(
+            item
+        );
+    }
+}
+
+
+/* =====================================================
+   AUTO CALCULATION
+===================================================== */
+
+const inputs = [
+
+    speedAwalEl,
+
+    treadmillEl,
+
+    trailEl,
+
+    multiplayerEl,
+
+    tanggalEl,
+
+    jamMulaiEl,
+
+    durasiHariEl,
+
+    durasiJamEl
+
+];
+
+
+inputs.forEach(
+    input => {
+
+        input.addEventListener(
+            "input",
+            calculate
+        );
+
+
+        input.addEventListener(
+            "change",
+            calculate
+        );
+
+    }
+);
+
+
+/* =====================================================
+   DEFAULT DATE
+===================================================== */
+
+(function setDefaultDateTime(){
+
+    const now =
+        new Date();
+
+
+    if(!tanggalEl.value){
+
+        const yyyy =
+            now.getFullYear();
+
+
+        const mm =
+            String(
+                now.getMonth()+1
+            ).padStart(2,"0");
+
+
+        const dd =
+            String(
+                now.getDate()
+            ).padStart(2,"0");
+
+
+        tanggalEl.value =
+            `${yyyy}-${mm}-${dd}`;
+    }
+
+
+    if(!jamMulaiEl.value){
+
+        const hh =
+            String(
+                now.getHours()
+            ).padStart(2,"0");
+
+
+        const minute =
+            String(
+                now.getMinutes()
+            ).padStart(2,"0");
+
+
+        jamMulaiEl.value =
+            `${hh}:${minute}`;
+    }
+
+
+    calculate();
+
+})();
+
+</script>
+
+</div>
+
 </body>
-</html> 
+</html>

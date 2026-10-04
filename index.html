@@ -10,7 +10,7 @@
 
 <meta
     name="theme-color"
-    content="#06070c"
+    content="#05050a"
 >
 
 <meta
@@ -29,25 +29,29 @@
 }
 
 :root{
-    --bg:#05060a;
-    --bg2:#090b12;
+    --bg:#040409;
+    --bg2:#090914;
 
-    --card:rgba(13,15,23,.78);
-    --card2:rgba(18,20,30,.88);
+    --card:rgba(15,15,27,.82);
+    --card2:rgba(22,20,36,.9);
 
-    --line:rgba(255,255,255,.075);
-    --line2:rgba(255,255,255,.12);
+    --line:rgba(255,255,255,.08);
+    --line2:rgba(255,255,255,.14);
 
-    --text:#f7f8ff;
-    --muted:#858a9d;
-    --muted2:#626879;
+    --text:#f8f8ff;
+    --muted:#8b8da3;
+    --muted2:#62657b;
 
     --red:#ff1648;
-    --red2:#ff426a;
-    --red-dark:#b9002e;
+    --red2:#ff4770;
+    --red-dark:#a90031;
 
+    --purple:#8b5cff;
+    --blue:#438cff;
+    --cyan:#00e5ff;
+    --pink:#ff36d1;
+    --gold:#ffc72c;
     --green:#19e68c;
-    --blue:#4f8cff;
 
     --radius:22px;
 }
@@ -61,24 +65,6 @@ body{
 
     color:var(--text);
 
-    background:
-        radial-gradient(
-            circle at 50% -10%,
-            rgba(255,22,72,.18),
-            transparent 32%
-        ),
-        radial-gradient(
-            circle at 0% 45%,
-            rgba(79,140,255,.07),
-            transparent 27%
-        ),
-        linear-gradient(
-            180deg,
-            #05060a 0%,
-            #07080d 55%,
-            #05060a 100%
-        );
-
     font-family:
         Inter,
         system-ui,
@@ -88,9 +74,32 @@ body{
         sans-serif;
 
     overflow-x:hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(255,22,72,.20),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 100% 25%,
+            rgba(139,92,255,.13),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 0% 65%,
+            rgba(0,229,255,.07),
+            transparent 25%
+        ),
+        linear-gradient(
+            180deg,
+            #040409 0%,
+            #070711 50%,
+            #040409 100%
+        );
 }
 
-/* subtle grid */
+/* GRID */
 
 body::before{
     content:"";
@@ -100,7 +109,7 @@ body::before{
 
     pointer-events:none;
 
-    opacity:.14;
+    opacity:.16;
 
     background-image:
         linear-gradient(
@@ -125,54 +134,101 @@ body::before{
     z-index:0;
 }
 
-/* ambient glow */
+/* SCANLINE */
+
+body::after{
+    content:"";
+
+    position:fixed;
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:20;
+
+    opacity:.035;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 3px,
+            rgba(255,255,255,.08) 4px
+        );
+}
+
+/* AMBIENT */
 
 .ambient{
     position:fixed;
 
-    width:420px;
-    height:420px;
+    width:430px;
+    height:430px;
 
     border-radius:50%;
 
-    background:rgba(255,22,72,.055);
-
-    filter:blur(100px);
+    filter:blur(110px);
 
     pointer-events:none;
 
     z-index:0;
 
     animation:
-        ambientMove 8s ease-in-out infinite alternate;
+        ambientMove 9s ease-in-out infinite alternate;
 }
 
 .ambient.one{
-    top:-180px;
-    left:-150px;
+    top:-210px;
+    left:-160px;
+
+    background:
+        rgba(255,22,72,.075);
 }
 
 .ambient.two{
-    right:-200px;
-    bottom:-180px;
+    right:-220px;
+    bottom:-190px;
 
-    background:rgba(79,140,255,.045);
+    background:
+        rgba(139,92,255,.07);
 
     animation-delay:2s;
 }
 
+.ambient.three{
+    left:35%;
+    top:45%;
+
+    width:280px;
+    height:280px;
+
+    background:
+        rgba(0,229,255,.035);
+
+    animation-delay:4s;
+}
+
 @keyframes ambientMove{
+
     from{
-        transform:translate3d(0,0,0) scale(1);
+        transform:
+            translate3d(0,0,0)
+            scale(1);
     }
 
     to{
-        transform:translate3d(25px,18px,0) scale(1.08);
+        transform:
+            translate3d(30px,20px,0)
+            scale(1.1);
     }
 }
 
 .container{
-    width:min(920px,calc(100% - 28px));
+    width:
+        min(
+            940px,
+            calc(100% - 28px)
+        );
 
     margin:auto;
 
@@ -181,18 +237,24 @@ body::before{
     z-index:2;
 }
 
-/* scrollbar */
+/* SCROLLBAR */
 
 ::-webkit-scrollbar{
     width:7px;
 }
 
 ::-webkit-scrollbar-track{
-    background:#05060a;
+    background:#040409;
 }
 
 ::-webkit-scrollbar-thumb{
-    background:#242633;
+    background:
+        linear-gradient(
+            180deg,
+            var(--red),
+            var(--purple)
+        );
+
     border-radius:20px;
 }
 
@@ -203,10 +265,11 @@ body::before{
 
 <div class="ambient one"></div>
 <div class="ambient two"></div>
+<div class="ambient three"></div>
 
 <div class="container">
 
-  <style>
+    <style>
 
 /* =========================
    NAV
@@ -218,20 +281,28 @@ nav{
     display:flex;
     align-items:center;
     justify-content:space-between;
+
+    position:relative;
 }
 
 .logo{
     font-size:19px;
-    font-weight:950;
+
+    font-weight:1000;
 
     letter-spacing:2px;
+
+    text-shadow:
+        0 0 25px
+        rgba(255,255,255,.08);
 }
 
 .logo span{
     color:var(--red);
 
     text-shadow:
-        0 0 18px rgba(255,22,72,.45);
+        0 0 18px
+        rgba(255,22,72,.65);
 }
 
 .status{
@@ -239,18 +310,22 @@ nav{
     align-items:center;
     gap:7px;
 
-    padding:7px 11px;
+    padding:8px 12px;
 
     border-radius:999px;
 
-    border:1px solid rgba(25,230,140,.14);
+    border:
+        1px solid
+        rgba(25,230,140,.18);
 
-    background:rgba(25,230,140,.045);
+    background:
+        rgba(25,230,140,.045);
 
     color:#91a69e;
 
     font-size:9px;
-    font-weight:800;
+
+    font-weight:900;
 
     letter-spacing:1px;
 }
@@ -264,20 +339,23 @@ nav{
     background:var(--green);
 
     box-shadow:
-        0 0 10px rgba(25,230,140,.8);
+        0 0 12px
+        rgba(25,230,140,.9);
 
     animation:
-        statusPulse 1.8s ease-in-out infinite;
+        statusPulse 1.5s infinite;
 }
 
 @keyframes statusPulse{
 
     0%,100%{
-        opacity:.45;
+        opacity:.35;
+        transform:scale(.8);
     }
 
     50%{
         opacity:1;
+        transform:scale(1.15);
     }
 }
 
@@ -292,42 +370,56 @@ nav{
     text-align:center;
 
     padding:
-        47px
+        42px
         0
-        32px;
+        30px;
 }
 
 .hero-badge{
     display:inline-flex;
 
     align-items:center;
-    gap:7px;
+    gap:8px;
 
-    padding:8px 13px;
-
-    border:1px solid rgba(255,22,72,.2);
-
-    background:rgba(255,22,72,.055);
+    padding:
+        9px
+        14px;
 
     border-radius:999px;
 
-    color:#ff718d;
+    border:
+        1px solid
+        rgba(255,22,72,.25);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,22,72,.10),
+            rgba(139,92,255,.07)
+        );
+
+    color:#ff7894;
 
     font-size:9px;
-    font-weight:900;
+
+    font-weight:950;
 
     letter-spacing:1.7px;
+
+    box-shadow:
+        0 0 25px
+        rgba(255,22,72,.08);
 }
 
 .hero h1{
-    margin-top:19px;
+    margin-top:20px;
 
     font-size:
-        clamp(38px,8vw,68px);
+        clamp(38px,8vw,70px);
 
     line-height:.94;
 
-    letter-spacing:-3px;
+    letter-spacing:-3.5px;
 
     font-weight:1000;
 }
@@ -336,11 +428,30 @@ nav{
     color:var(--red);
 
     text-shadow:
-        0 0 35px rgba(255,22,72,.28);
+        0 0 35px
+        rgba(255,22,72,.35);
+
+    animation:
+        titleGlow 3s ease-in-out infinite;
+}
+
+@keyframes titleGlow{
+
+    0%,100%{
+        text-shadow:
+            0 0 25px
+            rgba(255,22,72,.25);
+    }
+
+    50%{
+        text-shadow:
+            0 0 45px
+            rgba(255,22,72,.55);
+    }
 }
 
 .hero-description{
-    max-width:590px;
+    max-width:620px;
 
     margin:
         18px
@@ -361,19 +472,24 @@ nav{
 
     margin-top:19px;
 
-    padding:8px 13px;
+    padding:
+        8px
+        14px;
 
-    border-radius:10px;
+    border-radius:999px;
 
-    border:1px solid var(--line);
+    border:
+        1px solid
+        rgba(255,255,255,.08);
 
-    background:rgba(255,255,255,.025);
+    background:
+        rgba(255,255,255,.025);
 
     color:#777d90;
 
     font-size:9px;
 
-    font-weight:800;
+    font-weight:900;
 
     letter-spacing:1.1px;
 }
@@ -382,6 +498,10 @@ nav{
     color:#fff;
 
     margin-left:5px;
+
+    text-shadow:
+        0 0 12px
+        rgba(255,255,255,.4);
 }
 
 
@@ -398,8 +518,8 @@ nav{
     transform:
         translate(-50%,-50%);
 
-    width:150px;
-    height:62px;
+    width:155px;
+    height:64px;
 
     display:flex;
 
@@ -414,14 +534,14 @@ nav{
 
     filter:
         drop-shadow(
-            0 0 22px
-            rgba(255,0,45,.7)
+            0 0 25px
+            rgba(255,0,45,.75)
         );
 }
 
 .eye{
-    width:55px;
-    height:55px;
+    width:56px;
+    height:56px;
 
     border-radius:50%;
 
@@ -436,8 +556,6 @@ nav{
             rgba(115,0,25,.85) 13% 27%,
             rgba(12,0,4,.98) 28% 100%
         );
-
-    position:relative;
 
     animation:
         eyeBlink 4.4s infinite;
@@ -470,10 +588,7 @@ nav{
 
 @keyframes eyeBlink{
 
-    0%,
-    43%,
-    47%,
-    100%{
+    0%,43%,47%,100%{
         transform:scaleY(1);
     }
 
@@ -483,7 +598,6 @@ nav{
 }
 
 </style>
-
 
 <nav>
 
@@ -498,7 +612,6 @@ nav{
 
 </nav>
 
-
 <div class="eyes">
 
     <div class="eye">
@@ -510,7 +623,6 @@ nav{
     </div>
 
 </div>
-
 
 <section class="hero">
 
@@ -524,9 +636,10 @@ nav{
     </h1>
 
     <p class="hero-description">
-        Hitung estimasi Speed Akhir kamu berdasarkan
-        Speed Awal, Treadmill, Trail, Multiplayer,
-        dan durasi AFK secara otomatis.
+        Pilih Trail dan Treadmill kamu,
+        masukkan Speed Awal, Multiplayer,
+        lalu biarkan calculator menghitung
+        Speed Akhir secara otomatis.
     </p>
 
     <div class="calibration-pill">
@@ -536,10 +649,10 @@ nav{
 
 </section>
 
-  <style>
+    <style>
 
 /* =========================
-   OWNER NOTICE
+   NOTICE
 ========================= */
 
 .notice{
@@ -554,24 +667,26 @@ nav{
 
     margin-bottom:18px;
 
-    padding:15px 16px;
+    padding:16px;
 
-    border-radius:16px;
+    border-radius:17px;
 
     border:
         1px solid
-        rgba(255,22,72,.16);
+        rgba(255,22,72,.2);
 
     background:
         linear-gradient(
             135deg,
-            rgba(255,22,72,.07),
-            rgba(255,255,255,.018)
+            rgba(255,22,72,.09),
+            rgba(139,92,255,.05)
         );
 
     box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.18),
         inset 0 1px 0
-        rgba(255,255,255,.025);
+        rgba(255,255,255,.035);
 }
 
 .notice-content{
@@ -582,7 +697,8 @@ nav{
 
 .notice-title{
     font-size:12px;
-    font-weight:900;
+
+    font-weight:950;
 }
 
 .notice-subtitle{
@@ -596,7 +712,9 @@ nav{
 
     text-decoration:none;
 
-    padding:11px 15px;
+    padding:
+        11px
+        16px;
 
     border-radius:11px;
 
@@ -606,7 +724,7 @@ nav{
         linear-gradient(
             135deg,
             #ff1648,
-            #bd002f
+            #b90031
         );
 
     font-size:9px;
@@ -616,25 +734,25 @@ nav{
     letter-spacing:.8px;
 
     box-shadow:
-        0 0 22px
-        rgba(255,22,72,.22);
+        0 0 25px
+        rgba(255,22,72,.25);
 
     transition:
-        transform .2s ease,
-        box-shadow .2s ease;
+        transform .2s,
+        box-shadow .2s;
 }
 
 .join-button:hover{
     transform:translateY(-2px);
 
     box-shadow:
-        0 7px 30px
-        rgba(255,22,72,.3);
+        0 8px 35px
+        rgba(255,22,72,.4);
 }
 
 
 /* =========================
-   MAIN CARD
+   CARD
 ========================= */
 
 .card{
@@ -648,25 +766,51 @@ nav{
 
     border-radius:var(--radius);
 
-    border:1px solid var(--line);
+    border:
+        1px solid var(--line);
 
     background:
         linear-gradient(
             145deg,
-            rgba(18,20,30,.86),
-            rgba(10,11,18,.78)
+            rgba(20,19,32,.88),
+            rgba(9,9,17,.82)
         );
 
     backdrop-filter:blur(20px);
 
     box-shadow:
-        0 25px 70px rgba(0,0,0,.24),
+        0 25px 70px
+        rgba(0,0,0,.27),
         inset 0 1px 0
-        rgba(255,255,255,.035);
+        rgba(255,255,255,.04);
+
+    overflow:hidden;
+}
+
+.card::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+    right:0;
+
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,22,72,.5),
+            rgba(139,92,255,.5),
+            transparent
+        );
 }
 
 .section-heading{
     display:flex;
+
     align-items:center;
 
     gap:12px;
@@ -675,38 +819,54 @@ nav{
 }
 
 .section-icon{
-    width:40px;
-    height:40px;
+    width:42px;
+    height:42px;
 
     display:grid;
     place-items:center;
 
     flex-shrink:0;
 
-    border-radius:12px;
+    border-radius:13px;
 
     color:#fff;
 
     background:
-        rgba(255,22,72,.09);
+        linear-gradient(
+            135deg,
+            rgba(255,22,72,.13),
+            rgba(255,22,72,.035)
+        );
 
     border:
         1px solid
-        rgba(255,22,72,.15);
+        rgba(255,22,72,.2);
+
+    box-shadow:
+        0 0 25px
+        rgba(255,22,72,.08);
 }
 
 .section-icon.blue{
     background:
-        rgba(79,140,255,.08);
+        linear-gradient(
+            135deg,
+            rgba(67,140,255,.13),
+            rgba(67,140,255,.035)
+        );
 
     border-color:
-        rgba(79,140,255,.16);
+        rgba(67,140,255,.2);
+
+    box-shadow:
+        0 0 25px
+        rgba(67,140,255,.08);
 }
 
 .section-heading h2{
     font-size:15px;
 
-    font-weight:900;
+    font-weight:950;
 }
 
 .section-heading p{
@@ -719,7 +879,7 @@ nav{
 
 
 /* =========================
-   FORM GRID
+   SELECT / INPUT
 ========================= */
 
 .form-grid{
@@ -740,19 +900,20 @@ nav{
 }
 
 .field label{
-    color:#bfc3d2;
+    color:#c3c6d4;
 
     font-size:10px;
 
-    font-weight:800;
+    font-weight:850;
 
     letter-spacing:.2px;
 }
 
-.field input{
+.field input,
+.field select{
     width:100%;
 
-    height:49px;
+    height:50px;
 
     border-radius:13px;
 
@@ -763,7 +924,7 @@ nav{
         rgba(255,255,255,.075);
 
     background:
-        rgba(0,0,0,.28);
+        rgba(0,0,0,.3);
 
     color:#fff;
 
@@ -773,17 +934,45 @@ nav{
     font-size:12px;
 
     transition:
-        border .2s ease,
-        box-shadow .2s ease,
-        background .2s ease;
+        border .2s,
+        box-shadow .2s,
+        background .2s;
 }
 
-.field input:hover{
+.field select{
+    cursor:pointer;
+
+    appearance:none;
+
+    background-image:
+        linear-gradient(45deg,transparent 50%,#85899c 50%),
+        linear-gradient(135deg,#85899c 50%,transparent 50%);
+
+    background-position:
+        calc(100% - 18px) 21px,
+        calc(100% - 13px) 21px;
+
+    background-size:
+        5px 5px,
+        5px 5px;
+
+    background-repeat:no-repeat;
+}
+
+.field select option{
+    background:#11111b;
+
+    color:#fff;
+}
+
+.field input:hover,
+.field select:hover{
     background:
         rgba(255,255,255,.025);
 }
 
-.field input:focus{
+.field input:focus,
+.field select:focus{
     border-color:
         rgba(255,22,72,.55);
 
@@ -793,8 +982,8 @@ nav{
     box-shadow:
         0 0 0 3px
         rgba(255,22,72,.06),
-        0 0 24px
-        rgba(255,22,72,.07);
+        0 0 25px
+        rgba(255,22,72,.08);
 }
 
 .field input::placeholder{
@@ -810,7 +999,6 @@ nav{
 }
 
 </style>
-
 
 <div class="notice">
 
@@ -837,7 +1025,6 @@ nav{
 
 </div>
 
-
 <section class="card">
 
     <div class="section-heading">
@@ -853,16 +1040,14 @@ nav{
             </h2>
 
             <p>
-                Masukkan statistik speed kamu
+                Pilih equipment speed yang kamu gunakan
             </p>
 
         </div>
 
     </div>
 
-
     <div class="form-grid">
-
 
         <div class="field">
 
@@ -878,27 +1063,10 @@ nav{
             >
 
             <small>
-                Contoh format: K, M, B, T
+                Contoh format: K, M, B, T, Q
             </small>
 
         </div>
-
-
-        <div class="field">
-
-            <label>
-                TREADMILL
-            </label>
-
-            <input
-                id="treadmill"
-                type="text"
-                autocomplete="off"
-                placeholder="Masukkan nilai treadmill yang kamu gunakan"
-            >
-
-        </div>
-
 
         <div class="field">
 
@@ -906,15 +1074,39 @@ nav{
                 TRAIL
             </label>
 
-            <input
-                id="trail"
-                type="text"
-                autocomplete="off"
-                placeholder="Masukkan nilai trail yang kamu gunakan"
-            >
+            <select id="trailSelect">
+
+                <option value="">
+                    — Pilih Trail —
+                </option>
+
+            </select>
+
+            <small id="trailInfo">
+                Pilih trail untuk melihat multiplier
+            </small>
 
         </div>
 
+        <div class="field">
+
+            <label>
+                TREADMILL
+            </label>
+
+            <select id="treadmillSelect">
+
+                <option value="">
+                    — Pilih Treadmill —
+                </option>
+
+            </select>
+
+            <small id="treadmillInfo">
+                Pilih treadmill untuk melihat speed/step
+            </small>
+
+        </div>
 
         <div class="field">
 
@@ -935,12 +1127,11 @@ nav{
 
         </div>
 
-
     </div>
 
 </section>
 
-  <section class="card">
+    <section class="card">
 
     <div class="section-heading">
 
@@ -962,9 +1153,7 @@ nav{
 
     </div>
 
-
     <div class="form-grid">
-
 
         <div class="field">
 
@@ -983,7 +1172,6 @@ nav{
 
         </div>
 
-
         <div class="field">
 
             <label>
@@ -1001,7 +1189,6 @@ nav{
 
         </div>
 
-
         <div class="field">
 
             <label>
@@ -1016,7 +1203,6 @@ nav{
             >
 
         </div>
-
 
         <div class="field">
 
@@ -1033,7 +1219,6 @@ nav{
 
         </div>
 
-
     </div>
 
 </section>
@@ -1042,7 +1227,191 @@ nav{
 <style>
 
 /* =========================
-   RESULT CARD
+   SELECTED EQUIPMENT
+========================= */
+
+.equipment-preview{
+    position:relative;
+
+    z-index:3;
+
+    margin-bottom:18px;
+
+    padding:18px;
+
+    border-radius:20px;
+
+    border:
+        1px solid
+        rgba(139,92,255,.18);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(139,92,255,.08),
+            rgba(255,22,72,.045),
+            rgba(0,229,255,.025)
+        );
+
+    box-shadow:
+        0 20px 55px
+        rgba(0,0,0,.2),
+        inset 0 1px 0
+        rgba(255,255,255,.035);
+}
+
+.equipment-title{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:13px;
+}
+
+.equipment-title h2{
+    font-size:13px;
+
+    font-weight:950;
+}
+
+.equipment-title span{
+    color:#686d80;
+
+    font-size:8px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+}
+
+.equipment-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:10px;
+}
+
+.equipment-box{
+    padding:13px;
+
+    border-radius:14px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.055);
+
+    background:
+        rgba(0,0,0,.18);
+}
+
+.equipment-box small{
+    display:block;
+
+    color:#64697c;
+
+    font-size:7px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+}
+
+.equipment-box strong{
+    display:block;
+
+    margin-top:6px;
+
+    color:#f0f1f8;
+
+    font-size:12px;
+}
+
+.equipment-box em{
+    display:block;
+
+    margin-top:4px;
+
+    color:#8e93a6;
+
+    font-size:8px;
+
+    font-style:normal;
+}
+
+.equipment-box.trail{
+    border-color:
+        rgba(255,22,72,.12);
+}
+
+.equipment-box.treadmill{
+    border-color:
+        rgba(67,140,255,.12);
+}
+
+</style>
+
+
+<section class="equipment-preview">
+
+    <div class="equipment-title">
+
+        <h2>
+            🎮 Equipment Aktif
+        </h2>
+
+        <span>
+            AUTO DETECT
+        </span>
+
+    </div>
+
+    <div class="equipment-grid">
+
+        <div class="equipment-box trail">
+
+            <small>
+                TRAIL
+            </small>
+
+            <strong id="selectedTrail">
+                Belum dipilih
+            </strong>
+
+            <em id="selectedTrailMeta">
+                -
+            </em>
+
+        </div>
+
+        <div class="equipment-box treadmill">
+
+            <small>
+                TREADMILL
+            </small>
+
+            <strong id="selectedTreadmill">
+                Belum dipilih
+            </strong>
+
+            <em id="selectedTreadmillMeta">
+                -
+            </em>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+    <style>
+
+/* =========================
+   RESULT
 ========================= */
 
 .result-card{
@@ -1054,28 +1423,60 @@ nav{
 
     margin-bottom:18px;
 
-    padding:32px 20px;
+    padding:34px 20px;
 
     text-align:center;
 
-    border-radius:24px;
+    border-radius:25px;
 
     border:
         1px solid
-        rgba(255,22,72,.19);
+        rgba(255,22,72,.2);
 
     background:
         radial-gradient(
             circle at 50% -20%,
-            rgba(255,22,72,.13),
+            rgba(255,22,72,.15),
             transparent 58%
         ),
-        rgba(13,15,23,.86);
+        radial-gradient(
+            circle at 10% 100%,
+            rgba(139,92,255,.07),
+            transparent 35%
+        ),
+        rgba(13,15,23,.88);
 
     box-shadow:
-        0 25px 70px rgba(0,0,0,.28),
+        0 25px 75px
+        rgba(0,0,0,.3),
         inset 0 1px 0
         rgba(255,255,255,.04);
+}
+
+.result-card::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:15%;
+    right:15%;
+
+    height:2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--red),
+            var(--purple),
+            transparent
+        );
+
+    filter:
+        blur(.5px);
+
+    opacity:.8;
 }
 
 .result-card::after{
@@ -1085,14 +1486,14 @@ nav{
 
     left:15%;
     right:15%;
-    bottom:-60px;
+    bottom:-70px;
 
-    height:120px;
+    height:130px;
 
     border-radius:50%;
 
     background:
-        rgba(255,22,72,.08);
+        rgba(255,22,72,.09);
 
     filter:blur(45px);
 
@@ -1101,6 +1502,7 @@ nav{
 
 .result-label{
     position:relative;
+
     z-index:2;
 
     color:#777d90;
@@ -1109,11 +1511,12 @@ nav{
 
     font-weight:950;
 
-    letter-spacing:2px;
+    letter-spacing:2.5px;
 }
 
 .big-result{
     position:relative;
+
     z-index:2;
 
     margin-top:10px;
@@ -1121,7 +1524,7 @@ nav{
     color:#fff;
 
     font-size:
-        clamp(48px,11vw,82px);
+        clamp(48px,11vw,84px);
 
     line-height:1;
 
@@ -1132,43 +1535,77 @@ nav{
     word-break:break-word;
 
     text-shadow:
-        0 0 32px
-        rgba(255,22,72,.2);
+        0 0 35px
+        rgba(255,22,72,.25);
+
+    animation:
+        resultGlow 3s ease-in-out infinite;
+}
+
+@keyframes resultGlow{
+
+    0%,100%{
+        text-shadow:
+            0 0 25px
+            rgba(255,22,72,.18);
+    }
+
+    50%{
+        text-shadow:
+            0 0 42px
+            rgba(255,22,72,.38);
+    }
 }
 
 .step-result{
     position:relative;
+
     z-index:2;
 
     display:inline-flex;
 
     align-items:center;
 
-    margin-top:13px;
+    margin-top:14px;
 
-    padding:8px 13px;
+    padding:
+        9px
+        14px;
 
     border-radius:999px;
 
     color:#ff7892;
 
     background:
-        rgba(255,22,72,.065);
+        linear-gradient(
+            135deg,
+            rgba(255,22,72,.09),
+            rgba(139,92,255,.07)
+        );
 
     border:
         1px solid
-        rgba(255,22,72,.14);
+        rgba(255,22,72,.16);
 
     font-size:11px;
 
-    font-weight:900;
+    font-weight:950;
+
+    box-shadow:
+        0 0 25px
+        rgba(255,22,72,.07);
 }
 
 .result-info{
     position:relative;
+
     z-index:2;
 
-    width:min(510px,100%);
+    width:
+        min(
+            520px,
+            100%
+        );
 
     margin:
         21px
@@ -1185,8 +1622,7 @@ nav{
     gap:15px;
 
     padding:
-        12px
-        0;
+        12px 0;
 
     border-top:
         1px solid
@@ -1198,7 +1634,7 @@ nav{
 }
 
 .result-row strong{
-    color:#dfe2ec;
+    color:#e5e7ef;
 
     text-align:right;
 
@@ -1228,7 +1664,6 @@ nav{
         0 / step
     </div>
 
-
     <div class="result-info">
 
         <div class="result-row">
@@ -1243,7 +1678,6 @@ nav{
 
         </div>
 
-
         <div class="result-row">
 
             <span>
@@ -1255,7 +1689,6 @@ nav{
             </strong>
 
         </div>
-
 
         <div class="result-row">
 
@@ -1273,7 +1706,12 @@ nav{
 
 </section>
 
-  <style>
+
+    <style>
+
+/* =========================
+   TIMELINE
+========================= */
 
 .timeline-card{
     position:relative;
@@ -1286,15 +1724,21 @@ nav{
 
     border-radius:var(--radius);
 
-    border:1px solid var(--line);
+    border:
+        1px solid var(--line);
 
-    background:var(--card);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(18,18,30,.84),
+            rgba(9,9,17,.8)
+        );
 
     backdrop-filter:blur(18px);
 
     box-shadow:
         0 20px 55px
-        rgba(0,0,0,.2);
+        rgba(0,0,0,.22);
 }
 
 .timeline-header{
@@ -1310,6 +1754,8 @@ nav{
 
 .timeline-header h2{
     font-size:15px;
+
+    font-weight:950;
 }
 
 .timeline-header p{
@@ -1378,16 +1824,16 @@ nav{
     background:var(--red);
 
     box-shadow:
-        0 0 14px
-        rgba(255,22,72,.6);
+        0 0 15px
+        rgba(255,22,72,.65);
 }
 
 .timeline-dot.end{
     background:var(--blue);
 
     box-shadow:
-        0 0 14px
-        rgba(79,140,255,.6);
+        0 0 15px
+        rgba(67,140,255,.65);
 }
 
 .timeline-content span{
@@ -1421,91 +1867,21 @@ nav{
         linear-gradient(
             90deg,
             var(--red),
+            var(--purple),
             var(--blue)
         );
 
-    opacity:.32;
+    opacity:.4;
+
+    box-shadow:
+        0 0 8px
+        rgba(139,92,255,.25);
 }
 
-</style>
 
-
-<section class="timeline-card">
-
-    <div class="timeline-header">
-
-        <div>
-
-            <h2>
-                AFK Timeline
-            </h2>
-
-            <p>
-                Waktu mulai sampai selesai
-            </p>
-
-        </div>
-
-        <div class="auto-badge">
-
-            <i class="auto-dot"></i>
-
-            AUTO
-
-        </div>
-
-    </div>
-
-
-    <div class="timeline">
-
-
-        <div class="timeline-item">
-
-            <div class="timeline-dot"></div>
-
-            <div class="timeline-content">
-
-                <span>
-                    MULAI AFK
-                </span>
-
-                <strong id="timelineStart">
-                    -
-                </strong>
-
-            </div>
-
-        </div>
-
-
-        <div class="timeline-line"></div>
-
-
-        <div class="timeline-item">
-
-            <div class="timeline-dot end"></div>
-
-            <div class="timeline-content">
-
-                <span>
-                    SELESAI AFK
-                </span>
-
-                <strong id="timelineEnd">
-                    -
-                </strong>
-
-            </div>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-  <style>
+/* =========================
+   ESTIMATE
+========================= */
 
 .estimate-card{
     position:relative;
@@ -1518,9 +1894,15 @@ nav{
 
     border-radius:var(--radius);
 
-    border:1px solid var(--line);
+    border:
+        1px solid var(--line);
 
-    background:var(--card);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(18,18,30,.84),
+            rgba(9,9,17,.8)
+        );
 
     backdrop-filter:blur(18px);
 
@@ -1535,6 +1917,8 @@ nav{
 
 .estimate-heading h2{
     font-size:15px;
+
+    font-weight:950;
 }
 
 .estimate-heading p{
@@ -1562,7 +1946,8 @@ nav{
 
     gap:12px;
 
-    padding:12px 13px;
+    padding:
+        12px 13px;
 
     border-radius:12px;
 
@@ -1574,19 +1959,20 @@ nav{
         rgba(255,255,255,.018);
 
     transition:
-        background .2s ease,
-        border .2s ease,
-        transform .2s ease;
+        transform .2s,
+        background .2s,
+        border .2s;
 }
 
 .estimate-item:hover{
-    transform:translateY(-1px);
+    transform:
+        translateY(-2px);
 
     background:
-        rgba(255,255,255,.03);
+        rgba(255,255,255,.035);
 
     border-color:
-        rgba(255,22,72,.11);
+        rgba(255,22,72,.14);
 }
 
 .estimate-item span{
@@ -1600,64 +1986,94 @@ nav{
 
     font-size:10px;
 
-    font-weight:900;
-}
-
-
-/* footer */
-
-footer{
-    position:relative;
-
-    z-index:3;
-
-    padding:
-        14px
-        0
-        32px;
-
-    text-align:center;
-}
-
-.footer-logo{
-    font-size:12px;
-
     font-weight:950;
-
-    letter-spacing:2px;
-}
-
-.footer-logo span{
-    color:var(--red);
-}
-
-.footer-text{
-    margin-top:6px;
-
-    color:#4f5565;
-
-    font-size:7px;
-
-    letter-spacing:1.2px;
 }
 
 </style>
 
+<section class="timeline-card">
+
+    <div class="timeline-header">
+
+        <div>
+
+            <h2>
+                AFK Timeline
+            </h2>
+
+            <p>
+                Waktu mulai sampai selesai
+            </p>
+
+        </div>
+
+        <div class="auto-badge">
+
+            <i class="auto-dot"></i>
+
+            AUTO
+
+        </div>
+
+    </div>
+
+    <div class="timeline">
+
+        <div class="timeline-item">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-content">
+
+                <span>
+                    MULAI AFK
+                </span>
+
+                <strong id="timelineStart">
+                    -
+                </strong>
+
+            </div>
+
+        </div>
+
+        <div class="timeline-line"></div>
+
+        <div class="timeline-item">
+
+            <div class="timeline-dot end"></div>
+
+            <div class="timeline-content">
+
+                <span>
+                    SELESAI AFK
+                </span>
+
+                <strong id="timelineEnd">
+                    -
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
 <section class="estimate-card">
 
     <div class="estimate-heading">
 
         <h2>
-            Estimasi AFK
+            📊 Estimasi AFK
         </h2>
 
         <p>
-            Perkiraan Speed Akhir untuk beberapa durasi
+            Perkiraan Speed Akhir untuk 2–30 hari
         </p>
 
     </div>
-
 
     <div
         id="estimateList"
@@ -1666,21 +2082,55 @@ footer{
 
 </section>
 
+    <style>
 
-<footer>
+/* =========================
+   FOOTER
+========================= */
 
-    <div class="footer-logo">
-        YAKKZZ<span>.</span> CALCULATOR
-    </div>
+footer{
+    position:relative;
 
-    <div class="footer-text">
-        STEAL AN EGG • AFK SPEED CALCULATOR
-    </div>
+    z-index:3;
 
-</footer>
+    padding:
+        16px
+        0
+        35px;
+
+    text-align:center;
+}
+
+.footer-logo{
+    font-size:13px;
+
+    font-weight:1000;
+
+    letter-spacing:2px;
+}
+
+.footer-logo span{
+    color:var(--red);
+
+    text-shadow:
+        0 0 15px
+        rgba(255,22,72,.45);
+}
+
+.footer-text{
+    margin-top:7px;
+
+    color:#4f5565;
+
+    font-size:7px;
+
+    letter-spacing:1.3px;
+}
 
 
-  <style>
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:700px){
 
@@ -1688,7 +2138,7 @@ footer{
         width:
             min(
                 100% - 18px,
-                920px
+                940px
             );
     }
 
@@ -1702,7 +2152,10 @@ footer{
 
     .status{
         font-size:7px;
-        padding:6px 9px;
+
+        padding:
+            6px
+            9px;
     }
 
     .hero{
@@ -1714,7 +2167,10 @@ footer{
 
     .hero-badge{
         font-size:8px;
-        padding:7px 10px;
+
+        padding:
+            7px
+            10px;
     }
 
     .hero h1{
@@ -1756,6 +2212,7 @@ footer{
     }
 
     .card,
+    .equipment-preview,
     .result-card,
     .timeline-card,
     .estimate-card{
@@ -1765,6 +2222,10 @@ footer{
     }
 
     .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .equipment-grid{
         grid-template-columns:1fr;
     }
 
@@ -1780,7 +2241,8 @@ footer{
         font-size:9px;
     }
 
-    .field input{
+    .field input,
+    .field select{
         height:47px;
 
         font-size:11px;
@@ -1821,6 +2283,7 @@ footer{
             linear-gradient(
                 180deg,
                 var(--red),
+                var(--purple),
                 var(--blue)
             );
     }
@@ -1877,17 +2340,219 @@ footer{
 
 </style>
 
+<footer>
 
-  <script>
+    <div class="footer-logo">
+        YAKKZZ<span>.</span> CALCULATOR
+    </div>
+
+    <div class="footer-text">
+        STEAL AN EGG • AFK SPEED CALCULATOR
+    </div>
+
+</footer>
+
+    <script>
 
 "use strict";
 
 
 /* =====================================================
-   FIXED CALIBRATION
+   CALIBRATION
 ===================================================== */
 
 const CALIBRATION = 11;
+
+
+/* =====================================================
+   TRAIL DATA
+===================================================== */
+
+const TRAILS = [
+
+    {
+        name:"Gray Trail",
+        rarity:"Common",
+        multiplier:1.5,
+        price:"$100"
+    },
+
+    {
+        name:"Green Trail",
+        rarity:"Uncommon",
+        multiplier:2,
+        price:"$5.000 (5K)"
+    },
+
+    {
+        name:"Blue Trail",
+        rarity:"Rare",
+        multiplier:2.5,
+        price:"$75.000 (75K)"
+    },
+
+    {
+        name:"Purple Trail",
+        rarity:"Epic",
+        multiplier:3,
+        price:"$1.500.000 (1.5M)"
+    },
+
+    {
+        name:"Golden Trail",
+        rarity:"Legendary",
+        multiplier:3.5,
+        price:"$30.000.000 (30M)"
+    },
+
+    {
+        name:"Red Trail",
+        rarity:"Mythic",
+        multiplier:4,
+        price:"$750.000.000 (750M)"
+    },
+
+    {
+        name:"Galaxy Trail",
+        rarity:"Cosmic",
+        multiplier:5,
+        price:"$20 Miliar (20B)"
+    },
+
+    {
+        name:"Secret Trail",
+        rarity:"Secret",
+        multiplier:7,
+        price:"$500 Miliar (500B)"
+    },
+
+    {
+        name:"Eternal Trail",
+        rarity:"Eternal",
+        multiplier:10,
+        price:"$12.5 Triliun (12.5T)"
+    },
+
+    {
+        name:"Divine Trail",
+        rarity:"Divine",
+        multiplier:14,
+        price:"$300 Triliun (300T)"
+    },
+
+    {
+        name:"Moonbloom Trail 🔥",
+        rarity:"Divine",
+        multiplier:20,
+        price:"$5 Kuadriliun (5Qa)"
+    }
+
+];
+
+
+/* =====================================================
+   TREADMILL DATA
+===================================================== */
+
+const TREADMILLS = [
+
+    {
+        level:1,
+        name:"Treadmill (Base)",
+        rarity:"Common",
+        speed:2,
+        price:"Gratis"
+    },
+
+    {
+        level:2,
+        name:"Sci-Fi Treadmill",
+        rarity:"Uncommon",
+        speed:5,
+        price:"$15.000 (15K)"
+    },
+
+    {
+        level:3,
+        name:"Flame Treadmill",
+        rarity:"Rare",
+        speed:12,
+        price:"$250.000 (250K)"
+    },
+
+    {
+        level:4,
+        name:"Celebrity Treadmill",
+        rarity:"Epic",
+        speed:30,
+        price:"$5.000.000 (5M)"
+    },
+
+    {
+        level:5,
+        name:"Golden Treadmill",
+        rarity:"Legendary",
+        speed:80,
+        price:"$120.000.000 (120M)"
+    },
+
+    {
+        level:6,
+        name:"The Freeze Treadmill",
+        rarity:"Mythic",
+        speed:100,
+        price:"$3 Miliar (3B)"
+    },
+
+    {
+        level:7,
+        name:"Lucky Block Treadmill",
+        rarity:"Cosmic",
+        speed:200,
+        price:"$75 Miliar (75B)"
+    },
+
+    {
+        level:8,
+        name:"Hacker Treadmill",
+        rarity:"Secret",
+        speed:500,
+        price:"$3 Triliun (3T)"
+    },
+
+    {
+        level:9,
+        name:"Demonic Treadmill",
+        rarity:"Eternal",
+        speed:1000,
+        price:"$50 Triliun (50T)"
+    },
+
+    {
+        level:10,
+        name:"Angelic Treadmill",
+        rarity:"Divine",
+        speed:2000,
+        price:"$1 Kuadriliun (1Qa)"
+    },
+
+    {
+        level:11,
+        name:"Astral Treadmill",
+        rarity:"Titan",
+        speed:3000,
+        price:"$15 Kuadriliun (15Qa)"
+    },
+
+    {
+        level:12,
+        name:"Void / Galaxy Treadmill 🔥",
+        rarity:"Supreme / Max",
+        speed:8500,
+        price:"$7.5 Kuadriliun (7.5Qa)"
+    }
+
+];
 
 
 /* =====================================================
@@ -1897,11 +2562,11 @@ const CALIBRATION = 11;
 const speedAwalEl =
     document.getElementById("speedAwal");
 
-const treadmillEl =
-    document.getElementById("treadmill");
+const trailSelectEl =
+    document.getElementById("trailSelect");
 
-const trailEl =
-    document.getElementById("trail");
+const treadmillSelectEl =
+    document.getElementById("treadmillSelect");
 
 const multiplayerEl =
     document.getElementById("multiplayer");
@@ -1917,6 +2582,24 @@ const durasiHariEl =
 
 const durasiJamEl =
     document.getElementById("durasiJam");
+
+const trailInfoEl =
+    document.getElementById("trailInfo");
+
+const treadmillInfoEl =
+    document.getElementById("treadmillInfo");
+
+const selectedTrailEl =
+    document.getElementById("selectedTrail");
+
+const selectedTrailMetaEl =
+    document.getElementById("selectedTrailMeta");
+
+const selectedTreadmillEl =
+    document.getElementById("selectedTreadmill");
+
+const selectedTreadmillMetaEl =
+    document.getElementById("selectedTreadmillMeta");
 
 const speedAkhirEl =
     document.getElementById("speedAkhir");
@@ -1944,16 +2627,61 @@ const estimateListEl =
 
 
 /* =====================================================
+   FILL TRAIL OPTIONS
+===================================================== */
+
+TRAILS.forEach(
+    (trail,index) => {
+
+        const option =
+            document.createElement(
+                "option"
+            );
+
+        option.value =
+            index;
+
+        option.textContent =
+            `${trail.name} • x${trail.multiplier}`;
+
+        trailSelectEl.appendChild(
+            option
+        );
+    }
+);
+
+
+/* =====================================================
+   FILL TREADMILL OPTIONS
+===================================================== */
+
+TREADMILLS.forEach(
+    (treadmill,index) => {
+
+        const option =
+            document.createElement(
+                "option"
+            );
+
+        option.value =
+            index;
+
+        option.textContent =
+            `Lv.${treadmill.level} • ${treadmill.name} • +${formatRaw(treadmill.speed)}`;
+
+        treadmillSelectEl.appendChild(
+            option
+        );
+    }
+);
+
+</script>
+
+
+    <script>
+
+/* =====================================================
    PARSE NUMBER
-
-   Supports:
-
-   60
-   60K
-   1.5M
-   55.5B
-   2T
-   1Q
 ===================================================== */
 
 function parseNumber(value){
@@ -1975,12 +2703,10 @@ function parseNumber(value){
         return 0;
     }
 
-
     const match =
         text.match(
             /^(-?[\d.]+)([KMBTQ])?$/i
         );
-
 
     if(!match){
 
@@ -1997,45 +2723,53 @@ function parseNumber(value){
             : 0;
     }
 
-
     const number =
         Number(match[1]);
-
 
     if(!Number.isFinite(number)){
         return 0;
     }
-
 
     const suffix =
         (
             match[2] || ""
         ).toUpperCase();
 
-
     const multiplier = {
 
         "":1,
-
         "K":1e3,
-
         "M":1e6,
-
         "B":1e9,
-
         "T":1e12,
-
         "Q":1e15
 
     }[suffix];
-
 
     return number * multiplier;
 }
 
 
 /* =====================================================
-   FORMAT SHORT
+   RAW FORMAT
+===================================================== */
+
+function formatRaw(value){
+
+    if(
+        !Number.isFinite(value)
+    ){
+        return "0";
+    }
+
+    return Number(
+        value.toFixed(3)
+    ).toString();
+}
+
+
+/* =====================================================
+   SHORT FORMAT
 ===================================================== */
 
 function formatShort(value){
@@ -2046,10 +2780,8 @@ function formatShort(value){
         return "0";
     }
 
-
     const abs =
         Math.abs(value);
-
 
     if(abs >= 1e15){
 
@@ -2061,7 +2793,6 @@ function formatShort(value){
         );
     }
 
-
     if(abs >= 1e12){
 
         return (
@@ -2071,7 +2802,6 @@ function formatShort(value){
             + "T"
         );
     }
-
 
     if(abs >= 1e9){
 
@@ -2083,7 +2813,6 @@ function formatShort(value){
         );
     }
 
-
     if(abs >= 1e6){
 
         return (
@@ -2094,7 +2823,6 @@ function formatShort(value){
         );
     }
 
-
     if(abs >= 1e3){
 
         return (
@@ -2104,7 +2832,6 @@ function formatShort(value){
             + "K"
         );
     }
-
 
     return cleanDecimal(value);
 }
@@ -2118,10 +2845,111 @@ function cleanDecimal(value){
         return "0";
     }
 
-
     return Number(
         value.toFixed(3)
     ).toString();
+}
+
+
+/* =====================================================
+   SELECTED TRAIL
+===================================================== */
+
+function getSelectedTrail(){
+
+    if(
+        trailSelectEl.value === ""
+    ){
+        return null;
+    }
+
+    return TRAILS[
+        Number(
+            trailSelectEl.value
+        )
+    ] || null;
+}
+
+
+/* =====================================================
+   SELECTED TREADMILL
+===================================================== */
+
+function getSelectedTreadmill(){
+
+    if(
+        treadmillSelectEl.value === ""
+    ){
+        return null;
+    }
+
+    return TREADMILLS[
+        Number(
+            treadmillSelectEl.value
+        )
+    ] || null;
+}
+
+
+/* =====================================================
+   UPDATE EQUIPMENT UI
+===================================================== */
+
+function updateEquipmentUI(){
+
+    const trail =
+        getSelectedTrail();
+
+    const treadmill =
+        getSelectedTreadmill();
+
+
+    if(trail){
+
+        trailInfoEl.textContent =
+            `${trail.rarity} • x${trail.multiplier} • ${trail.price}`;
+
+        selectedTrailEl.textContent =
+            trail.name;
+
+        selectedTrailMetaEl.textContent =
+            `${trail.rarity} • x${trail.multiplier} • ${trail.price}`;
+
+    }else{
+
+        trailInfoEl.textContent =
+            "Pilih trail untuk melihat multiplier";
+
+        selectedTrailEl.textContent =
+            "Belum dipilih";
+
+        selectedTrailMetaEl.textContent =
+            "-";
+    }
+
+
+    if(treadmill){
+
+        treadmillInfoEl.textContent =
+            `${treadmill.rarity} • +${formatRaw(treadmill.speed)} speed/step • ${treadmill.price}`;
+
+        selectedTreadmillEl.textContent =
+            treadmill.name;
+
+        selectedTreadmillMetaEl.textContent =
+            `Lv.${treadmill.level} • +${formatRaw(treadmill.speed)} • ${treadmill.rarity}`;
+
+    }else{
+
+        treadmillInfoEl.textContent =
+            "Pilih treadmill untuk melihat speed/step";
+
+        selectedTreadmillEl.textContent =
+            "Belum dipilih";
+
+        selectedTreadmillMetaEl.textContent =
+            "-";
+    }
 }
 
 
@@ -2140,34 +2968,28 @@ function formatDateTime(date){
         return "-";
     }
 
-
     const dd =
         String(
             date.getDate()
         ).padStart(2,"0");
-
 
     const mm =
         String(
             date.getMonth()+1
         ).padStart(2,"0");
 
-
     const yyyy =
         date.getFullYear();
-
 
     const hh =
         String(
             date.getHours()
         ).padStart(2,"0");
 
-
     const minute =
         String(
             date.getMinutes()
         ).padStart(2,"0");
-
 
     return (
         `${dd}/${mm}/${yyyy} ` +
@@ -2189,14 +3011,11 @@ function getStartDate(){
         return null;
     }
 
-
     const dateParts =
         tanggalEl.value.split("-");
 
-
     const timeParts =
         jamMulaiEl.value.split(":");
-
 
     if(
         dateParts.length !== 3 ||
@@ -2205,12 +3024,11 @@ function getStartDate(){
         return null;
     }
 
-
     const year =
         Number(dateParts[0]);
 
     const month =
-        Number(dateParts[1]) - 1;
+        Number(dateParts[1])-1;
 
     const day =
         Number(dateParts[2]);
@@ -2220,7 +3038,6 @@ function getStartDate(){
 
     const minute =
         Number(timeParts[1]);
-
 
     const date =
         new Date(
@@ -2233,7 +3050,6 @@ function getStartDate(){
             0
         );
 
-
     if(
         Number.isNaN(
             date.getTime()
@@ -2242,14 +3058,9 @@ function getStartDate(){
         return null;
     }
 
-
     return date;
 }
 
-</script>
-
-
-  <script>
 
 /* =====================================================
    CALCULATE
@@ -2257,35 +3068,43 @@ function getStartDate(){
 
 function calculate(){
 
-    /* -----------------------------------------------
-       SPEED AWAL
-    ------------------------------------------------ */
-
     const speedAwal =
         parseNumber(
             speedAwalEl.value
         );
 
 
-    /* -----------------------------------------------
-       SPEED COMPONENTS
-    ------------------------------------------------ */
+    const trail =
+        getSelectedTrail();
 
     const treadmill =
-        parseNumber(
-            treadmillEl.value
-        );
+        getSelectedTreadmill();
 
 
-    const trail =
-        parseNumber(
-            trailEl.value
-        );
+    /*
+       Trail multiplier
+       default 0 agar belum pilih
+    */
+
+    const trailMultiplier =
+        trail
+            ? trail.multiplier
+            : 0;
+
+
+    /*
+       Treadmill speed
+    */
+
+    const treadmillSpeed =
+        treadmill
+            ? treadmill.speed
+            : 0;
 
 
     /*
        Multiplayer kosong
-       = internal x1
+       = x1 internal
     */
 
     const multiplayer =
@@ -2296,25 +3115,21 @@ function calculate(){
             );
 
 
-    /* -----------------------------------------------
+    /*
        SPEED / STEP
 
        Treadmill ×
        (Trail + Multiplayer - 1)
-    ------------------------------------------------ */
+    */
 
     const speedPerStep =
-        treadmill *
+        treadmillSpeed *
         (
-            trail +
+            trailMultiplier +
             multiplayer -
             1
         );
 
-
-    /* -----------------------------------------------
-       DURASI
-    ------------------------------------------------ */
 
     const hari =
         Math.max(
@@ -2334,18 +3149,10 @@ function calculate(){
         );
 
 
-    /*
-       Total hours
-    */
-
     const totalHours =
         (hari * 24) +
         jam;
 
-
-    /*
-       Total seconds
-    */
 
     const totalSeconds =
         totalHours *
@@ -2353,11 +3160,11 @@ function calculate(){
         60;
 
 
-    /* -----------------------------------------------
+    /*
        GAIN
 
        Speed/Step × 11 × detik
-    ------------------------------------------------ */
+    */
 
     const gain =
         speedPerStep *
@@ -2365,20 +3172,10 @@ function calculate(){
         totalSeconds;
 
 
-    /* -----------------------------------------------
-       SPEED AKHIR
-
-       Speed Awal + Gain
-    ------------------------------------------------ */
-
     const speedAkhir =
         speedAwal +
         gain;
 
-
-    /* -----------------------------------------------
-       OUTPUT SPEED
-    ------------------------------------------------ */
 
     speedPerStepEl.textContent =
         `${formatShort(speedPerStep)} / step`;
@@ -2388,9 +3185,7 @@ function calculate(){
         formatShort(speedAkhir);
 
 
-    /* -----------------------------------------------
-       OUTPUT DURASI
-    ------------------------------------------------ */
+    /* DURASI */
 
     if(totalHours <= 0){
 
@@ -2404,65 +3199,48 @@ function calculate(){
                 totalHours * 60
             );
 
-
         const days =
             Math.floor(
                 totalMinutes / 1440
             );
 
-
         const remaining =
             totalMinutes % 1440;
-
 
         const hours =
             Math.floor(
                 remaining / 60
             );
 
-
         const minutes =
             remaining % 60;
 
-
         const parts = [];
 
-
         if(days > 0){
-
             parts.push(
                 `${days} hari`
             );
-
         }
 
-
         if(hours > 0){
-
             parts.push(
                 `${hours} jam`
             );
-
         }
 
-
         if(minutes > 0){
-
             parts.push(
                 `${minutes} menit`
             );
-
         }
-
 
         durasiTextEl.textContent =
             parts.join(" ");
     }
 
 
-    /* -----------------------------------------------
-       TIMELINE
-    ------------------------------------------------ */
+    /* TIMELINE */
 
     const startDate =
         getStartDate();
@@ -2488,7 +3266,6 @@ function calculate(){
                 startDate
             );
 
-
         const endFormatted =
             formatDateTime(
                 endDate
@@ -2498,14 +3275,11 @@ function calculate(){
         mulaiTextEl.textContent =
             startFormatted;
 
-
         selesaiTextEl.textContent =
             endFormatted;
 
-
         timelineStartEl.textContent =
             startFormatted;
-
 
         timelineEndEl.textContent =
             endFormatted;
@@ -2515,23 +3289,16 @@ function calculate(){
         mulaiTextEl.textContent =
             "-";
 
-
         selesaiTextEl.textContent =
             "-";
 
-
         timelineStartEl.textContent =
             "-";
-
 
         timelineEndEl.textContent =
             "-";
     }
 
-
-    /* -----------------------------------------------
-       ESTIMATES
-    ------------------------------------------------ */
 
     buildEstimates(
         speedAwal,
@@ -2542,10 +3309,10 @@ function calculate(){
 </script>
 
 
-  <script>
+    <script>
 
 /* =====================================================
-   ESTIMATE 2 - 30 DAYS
+   ESTIMATE 2–30 DAYS
 ===================================================== */
 
 function buildEstimates(
@@ -2554,7 +3321,6 @@ function buildEstimates(
 ){
 
     estimateListEl.innerHTML = "";
-
 
     if(speedPerStep <= 0){
         return;
@@ -2567,13 +3333,6 @@ function buildEstimates(
         day++
     ){
 
-        /*
-           Hari → detik
-
-           1 hari =
-           24 × 60 × 60
-        */
-
         const seconds =
             day *
             24 *
@@ -2581,21 +3340,11 @@ function buildEstimates(
             60;
 
 
-        /*
-           Gain =
-           Speed/Step × 11 × detik
-        */
-
         const gain =
             speedPerStep *
             CALIBRATION *
             seconds;
 
-
-        /*
-           Final =
-           Speed Awal + Gain
-        */
 
         const finalSpeed =
             speedAwal +
@@ -2607,10 +3356,8 @@ function buildEstimates(
                 "div"
             );
 
-
         item.className =
             "estimate-item";
-
 
         item.innerHTML = `
             <span>
@@ -2622,7 +3369,6 @@ function buildEstimates(
             </strong>
         `;
 
-
         estimateListEl.appendChild(
             item
         );
@@ -2631,16 +3377,12 @@ function buildEstimates(
 
 
 /* =====================================================
-   AUTO CALCULATION
+   EVENTS
 ===================================================== */
 
 const inputs = [
 
     speedAwalEl,
-
-    treadmillEl,
-
-    trailEl,
 
     multiplayerEl,
 
@@ -2663,7 +3405,6 @@ inputs.forEach(
             calculate
         );
 
-
         input.addEventListener(
             "change",
             calculate
@@ -2673,8 +3414,32 @@ inputs.forEach(
 );
 
 
+trailSelectEl.addEventListener(
+    "change",
+    () => {
+
+        updateEquipmentUI();
+
+        calculate();
+
+    }
+);
+
+
+treadmillSelectEl.addEventListener(
+    "change",
+    () => {
+
+        updateEquipmentUI();
+
+        calculate();
+
+    }
+);
+
+
 /* =====================================================
-   DEFAULT DATE
+   DEFAULT DATE + TIME
 ===================================================== */
 
 (function setDefaultDateTime(){
@@ -2688,18 +3453,15 @@ inputs.forEach(
         const yyyy =
             now.getFullYear();
 
-
         const mm =
             String(
                 now.getMonth()+1
             ).padStart(2,"0");
 
-
         const dd =
             String(
                 now.getDate()
             ).padStart(2,"0");
-
 
         tanggalEl.value =
             `${yyyy}-${mm}-${dd}`;
@@ -2713,17 +3475,17 @@ inputs.forEach(
                 now.getHours()
             ).padStart(2,"0");
 
-
         const minute =
             String(
                 now.getMinutes()
             ).padStart(2,"0");
 
-
         jamMulaiEl.value =
             `${hh}:${minute}`;
     }
 
+
+    updateEquipmentUI();
 
     calculate();
 
@@ -2735,3 +3497,5 @@ inputs.forEach(
 
 </body>
 </html>
+    
+    

@@ -2,8 +2,8 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<meta name="theme-color" content="#09030a">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<meta name="theme-color" content="#07050a">
 
 <title>YAKKZZ CALCULATOR — Steal An Egg AFK Speed</title>
 
@@ -20,14 +20,14 @@ html{
 
 body{
   min-height:100vh;
-  font-family:Arial,Helvetica,sans-serif;
-  color:#fff;
-  background:
-    radial-gradient(circle at 15% 15%,rgba(255,0,70,.18),transparent 30%),
-    radial-gradient(circle at 85% 20%,rgba(100,0,255,.16),transparent 30%),
-    radial-gradient(circle at 50% 90%,rgba(255,20,100,.10),transparent 35%),
-    #050507;
   overflow-x:hidden;
+  color:#fff;
+  font-family:Arial,Helvetica,sans-serif;
+  background:
+    radial-gradient(circle at 15% 10%,rgba(255,0,75,.18),transparent 30%),
+    radial-gradient(circle at 90% 20%,rgba(100,0,255,.15),transparent 30%),
+    radial-gradient(circle at 50% 100%,rgba(255,20,90,.12),transparent 35%),
+    #050507;
 }
 
 body::before{
@@ -35,7 +35,7 @@ body::before{
   position:fixed;
   inset:0;
   pointer-events:none;
-  opacity:.18;
+  opacity:.16;
   background-image:
     linear-gradient(rgba(255,0,70,.08) 1px,transparent 1px),
     linear-gradient(90deg,rgba(255,0,70,.08) 1px,transparent 1px);
@@ -43,31 +43,23 @@ body::before{
   animation:gridMove 12s linear infinite;
 }
 
-@keyframes gridMove{
-  from{background-position:0 0}
-  to{background-position:45px 45px}
-}
-
 body::after{
   content:"";
   position:fixed;
-  width:380px;
-  height:380px;
+  width:420px;
+  height:420px;
   left:50%;
   top:42%;
   transform:translate(-50%,-50%);
   border-radius:50%;
-  background:rgba(255,0,70,.08);
-  filter:blur(80px);
+  background:rgba(255,0,70,.07);
+  filter:blur(85px);
   pointer-events:none;
 }
 
-.container{
-  width:min(940px,calc(100% - 28px));
-  margin:auto;
-  padding:28px 0 50px;
-  position:relative;
-  z-index:2;
+@keyframes gridMove{
+  from{background-position:0 0}
+  to{background-position:45px 45px}
 }
 
 ::-webkit-scrollbar{
@@ -83,19 +75,27 @@ body::after{
   border-radius:20px;
 }
 
+.container{
+  position:relative;
+  z-index:2;
+  width:min(940px,calc(100% - 28px));
+  margin:auto;
+  padding:28px 0 50px;
+}
+
 .topbar{
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   gap:12px;
   margin-bottom:18px;
 }
 
 .brand{
+  color:#ff4773;
+  font-size:13px;
   font-weight:900;
   letter-spacing:2px;
-  font-size:13px;
-  color:#ff4773;
   text-shadow:0 0 15px rgba(255,0,70,.5);
 }
 
@@ -105,10 +105,10 @@ body::after{
   gap:7px;
   padding:7px 12px;
   border:1px solid rgba(255,40,90,.3);
-  background:rgba(255,0,70,.08);
   border-radius:99px;
+  background:rgba(255,0,70,.08);
   font-size:10px;
-  font-weight:800;
+  font-weight:900;
   letter-spacing:1px;
 }
 
@@ -122,12 +122,15 @@ body::after{
 }
 
 @keyframes pulse{
-  50%{opacity:.35;transform:scale(.7)}
+  50%{
+    opacity:.35;
+    transform:scale(.7);
+  }
 }
 
 .hero{
-  text-align:center;
   padding:20px 10px 26px;
+  text-align:center;
 }
 
 .hero h1{
@@ -169,15 +172,16 @@ body::after{
   box-shadow:0 0 25px rgba(255,0,70,.08);
 }
 
-
-    <style>
+  <style>
 .owner{
+  position:relative;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   gap:18px;
-  margin:0 0 28px;
+  margin-bottom:28px;
   padding:18px 20px;
+  overflow:hidden;
   border:1px solid rgba(255,0,70,.25);
   border-radius:24px;
   background:
@@ -186,8 +190,6 @@ body::after{
   box-shadow:
     0 15px 45px rgba(0,0,0,.35),
     inset 0 0 30px rgba(255,0,70,.025);
-  position:relative;
-  overflow:hidden;
 }
 
 .owner::before{
@@ -211,22 +213,22 @@ body::after{
 }
 
 .owner-sub{
+  margin-top:7px;
   color:#827b86;
   font-size:11px;
-  margin-top:7px;
 }
 
 .join{
   flex-shrink:0;
+  padding:14px 22px;
   border:0;
   border-radius:15px;
-  padding:14px 22px;
-  color:white;
-  font-weight:1000;
+  color:#fff;
+  background:linear-gradient(135deg,#ff174f,#b60039);
   font-size:11px;
+  font-weight:1000;
   letter-spacing:1px;
   cursor:pointer;
-  background:linear-gradient(135deg,#ff174f,#b60039);
   box-shadow:0 8px 25px rgba(255,0,70,.28);
   transition:.2s;
 }
@@ -240,24 +242,31 @@ body::after{
   position:relative;
   margin-bottom:20px;
   padding:25px;
-  border-radius:28px;
+  overflow:hidden;
   border:1px solid rgba(255,255,255,.07);
+  border-radius:28px;
   background:
     linear-gradient(145deg,rgba(20,18,25,.92),rgba(8,8,12,.94));
   box-shadow:
     0 18px 55px rgba(0,0,0,.35),
     inset 0 0 35px rgba(255,0,70,.025);
-  overflow:hidden;
 }
 
 .card::before{
   content:"";
   position:absolute;
-  left:0;
   top:0;
+  left:0;
   width:100%;
   height:2px;
-  background:linear-gradient(90deg,transparent,#ff174f,#7c35ff,#ff174f,transparent);
+  background:linear-gradient(
+    90deg,
+    transparent,
+    #ff174f,
+    #7c35ff,
+    #ff174f,
+    transparent
+  );
   background-size:200% 100%;
   animation:borderFlow 5s linear infinite;
 }
@@ -274,15 +283,20 @@ body::after{
 }
 
 .icon{
-  width:60px;
-  height:60px;
-  border-radius:20px;
   display:grid;
   place-items:center;
+  width:60px;
+  height:60px;
   flex-shrink:0;
-  font-size:27px;
-  background:linear-gradient(145deg,rgba(255,0,70,.13),rgba(120,0,255,.08));
   border:1px solid rgba(255,0,70,.2);
+  border-radius:20px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,0,70,.13),
+      rgba(120,0,255,.08)
+    );
+  font-size:27px;
   box-shadow:0 0 28px rgba(255,0,70,.08);
 }
 
@@ -301,9 +315,9 @@ body::after{
   margin-left:auto;
   align-self:flex-start;
   padding:7px 10px;
+  border:1px solid rgba(255,255,255,.07);
   border-radius:99px;
   background:rgba(255,255,255,.045);
-  border:1px solid rgba(255,255,255,.07);
   color:#aaa3ad;
   font-size:9px;
   font-weight:900;
@@ -338,10 +352,10 @@ input,
 select{
   width:100%;
   min-height:58px;
+  padding:0 17px;
+  outline:none;
   border:1px solid rgba(255,255,255,.07);
   border-radius:18px;
-  outline:none;
-  padding:0 17px;
   color:#fff;
   background:#08080c;
   font-size:14px;
@@ -364,8 +378,8 @@ select:focus{
 select{
   appearance:none;
   -webkit-appearance:none;
-  cursor:pointer;
   padding-right:45px;
+  cursor:pointer;
   background-image:
     linear-gradient(45deg,transparent 50%,#ff4772 50%),
     linear-gradient(135deg,#ff4772 50%,transparent 50%);
@@ -377,9 +391,9 @@ select{
 }
 
 select option{
+  padding:12px;
   background:#111016;
   color:#fff;
-  padding:12px;
 }
 
 .grid2{
@@ -390,18 +404,18 @@ select option{
 
 .selection{
   display:none;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
   margin-top:9px;
   padding:12px 14px;
-  border-radius:15px;
   border:1px solid rgba(255,0,70,.13);
+  border-radius:15px;
   background:rgba(255,0,70,.035);
 }
 
 .selection.show{
   display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
 }
 
 .selection-name{
@@ -420,20 +434,20 @@ select option{
   color:#ff5279;
   font-size:12px;
   font-weight:1000;
-    }
+  }
 
 
-    <style>
+  <style>
 .rarity{
   display:inline-flex;
-  padding:4px 7px;
   margin-top:6px;
+  padding:4px 7px;
   border-radius:7px;
+  background:rgba(255,255,255,.06);
+  color:#aaa;
   font-size:8px;
   font-weight:1000;
   letter-spacing:.5px;
-  background:rgba(255,255,255,.06);
-  color:#aaa;
 }
 
 .rarity.common{color:#c9c9c9}
@@ -450,15 +464,20 @@ select option{
 .rarity.supreme{color:#ff315f}
 
 .speed-chip{
-  margin-top:20px;
-  padding:15px 17px;
-  border-radius:18px;
-  border:1px solid rgba(255,0,70,.15);
-  background:linear-gradient(90deg,rgba(255,0,70,.055),rgba(100,0,255,.04));
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:12px;
+  margin-top:20px;
+  padding:15px 17px;
+  border:1px solid rgba(255,0,70,.15);
+  border-radius:18px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,0,70,.055),
+      rgba(100,0,255,.04)
+    );
 }
 
 .speed-chip span:first-child{
@@ -491,10 +510,14 @@ select option{
 }
 
 .result{
-  text-align:center;
   padding:28px 20px;
+  text-align:center;
   background:
-    radial-gradient(circle at 50% 0,rgba(255,0,70,.12),transparent 50%),
+    radial-gradient(
+      circle at 50% 0,
+      rgba(255,0,70,.12),
+      transparent 50%
+    ),
     linear-gradient(145deg,#120b11,#08080c);
 }
 
@@ -507,11 +530,11 @@ select option{
 
 .result-main{
   margin:10px 0 8px;
+  color:#fff;
   font-size:clamp(38px,10vw,68px);
   line-height:1;
   font-weight:1000;
   letter-spacing:-2px;
-  color:#fff;
   text-shadow:
     0 0 15px rgba(255,255,255,.12),
     0 0 45px rgba(255,0,70,.18);
@@ -535,8 +558,8 @@ select option{
 
 .stat{
   padding:15px 10px;
-  border-radius:17px;
   border:1px solid rgba(255,255,255,.06);
+  border-radius:17px;
   background:rgba(255,255,255,.025);
 }
 
@@ -544,8 +567,8 @@ select option{
   color:#625d65;
   font-size:9px;
   font-weight:900;
-  text-transform:uppercase;
   letter-spacing:.5px;
+  text-transform:uppercase;
 }
 
 .stat-value{
@@ -565,9 +588,9 @@ select option{
 
 .time-box{
   padding:18px;
+  border:1px solid rgba(255,255,255,.06);
   border-radius:20px;
   background:rgba(255,255,255,.025);
-  border:1px solid rgba(255,255,255,.06);
 }
 
 .time-title{
@@ -610,9 +633,9 @@ select option{
 
 .estimate{
   padding:15px;
+  border:1px solid rgba(255,255,255,.055);
   border-radius:17px;
   background:rgba(255,255,255,.025);
-  border:1px solid rgba(255,255,255,.055);
 }
 
 .estimate-day{
@@ -637,14 +660,59 @@ select option{
 
 .footer{
   padding:15px 0 0;
-  text-align:center;
   color:#49454c;
   font-size:9px;
   letter-spacing:.5px;
+  text-align:center;
 }
 
-.hidden{
-  display:none!important;
+@media(max-width:650px){
+  .container{
+    width:min(100% - 18px,940px);
+    padding-top:18px;
+  }
+
+  .card{
+    padding:20px 16px;
+    border-radius:24px;
+  }
+
+  .grid2,
+  .afk-grid{
+    grid-template-columns:1fr;
+  }
+
+  .afk-grid .full{
+    grid-column:auto;
+  }
+
+  .result-stats{
+    grid-template-columns:1fr;
+  }
+
+  .timeline{
+    grid-template-columns:1fr;
+  }
+
+  .estimate-list{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .owner{
+    padding:16px;
+  }
+
+  .join{
+    padding:13px 15px;
+  }
+
+  .card-head h2{
+    font-size:20px;
+  }
+
+  .badge{
+    display:none;
+  }
 }
 </style>
 </head>
@@ -655,6 +723,7 @@ select option{
 
   <div class="topbar">
     <div class="brand">⚡ YAKKZZ CALCULATOR</div>
+
     <div class="live">
       <span class="live-dot"></span>
       AUTO CALCULATE
@@ -663,17 +732,26 @@ select option{
 
   <section class="hero">
     <h1>STEAL AN EGG</h1>
+
     <p>
       Kalkulator AFK Speed otomatis.<br>
       Pilih treadmill & trail, masukkan speed awal dan multiplayer.
     </p>
-    <div class="calibration">KALIBRASI&nbsp; 11</div>
+
+    <div class="calibration">
+      KALIBRASI&nbsp; 11
+    </div>
   </section>
 
   <div class="owner">
     <div>
-      <div class="owner-title">❤️ Jangan lupa join SL Owner</div>
-      <div class="owner-sub">hargai owner ❤️</div>
+      <div class="owner-title">
+        ❤️ Jangan lupa join SL Owner
+      </div>
+
+      <div class="owner-sub">
+        hargai owner ❤️
+      </div>
     </div>
 
     <button class="join" id="joinOwner">
@@ -681,247 +759,351 @@ select option{
     </button>
   </div>
 
-
-      <section class="card">
+    <section class="card">
 
     <div class="card-head">
       <div class="icon">⚡</div>
+
       <div>
         <h2>Speed Setup</h2>
         <p>Pilih equipment speed yang kamu gunakan</p>
       </div>
-      <div class="badge">DATABASE</div>
+
+      <div class="badge">
+        DATABASE
+      </div>
     </div>
 
     <div class="field">
       <label>SPEED AWAL</label>
+
       <input
         id="speedAwal"
         type="text"
-        inputmode="decimal"
+        inputmode="text"
         placeholder="Masukkan speed kamu saat ini"
         autocomplete="off"
+        spellcheck="false"
       >
-      <small>Contoh format: 60K, 2M, 30.3B, 1T</small>
+
+      <small>
+        Contoh format: 60K, 2M, 30.3B, 1T
+      </small>
     </div>
 
     <div class="grid2">
 
       <div class="field">
+
         <label>TRAIL</label>
 
         <select id="trail">
-          <option value="">— Pilih Trail —</option>
 
-          <option value="1.5"
+          <option value="">
+            — Pilih Trail —
+          </option>
+
+          <option
+            value="1.5"
             data-name="Gray Trail"
             data-rarity="Common"
-            data-price="$100">
+            data-price="$100"
+          >
             Gray Trail • Common • x1.5
           </option>
 
-          <option value="2"
+          <option
+            value="2"
             data-name="Green Trail"
             data-rarity="Uncommon"
-            data-price="$5K">
+            data-price="$5K"
+          >
             Green Trail • Uncommon • x2
           </option>
 
-          <option value="2.5"
+          <option
+            value="2.5"
             data-name="Blue Trail"
             data-rarity="Rare"
-            data-price="$75K">
+            data-price="$75K"
+          >
             Blue Trail • Rare • x2.5
           </option>
 
-          <option value="3"
+          <option
+            value="3"
             data-name="Purple Trail"
             data-rarity="Epic"
-            data-price="$1.5M">
+            data-price="$1.5M"
+          >
             Purple Trail • Epic • x3
           </option>
 
-          <option value="3.5"
+          <option
+            value="3.5"
             data-name="Golden Trail"
             data-rarity="Legendary"
-            data-price="$30M">
+            data-price="$30M"
+          >
             Golden Trail • Legendary • x3.5
           </option>
 
-          <option value="4"
+          <option
+            value="4"
             data-name="Red Trail"
             data-rarity="Mythic"
-            data-price="$750M">
+            data-price="$750M"
+          >
             Red Trail • Mythic • x4
           </option>
 
-          <option value="5"
+          <option
+            value="5"
             data-name="Galaxy Trail"
             data-rarity="Cosmic"
-            data-price="$20B">
+            data-price="$20B"
+          >
             Galaxy Trail • Cosmic • x5
           </option>
 
-          <option value="7"
+          <option
+            value="7"
             data-name="Secret Trail"
             data-rarity="Secret"
-            data-price="$500B">
+            data-price="$500B"
+          >
             Secret Trail • Secret • x7
           </option>
 
-          <option value="10"
+          <option
+            value="10"
             data-name="Eternal Trail"
             data-rarity="Eternal"
-            data-price="$12.5T">
+            data-price="$12.5T"
+          >
             Eternal Trail • Eternal • x10
           </option>
 
-          <option value="14"
+          <option
+            value="14"
             data-name="Divine Trail"
             data-rarity="Divine"
-            data-price="$300T">
+            data-price="$300T"
+          >
             Divine Trail • Divine • x14
           </option>
 
-          <option value="20"
+          <option
+            value="20"
             data-name="Moonbloom Trail 🔥"
             data-rarity="Divine"
-            data-price="$5Qa">
+            data-price="$5Qa"
+          >
             Moonbloom Trail 🔥 • Divine • x20
           </option>
+
         </select>
 
         <div class="selection" id="trailInfo">
+
           <div>
-            <div class="selection-name" id="trailName">-</div>
-            <div class="selection-meta" id="trailMeta">-</div>
+            <div class="selection-name" id="trailName">
+              -
+            </div>
+
+            <div class="selection-meta" id="trailMeta">
+              -
+            </div>
           </div>
-          <div class="selection-value" id="trailValue">-</div>
+
+          <div class="selection-value" id="trailValue">
+            -
+          </div>
+
         </div>
 
-        <small>Pilih trail untuk otomatis mendapatkan multiplier.</small>
+        <small>
+          Pilih trail untuk otomatis mendapatkan multiplier.
+        </small>
+
       </div>
 
       <div class="field">
+
         <label>TREADMILL</label>
 
         <select id="treadmill">
-          <option value="">— Pilih Treadmill —</option>
 
-          <option value="2"
+          <option value="">
+            — Pilih Treadmill —
+          </option>
+
+          <option
+            value="2"
             data-name="Treadmill (Base)"
             data-rarity="Common"
-            data-price="Gratis">
+            data-price="Gratis"
+          >
             Treadmill (Base) • Common • +2/step
           </option>
 
-          <option value="5"
+          <option
+            value="5"
             data-name="Sci-Fi Treadmill"
             data-rarity="Uncommon"
-            data-price="$15K">
+            data-price="$15K"
+          >
             Sci-Fi Treadmill • Uncommon • +5/step
           </option>
 
-          <option value="12"
+          <option
+            value="12"
             data-name="Flame Treadmill"
             data-rarity="Rare"
-            data-price="$250K">
+            data-price="$250K"
+          >
             Flame Treadmill • Rare • +12/step
           </option>
 
-          <option value="30"
+          <option
+            value="30"
             data-name="Celebrity Treadmill"
             data-rarity="Epic"
-            data-price="$5M">
+            data-price="$5M"
+          >
             Celebrity Treadmill • Epic • +30/step
           </option>
 
-          <option value="80"
+          <option
+            value="80"
             data-name="Golden Treadmill"
             data-rarity="Legendary"
-            data-price="$120M">
+            data-price="$120M"
+          >
             Golden Treadmill • Legendary • +80/step
           </option>
 
-          <option value="100"
+          <option
+            value="100"
             data-name="The Freeze Treadmill"
             data-rarity="Mythic"
-            data-price="$3B">
+            data-price="$3B"
+          >
             The Freeze Treadmill • Mythic • +100/step
           </option>
 
-          <option value="200"
+          <option
+            value="200"
             data-name="Lucky Block Treadmill"
             data-rarity="Cosmic"
-            data-price="$75B">
+            data-price="$75B"
+          >
             Lucky Block Treadmill • Cosmic • +200/step
           </option>
 
-
-                      <option value="500"
+          
+                    <option
+            value="500"
             data-name="Hacker Treadmill"
             data-rarity="Secret"
-            data-price="$3T">
+            data-price="$3T"
+          >
             Hacker Treadmill • Secret • +500/step
           </option>
 
-          <option value="1000"
+          <option
+            value="1000"
             data-name="Demonic Treadmill"
             data-rarity="Eternal"
-            data-price="$50T">
+            data-price="$50T"
+          >
             Demonic Treadmill • Eternal • +1K/step
           </option>
 
-          <option value="2000"
+          <option
+            value="2000"
             data-name="Angelic Treadmill"
             data-rarity="Divine"
-            data-price="$1Qa">
+            data-price="$1Qa"
+          >
             Angelic Treadmill • Divine • +2K/step
           </option>
 
-          <option value="3000"
+          <option
+            value="3000"
             data-name="Astral Treadmill"
             data-rarity="Titan"
-            data-price="$15Qa">
+            data-price="$15Qa"
+          >
             Astral Treadmill • Titan • +3K/step
           </option>
 
-          <option value="8500"
+          <option
+            value="8500"
             data-name="Void / Galaxy Treadmill 🔥"
             data-rarity="Supreme / Max"
-            data-price="$7.5Qa">
+            data-price="$7.5Qa"
+          >
             Void / Galaxy Treadmill 🔥 • Supreme • +8.5K/step
           </option>
+
         </select>
 
         <div class="selection" id="treadmillInfo">
+
           <div>
-            <div class="selection-name" id="treadmillName">-</div>
-            <div class="selection-meta" id="treadmillMeta">-</div>
+            <div class="selection-name" id="treadmillName">
+              -
+            </div>
+
+            <div class="selection-meta" id="treadmillMeta">
+              -
+            </div>
           </div>
-          <div class="selection-value" id="treadmillValue">-</div>
+
+          <div class="selection-value" id="treadmillValue">
+            -
+          </div>
+
         </div>
 
-        <small>Pilih treadmill untuk otomatis mendapatkan speed/step.</small>
+        <small>
+          Pilih treadmill untuk otomatis mendapatkan speed/step.
+        </small>
+
       </div>
 
     </div>
 
     <div class="field">
+
       <label>ROBUX MULTIPLAYER</label>
+
       <input
         id="multiplayer"
         type="text"
-        inputmode="decimal"
+        inputmode="text"
         placeholder="Masukkan multiplier multiplayer yang kamu miliki"
         autocomplete="off"
+        spellcheck="false"
       >
-      <small>Kosongkan jika tidak memiliki multiplayer.</small>
+
+      <small>
+        Kosongkan jika tidak memiliki multiplayer.
+      </small>
+
     </div>
 
     <div class="speed-chip">
-      <span>SPEED PER STEP</span>
-      <strong id="speedPerStep">0 / step</strong>
+
+      <span>
+        SPEED PER STEP
+      </span>
+
+      <strong id="speedPerStep">
+        0 / step
+      </strong>
+
     </div>
 
   </section>
@@ -929,27 +1111,48 @@ select option{
   <section class="card">
 
     <div class="card-head">
-      <div class="icon">⏱️</div>
+
+      <div class="icon">
+        ⏱️
+      </div>
+
       <div>
         <h2>AFK Setup</h2>
         <p>Tentukan waktu mulai dan durasi AFK</p>
       </div>
-      <div class="badge">AUTO</div>
+
+      <div class="badge">
+        AUTO
+      </div>
+
     </div>
 
     <div class="afk-grid">
 
       <div class="field">
+
         <label>TANGGAL MULAI</label>
-        <input id="startDate" type="date">
+
+        <input
+          id="startDate"
+          type="date"
+        >
+
       </div>
 
       <div class="field">
+
         <label>AFK MULAI DARI</label>
-        <input id="startTime" type="time">
+
+        <input
+          id="startTime"
+          type="time"
+        >
+
       </div>
 
       <div class="field full">
+
         <label>DURASI AFK</label>
 
         <div class="duration-row">
@@ -957,7 +1160,7 @@ select option{
           <input
             id="afkDays"
             type="text"
-            inputmode="decimal"
+            inputmode="numeric"
             placeholder="Berapa hari? Contoh: 7"
             autocomplete="off"
           >
@@ -965,14 +1168,17 @@ select option{
           <input
             id="afkHours"
             type="text"
-            inputmode="decimal"
+            inputmode="numeric"
             placeholder="Berapa jam? Contoh: 6"
             autocomplete="off"
           >
 
         </div>
 
-        <small>Contoh: 7 hari + 6 jam = total AFK 174 jam.</small>
+        <small>
+          Contoh: 7 hari + 6 jam = total AFK 174 jam.
+        </small>
+
       </div>
 
     </div>
@@ -980,10 +1186,11 @@ select option{
   </section>
 
 
+    <section class="card result">
 
-      <section class="card result">
-
-    <div class="result-label">SPEED AKHIR</div>
+    <div class="result-label">
+      SPEED AKHIR
+    </div>
 
     <div class="result-main" id="finalSpeed">
       0<span></span>
@@ -996,18 +1203,39 @@ select option{
     <div class="result-stats">
 
       <div class="stat">
-        <div class="stat-label">Speed Awal</div>
-        <div class="stat-value" id="resultInitial">0</div>
+
+        <div class="stat-label">
+          Speed Awal
+        </div>
+
+        <div class="stat-value" id="resultInitial">
+          0
+        </div>
+
       </div>
 
       <div class="stat">
-        <div class="stat-label">Speed / Step</div>
-        <div class="stat-value" id="resultStep">0</div>
+
+        <div class="stat-label">
+          Speed / Step
+        </div>
+
+        <div class="stat-value" id="resultStep">
+          0
+        </div>
+
       </div>
 
       <div class="stat">
-        <div class="stat-label">Durasi</div>
-        <div class="stat-value" id="resultDuration">0 jam</div>
+
+        <div class="stat-label">
+          Durasi
+        </div>
+
+        <div class="stat-value" id="resultDuration">
+          0 jam
+        </div>
+
       </div>
 
     </div>
@@ -1015,13 +1243,27 @@ select option{
     <div class="timeline">
 
       <div class="time-box">
-        <div class="time-title">MULAI AFK</div>
-        <div class="time-value" id="resultStart">-</div>
+
+        <div class="time-title">
+          MULAI AFK
+        </div>
+
+        <div class="time-value" id="resultStart">
+          -
+        </div>
+
       </div>
 
       <div class="time-box">
-        <div class="time-title">SELESAI AFK</div>
-        <div class="time-value" id="resultFinish">-</div>
+
+        <div class="time-title">
+          SELESAI AFK
+        </div>
+
+        <div class="time-value" id="resultFinish">
+          -
+        </div>
+
       </div>
 
     </div>
@@ -1031,11 +1273,21 @@ select option{
   <section class="card">
 
     <div class="estimate-title">
-      <h3>📊 Estimasi AFK</h3>
-      <span>AUTO UPDATE</span>
+
+      <h3>
+        📊 Estimasi AFK
+      </h3>
+
+      <span>
+        AUTO UPDATE
+      </span>
+
     </div>
 
-    <div class="estimate-list" id="estimateList"></div>
+    <div
+      class="estimate-list"
+      id="estimateList"
+    ></div>
 
   </section>
 
@@ -1068,8 +1320,10 @@ const finalSpeedEl = $("finalSpeed");
 const resultInitialEl = $("resultInitial");
 const resultStepEl = $("resultStep");
 const resultDurationEl = $("resultDuration");
+
 const resultStartEl = $("resultStart");
 const resultFinishEl = $("resultFinish");
+
 const estimateListEl = $("estimateList");
 
 const trailInfo = $("trailInfo");
@@ -1082,9 +1336,14 @@ const treadmillName = $("treadmillName");
 const treadmillMeta = $("treadmillMeta");
 const treadmillValue = $("treadmillValue");
 
+  
 
-    function parseNumber(value){
-  if(value === null || value === undefined){
+  function parseNumber(value){
+
+  if(
+    value === null ||
+    value === undefined
+  ){
     return 0;
   }
 
@@ -1097,11 +1356,16 @@ const treadmillValue = $("treadmillValue");
     return 0;
   }
 
-  const match = text.match(/^(-?[\d.]+)([KMBTQ])?$/i);
+  const match =
+    text.match(/^(-?[\d.]+)([KMBTQ])?$/i);
 
   if(!match){
+
     const plain = Number(text);
-    return Number.isFinite(plain) ? plain : 0;
+
+    return Number.isFinite(plain)
+      ? plain
+      : 0;
   }
 
   const number = Number(match[1]);
@@ -1110,7 +1374,8 @@ const treadmillValue = $("treadmillValue");
     return 0;
   }
 
-  const suffix = (match[2] || "").toUpperCase();
+  const suffix =
+    (match[2] || "").toUpperCase();
 
   const multiplier = {
     K:1e3,
@@ -1124,12 +1389,13 @@ const treadmillValue = $("treadmillValue");
 }
 
 function formatShort(value){
+
   if(!Number.isFinite(value)){
     return "0";
   }
 
   const negative = value < 0;
-  let n = Math.abs(value);
+  const n = Math.abs(value);
 
   const units = [
     {value:1e15,suffix:"Qa"},
@@ -1140,103 +1406,157 @@ function formatShort(value){
   ];
 
   for(const unit of units){
+
     if(n >= unit.value){
-      let result = n / unit.value;
 
-      result = Number(result.toFixed(3));
+      let result =
+        n / unit.value;
 
-      return (negative ? "-" : "") + result + unit.suffix;
+      result =
+        Number(result.toFixed(3));
+
+      return (
+        negative ? "-" : ""
+      ) + result + unit.suffix;
     }
   }
 
   if(Number.isInteger(n)){
-    return (negative ? "-" : "") + n.toLocaleString("en-US");
+    return (
+      negative ? "-" : ""
+    ) + n.toLocaleString("en-US");
   }
 
-  return (negative ? "-" : "") + Number(n.toFixed(3));
-}
-
-function formatNumber(value){
-  if(!Number.isFinite(value)){
-    return "0";
-  }
-
-  if(Number.isInteger(value)){
-    return value.toLocaleString("en-US");
-  }
-
-  return Number(value.toFixed(3)).toLocaleString("en-US");
+  return (
+    negative ? "-" : ""
+  ) + Number(n.toFixed(3));
 }
 
 function getSelectedValue(select){
-  const value = Number(select.value);
 
-  return Number.isFinite(value) ? value : 0;
+  const value =
+    Number(select.value);
+
+  return Number.isFinite(value)
+    ? value
+    : 0;
 }
 
 function getSelectedOption(select){
-  if(!select || select.selectedIndex < 0){
+
+  if(
+    !select ||
+    select.selectedIndex < 0
+  ){
     return null;
   }
 
-  return select.options[select.selectedIndex];
-                  }
+  return select.options[
+    select.selectedIndex
+  ];
+  }
 
+  function updateTrailInfo(){
 
-    function updateTrailInfo(){
-  const option = getSelectedOption(trailEl);
+  const option =
+    getSelectedOption(trailEl);
 
-  if(!option || !trailEl.value){
+  if(
+    !option ||
+    !trailEl.value
+  ){
+
     trailInfo.classList.remove("show");
+
     trailName.textContent = "-";
     trailMeta.textContent = "-";
     trailValue.textContent = "-";
+
     return;
   }
 
-  const name = option.dataset.name || option.textContent.trim();
-  const rarity = option.dataset.rarity || "Unknown";
-  const price = option.dataset.price || "-";
-  const multiplier = getSelectedValue(trailEl);
+  const name =
+    option.dataset.name ||
+    option.textContent.trim();
+
+  const rarity =
+    option.dataset.rarity ||
+    "Unknown";
+
+  const price =
+    option.dataset.price ||
+    "-";
+
+  const multiplier =
+    getSelectedValue(trailEl);
 
   trailInfo.classList.add("show");
 
   trailName.textContent = name;
-  trailMeta.textContent = rarity + " • " + price;
-  trailValue.textContent = "x" + multiplier;
+
+  trailMeta.textContent =
+    rarity + " • " + price;
+
+  trailValue.textContent =
+    "x" + multiplier;
 }
 
 function updateTreadmillInfo(){
-  const option = getSelectedOption(treadmillEl);
 
-  if(!option || !treadmillEl.value){
+  const option =
+    getSelectedOption(treadmillEl);
+
+  if(
+    !option ||
+    !treadmillEl.value
+  ){
+
     treadmillInfo.classList.remove("show");
+
     treadmillName.textContent = "-";
     treadmillMeta.textContent = "-";
     treadmillValue.textContent = "-";
+
     return;
   }
 
-  const name = option.dataset.name || option.textContent.trim();
-  const rarity = option.dataset.rarity || "Unknown";
-  const price = option.dataset.price || "-";
-  const speed = getSelectedValue(treadmillEl);
+  const name =
+    option.dataset.name ||
+    option.textContent.trim();
+
+  const rarity =
+    option.dataset.rarity ||
+    "Unknown";
+
+  const price =
+    option.dataset.price ||
+    "-";
+
+  const speed =
+    getSelectedValue(treadmillEl);
 
   treadmillInfo.classList.add("show");
 
   treadmillName.textContent = name;
-  treadmillMeta.textContent = rarity + " • " + price;
-  treadmillValue.textContent = "+" + formatShort(speed) + " / step";
+
+  treadmillMeta.textContent =
+    rarity + " • " + price;
+
+  treadmillValue.textContent =
+    "+" + formatShort(speed) + " / step";
 }
 
 function getMultiplier(){
-  const raw = multiplayerEl.value.trim();
+
+  const raw =
+    multiplayerEl.value.trim();
 
   if(!raw){
     return 1;
   }
 
-  const value = parseNumber(raw);
+  const value =
+    parseNumber(raw);
 
   if(value <= 0){
     return 1;
@@ -1246,45 +1566,71 @@ function getMultiplier(){
 }
 
 function getSpeedPerStep(){
-  const treadmill = getSelectedValue(treadmillEl);
-  const trail = getSelectedValue(trailEl);
-  const multiplayer = getMultiplier();
 
-  if(treadmill <= 0 || trail <= 0){
+  const treadmill =
+    getSelectedValue(treadmillEl);
+
+  const trail =
+    getSelectedValue(trailEl);
+
+  const multiplayer =
+    getMultiplier();
+
+  if(
+    treadmill <= 0 ||
+    trail <= 0
+  ){
     return 0;
   }
 
-  /*
-    Formula:
-    Treadmill × (Trail + Multiplayer − 1)
-
-    Treadmill = nilai speed per step dari database.
-    Trail = multiplier trail.
-    Multiplayer = multiplier user.
-  */
-
-  return treadmill * (trail + multiplayer - 1);
+  return treadmill *
+    (trail + multiplayer - 1);
 }
 
 function getDurationHours(){
-  const days = Math.max(0,parseNumber(afkDaysEl.value));
-  const hours = Math.max(0,parseNumber(afkHoursEl.value));
 
-  return (days * 24) + hours;
+  const days =
+    Math.max(
+      0,
+      parseNumber(afkDaysEl.value)
+    );
+
+  const hours =
+    Math.max(
+      0,
+      parseNumber(afkHoursEl.value)
+    );
+
+  return (
+    days * 24
+  ) + hours;
 }
 
 function buildStartDate(){
-  const dateValue = startDateEl.value;
-  const timeValue = startTimeEl.value;
 
-  if(!dateValue || !timeValue){
+  const dateValue =
+    startDateEl.value;
+
+  const timeValue =
+    startTimeEl.value;
+
+  if(
+    !dateValue ||
+    !timeValue
+  ){
     return null;
   }
 
-  const parts = dateValue.split("-").map(Number);
-  const timeParts = timeValue.split(":").map(Number);
+  const parts =
+    dateValue.split("-").map(Number);
 
-  if(parts.length !== 3 || timeParts.length !== 2){
+  const timeParts =
+    timeValue.split(":").map(Number);
+
+  if(
+    parts.length !== 3 ||
+    timeParts.length !== 2
+  ){
     return null;
   }
 
@@ -1298,35 +1644,55 @@ function buildStartDate(){
     0
   );
 
-  return Number.isNaN(date.getTime()) ? null : date;
-}
+  return Number.isNaN(
+    date.getTime()
+  )
+    ? null
+    : date;
+  }
 
 
-    function formatDateTime(date){
+  function formatDateTime(date){
+
   if(!date){
     return "-";
   }
 
-  return date.toLocaleString("id-ID",{
-    day:"2-digit",
-    month:"2-digit",
-    year:"numeric",
-    hour:"2-digit",
-    minute:"2-digit",
-    hour12:false
-  });
+  return date.toLocaleString(
+    "id-ID",
+    {
+      day:"2-digit",
+      month:"2-digit",
+      year:"numeric",
+      hour:"2-digit",
+      minute:"2-digit",
+      hour12:false
+    }
+  );
 }
 
 function formatDuration(hours){
+
   if(hours <= 0){
     return "0 jam";
   }
 
-  const days = Math.floor(hours / 24);
-  const remaining = hours % 24;
+  const days =
+    Math.floor(hours / 24);
 
-  if(days > 0 && remaining > 0){
-    return days + " hari " + remaining + " jam";
+  const remaining =
+    hours % 24;
+
+  if(
+    days > 0 &&
+    remaining > 0
+  ){
+    return (
+      days +
+      " hari " +
+      remaining +
+      " jam"
+    );
   }
 
   if(days > 0){
@@ -1337,63 +1703,119 @@ function formatDuration(hours){
 }
 
 function calculate(){
+
   updateTrailInfo();
   updateTreadmillInfo();
 
-  const speedAwal = parseNumber(speedAwalEl.value);
-  const speedPerStep = getSpeedPerStep();
-  const durationHours = getDurationHours();
-
-  speedPerStepEl.textContent =
-    formatShort(speedPerStep) + " / step";
-
-  resultInitialEl.textContent = formatShort(speedAwal);
-  resultStepEl.textContent = formatShort(speedPerStep) + " / step";
-  resultDurationEl.textContent = formatDuration(durationHours);
-
-  const startDate = buildStartDate();
-
-  if(startDate){
-    resultStartEl.textContent = formatDateTime(startDate);
-
-    const finishDate = new Date(
-      startDate.getTime() +
-      durationHours * 60 * 60 * 1000
+  const speedAwal =
+    parseNumber(
+      speedAwalEl.value
     );
 
-    resultFinishEl.textContent = formatDateTime(finishDate);
+  const speedPerStep =
+    getSpeedPerStep();
+
+  const durationHours =
+    getDurationHours();
+
+  speedPerStepEl.textContent =
+    formatShort(speedPerStep) +
+    " / step";
+
+  resultInitialEl.textContent =
+    formatShort(speedAwal);
+
+  resultStepEl.textContent =
+    formatShort(speedPerStep) +
+    " / step";
+
+  resultDurationEl.textContent =
+    formatDuration(durationHours);
+
+  const startDate =
+    buildStartDate();
+
+  if(startDate){
+
+    resultStartEl.textContent =
+      formatDateTime(startDate);
+
+    const finishDate =
+      new Date(
+        startDate.getTime() +
+        durationHours *
+        60 *
+        60 *
+        1000
+      );
+
+    resultFinishEl.textContent =
+      formatDateTime(finishDate);
+
   }else{
-    resultStartEl.textContent = "-";
-    resultFinishEl.textContent = "-";
+
+    resultStartEl.textContent =
+      "-";
+
+    resultFinishEl.textContent =
+      "-";
   }
 
   const gain =
     speedPerStep *
     CALIBRATION *
-    (durationHours * 60 * 60);
+    (
+      durationHours *
+      60 *
+      60
+    );
 
   const finalSpeed =
     speedAwal + gain;
 
   finalSpeedEl.innerHTML =
-    formatShort(finalSpeed) + "<span></span>";
+    formatShort(finalSpeed) +
+    "<span></span>";
 
-  buildEstimates(speedAwal,speedPerStep,startDate);
+  buildEstimates(
+    speedAwal,
+    speedPerStep,
+    startDate
+  );
 }
 
-function buildEstimates(speedAwal,speedPerStep,startDate){
+function buildEstimates(
+  speedAwal,
+  speedPerStep,
+  startDate
+){
+
   estimateListEl.innerHTML = "";
 
-  const estimateDays = [1,2,3,7,14,30];
+  const estimateDays = [
+    1,
+    2,
+    3,
+    7,
+    14,
+    30
+  ];
 
-  for(const days of estimateDays){
+  for(
+    const days of estimateDays
+  ){
 
-    const hours = days * 24;
+    const hours =
+      days * 24;
 
     const gain =
       speedPerStep *
       CALIBRATION *
-      (hours * 60 * 60);
+      (
+        hours *
+        60 *
+        60
+      );
 
     const finalSpeed =
       speedAwal + gain;
@@ -1401,22 +1823,38 @@ function buildEstimates(speedAwal,speedPerStep,startDate){
     let finishText = "-";
 
     if(startDate){
-      const finish = new Date(
-        startDate.getTime() +
-        hours * 60 * 60 * 1000
-      );
 
-      finishText = formatDateTime(finish);
+      const finish =
+        new Date(
+          startDate.getTime() +
+          hours *
+          60 *
+          60 *
+          1000
+        );
+
+      finishText =
+        formatDateTime(finish);
     }
 
-    const item = document.createElement("div");
+    const item =
+      document.createElement("div");
 
-    item.className = "estimate";
+    item.className =
+      "estimate";
 
     item.innerHTML = `
-      <div class="estimate-day">${days} HARI</div>
-      <div class="estimate-speed">${formatShort(finalSpeed)}</div>
-      <div class="estimate-date">${finishText}</div>
+      <div class="estimate-day">
+        ${days} HARI
+      </div>
+
+      <div class="estimate-speed">
+        ${formatShort(finalSpeed)}
+      </div>
+
+      <div class="estimate-date">
+        ${finishText}
+      </div>
     `;
 
     estimateListEl.appendChild(item);
@@ -1424,23 +1862,49 @@ function buildEstimates(speedAwal,speedPerStep,startDate){
 }
 
 function setDefaultDateTime(){
-  const now = new Date();
 
-  const year = now.getFullYear();
-  const month = String(now.getMonth()+1).padStart(2,"0");
-  const day = String(now.getDate()).padStart(2,"0");
+  const now =
+    new Date();
 
-  const hours = String(now.getHours()).padStart(2,"0");
-  const minutes = String(now.getMinutes()).padStart(2,"0");
+  const year =
+    now.getFullYear();
+
+  const month =
+    String(
+      now.getMonth() + 1
+    ).padStart(2,"0");
+
+  const day =
+    String(
+      now.getDate()
+    ).padStart(2,"0");
+
+  const hours =
+    String(
+      now.getHours()
+    ).padStart(2,"0");
+
+  const minutes =
+    String(
+      now.getMinutes()
+    ).padStart(2,"0");
 
   if(!startDateEl.value){
+
     startDateEl.value =
-      year + "-" + month + "-" + day;
+      year +
+      "-" +
+      month +
+      "-" +
+      day;
   }
 
   if(!startTimeEl.value){
+
     startTimeEl.value =
-      hours + ":" + minutes;
+      hours +
+      ":" +
+      minutes;
   }
 
   if(!afkDaysEl.value){
@@ -1450,12 +1914,20 @@ function setDefaultDateTime(){
   if(!afkHoursEl.value){
     afkHoursEl.value = "1";
   }
-}
+    }
 
 
-    function addAutoListener(element){
-  element.addEventListener("input",calculate);
-  element.addEventListener("change",calculate);
+  function addAutoListener(element){
+
+  element.addEventListener(
+    "input",
+    calculate
+  );
+
+  element.addEventListener(
+    "change",
+    calculate
+  );
 }
 
 [
@@ -1469,20 +1941,28 @@ function setDefaultDateTime(){
   afkHoursEl
 ].forEach(addAutoListener);
 
-$("joinOwner").addEventListener("click",function(){
-  window.open(
-    "https://whatsapp.com/channel/0029VbAVjDXHgZWVGTVHH30r",
-    "_blank"
-  );
-});
+$("joinOwner").addEventListener(
+  "click",
+  function(){
+
+    window.open(
+      "https://whatsapp.com/channel/0029VbAVjDXHgZWVGTVHH30r",
+      "_blank"
+    );
+
+  }
+);
 
 setDefaultDateTime();
 
 updateTrailInfo();
+
 updateTreadmillInfo();
 
 calculate();
+
 </script>
 
 </body>
 </html>
+  

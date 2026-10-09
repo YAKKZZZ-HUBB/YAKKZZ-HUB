@@ -58,6 +58,8 @@ img,svg{max-width:100%;height:auto;display:block}
 .music-toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);z-index:9999;padding:10px 20px;border-radius:999px;background:linear-gradient(135deg,var(--red),var(--red-dark));color:#fff;font-size:12px;font-weight:800;box-shadow:0 8px 24px rgba(255,31,61,.5);opacity:0;visibility:hidden;transition:all .4s cubic-bezier(.34,1.56,.64,1);pointer-events:none}
 .music-toast.show{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
 .music-toast.hide{opacity:0;visibility:hidden;transform:translateX(-50%) translateY(20px)}
+.anime-particle{position:fixed;top:-50px;z-index:1;pointer-events:none;animation:fall linear infinite;opacity:.7;user-select:none}
+@keyframes fall{0%{transform:translateY(-50px) rotate(0deg);opacity:0}10%{opacity:.8}100%{transform:translateY(105vh) rotate(360deg);opacity:0}}
   .topbar{position:sticky;top:0;z-index:100;background:rgba(5,5,8,.85);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(255,31,61,.15)}
 .nav{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 0}
 .brand{display:flex;align-items:center;gap:10px;cursor:pointer}
@@ -88,12 +90,12 @@ img,svg{max-width:100%;height:auto;display:block}
 .page{display:none;padding-top:20px;padding-bottom:120px;animation:pageIn .5s}
 .page.active{display:block}
 @keyframes pageIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-  .hero-banner{position:relative;overflow:hidden;border-radius:24px;padding:44px 26px;text-align:center;background:radial-gradient(circle at 20% 20%,rgba(255,31,61,.4),transparent 50%),radial-gradient(circle at 80% 80%,rgba(138,0,21,.5),transparent 50%),linear-gradient(135deg,#1a0008,#0a0005 60%,#15000a);border:1px solid rgba(255,31,61,.4);box-shadow:0 20px 60px rgba(255,31,61,.25),0 0 0 1px rgba(255,31,61,.15) inset}
-.hero-banner::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--red),transparent);background-size:200% auto;animation:shine 3s linear infinite}
-.hero-banner::after{content:"";position:absolute;width:400px;height:400px;right:-150px;top:-150px;background:radial-gradient(circle,rgba(255,31,61,.30),transparent 70%);animation:floatGlow 8s ease-in-out infinite;pointer-events:none}
-@keyframes floatGlow{0%,100%{transform:translate(0,0) scale(1);opacity:.6}50%{transform:translate(30px,-30px) scale(1.2);opacity:1}}
-.hero-banner h1{font-size:clamp(28px,6vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1;background:linear-gradient(90deg,#fff,#ff5570,#fff);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;position:relative;z-index:2}
-.hero-banner p{margin-top:14px;color:#ffb3c0;font-size:12px;letter-spacing:2px;font-weight:700;text-transform:uppercase;position:relative;z-index:2}
+  .hero-banner{position:relative;overflow:hidden;border-radius:24px;padding:60px 26px;text-align:center;min-height:420px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a0008,#0a0005 60%,#15000a);border:1px solid rgba(255,31,61,.4);box-shadow:0 20px 60px rgba(255,31,61,.25),0 0 0 1px rgba(255,31,61,.15) inset}
+.hero-video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.55}
+.hero-overlay{position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(180deg,rgba(0,0,0,.5),rgba(0,0,0,.75)),radial-gradient(circle at 50% 50%,transparent 30%,rgba(0,0,0,.6) 100%);z-index:1}
+.hero-banner::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--red),transparent);background-size:200% auto;animation:shine 3s linear infinite;z-index:3}
+.hero-banner h1{font-size:clamp(28px,6vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1;background:linear-gradient(90deg,#fff,#ff5570,#fff);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;position:relative;z-index:2;text-shadow:0 4px 30px rgba(0,0,0,.8)}
+.hero-banner p{margin-top:14px;color:#ffb3c0;font-size:12px;letter-spacing:2px;font-weight:700;text-transform:uppercase;position:relative;z-index:2;text-shadow:0 2px 10px rgba(0,0,0,.9)}
 .hero-fire{margin-top:12px;font-size:32px;animation:fireFloat 2s ease-in-out infinite;position:relative;z-index:2}
 @keyframes fireFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 .section-title{margin-top:26px;margin-bottom:14px;display:flex;align-items:center;gap:10px;font-size:16px;font-weight:900;color:#fff}
@@ -137,7 +139,7 @@ img,svg{max-width:100%;height:auto;display:block}
 .toggle-sold{padding:8px 12px;border-radius:10px;font-size:11px;font-weight:900;cursor:pointer}
 .toggle-sold.sold{background:rgba(139,139,156,.2);color:#8b8b9c;border:1px solid rgba(139,139,156,.3)}
 .toggle-sold.available{background:rgba(53,208,127,.2);color:#35d07f;border:1px solid rgba(53,208,127,.3)}
-.form-box{margin-top:16px;padding:22px 20px;border-radius:18px;background:linear-gradient(145deg,rgba(20,5,10,.98),rgba(10,2,5,.98));border:1px solid rgba(255,31,61,.25)}
+  .form-box{margin-top:16px;padding:22px 20px;border-radius:18px;background:linear-gradient(145deg,rgba(20,5,10,.98),rgba(10,2,5,.98));border:1px solid rgba(255,31,61,.25)}
 .form-box h3{font-size:15px;font-weight:900;display:flex;align-items:center;gap:8px;color:#fff}
 .form-group{margin-top:16px}
 .form-group label{display:block;margin-bottom:8px;font-size:11.5px;font-weight:800;color:#ffb3c0;text-transform:uppercase}
@@ -157,7 +159,7 @@ img,svg{max-width:100%;height:auto;display:block}
 .info-box{min-height:56px;margin-top:11px;padding:12px 14px;border-radius:13px;border:1px solid #242430;background:linear-gradient(135deg,#08080e,#0b0b12)}
 .info-main{font-size:12.5px;font-weight:800;color:#eaeaf2}
 .info-sub{margin-top:5px;color:var(--muted);font-size:10.5px}
-  .pay-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
+.pay-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
 @media(min-width:640px){.pay-grid{grid-template-columns:repeat(3,1fr)}}
 .pay-card{padding:18px 14px;border-radius:16px;text-align:center;background:linear-gradient(145deg,rgba(20,5,10,.98),rgba(10,2,5,.98));border:1px solid rgba(255,31,61,.20);cursor:pointer;transition:all .25s}
 .pay-card:hover{transform:translateY(-6px) scale(1.03);border-color:var(--red);box-shadow:0 16px 40px rgba(255,31,61,.30)}
@@ -215,7 +217,7 @@ img,svg{max-width:100%;height:auto;display:block}
 .footer{padding:40px 0 100px;text-align:center;color:#5a4a50;font-size:10.5px}
 .footer strong{color:#ffb3c0}
 .bottom-nav{position:fixed;bottom:10px;left:10px;right:10px;z-index:50;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:8px;border-radius:18px;background:rgba(10,2,5,.95);border:1px solid rgba(255,31,61,.3);backdrop-filter:blur(20px)}
-.bottom-nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:46px;gap:2px;border-radius:12px;color:#8b8b9c;font-size:9px;font-weight:800}
+.bottom-nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:50px;gap:3px;border-radius:12px;color:#8b8b9c;font-size:10px;font-weight:800}
 .bottom-nav button.active{color:#fff;background:linear-gradient(135deg,rgba(255,31,61,.25),rgba(138,0,21,.15))}
 .bottom-nav button svg{width:20px;height:20px;fill:currentColor}
 @media(min-width:769px){.bottom-nav{display:none}}
@@ -241,9 +243,9 @@ img,svg{max-width:100%;height:auto;display:block}
 <aside class="mobile-menu" id="mobileMenu">
   <button class="menu-close" id="menuClose" type="button"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
   <div class="menu-item active" data-page="home"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg> HALAMAN UTAMA</div>
-  <div class="menu-item" data-page="calculator"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg> CALCULATOR</div>
+  <div class="menu-item" data-page="calculator"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg> CALCULATOR AFK</div>
   <div class="menu-item" data-page="joki"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> JOKI AFK</div>
-  <div class="menu-item" data-page="payment"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2z"/></svg> PAYMENT</div>
+  <div class="menu-item" data-page="payment"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2z"/></svg> METODE PEMBAYARAN</div>
   <div class="menu-item" data-page="cara-order"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg> CARA ORDER</div>
   <div class="menu-item admin-mobile" id="adminMenuBtn"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg> ADMIN PANEL</div>
 </aside>
@@ -257,10 +259,10 @@ img,svg{max-width:100%;height:auto;display:block}
       </div>
     </div>
     <nav class="desktop-nav">
-      <a class="nav-link active" data-page="home">Home</a>
-      <a class="nav-link" data-page="calculator">Calculator</a>
+      <a class="nav-link active" data-page="home">Halaman Utama</a>
+      <a class="nav-link" data-page="calculator">Calculator AFK</a>
       <a class="nav-link" data-page="joki">Joki AFK</a>
-      <a class="nav-link" data-page="payment">Payment</a>
+      <a class="nav-link" data-page="payment">Pembayaran</a>
       <a class="nav-link" data-page="cara-order">Cara Order</a>
       <button class="admin-btn" id="adminBtnTop" type="button">🔐 ADMIN</button>
     </nav>
@@ -272,7 +274,17 @@ img,svg{max-width:100%;height:auto;display:block}
 </header>
 <main class="container">
   <section class="page active" id="page-home">
-  <div class="hero-banner"><h1>WELCOME</h1><p>YAKKZZ OFFICIAL</p><div class="hero-fire">⚡🔥⚡</div></div>
+  <div class="hero-banner">
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="https://files.catbox.moe/trcdjb.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div style="position:relative;z-index:2">
+      <h1>WELCOME</h1>
+      <p>YAKKZZ OFFICIAL</p>
+      <div class="hero-fire">⚡🔥⚡</div>
+    </div>
+  </div>
   <div class="welcome-block">
     <h2>HALO SELAMAT DATANG DI WEBSITE YAKKZZ OFFICIAL</h2>
     <p>Joki AFK Steal An Egg, Jual Akun Roblox, Payment Gateway. Fast respon, online 24/7, amanah 100%.</p>
@@ -301,7 +313,7 @@ img,svg{max-width:100%;height:auto;display:block}
 </section>
 
 <section class="page" id="page-calculator">
-  <div class="section-title">⚡ AFK Speed Calculator</div>
+  <div class="section-title">⚡ Calculator AFK Speed</div>
   <div class="main-grid">
     <div>
       <section class="card">
@@ -419,7 +431,7 @@ img,svg{max-width:100%;height:auto;display:block}
 </section>
 
 <section class="page" id="page-payment">
-  <div class="hero-banner"><h1>PAYMENT</h1><p>Pilih metode pembayaran favoritmu</p><div class="hero-fire">💳</div></div>
+  <div class="hero-banner"><h1>PEMBAYARAN</h1><p>Pilih metode pembayaran favoritmu</p><div class="hero-fire">💳</div></div>
   <div class="section-title">💳 Metode Pembayaran</div>
   <div class="pay-grid">
     <div class="pay-card" data-pay="dana"><div class="pay-card-icon" style="background:#118EEA">D</div><div class="pay-card-name">DANA</div><div class="pay-card-note">0895622759784</div></div>
@@ -486,10 +498,10 @@ img,svg{max-width:100%;height:auto;display:block}
   <span style="opacity:.6">© 2025 YAKKZZ OFFICIAL — Transaksi aman & cepat</span>
 </footer>
 <nav class="bottom-nav">
-  <button class="active" data-page="home" type="button"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg><span>Home</span></button>
-  <button data-page="calculator" type="button"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg><span>Calc</span></button>
-  <button data-page="joki" type="button"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span>Joki</span></button>
-  <button data-page="payment" type="button"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2z"/></svg><span>Pay</span></button>
+  <button class="active" data-page="home" type="button"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg><span>Halaman Utama</span></button>
+  <button data-page="calculator" type="button"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg><span>Calculator</span></button>
+  <button data-page="joki" type="button"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span>Joki AFK</span></button>
+  <button data-page="payment" type="button"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2z"/></svg><span>Pembayaran</span></button>
 </nav>
 <script>
 "use strict";
@@ -635,7 +647,7 @@ function setupCalculator(){
   });
   if($("trail"))$("trail").addEventListener("change",function(){updateTrailInfo();requestCalculation();});
   if($("treadmill"))$("treadmill").addEventListener("change",function(){updateTreadmillInfo();requestCalculation();});
-    }
+}
   function showPage(name){
   var p=document.querySelectorAll(".page");
   for(var i=0;i<p.length;i++)p[i].classList.remove("active");
@@ -732,106 +744,6 @@ function setupJoki(){
       cb.setAttribute("href","https://wa.me/"+CONFIG.ownerNumber+"?text="+encodeURIComponent(msg));
     });
   }
-  }
-  var PRODUCTS_KEY="yakkzz_products_v1";
-function loadProducts(){
-  try{var r=SafeStorage.get(PRODUCTS_KEY);if(r)return JSON.parse(r);}catch(e){}
-  return [
-    {id:1,nama:"Akun Roblox Level 100",deskripsi:"Akun sultan, banyak item langka",harga:50000,stok:5,kategori:"Akun Roblox",status:"tersedia",gambar:""},
-    {id:2,nama:"Akun Roblox Level 50",deskripsi:"Akun mid, cocok buat main",harga:25000,stok:3,kategori:"Akun Roblox",status:"tersedia",gambar:""}
-  ];
-}
-function saveProducts(a){try{SafeStorage.set(PRODUCTS_KEY,JSON.stringify(a));}catch(e){}}
-function renderAdminProducts(){
-  var list=$("adminProductList");if(!list)return;
-  var p=loadProducts();
-  if(p.length===0){list.innerHTML='<div style="padding:20px;color:#8b8b9c;text-align:center;grid-column:1/-1">Belum ada produk.</div>';return;}
-  var h="";
-  for(var i=0;i<p.length;i++){
-    var x=p[i];
-    var sc=x.status==="sold"?"sold":"";
-    var tc=x.status==="sold"?"sold":"available";
-    var tt=x.status==="sold"?"SOLD":"TERSEDIA";
-    h+='<div class="product-card">'+
-      '<div class="product-badge '+sc+'">'+(x.kategori||"Produk")+'</div>'+
-      '<div class="product-title">'+x.nama+'</div>'+
-      '<div class="product-price">Rp '+formatFull(x.harga)+'</div>'+
-      '<div style="color:#8b8b9c;font-size:11px;margin-top:6px">Stok: '+x.stok+'</div>'+
-      '<div style="color:#a8a8b8;font-size:12px;margin-top:8px">'+(x.deskripsi||"")+'</div>'+
-      '<div class="product-actions">'+
-        '<button class="toggle-sold '+tc+'" data-id="'+x.id+'" data-action="toggle">'+tt+'</button>'+
-        '<button class="btn-admin-action red" data-id="'+x.id+'" data-action="delete" style="margin:0">🗑 HAPUS</button>'+
-      '</div></div>';
-  }
-  list.innerHTML=h;
-}
-function renderPublicProducts(){
-  var list=$("publicProductList");if(!list)return;
-  var p=loadProducts().filter(function(x){return x.status!=="sold";});
-  if(p.length===0){list.innerHTML='<div style="padding:20px;color:#8b8b9c;text-align:center;grid-column:1/-1">Belum ada produk tersedia.</div>';return;}
-  var h="";
-  for(var i=0;i<p.length;i++){
-    var x=p[i];
-    h+='<div class="product-card">'+
-      '<div class="product-badge">'+(x.kategori||"Produk")+'</div>'+
-      '<div class="product-title">'+x.nama+'</div>'+
-      '<div class="product-price">Rp '+formatFull(x.harga)+'</div>'+
-      '<div style="color:#8b8b9c;font-size:11px;margin-top:6px">Stok: '+x.stok+'</div>'+
-      '<div style="color:#a8a8b8;font-size:12px;margin-top:8px">'+(x.deskripsi||"")+'</div>'+
-      '<button class="product-btn" data-id="'+x.id+'" data-action="buy">BELI SEKARANG</button>'+
-    '</div>';
-  }
-  list.innerHTML=h;
-}
-function setupKatalog(){
-  if($("addProductBtn")){
-    $("addProductBtn").addEventListener("click",function(){
-      var nama=($("prodName")?$("prodName").value:"").trim();
-      var harga=parseNumber($("prodPrice")?$("prodPrice").value:0);
-      var stok=parseNumber($("prodStock")?$("prodStock").value:1);
-      var kat=($("prodCategory")?$("prodCategory").value:"").trim()||"Produk";
-      var gambar=($("prodImage")?$("prodImage").value:"").trim();
-      var desc=($("prodDesc")?$("prodDesc").value:"").trim();
-      if(!nama||!harga){showToast("⚠️ Nama & Harga wajib!");return;}
-      var a=loadProducts();
-      a.push({id:Date.now(),nama:nama,deskripsi:desc,harga:harga,stok:stok,kategori:kat,status:"tersedia",gambar:gambar});
-      saveProducts(a);renderAdminProducts();renderPublicProducts();
-      if($("prodName"))$("prodName").value="";
-      if($("prodPrice"))$("prodPrice").value="";
-      if($("prodStock"))$("prodStock").value="1";
-      if($("prodCategory"))$("prodCategory").value="";
-      if($("prodImage"))$("prodImage").value="";
-      if($("prodDesc"))$("prodDesc").value="";
-      showToast("✅ Produk ditambahkan!");
-    });
-  }
-  document.addEventListener("click",function(e){
-    var btn=e.target.closest("[data-action]");
-    if(!btn)return;
-    var action=btn.getAttribute("data-action");
-    var id=Number(btn.getAttribute("data-id"));
-    if(action==="toggle"){
-      var a=loadProducts();
-      for(var i=0;i<a.length;i++){if(a[i].id===id){a[i].status=a[i].status==="sold"?"tersedia":"sold";break;}}
-      saveProducts(a);renderAdminProducts();renderPublicProducts();showToast("✅ Status diubah!");
-    }else if(action==="delete"){
-      if(!confirm("Hapus produk ini?"))return;
-      var b=loadProducts().filter(function(x){return x.id!==id;});
-      saveProducts(b);renderAdminProducts();renderPublicProducts();showToast("🗑 Produk dihapus!");
-    }else if(action==="buy"){
-      var c=loadProducts();
-      for(var j=0;j<c.length;j++){
-        if(c[j].id===id){
-          var msg="Halo "+CONFIG.ownerName+", saya mau beli:\n\n";
-          msg+="Produk: "+c[j].nama+"\n";
-          msg+="Harga: Rp "+formatFull(c[j].harga)+"\n";
-          msg+="Kategori: "+c[j].kategori+"\n";
-          window.open("https://wa.me/"+CONFIG.ownerNumber+"?text="+encodeURIComponent(msg),"_blank");
-          break;
-        }
-      }
-    }
-  });
 }
   function setupAdmin(){
   function openAdmin(){
@@ -891,10 +803,26 @@ function setupMusic(){
   document.addEventListener("visibilitychange", function(){
     if(!document.hidden && !started){ tryPlay(); }
   });
+}
+function setupParticles(){
+  var emojis = ["🌸","✨","💫","⭐","🔥"];
+  setInterval(function(){
+    if(document.querySelectorAll(".anime-particle").length > 15) return;
+    var p = document.createElement("div");
+    p.className = "anime-particle";
+    p.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    p.style.left = Math.random()*100 + "vw";
+    p.style.fontSize = (Math.random()*15 + 12) + "px";
+    p.style.animationDuration = (Math.random()*6 + 6) + "s";
+    p.style.animationDelay = "0s";
+    document.body.appendChild(p);
+    setTimeout(function(){ p.remove(); }, 15000);
+  }, 800);
   }
   function init(){
   setupIntro();
   setupMusic();
+  setupParticles();
   setupNav();
   setupAdmin();
   createEstimateCards();

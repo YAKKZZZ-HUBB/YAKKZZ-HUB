@@ -24,10 +24,11 @@ html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
   min-height:100vh;
   background:
-    radial-gradient(circle at 85% 5%,rgba(255,31,61,.15),transparent 30%),
-    radial-gradient(circle at 10% 20%,rgba(138,0,21,.20),transparent 28%),
-    radial-gradient(circle at 50% 100%,rgba(255,31,61,.08),transparent 35%),
-    var(--bg);
+    radial-gradient(circle at 15% 10%,rgba(255,31,61,.18),transparent 35%),
+    radial-gradient(circle at 85% 20%,rgba(138,0,21,.25),transparent 35%),
+    radial-gradient(circle at 50% 100%,rgba(255,31,61,.10),transparent 40%),
+    linear-gradient(180deg,#050508 0%,#0a0205 50%,#050508 100%);
+  background-attachment:fixed;
   color:var(--text);
   font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
   overflow-x:hidden;
@@ -54,10 +55,13 @@ img,svg{max-width:100%;height:auto;display:block}
 .intro-loader{margin-top:30px;width:200px;height:3px;background:rgba(255,255,255,.1);border-radius:3px;margin:auto;overflow:hidden}
 .intro-loader::after{content:"";display:block;height:100%;width:40%;background:linear-gradient(90deg,transparent,var(--red),transparent);animation:loading 1.5s ease infinite}
 @keyframes loading{0%{transform:translateX(-100%)}100%{transform:translateX(350%)}}
+.music-toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);z-index:9999;padding:10px 20px;border-radius:999px;background:linear-gradient(135deg,var(--red),var(--red-dark));color:#fff;font-size:12px;font-weight:800;box-shadow:0 8px 24px rgba(255,31,61,.5);opacity:0;visibility:hidden;transition:all .4s cubic-bezier(.34,1.56,.64,1);pointer-events:none}
+.music-toast.show{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.music-toast.hide{opacity:0;visibility:hidden;transform:translateX(-50%) translateY(20px)}
   .topbar{position:sticky;top:0;z-index:100;background:rgba(5,5,8,.85);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(255,31,61,.15)}
 .nav{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 0}
 .brand{display:flex;align-items:center;gap:10px;cursor:pointer}
-.brand-logo{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,var(--red),var(--red-dark));display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:#fff}
+.brand-logo{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,var(--red),var(--red-dark));display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:#fff;box-shadow:0 6px 18px rgba(255,31,61,.4)}
 .brand-title{font-size:14px;font-weight:900;letter-spacing:.5px;background:linear-gradient(90deg,#fff,#ff5570);-webkit-background-clip:text;background-clip:text;color:transparent}
 .brand-sub{font-size:9px;color:var(--muted);letter-spacing:.5px;margin-top:1px}
 .desktop-nav{display:none;gap:6px}
@@ -84,39 +88,51 @@ img,svg{max-width:100%;height:auto;display:block}
 .page{display:none;padding-top:20px;padding-bottom:120px;animation:pageIn .5s}
 .page.active{display:block}
 @keyframes pageIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-  .hero-banner{position:relative;overflow:hidden;border-radius:24px;padding:44px 26px;text-align:center;background:radial-gradient(circle at 20% 20%,rgba(255,31,61,.4),transparent 50%),radial-gradient(circle at 80% 80%,rgba(138,0,21,.5),transparent 50%),linear-gradient(135deg,#1a0008,#0a0005 60%,#15000a);border:1px solid rgba(255,31,61,.4);box-shadow:0 20px 60px rgba(255,31,61,.25)}
+  .hero-banner{position:relative;overflow:hidden;border-radius:24px;padding:44px 26px;text-align:center;background:radial-gradient(circle at 20% 20%,rgba(255,31,61,.4),transparent 50%),radial-gradient(circle at 80% 80%,rgba(138,0,21,.5),transparent 50%),linear-gradient(135deg,#1a0008,#0a0005 60%,#15000a);border:1px solid rgba(255,31,61,.4);box-shadow:0 20px 60px rgba(255,31,61,.25),0 0 0 1px rgba(255,31,61,.15) inset}
 .hero-banner::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--red),transparent);background-size:200% auto;animation:shine 3s linear infinite}
-.hero-banner h1{font-size:clamp(28px,6vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1;background:linear-gradient(90deg,#fff,#ff5570,#fff);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero-banner p{margin-top:14px;color:#ffb3c0;font-size:12px;letter-spacing:2px;font-weight:700;text-transform:uppercase}
-.hero-fire{margin-top:12px;font-size:32px;animation:fireFloat 2s ease-in-out infinite}
+.hero-banner::after{content:"";position:absolute;width:400px;height:400px;right:-150px;top:-150px;background:radial-gradient(circle,rgba(255,31,61,.30),transparent 70%);animation:floatGlow 8s ease-in-out infinite;pointer-events:none}
+@keyframes floatGlow{0%,100%{transform:translate(0,0) scale(1);opacity:.6}50%{transform:translate(30px,-30px) scale(1.2);opacity:1}}
+.hero-banner h1{font-size:clamp(28px,6vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1;background:linear-gradient(90deg,#fff,#ff5570,#fff);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;position:relative;z-index:2}
+.hero-banner p{margin-top:14px;color:#ffb3c0;font-size:12px;letter-spacing:2px;font-weight:700;text-transform:uppercase;position:relative;z-index:2}
+.hero-fire{margin-top:12px;font-size:32px;animation:fireFloat 2s ease-in-out infinite;position:relative;z-index:2}
 @keyframes fireFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 .section-title{margin-top:26px;margin-bottom:14px;display:flex;align-items:center;gap:10px;font-size:16px;font-weight:900;color:#fff}
 .section-title::before{content:"";width:4px;height:18px;border-radius:3px;background:linear-gradient(180deg,var(--red),var(--red-dark))}
-.card{border:1px solid var(--border);border-radius:var(--radius);background:linear-gradient(145deg,rgba(21,21,31,.98),rgba(12,12,18,.98));box-shadow:var(--shadow-sm);overflow:hidden}
-.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;padding:22px 22px 0}
+.card{border:1px solid var(--border);border-radius:var(--radius);background:linear-gradient(145deg,rgba(21,21,31,.98),rgba(12,12,18,.98));box-shadow:var(--shadow-sm);overflow:hidden;position:relative;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.card::before{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,31,61,.06),transparent);transition:left .8s ease;pointer-events:none}
+.card:hover::before{left:100%}
+.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;padding:22px 22px 0;position:relative;z-index:2}
 .card-title{font-size:16px;font-weight:900;display:flex;align-items:center;gap:8px}
 .card-desc{margin-top:6px;color:var(--muted);font-size:11.5px;line-height:1.55}
-.card-body{padding:22px}
-.welcome-block{margin-top:24px;padding:26px 22px;border-radius:20px;text-align:center;background:linear-gradient(145deg,rgba(20,5,10,.98),rgba(10,2,5,.98));border:1px solid rgba(255,31,61,.2)}
+.card-body{padding:22px;position:relative;z-index:2}
+.welcome-block{margin-top:24px;padding:26px 22px;border-radius:20px;text-align:center;background:linear-gradient(145deg,rgba(20,5,10,.98),rgba(10,2,5,.98));border:1px solid rgba(255,31,61,.2);box-shadow:var(--shadow-sm)}
 .welcome-block h2{font-size:clamp(18px,4vw,26px);font-weight:900;line-height:1.3;background:linear-gradient(90deg,#fff,#ff8497);-webkit-background-clip:text;background-clip:text;color:transparent}
 .welcome-block p{margin-top:12px;color:#a8a8b8;font-size:13px;line-height:1.7}
-.order-btn-hero{display:inline-flex;align-items:center;justify-content:center;gap:10px;margin-top:22px;padding:16px 32px;border-radius:14px;background:linear-gradient(135deg,var(--red),var(--red-dark));color:#fff;font-size:15px;font-weight:900}
+.order-btn-hero{display:inline-flex;align-items:center;justify-content:center;gap:10px;margin-top:22px;padding:16px 32px;border-radius:14px;background:linear-gradient(135deg,var(--red),var(--red-dark));color:#fff;font-size:15px;font-weight:900;position:relative;overflow:hidden}
+.order-btn-hero::after{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);transition:left .6s ease}
+.order-btn-hero:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(255,31,61,.55)}
+.order-btn-hero:hover::after{left:100%}
 .order-btn-hero svg{width:20px;height:20px;fill:#fff}
 .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
-.stat-box{padding:20px 14px;border-radius:16px;text-align:center;background:linear-gradient(145deg,rgba(20,5,10,.98),rgba(10,2,5,.98));border:1px solid rgba(255,31,61,.25);transition:transform .25s}
-.stat-box:hover{transform:translateY(-4px);border-color:var(--red)}
+.stat-box{padding:20px 14px;border-radius:16px;text-align:center;background:linear-gradient(145deg,rgba(20,5,10,.98),rgba(10,2,5,.98));border:1px solid rgba(255,31,61,.25);transition:transform .25s,box-shadow .25s;backdrop-filter:blur(10px)}
+.stat-box:hover{transform:translateY(-6px);border-color:var(--red);box-shadow:0 16px 40px rgba(255,31,61,.25)}
 .stat-icon{font-size:28px}
 .stat-title{margin-top:8px;font-size:12px;font-weight:900;color:#ffb3c0}
 .stat-sub{margin-top:4px;font-size:9px;color:#8b8b9c}
 .products-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:14px}
 @media(max-width:500px){.products-grid{grid-template-columns:1fr}}
-.product-card{position:relative;overflow:hidden;padding:22px 18px;border-radius:20px;background:linear-gradient(145deg,rgba(20,5,10,.98),rgba(10,2,5,.98));border:1px solid rgba(255,31,61,.25);transition:transform .3s,border-color .3s;cursor:pointer}
-.product-card:hover{transform:translateY(-6px);border-color:var(--red)}
+.product-card{position:relative;overflow:hidden;padding:22px 18px;border-radius:20px;background:linear-gradient(145deg,rgba(20,5,10,.98),rgba(10,2,5,.98));border:1px solid rgba(255,31,61,.25);transition:transform .3s,border-color .3s,box-shadow .3s;cursor:pointer;backdrop-filter:blur(10px)}
+.product-card::before{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,31,61,.06),transparent);transition:left .8s ease;pointer-events:none}
+.product-card:hover{transform:translateY(-8px) scale(1.02);border-color:var(--red);box-shadow:0 20px 50px rgba(255,31,61,.35),0 0 0 1px rgba(255,31,61,.5) inset}
+.product-card:hover::before{left:100%}
 .product-badge{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:999px;background:rgba(255,31,61,.15);border:1px solid rgba(255,31,61,.4);color:#ffb3c0;font-size:9px;font-weight:900;text-transform:uppercase}
 .product-badge.sold{background:rgba(139,139,156,.15);border-color:rgba(139,139,156,.4);color:#8b8b9c}
 .product-title{margin-top:12px;font-size:18px;font-weight:900;color:#fff}
 .product-price{margin-top:10px;font-family:"JetBrains Mono",monospace;font-size:26px;font-weight:800;background:linear-gradient(90deg,#fff,#ff5570);-webkit-background-clip:text;background-clip:text;color:transparent}
-.product-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px;width:100%;padding:13px;border-radius:12px;background:linear-gradient(135deg,var(--red),var(--red-dark));color:#fff;font-size:13px;font-weight:900}
+.product-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px;width:100%;padding:13px;border-radius:12px;background:linear-gradient(135deg,var(--red),var(--red-dark));color:#fff;font-size:13px;font-weight:900;position:relative;overflow:hidden}
+.product-btn::after{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);transition:left .6s ease}
+.product-btn:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(255,31,61,.55)}
+.product-btn:hover::after{left:100%}
 .product-actions{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
 .toggle-sold{padding:8px 12px;border-radius:10px;font-size:11px;font-weight:900;cursor:pointer}
 .toggle-sold.sold{background:rgba(139,139,156,.2);color:#8b8b9c;border:1px solid rgba(139,139,156,.3)}
@@ -128,8 +144,8 @@ img,svg{max-width:100%;height:auto;display:block}
 .form-group input,.form-group select,.form-group textarea{width:100%;min-height:50px;padding:0 16px;border-radius:13px;border:1px solid rgba(255,31,61,.3);background:#0a0205;color:#f4f4f6;font-size:14px;outline:none}
 .form-group textarea{min-height:90px;padding:14px 16px;resize:vertical}
 .form-group input::placeholder{color:#5a4a50}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--red);background:#12040a}
-.form-group select{cursor:pointer;-webkit-appearance:none;appearance:none;padding-right:38px}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--red);background:#12040a;box-shadow:0 0 0 4px rgba(255,31,61,.15)}
+.form-group select{cursor:pointer;-webkit-appearance:none;appearance:none;padding-right:38px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23ff1f3d' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
 .form-group select option{background:#0a0205;color:#f4f4f6}
 .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 @media(max-width:600px){.form-grid{grid-template-columns:1fr}}
@@ -144,7 +160,7 @@ img,svg{max-width:100%;height:auto;display:block}
   .pay-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
 @media(min-width:640px){.pay-grid{grid-template-columns:repeat(3,1fr)}}
 .pay-card{padding:18px 14px;border-radius:16px;text-align:center;background:linear-gradient(145deg,rgba(20,5,10,.98),rgba(10,2,5,.98));border:1px solid rgba(255,31,61,.20);cursor:pointer;transition:all .25s}
-.pay-card:hover{transform:translateY(-4px);border-color:var(--red)}
+.pay-card:hover{transform:translateY(-6px) scale(1.03);border-color:var(--red);box-shadow:0 16px 40px rgba(255,31,61,.30)}
 .pay-card-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:22px;font-weight:900;color:#fff}
 .pay-card-name{font-size:13px;font-weight:900;color:#fff}
 .pay-card-note{margin-top:4px;font-size:10px;color:#8b8b9c}
@@ -164,7 +180,10 @@ img,svg{max-width:100%;height:auto;display:block}
 .toast.show{transform:translateX(-50%) translateY(0)}
 .chat-admin-box{margin-top:20px;padding:24px 20px;border-radius:18px;text-align:center;background:linear-gradient(145deg,rgba(20,5,10,.98),rgba(10,2,5,.98));border:1px solid rgba(255,31,61,.35)}
 .chat-admin-box p{color:#ffb3c0;font-size:13px;font-weight:800;line-height:1.6}
-.chat-admin-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;margin-top:16px;width:100%;padding:16px;border-radius:14px;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;font-size:14px;font-weight:900}
+.chat-admin-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;margin-top:16px;width:100%;padding:16px;border-radius:14px;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;font-size:14px;font-weight:900;position:relative;overflow:hidden}
+.chat-admin-btn::after{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);transition:left .6s ease}
+.chat-admin-btn:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(37,211,102,.55)}
+.chat-admin-btn:hover::after{left:100%}
 .main-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(340px,.85fr);gap:20px;margin-top:20px}
 @media(max-width:900px){.main-grid{grid-template-columns:1fr}}
 .result-card{position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(24,18,30,.98),rgba(12,12,18,.98))}
@@ -214,9 +233,10 @@ img,svg{max-width:100%;height:auto;display:block}
     <div class="intro-loader"></div>
   </div>
 </div>
-<audio id="bgMusic" loop preload="auto" autoplay>
+<audio id="bgMusic" loop preload="auto" autoplay playsinline>
   <source src="https://files.catbox.moe/hv0qhn.mp3" type="audio/mpeg">
 </audio>
+<div class="music-toast" id="musicToast">🔊 Klik di mana saja untuk mengaktifkan musik</div>
 <div class="mobile-menu-overlay" id="menuOverlay"></div>
 <aside class="mobile-menu" id="mobileMenu">
   <button class="menu-close" id="menuClose" type="button"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
@@ -356,34 +376,35 @@ img,svg{max-width:100%;height:auto;display:block}
   <div class="hero-banner"><h1>JOKI AFK</h1><p>Steal An Egg — Pilih paket kamu</p><div class="hero-fire">🎮</div></div>
   <div class="section-title">🔥 Paket Joki AFK</div>
   <div class="products-grid">
-    <div class="product-card" data-product="JOKI 1 HARI" data-price="5000">
+    <div class="product-card" data-product="JOKI 1 HARI" data-price="5000" data-days="1">
       <div class="product-badge">⚡ PAKET 1</div><div class="product-title">JOKI 1 HARI</div><div class="product-price">Rp 5.000</div>
       <button class="product-btn" type="button">BELI SEKARANG</button>
     </div>
-    <div class="product-card" data-product="JOKI 2 HARI" data-price="10000">
+    <div class="product-card" data-product="JOKI 2 HARI" data-price="10000" data-days="2">
       <div class="product-badge">⚡ PAKET 2</div><div class="product-title">JOKI 2 HARI</div><div class="product-price">Rp 10.000</div>
       <button class="product-btn" type="button">BELI SEKARANG</button>
     </div>
-    <div class="product-card" data-product="JOKI 5 HARI" data-price="25000">
+    <div class="product-card" data-product="JOKI 5 HARI" data-price="25000" data-days="5">
       <div class="product-badge">🔥 PAKET 3</div><div class="product-title">JOKI 5 HARI</div><div class="product-price">Rp 25.000</div>
       <button class="product-btn" type="button">BELI SEKARANG</button>
     </div>
   </div>
 </section>
 <section class="page" id="page-order">
-  <div class="hero-banner"><h1>FORM ORDER</h1><p>Isi data kamu dengan lengkap</p><div class="hero-fire">📝</div></div>
+  <div class="hero-banner"><h1>FORM ORDER</h1><p>Isi data akun kamu dengan lengkap</p><div class="hero-fire">📝</div></div>
   <div class="form-box">
-    <h3>🔥 JOKI KONTAK BY YAKKZZSTORE 🔥</h3>
+    <h3>🎮 FORM ORDER JOKI AFK</h3>
     <div class="form-group">
       <label for="orderProduct">Produk</label>
       <select id="orderProduct">
-        <option value="JOKI 1 HARI|5000">JOKI 1 HARI — Rp 5.000</option>
-        <option value="JOKI 2 HARI|10000">JOKI 2 HARI — Rp 10.000</option>
-        <option value="JOKI 5 HARI|25000">JOKI 5 HARI — Rp 25.000</option>
+        <option value="JOKI 1 HARI|5000|1">JOKI 1 HARI — Rp 5.000</option>
+        <option value="JOKI 2 HARI|10000|2">JOKI 2 HARI — Rp 10.000</option>
+        <option value="JOKI 5 HARI|25000|5">JOKI 5 HARI — Rp 25.000</option>
       </select>
     </div>
-    <div class="form-group"><label for="orderName">Nama</label><input id="orderName" type="text" placeholder="Masukkan nama kamu"></div>
-    <div class="form-group"><label for="orderPhone">Nomor WA</label><input id="orderPhone" type="tel" placeholder="Contoh: 6281234567890"></div>
+    <div class="form-group"><label for="orderUsn">USN</label><input id="orderUsn" type="text" placeholder="Username Roblox kamu" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></div>
+    <div class="form-group"><label for="orderPass">PASSWORD</label><input id="orderPass" type="password" placeholder="Password akun Roblox" autocomplete="off"></div>
+    <div class="form-group"><label for="orderBackup">BACKUPCODE</label><input id="orderBackup" type="text" placeholder="Backup code akun Roblox" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></div>
     <div class="section-title" style="margin-top:22px">💳 Metode Pembayaran</div>
     <div class="pay-grid">
       <div class="pay-card" data-pay="dana"><div class="pay-card-icon" style="background:#118EEA">D</div><div class="pay-card-name">DANA</div><div class="pay-card-note">Tap untuk lihat</div></div>
@@ -412,7 +433,7 @@ img,svg{max-width:100%;height:auto;display:block}
   <div class="card" style="margin-top:20px"><div class="card-body">
     <div class="breakdown-row"><span class="breakdown-label">1. Pilih paket joki di halaman JOKI AFK</span></div>
     <div class="breakdown-row"><span class="breakdown-label">2. Klik tombol BELI SEKARANG</span></div>
-    <div class="breakdown-row"><span class="breakdown-label">3. Isi Nama dan Nomor WA kamu</span></div>
+    <div class="breakdown-row"><span class="breakdown-label">3. Isi USN, PASSWORD, BACKUPCODE kamu</span></div>
     <div class="breakdown-row"><span class="breakdown-label">4. Pilih metode pembayaran (DANA / GoPay / QRIS)</span></div>
     <div class="breakdown-row"><span class="breakdown-label">5. Transfer sesuai nominal</span></div>
     <div class="breakdown-row"><span class="breakdown-label">6. Klik CHAT ADMIN untuk konfirmasi</span></div>
@@ -614,7 +635,7 @@ function setupCalculator(){
   });
   if($("trail"))$("trail").addEventListener("change",function(){updateTrailInfo();requestCalculation();});
   if($("treadmill"))$("treadmill").addEventListener("change",function(){updateTreadmillInfo();requestCalculation();});
-  }
+    }
   function showPage(name){
   var p=document.querySelectorAll(".page");
   for(var i=0;i<p.length;i++)p[i].classList.remove("active");
@@ -695,15 +716,19 @@ function setupJoki(){
   var cb=$("chatAdmin");
   if(cb){
     cb.addEventListener("click",function(){
-      var name=($("orderName")?$("orderName").value:"").trim();
-      var phone=($("orderPhone")?$("orderPhone").value:"").trim();
+      var usn=($("orderUsn")?$("orderUsn").value:"").trim();
+      var pw=($("orderPass")?$("orderPass").value:"").trim();
+      var bc=($("orderBackup")?$("orderBackup").value:"").trim();
       var sel=$("orderProduct");
-      var prod=sel?sel.value.split("|"):["JOKI 1 HARI","5000"];
-      var pn=prod[0]||"JOKI",pp=prod[1]||"5000";
-      var msg="JOKI KONTAK BY "+CONFIG.ownerName.toUpperCase()+" 🔥\n\n";
-      msg+="nama="+(name||"(belum diisi)")+"\n";
-      msg+="nomor="+(phone?"wa.me/"+phone:"(belum diisi)")+"\n\n";
-      msg+="Produk: "+pn+"\nHarga: Rp "+pp+"\n";
+      var prod=sel?sel.value.split("|"):["JOKI 1 HARI","5000","1"];
+      var pn=prod[0]||"JOKI 1 HARI";
+      var pp=prod[1]||"5000";
+      var hari=prod[2]||"1";
+      var msg="bang mau joki afk yang "+hari+" hari";
+      msg+="\n\nUSN: "+(usn||"(belum diisi)");
+      msg+="\nPASSWORD: "+(pw||"(belum diisi)");
+      msg+="\nBACKUPCODE: "+(bc||"(belum diisi)");
+      msg+="\n\nPaket: "+pn+"\nHarga: Rp "+pp;
       cb.setAttribute("href","https://wa.me/"+CONFIG.ownerNumber+"?text="+encodeURIComponent(msg));
     });
   }
@@ -807,7 +832,7 @@ function setupKatalog(){
       }
     }
   });
-      }
+}
   function setupAdmin(){
   function openAdmin(){
     var pw=prompt("Masukkan password admin:");
@@ -823,27 +848,51 @@ function setupIntro(){
   setTimeout(function(){i.classList.add("hidden");},3500);
 }
 function setupMusic(){
-  var music=$("bgMusic");
-  if(!music)return;
-  music.volume = 0.5;
-  function play(){
-    var p=music.play();
-    if(p&&p.then){p.catch(function(){});}
+  var music = $("bgMusic");
+  var toast = $("musicToast");
+  if(!music) return;
+  music.volume = 0.6;
+  music.load();
+  var started = false;
+  function tryPlay(){
+    if(started) return;
+    var p = music.play();
+    if(p && p.then){
+      p.then(function(){
+        started = true;
+        if(toast){ toast.classList.remove("show"); toast.classList.add("hide"); }
+      }).catch(function(){
+        if(toast && !started){ toast.classList.add("show"); }
+      });
+    } else {
+      started = true;
+      if(toast){ toast.classList.remove("show"); toast.classList.add("hide"); }
+    }
   }
-  play();
-  var once=function(){
-    play();
-    document.removeEventListener("click",once);
-    document.removeEventListener("touchstart",once);
-    document.removeEventListener("keydown",once);
-    document.removeEventListener("scroll",once);
+  tryPlay();
+  var events = ["click","touchstart","touchend","keydown","scroll","mousemove","pointerdown"];
+  var handler = function(){
+    tryPlay();
+    if(started){
+      events.forEach(function(ev){ document.removeEventListener(ev, handler); });
+    }
   };
-  document.addEventListener("click",once,{once:false});
-  document.addEventListener("touchstart",once,{once:false,passive:true});
-  document.addEventListener("keydown",once,{once:false});
-  document.addEventListener("scroll",once,{once:false,passive:true});
-}
-function init(){
+  events.forEach(function(ev){ document.addEventListener(ev, handler, {passive:true}); });
+  var attempts = 0;
+  var interval = setInterval(function(){
+    attempts++;
+    if(started || attempts > 10){ clearInterval(interval); return; }
+    tryPlay();
+  }, 1000);
+  music.addEventListener("play", function(){
+    started = true;
+    if(toast){ toast.classList.remove("show"); toast.classList.add("hide"); }
+  });
+  document.addEventListener("visibilitychange", function(){
+    if(!document.hidden && !started){ tryPlay(); }
+  });
+  }
+  function init(){
   setupIntro();
   setupMusic();
   setupNav();
@@ -870,4 +919,3 @@ if(document.readyState==="loading"){
 
 </body>
 </html>
-  

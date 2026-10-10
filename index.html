@@ -44,7 +44,7 @@ img,svg{max-width:100%;height:auto;display:block}
 ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--red),var(--red-dark));border-radius:10px;border:2px solid var(--bg2)}
 .container{width:min(1180px,calc(100% - 28px));margin:auto;position:relative;z-index:1}
 .ic{width:18px;height:18px;fill:var(--red);flex:none}
-.intro-screen{position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background:#000;display:flex;align-items:center;justify-content:center;transition:opacity .6s,visibility .6s}
+  .intro-screen{position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background:#000;display:flex;align-items:center;justify-content:center;transition:opacity .6s,visibility .6s}
 .intro-screen.hidden{opacity:0;visibility:hidden;pointer-events:none}
 .intro-overlay{position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(255,31,61,.25),transparent 70%),linear-gradient(180deg,rgba(0,0,0,.85),rgba(0,0,0,.95))}
 .intro-overlay::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,31,61,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,31,61,.06) 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(ellipse at 50% 50%,black 20%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at 50% 50%,black 20%,transparent 75%)}
@@ -137,7 +137,7 @@ img,svg{max-width:100%;height:auto;display:block}
 .card-title .ic{width:32px;height:32px;padding:7px;border-radius:9px;background:linear-gradient(135deg,rgba(255,31,61,.25),rgba(177,140,255,.15));border:1px solid rgba(255,31,61,.35)}
 .card-desc{margin-top:6px;color:var(--muted);font-size:11.5px;line-height:1.55}
 .card-body{padding:22px}
-  .welcome-block{margin-top:24px;padding:36px 32px;border-radius:26px;background:radial-gradient(circle at 0% 0%,rgba(255,31,61,.25),transparent 45%),radial-gradient(circle at 100% 100%,rgba(177,140,255,.18),transparent 45%),radial-gradient(circle at 50% 50%,rgba(34,211,238,.08),transparent 60%),linear-gradient(135deg,rgba(25,8,15,.98),rgba(10,3,8,.98));border:1px solid rgba(255,31,61,.30);position:relative;overflow:hidden;box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 -1px 0 rgba(0,0,0,.5) inset,0 30px 80px rgba(0,0,0,.6);isolation:isolate}
+.welcome-block{margin-top:24px;padding:36px 32px;border-radius:26px;background:radial-gradient(circle at 0% 0%,rgba(255,31,61,.25),transparent 45%),radial-gradient(circle at 100% 100%,rgba(177,140,255,.18),transparent 45%),radial-gradient(circle at 50% 50%,rgba(34,211,238,.08),transparent 60%),linear-gradient(135deg,rgba(25,8,15,.98),rgba(10,3,8,.98));border:1px solid rgba(255,31,61,.30);position:relative;overflow:hidden;box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 -1px 0 rgba(0,0,0,.5) inset,0 30px 80px rgba(0,0,0,.6);isolation:isolate}
 .welcome-block::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(255,31,61,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,31,61,.06) 1px,transparent 1px);background-size:32px 32px;mask-image:radial-gradient(ellipse at 50% 50%,black 30%,transparent 80%);-webkit-mask-image:radial-gradient(ellipse at 50% 50%,black 30%,transparent 80%)}
 .welcome-block::after{content:"";position:absolute;width:400px;height:400px;right:-120px;top:-120px;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(255,31,61,.35),transparent 65%);animation:welcomeGlow 16s ease-in-out infinite}
 @keyframes welcomeGlow{0%,100%{transform:translate(0,0) scale(1);opacity:.7}50%{transform:translate(-40px,40px) scale(1.2);opacity:1}}
@@ -437,7 +437,7 @@ input[type=range].calc-range::-moz-range-thumb{width:18px;height:18px;border-rad
   .product-card:hover{transform:translateY(-4px)}
   .stat-box:hover{transform:translateY(-3px)}
   .pay-card:hover{transform:translateY(-3px)}
-              }
+}
   </style>
 </head>
 <body>
@@ -476,7 +476,7 @@ input[type=range].calc-range::-moz-range-thumb{width:18px;height:18px;border-rad
   </div>
   <div class="menu-item" data-page="katalog">
     <div class="menu-item-icon"><svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1z"/></svg></div>
-    <div class="menu-item-text"><div class="menu-item-title">Katalog Produk</div><div class="menu-item-sub">Akun Roblox & Joki</div></div>
+    <div class="menu-item-text"><div class="menu-item-title">Katalog Produk</div><div class="menu-item-sub">Akun • Joki • Jasa</div></div>
   </div>
   <div class="menu-item" data-page="cara-order">
     <div class="menu-item-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg></div>
@@ -526,9 +526,9 @@ input[type=range].calc-range::-moz-range-thumb{width:18px;height:18px;border-rad
       <div class="welcome-text">
         <div class="welcome-badge"><span class="dot-live"></span> ONLINE 24/7</div>
         <h2>Halo, gw <span class="brand-highlight">YAKKZZ</span>
-          <svg viewBox="0 0 24 24" style="width:30px;height:30px;fill:#ff5570;filter:drop-shadow(0 0 12px rgba(255,31,61,.7))" aria-hidden="true"><path d="M23 12c0-1.1-.9-2-2-2h-.18c-.28-3.79-3.45-6.8-7.32-6.8-1.99 0-3.79.79-5.12 2.07l-1.41-1.42c-.39-.39-1.02-.39-1.41 0s-.39 1.02 0 1.41l1.23 1.23c-.5.72-.91 1.51-1.21 2.35L3 8.5V6c0-.55-.45-1-1-1s-1 .45-1 1v3c0 .55.45 1 1 1h3.06C5.02 11.18 5 11.59 5 12c0 4.42 3.58 8 8 8 2.4 0 4.55-1.06 6.03-2.74L23 12z"/></svg>
+          <svg viewBox="0 0 24 24" style="width:30px;height:30px;fill:#ff5570" aria-hidden="true"><path d="M23 12c0-1.1-.9-2-2-2h-.18c-.28-3.79-3.45-6.8-7.32-6.8-1.99 0-3.79.79-5.12 2.07l-1.41-1.42c-.39-.39-1.02-.39-1.41 0s-.39 1.02 0 1.41l1.23 1.23c-.5.72-.91 1.51-1.21 2.35L3 8.5V6c0-.55-.45-1-1-1s-1 .45-1 1v3c0 .55.45 1 1 1h3.06C5.02 11.18 5 11.59 5 12c0 4.42 3.58 8 8 8 2.4 0 4.55-1.06 6.03-2.74L23 12z"/></svg>
         </h2>
-        <p>Joki AFK Steal An Egg & jual akun Roblox. Order → bayar → beres. Gak pake ribet.</p>
+        <p>Joki AFK Steal An Egg, jual akun Roblox, & jasa bikin web. Order → bayar → beres. Gak pake ribet.</p>
         <div class="welcome-actions">
           <a class="order-btn-hero" data-page="joki"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> ORDER JOKI</a>
           <a class="ghost-btn" data-page="katalog"><svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1z"/></svg> LIHAT KATALOG</a>
@@ -555,7 +555,7 @@ input[type=range].calc-range::-moz-range-thumb{width:18px;height:18px;border-rad
   <div class="section-title reveal"><svg class="ic" viewBox="0 0 24 24"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/></svg> Layanan Kami</div>
   <div class="products-grid reveal">
     <div class="product-card" data-page="joki"><div class="product-badge"><svg viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67z"/></svg> JOKI</div><div class="product-title">Joki AFK Steal An Egg</div><div class="product-price" style="font-size:18px">Mulai Rp 5.000</div><button class="product-btn" type="button">LIHAT PAKET</button></div>
-    <div class="product-card" data-page="payment"><div class="product-badge"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2z"/></svg> PAYMENT</div><div class="product-title">Metode Pembayaran</div><div class="product-price" style="font-size:18px">DANA • GoPay • QRIS</div><button class="product-btn" type="button">LIHAT METODE</button></div>
+    <div class="product-card" data-page="katalog"><div class="product-badge"><svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg> JASA WEB</div><div class="product-title">Jasa Bikin Web</div><div class="product-price" style="font-size:18px">Mulai Rp 50.000</div><button class="product-btn" type="button">LIHAT PAKET</button></div>
   </div>
 </section>
 <section class="page" id="page-calculator">
@@ -674,8 +674,8 @@ input[type=range].calc-range::-moz-range-thumb{width:18px;height:18px;border-rad
     <div class="card-head"><div><div class="card-title"><svg class="ic" viewBox="0 0 24 24"><path d="M9 3v2h3v14h2V5h3V3H9z"/></svg> Langkah Order</div><div class="card-desc">Cuma 7 step, gampang banget.</div></div></div>
     <div class="card-body">
       <div class="step-list">
-        <div class="step-item"><div class="step-num">1</div><div class="step-text">Pilih paket joki di halaman <b>JOKI AFK</b></div></div>
-        <div class="step-item"><div class="step-num">2</div><div class="step-text">Klik tombol <b>BELI SEKARANG</b></div></div>
+        <div class="step-item"><div class="step-num">1</div><div class="step-text">Pilih paket di halaman <b>JOKI AFK</b> / <b>KATALOG</b></div></div>
+        <div class="step-item"><div class="step-num">2</div><div class="step-text">Klik tombol <b>ORDER</b> / <b>BELI SEKARANG</b></div></div>
         <div class="step-item"><div class="step-num">3</div><div class="step-text">Isi <b>USN</b>, <b>PASSWORD</b>, <b>BACKUPCODE</b> kamu</div></div>
         <div class="step-item"><div class="step-num">4</div><div class="step-text">Pilih metode pembayaran <b>DANA / GoPay / QRIS</b></div></div>
         <div class="step-item"><div class="step-num">5</div><div class="step-text">Transfer sesuai <b>nominal</b></div></div>
@@ -686,16 +686,16 @@ input[type=range].calc-range::-moz-range-thumb{width:18px;height:18px;border-rad
   </div>
 </section>
 <section class="page" id="page-katalog">
-  <div class="hero-banner"><h1>KATALOG</h1><p>Akun Roblox & Joki AFK</p><div class="hero-fire"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1z"/></svg></div></div>
+  <div class="hero-banner"><h1>KATALOG</h1><p>Akun Roblox • Joki AFK • Jasa Bikin Web</p><div class="hero-fire"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1z"/></svg></div></div>
 
   <div id="adminPanelWrap" style="display:none">
     <div class="section-title"><svg class="ic" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg> Tambah Produk Baru</div>
     <div class="form-box reveal">
       <div class="form-grid">
+        <div class="field full"><label for="prodCategory">Kategori</label><select id="prodCategory"><option value="Akun Roblox">Akun Roblox</option><option value="Joki AFK">Joki AFK</option><option value="Jasa Bikin Web">Jasa Bikin Web</option></select></div>
         <div class="field full"><label for="prodName">Nama Produk</label><input id="prodName" type="text" placeholder="Akun Roblox Level 200"></div>
         <div class="field"><label for="prodPrice">Harga (Rp)</label><input id="prodPrice" type="text" placeholder="50000"></div>
         <div class="field"><label for="prodStock">Stok</label><input id="prodStock" type="text" placeholder="1" value="1"></div>
-        <div class="field full"><label for="prodCategory">Kategori</label><select id="prodCategory"><option value="Akun Roblox">Akun Roblox</option><option value="Joki AFK">Joki AFK</option></select></div>
         <div class="field full"><label for="prodImage">URL Gambar (opsional)</label><input id="prodImage" type="text" placeholder="https://..."></div>
         <div class="field full"><label for="prodDesc">Deskripsi</label><textarea id="prodDesc" placeholder="Deskripsi singkat produk..."></textarea></div>
       </div>
@@ -716,6 +716,12 @@ input[type=range].calc-range::-moz-range-thumb{width:18px;height:18px;border-rad
   <div id="publicWrap">
     <div class="section-title"><svg class="ic" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1z"/></svg> Produk Tersedia</div>
     <div class="products-grid reveal" id="publicProductList"></div>
+
+    <div class="section-title" style="margin-top:26px"><svg class="ic" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg> Jasa Bikin Web</div>
+    <div class="products-grid reveal" id="publicJasaList"></div>
+
+    <div class="section-title" style="margin-top:26px"><svg class="ic" viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67z"/></svg> Paket Joki</div>
+    <div class="products-grid reveal" id="publicJokiList"></div>
   </div>
 </section>
 <div class="modal" id="payModal">
@@ -754,7 +760,8 @@ input[type=range].calc-range::-moz-range-thumb{width:18px;height:18px;border-rad
       <a data-page="cara-order">Cara Order</a>
     </div>
     <div class="footer-social">
-      <a href="https://wa.me/62895622759784" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35z"/></svg></a>
+      <a href="https://wa.me/62895622759784" target="_blank" rel="noopener" aria-label="WhatsApp 1"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35z"/></svg></a>
+      <a href="https://wa.me/6283841658037" target="_blank" rel="noopener" aria-label="WhatsApp 2"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35z"/></svg></a>
       <a href="https://www.tiktok.com/@bang_aryaa1" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.1z"/></svg></a>
       <a href="https://instagram.com/arrrryaaa.brr" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
     </div>
@@ -772,6 +779,7 @@ input[type=range].calc-range::-moz-range-thumb{width:18px;height:18px;border-rad
 "use strict";
 var CONFIG = {
   ownerNumber: "62895622759784",
+  ownerNumber2: "6283841658037",
   ownerName: "yakkzzstore",
   ownerFullName: "Arya Lintang Saputra",
   danaNumber: "0895622759784",
@@ -1041,7 +1049,11 @@ function showPage(name){
     for(var i=0;i<rv.length;i++)rv[i].classList.add("visible");
   },50);
   if(name==="joki" && typeof renderJokiProducts==="function")renderJokiProducts();
-  if(name==="katalog" && typeof renderPublicProducts==="function")renderPublicProducts();
+  if(name==="katalog"){
+    if(typeof renderPublicProducts==="function")renderPublicProducts();
+    if(typeof renderJokiProducts==="function")renderJokiProducts();
+    if(typeof renderJasaWeb==="function")renderJasaWeb();
+  }
 }
 function openMenu(){if($("mobileMenu"))$("mobileMenu").classList.add("open");if($("menuOverlay"))$("menuOverlay").classList.add("open");}
 function closeMenu(){if($("mobileMenu"))$("mobileMenu").classList.remove("open");if($("menuOverlay"))$("menuOverlay").classList.remove("open");}
@@ -1147,16 +1159,6 @@ function setupJoki(){
       showPage("order");
       return;
     }
-    var card=e.target.closest(".product-card[data-product]");
-    if(!card)return;
-    var p=card.getAttribute("data-product");
-    var sel2=$("orderProduct");
-    if(sel2){
-      for(var i=0;i<sel2.options.length;i++){
-        if(sel2.options[i].value.indexOf(p+"|")===0){sel2.selectedIndex=i;break;}
-      }
-    }
-    showPage("order");
   });
   var cb=$("chatAdmin");
   if(cb){
@@ -1185,7 +1187,8 @@ function setupJoki(){
       msg+="\n\nUSN: "+usn;
       msg+="\nPASSWORD: "+pw;
       msg+="\nBACKUPCODE: "+bc;
-      msg+="\n\nPaket: "+pn+"\nHarga: Rp "+pp;
+      msg+="\n\nPaket: "+pn+"\nHarga: Rp "+pp+"\n\n";
+      msg+="Kalo slow respon, bisa chat admin no 2: wa.me/"+CONFIG.ownerNumber2;
       var url="https://wa.me/"+CONFIG.ownerNumber+"?text="+encodeURIComponent(msg);
       var w=window.open(url,"_blank");
       if(!w)window.location.href=url;
@@ -1199,7 +1202,9 @@ function loadProducts(){
 }
 function saveProducts(a){try{SafeStorage.set(PRODUCTS_KEY,JSON.stringify(a));}catch(e){}}
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+function openWA(number,msg){var url="https://wa.me/"+number+"?text="+encodeURIComponent(msg);var w=window.open(url,"_blank");if(!w)window.location.href=url;}
 
+/* ADMIN: RENDER SEMUA PRODUK */
 function renderAdminProducts(){
   var list=$("adminProductList");if(!list)return;
   var p=loadProducts();
@@ -1231,32 +1236,35 @@ function renderAdminProducts(){
   }
   list.innerHTML=h;
 }
+
+/* PUBLIK: PRODUK BIASA (Akun Roblox) */
 function renderPublicProducts(){
   var list=$("publicProductList");if(!list)return;
-  var all=loadProducts().filter(function(x){return x.status!=="sold" && x.kategori!=="Joki AFK";});
-  if(all.length===0){list.innerHTML='<div style="padding:30px 20px;color:#8b8b9c;text-align:center;grid-column:1/-1;border:1px dashed rgba(255,31,61,.3);border-radius:16px"><div style="font-size:14px;font-weight:700;color:#ffb3c0;margin-bottom:6px">Belum ada produk</div><div style="font-size:11px">Admin belum menambahkan produk. Cek lagi nanti ya!</div></div>';return;}
+  var all=loadProducts().filter(function(x){return x.status!=="sold" && x.kategori!=="Joki AFK" && x.kategori!=="Jasa Bikin Web";});
+  if(all.length===0){list.innerHTML='<div style="padding:30px 20px;color:#8b8b9c;text-align:center;grid-column:1/-1;border:1px dashed rgba(255,31,61,.3);border-radius:16px"><div style="font-size:14px;font-weight:700;color:#ffb3c0;margin-bottom:6px">Belum ada produk</div><div style="font-size:11px">Cek lagi nanti ya!</div></div>';return;}
   var h="";
   for(var i=0;i<all.length;i++){
     var x=all[i];
-    var btnHtml='<button class="product-btn" data-id="'+x.id+'" data-action="buy">BELI SEKARANG</button>';
     h+='<div class="product-card">'+
       '<div class="product-badge">'+esc(x.kategori||"Produk")+'</div>'+
       '<div class="product-title">'+esc(x.nama)+'</div>'+
       '<div class="product-price">Rp '+formatFull(x.harga)+'</div>'+
       '<div style="color:#8b8b9c;font-size:11px;margin-top:6px">Stok: '+x.stok+'</div>'+
       '<div style="color:#a8a8b8;font-size:12px;margin-top:8px">'+esc(x.deskripsi||"")+'</div>'+
-      btnHtml+
+      '<div class="product-actions" style="flex-direction:column">'+
+        '<button class="product-btn" data-id="'+x.id+'" data-action="buy" data-wa="1">CHAT ADMIN 1</button>'+
+        '<button class="product-btn" data-id="'+x.id+'" data-action="buy" data-wa="2" style="background:linear-gradient(135deg,#25d366,#128c7e);box-shadow:0 6px 18px rgba(37,211,102,.4)">CHAT ADMIN 2</button>'+
+      '</div>'+
     '</div>';
   }
   list.innerHTML=h;
 }
+
+/* PUBLIK: JOKI */
 function renderJokiProducts(){
   var list=$("jokiProductList");if(!list)return;
   var p=loadProducts().filter(function(x){return x.kategori==="Joki AFK" && x.status!=="sold";});
-  if(p.length===0){
-    list.innerHTML='<div style="padding:30px 20px;color:#8b8b9c;text-align:center;grid-column:1/-1;border:1px dashed rgba(255,31,61,.3);border-radius:16px"><div style="font-size:14px;font-weight:700;color:#ffb3c0;margin-bottom:6px">Belum ada paket joki</div><div style="font-size:11px">Admin belum menambahkan paket. Cek lagi nanti ya!</div></div>';
-    return;
-  }
+  if(p.length===0){list.innerHTML='<div style="padding:30px 20px;color:#8b8b9c;text-align:center;grid-column:1/-1;border:1px dashed rgba(255,31,61,.3);border-radius:16px"><div style="font-size:14px;font-weight:700;color:#ffb3c0;margin-bottom:6px">Belum ada paket joki</div><div style="font-size:11px">Cek lagi nanti ya!</div></div>';return;}
   var h="";
   for(var i=0;i<p.length;i++){
     var x=p[i];
@@ -1264,8 +1272,8 @@ function renderJokiProducts(){
     var slotHtml='<div class="slot-card-status '+(isFull?"full":"kosong")+'" style="margin-top:8px">'+(isFull?"FULL":"KOSONG")+'</div>';
     var btnHtml=isFull
       ? '<button class="product-btn" disabled style="background:linear-gradient(135deg,#4a4a52,#2a2a32);cursor:not-allowed">SLOT PENUH</button>'
-      : '<button class="product-btn" type="button" data-joki-id="'+x.id+'">BELI SEKARANG</button>';
-    h+='<div class="product-card '+(isFull?"slot-full":"")+'" data-joki-id="'+x.id+'">'+
+      : '<button class="product-btn" type="button" data-joki-id="'+x.id+'">ORDER JOKI</button>';
+    h+='<div class="product-card '+(isFull?"slot-full":"")+'">'+
       '<div class="product-badge">PAKET '+(i+1)+'</div>'+
       '<div class="product-title">'+esc(x.nama)+'</div>'+
       '<div class="product-price">Rp '+formatFull(x.harga)+'</div>'+
@@ -1276,6 +1284,31 @@ function renderJokiProducts(){
   }
   list.innerHTML=h;
 }
+
+/* PUBLIK: JASA BIKIN WEB */
+function renderJasaWeb(){
+  var list=$("publicJasaList");if(!list)return;
+  var p=loadProducts().filter(function(x){return x.kategori==="Jasa Bikin Web" && x.status!=="sold";});
+  if(p.length===0){list.innerHTML='<div style="padding:30px 20px;color:#8b8b9c;text-align:center;grid-column:1/-1;border:1px dashed rgba(255,31,61,.3);border-radius:16px"><div style="font-size:14px;font-weight:700;color:#ffb3c0;margin-bottom:6px">Belum ada paket jasa</div><div style="font-size:11px">Cek lagi nanti ya!</div></div>';return;}
+  var h="";
+  for(var i=0;i<p.length;i++){
+    var x=p[i];
+    h+='<div class="product-card">'+
+      '<div class="product-badge">'+esc(x.kategori)+'</div>'+
+      '<div class="product-title">'+esc(x.nama)+'</div>'+
+      '<div class="product-price">Rp '+formatFull(x.harga)+'</div>'+
+      '<div style="color:#8b8b9c;font-size:11px;margin-top:6px">Slot: '+x.stok+'</div>'+
+      '<div style="color:#a8a8b8;font-size:12px;margin-top:8px">'+esc(x.deskripsi||"")+'</div>'+
+      '<div class="product-actions" style="flex-direction:column">'+
+        '<button class="product-btn" data-id="'+x.id+'" data-action="order-jasa" data-wa="1">CHAT ADMIN 1</button>'+
+        '<button class="product-btn" data-id="'+x.id+'" data-action="order-jasa" data-wa="2" style="background:linear-gradient(135deg,#25d366,#128c7e);box-shadow:0 6px 18px rgba(37,211,102,.4)">CHAT ADMIN 2</button>'+
+      '</div>'+
+    '</div>';
+  }
+  list.innerHTML=h;
+}
+
+/* SLOT MANAGER */
 function renderSlotManager(){
   var list=$("slotManagerList");if(!list)return;
   var p=loadProducts().filter(function(x){return x.kategori==="Joki AFK";});
@@ -1298,6 +1331,8 @@ function renderSlotManager(){
   }
   list.innerHTML=h;
 }
+
+/* SETUP KATALOG */
 function setupKatalog(){
   if($("addProductBtn")){
     $("addProductBtn").addEventListener("click",function(){
@@ -1310,11 +1345,10 @@ function setupKatalog(){
       if(!nama||!harga){showToast("Nama & Harga wajib!","error");return;}
       var a=loadProducts();
       a.push({id:Date.now(),nama:nama,deskripsi:desc,harga:harga,stok:stok,kategori:kat,status:"tersedia",gambar:gambar,slot:"kosong"});
-      saveProducts(a);renderAdminProducts();renderPublicProducts();renderJokiProducts();renderSlotManager();
+      saveProducts(a);renderAdminProducts();renderPublicProducts();renderJokiProducts();renderJasaWeb();renderSlotManager();
       if($("prodName"))$("prodName").value="";
       if($("prodPrice"))$("prodPrice").value="";
       if($("prodStock"))$("prodStock").value="1";
-      if($("prodCategory"))$("prodCategory").value="";
       if($("prodImage"))$("prodImage").value="";
       if($("prodDesc"))$("prodDesc").value="";
       showToast("Produk ditambahkan!");
@@ -1326,25 +1360,28 @@ function setupKatalog(){
       var sid=Number(tg.getAttribute("data-id"));
       var sa=loadProducts();
       for(var s=0;s<sa.length;s++){if(sa[s].id===sid){sa[s].slot=sa[s].slot==="full"?"kosong":"full";break;}}
-      saveProducts(sa);renderAdminProducts();renderPublicProducts();renderJokiProducts();renderSlotManager();showToast("Status slot diubah!");
+      saveProducts(sa);renderAdminProducts();renderPublicProducts();renderJokiProducts();renderJasaWeb();renderSlotManager();showToast("Status slot diubah!");
       return;
     }
     var btn=e.target.closest("[data-action]");
     if(!btn)return;
     var action=btn.getAttribute("data-action");
     var id=Number(btn.getAttribute("data-id"));
+    var waChoice=btn.getAttribute("data-wa")||"1";
+    var targetNumber=waChoice==="2"?CONFIG.ownerNumber2:CONFIG.ownerNumber;
+
     if(action==="toggle"){
       var a=loadProducts();
       for(var i=0;i<a.length;i++){if(a[i].id===id){a[i].status=a[i].status==="sold"?"tersedia":"sold";break;}}
-      saveProducts(a);renderAdminProducts();renderPublicProducts();renderJokiProducts();showToast("Status diubah!");
+      saveProducts(a);renderAdminProducts();renderPublicProducts();renderJokiProducts();renderJasaWeb();showToast("Status diubah!");
     }else if(action==="toggle-slot"){
       var b=loadProducts();
       for(var k=0;k<b.length;k++){if(b[k].id===id){b[k].slot=b[k].slot==="full"?"kosong":"full";break;}}
-      saveProducts(b);renderAdminProducts();renderPublicProducts();renderJokiProducts();renderSlotManager();showToast("Status slot diubah!");
+      saveProducts(b);renderAdminProducts();renderPublicProducts();renderJokiProducts();renderJasaWeb();renderSlotManager();showToast("Status slot diubah!");
     }else if(action==="delete"){
       if(!confirm("Hapus produk ini?"))return;
       var c=loadProducts().filter(function(x){return x.id!==id;});
-      saveProducts(c);renderAdminProducts();renderPublicProducts();renderJokiProducts();renderSlotManager();showToast("Produk dihapus","warning");
+      saveProducts(c);renderAdminProducts();renderPublicProducts();renderJokiProducts();renderJasaWeb();renderSlotManager();showToast("Produk dihapus","warning");
     }else if(action==="buy"){
       if(btn.disabled)return;
       btn.disabled=true;
@@ -1355,16 +1392,36 @@ function setupKatalog(){
           var msg="Halo "+CONFIG.ownerName+", saya mau beli:\n\n";
           msg+="Produk: "+d[j].nama+"\n";
           msg+="Harga: Rp "+formatFull(d[j].harga)+"\n";
-          msg+="Kategori: "+d[j].kategori+"\n";
-          var url="https://wa.me/"+CONFIG.ownerNumber+"?text="+encodeURIComponent(msg);
-          var w=window.open(url,"_blank");
-          if(!w)window.location.href=url;
+          msg+="Kategori: "+d[j].kategori+"\n\n";
+          msg+="Kalo slow respon, bisa chat admin no 2: wa.me/"+CONFIG.ownerNumber2;
+          openWA(targetNumber,msg);
           break;
         }
       }
+    }else if(action==="order-jasa"){
+      var d2=loadProducts();
+      var namaJasa="";
+      for(var m=0;m<d2.length;m++){if(d2[m].id===id){namaJasa=d2[m].nama;break;}}
+      var msg2="Halo "+CONFIG.ownerName+", saya mau order *"+namaJasa+"* (Jasa Bikin Web)\n\n";
+      msg2+="Mohon isi data berikut:\n\n";
+      msg2+="NAMA WEB: \n";
+      msg2+="NAMA OWNER: \n";
+      msg2+="WEB APA: \n";
+      msg2+="PAKE ANIMASI GA: \n";
+      msg2+="MAU ANIMASI APA: \n";
+      msg2+="NO OWNER: \n";
+      msg2+="USERNAME TIKTOK: \n";
+      msg2+="USERNAME IG: \n";
+      msg2+="TESTIMONI (kalo ada): \n\n";
+      msg2+="*Kalo ada informasi tambahan bisa chat admin:*\n";
+      msg2+="wa.me/"+CONFIG.ownerNumber+" / wa.me/"+CONFIG.ownerNumber2+"\n\n";
+      msg2+="Nanti admin yang proses ya bang 🔥";
+      openWA(targetNumber,msg2);
     }
   });
 }
+
+/* ADMIN OPEN */
 function setupAdmin(){
   function openAdmin(){
     var pw=prompt("Masukkan password admin:");
@@ -1391,6 +1448,8 @@ function setupAdmin(){
     }
   });
 }
+
+/* INTRO + MUSIC */
 function setupIntro(){
   var intro=$("introScreen");
   var loaderBar=$("introLoader")?$("introLoader").querySelector(".intro-loader-bar"):null;
@@ -1483,6 +1542,8 @@ function setupParticles(){
     else{spawn();}
   },intervalTime);
 }
+
+/* INIT */
 function init(){
   setupIntro();
   setupMusic();
@@ -1502,8 +1563,9 @@ function init(){
   setupKatalog();
   renderAdminProducts();
   renderPublicProducts();
-  renderSlotManager();
   renderJokiProducts();
+  renderJasaWeb();
+  renderSlotManager();
   calculate();
   document.addEventListener("visibilitychange",function(){if(!document.hidden)requestCalculation();},{passive:true});
 }
@@ -1515,4 +1577,3 @@ if(document.readyState==="loading"){
 </script>
 </body>
 </html>
-  

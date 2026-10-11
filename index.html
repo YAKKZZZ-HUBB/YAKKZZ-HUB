@@ -44,7 +44,7 @@ img,svg{max-width:100%;height:auto;display:block}
 ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--red),var(--red-dark));border-radius:10px;border:2px solid var(--bg2)}
 .container{width:min(1180px,calc(100% - 28px));margin:auto;position:relative;z-index:1}
 .ic{width:18px;height:18px;fill:var(--red);flex:none}
-  .intro-screen{position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background:#000;display:flex;align-items:center;justify-content:center;transition:opacity .6s,visibility .6s}
+.intro-screen{position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background:#000;display:flex;align-items:center;justify-content:center;transition:opacity .6s,visibility .6s}
 .intro-screen.hidden{opacity:0;visibility:hidden;pointer-events:none}
 .intro-overlay{position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(255,31,61,.25),transparent 70%),linear-gradient(180deg,rgba(0,0,0,.85),rgba(0,0,0,.95))}
 .intro-overlay::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,31,61,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,31,61,.06) 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(ellipse at 50% 50%,black 20%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at 50% 50%,black 20%,transparent 75%)}
@@ -309,6 +309,26 @@ input[type=range].calc-range::-moz-range-thumb{width:18px;height:18px;border-rad
 .stat-chip::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,31,61,.3),transparent)}
 .stat-chip .lbl{color:#6a6a80;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;position:relative;z-index:1}
 .stat-chip .val{margin-top:6px;font-size:12.5px;font-weight:700;font-family:"JetBrains Mono",monospace;word-break:break-word;background:linear-gradient(90deg,#fff,#ff8497);-webkit-background-clip:text;background-clip:text;color:transparent;position:relative;z-index:1}
+.result-afk-box{margin-top:18px;padding:20px 18px;border-radius:16px;background:linear-gradient(135deg,rgba(255,31,61,.08),rgba(177,140,255,.05));border:1px solid rgba(255,31,61,.25);position:relative;overflow:hidden}
+.result-afk-box::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#ff5570,#b18cff,transparent);background-size:300% auto;animation:gradientMove 6s linear infinite}
+.result-afk-title{display:flex;align-items:center;gap:6px;color:#22d3ee;font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.16em;margin-bottom:10px}
+.result-afk-title svg{width:12px;height:12px;fill:#22d3ee}
+.result-afk-main{font-family:"JetBrains Mono",monospace;font-size:clamp(28px,7vw,42px);font-weight:700;letter-spacing:-2px;line-height:1;background:linear-gradient(180deg,#35d07f,#128c7e);-webkit-background-clip:text;background-clip:text;color:transparent;word-break:break-word}
+.result-afk-sub{margin-top:6px;color:#6a6a80;font-size:9.5px;text-transform:uppercase;letter-spacing:.14em;font-weight:700}
+.result-summary{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:16px;padding:12px 10px;border-radius:12px;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.06)}
+.result-summary-item{flex:1;text-align:center;min-width:0}
+.result-summary-lbl{color:#6a6a80;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:4px}
+.result-summary-val{font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:700;color:#fff;word-break:break-word}
+.result-summary-item.highlight .result-summary-val{background:linear-gradient(90deg,#35d07f,#22d3ee);-webkit-background-clip:text;background-clip:text;color:transparent}
+.result-summary-op{color:#ff5570;font-weight:700;font-size:14px;flex:none}
+.result-time{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px;padding:12px 14px;border-radius:12px;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.06)}
+.result-time-item{flex:1;min-width:0}
+.result-time-lbl{color:#6a6a80;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:4px}
+.result-time-val{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;color:#ff8497;word-break:break-word}
+.result-time-arrow{color:#ff5570;font-weight:700;font-size:16px;flex:none}
+.result-duration{margin-top:10px;padding:10px 14px;border-radius:10px;background:rgba(0,0,0,.35);border:1px solid rgba(34,211,238,.2);display:flex;align-items:center;gap:8px;color:#c4c4d2;font-size:11px;font-weight:600}
+.result-duration svg{width:14px;height:14px;fill:#22d3ee;flex:none}
+.result-duration b{color:#22d3ee;font-family:"JetBrains Mono",monospace;font-weight:700}
 .formula-box{margin-top:20px;padding:14px 16px;border-radius:12px;background:linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,.4));border:1px solid rgba(34,211,238,.15);font-family:"JetBrains Mono",monospace;font-size:10.5px;color:#c4c4d2;line-height:1.85;text-align:left;word-break:break-word;position:relative}
 .formula-box::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(34,211,238,.5),transparent)}
 .formula-title{display:flex;align-items:center;gap:6px;color:#22d3ee;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.18em;margin-bottom:10px}
@@ -437,7 +457,7 @@ input[type=range].calc-range::-moz-range-thumb{width:18px;height:18px;border-rad
   .product-card:hover{transform:translateY(-4px)}
   .stat-box:hover{transform:translateY(-3px)}
   .pay-card:hover{transform:translateY(-3px)}
-}
+            }
   </style>
 </head>
 <body>
@@ -487,7 +507,7 @@ input[type=range].calc-range::-moz-range-thumb{width:18px;height:18px;border-rad
     <div class="menu-item-text"><div class="menu-item-title">Admin Panel</div><div class="menu-item-sub">Khusus owner</div></div>
   </div>
 </aside>
-<header class="topbar">
+  <header class="topbar">
   <div class="container nav">
     <div class="brand" data-page="home">
       <div class="brand-logo"><svg viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67z"/></svg></div>
@@ -557,8 +577,8 @@ input[type=range].calc-range::-moz-range-thumb{width:18px;height:18px;border-rad
     <div class="product-card" data-page="joki"><div class="product-badge"><svg viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67z"/></svg> JOKI</div><div class="product-title">Joki AFK Steal An Egg</div><div class="product-price" style="font-size:18px">Mulai Rp 5.000</div><button class="product-btn" type="button">LIHAT PAKET</button></div>
     <div class="product-card" data-page="katalog"><div class="product-badge"><svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg> JASA WEB</div><div class="product-title">Jasa Bikin Web</div><div class="product-price" style="font-size:18px">Mulai Rp 50.000</div><button class="product-btn" type="button">LIHAT PAKET</button></div>
   </div>
-</section>
-<section class="page" id="page-calculator">
+  </section>
+  <section class="page" id="page-calculator">
   <div class="section-title"><svg class="ic" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Calculator AFK Speed</div>
   <div class="main-grid">
     <div>
@@ -566,9 +586,42 @@ input[type=range].calc-range::-moz-range-thumb{width:18px;height:18px;border-rad
         <div class="card-head"><div><div class="card-title"><svg class="ic" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Speed Setup</div><div class="card-desc">Atur speed awal, trail, treadmill, dan multiplayer.</div></div></div>
         <div class="card-body">
           <div class="form-grid">
-            <div class="field full"><label for="speedAwal">Speed Awal</label><span class="field-hint">Format: <b>K</b>, <b>M</b>, <b>B</b>, <b>T</b>, <b>Q</b>, <b>Qa</b></span><div class="input-wrap"><input id="speedAwal" type="text" placeholder="Contoh: 0, 60K, 2M" value="0"><span class="input-suffix">SPD</span></div></div>
-            <div class="field"><label for="trail">Trail</label><select id="trail"><option value="0">Gray — ×1.5</option><option value="1">Green — ×2</option><option value="2">Blue — ×2.5</option><option value="3">Purple — ×3</option><option value="4">Golden — ×3.5</option><option value="5">Red — ×4</option><option value="6">Galaxy — ×5</option><option value="7">Secret — ×7</option><option value="8">Eternal — ×10</option><option value="9">Divine — ×14</option><option value="10" selected>Moonbloom — ×20</option></select><div class="info-box" id="trailInfo"><div class="info-main">Moonbloom</div><div class="info-sub">×20</div></div></div>
-            <div class="field"><label for="treadmill">Treadmill</label><select id="treadmill"><option value="0">1 Base — +2</option><option value="1">2 Sci-Fi — +5</option><option value="2">3 Flame — +12</option><option value="3">4 Celebrity — +30</option><option value="4">5 Golden — +80</option><option value="5">6 Freeze — +100</option><option value="6">7 Lucky Block — +200</option><option value="7">8 Hacker — +500</option><option value="8">9 Demonic — +1K</option><option value="9">10 Angelic — +2K</option><option value="10">11 Astral — +3K</option><option value="11" selected>12 Void — +8.5K</option></select><div class="info-box" id="treadmillInfo"><div class="info-main">12 Void</div><div class="info-sub">+8.5K</div></div></div>
+            <div class="field full"><label for="speedAwal">Speed Awal</label><span class="field-hint">Format: <b>K</b>, <b>M</b>, <b>B</b>, <b>T</b>, <b>Q</b>, <b>Qa</b></span><div class="input-wrap"><input id="speedAwal" type="text" placeholder="Contoh: 0, 60K, 2M" value=""><span class="input-suffix">SPD</span></div></div>
+            <div class="field"><label for="trail">Trail</label>
+              <select id="trail">
+                <option value="" disabled selected>-- Pilih Trail --</option>
+                <option value="0">Gray — ×1.5</option>
+                <option value="1">Green — ×2</option>
+                <option value="2">Blue — ×2.5</option>
+                <option value="3">Purple — ×3</option>
+                <option value="4">Golden — ×3.5</option>
+                <option value="5">Red — ×4</option>
+                <option value="6">Galaxy — ×5</option>
+                <option value="7">Secret — ×7</option>
+                <option value="8">Eternal — ×10</option>
+                <option value="9">Divine — ×14</option>
+                <option value="10">Moonbloom — ×20</option>
+              </select>
+              <div class="info-box" id="trailInfo"><div class="info-main">-</div><div class="info-sub">Pilih dulu</div></div>
+            </div>
+            <div class="field"><label for="treadmill">Treadmill</label>
+              <select id="treadmill">
+                <option value="" disabled selected>-- Pilih Treadmill --</option>
+                <option value="0">1 Base — +2</option>
+                <option value="1">2 Sci-Fi — +5</option>
+                <option value="2">3 Flame — +12</option>
+                <option value="3">4 Celebrity — +30</option>
+                <option value="4">5 Golden — +80</option>
+                <option value="5">6 Freeze — +100</option>
+                <option value="6">7 Lucky Block — +200</option>
+                <option value="7">8 Hacker — +500</option>
+                <option value="8">9 Demonic — +1K</option>
+                <option value="9">10 Angelic — +2K</option>
+                <option value="10">11 Astral — +3K</option>
+                <option value="11">12 Void — +8.5K</option>
+              </select>
+              <div class="info-box" id="treadmillInfo"><div class="info-main">-</div><div class="info-sub">Pilih dulu</div></div>
+            </div>
             <div class="field full"><label for="multiplayer">Multiplayer</label><span class="field-hint">Geser slider atau isi manual (maks 4000×)</span><div class="input-wrap"><input id="multiplayer" type="text" placeholder="1" value="1"><span class="input-suffix">×</span></div><div class="slider-wrap"><input class="calc-range" id="multiplayerSlider" type="range" min="1" max="50" value="1" step="1"><div class="slider-labels"><span>1×</span><span>25×</span><span>50×</span></div></div></div>
           </div>
         </div>
@@ -586,7 +639,7 @@ input[type=range].calc-range::-moz-range-thumb{width:18px;height:18px;border-rad
               <button class="calc-preset" type="button" data-days="0" data-hours="1">1 Jam</button>
               <button class="calc-preset" type="button" data-days="0" data-hours="6">6 Jam</button>
               <button class="calc-preset" type="button" data-days="0" data-hours="12">12 Jam</button>
-              <button class="calc-preset active" type="button" data-days="1" data-hours="0">1 Hari</button>
+              <button class="calc-preset" type="button" data-days="1" data-hours="0">1 Hari</button>
               <button class="calc-preset" type="button" data-days="3" data-hours="0">3 Hari</button>
               <button class="calc-preset" type="button" data-days="7" data-hours="0">7 Hari</button>
               <button class="calc-preset" type="button" data-days="14" data-hours="0">14 Hari</button>
@@ -594,8 +647,8 @@ input[type=range].calc-range::-moz-range-thumb{width:18px;height:18px;border-rad
             </div>
           </div>
           <div class="form-grid" style="margin-top:18px">
-            <div class="field"><label for="days">Durasi Hari</label><input id="days" type="text" placeholder="1" value="1"></div>
-            <div class="field"><label for="hours">Durasi Jam</label><input id="hours" type="text" placeholder="0" value="0"></div>
+            <div class="field"><label for="days">Durasi Hari</label><input id="days" type="text" placeholder="0" value=""></div>
+            <div class="field"><label for="hours">Durasi Jam</label><input id="hours" type="text" placeholder="0" value=""></div>
           </div>
         </div>
       </section>
@@ -615,12 +668,46 @@ input[type=range].calc-range::-moz-range-thumb{width:18px;height:18px;border-rad
           <div class="stat-chip"><div class="lbl">Mulai</div><div class="val" id="startDateResult">-</div></div>
           <div class="stat-chip"><div class="lbl">Selesai</div><div class="val" id="finishDateResult">-</div></div>
         </div>
+        <div class="result-afk-box">
+          <div class="result-afk-title"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Hasil AFK</div>
+          <div class="result-afk-main" id="afkTotal">+0</div>
+          <div class="result-afk-sub">Total Speed yang Didapat dari AFK</div>
+          <div class="result-summary">
+            <div class="result-summary-item">
+              <div class="result-summary-lbl">Speed Awal</div>
+              <div class="result-summary-val" id="summaryStart">0</div>
+            </div>
+            <div class="result-summary-op">+</div>
+            <div class="result-summary-item">
+              <div class="result-summary-lbl">Speed Akhir</div>
+              <div class="result-summary-val" id="summaryEnd">0</div>
+            </div>
+            <div class="result-summary-op">=</div>
+            <div class="result-summary-item highlight">
+              <div class="result-summary-lbl">Total</div>
+              <div class="result-summary-val" id="summaryTotal">0</div>
+            </div>
+          </div>
+          <div class="result-time">
+            <div class="result-time-item">
+              <div class="result-time-lbl">Mulai</div>
+              <div class="result-time-val" id="timeStart">-</div>
+            </div>
+            <div class="result-time-arrow">→</div>
+            <div class="result-time-item">
+              <div class="result-time-lbl">Selesai</div>
+              <div class="result-time-val" id="timeEnd">-</div>
+            </div>
+          </div>
+          <div class="result-duration">
+            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+            Total AFK: <b id="totalDuration">0 detik</b> (<span id="totalDurationHuman">0 jam</span>)
+          </div>
+        </div>
         <div class="formula-box" id="formulaBox">
           <div class="formula-title"><svg viewBox="0 0 24 24"><path d="M9 3v2h3v14h2V5h3V3H9z"/></svg> Rincian Formula</div>
           <div id="formulaText">
-            <div><span class="lbl">sps</span> = <span class="hl">bonus</span> × (<span class="hl">trail</span> + <span class="hl">mp</span> − 1)</div>
-            <div><span class="lbl">spd</span> = sps × <span class="v">11</span></div>
-            <div><span class="lbl">fs</span> &nbsp;= sa + (spd × detik)</div>
+            <div style="color:#8b8b9c;text-align:center;padding:10px">Pilih <b style="color:#ff5570">Trail</b> & <b style="color:#ff5570">Treadmill</b> dulu buat lihat hasil</div>
           </div>
         </div>
       </div>
@@ -630,8 +717,8 @@ input[type=range].calc-range::-moz-range-thumb{width:18px;height:18px;border-rad
       </section>
     </div>
   </div>
-</section>
-<section class="page" id="page-joki">
+                </section>
+  <section class="page" id="page-joki">
   <div class="hero-banner"><h1>JOKI AFK</h1><p>Steal An Egg — Pilih paket kamu</p><div class="hero-fire"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/></svg></div></div>
   <div class="section-title"><svg class="ic" viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67z"/></svg> Paket Joki AFK</div>
   <div class="products-grid varied reveal" id="jokiProductList"></div>
@@ -685,7 +772,7 @@ input[type=range].calc-range::-moz-range-thumb{width:18px;height:18px;border-rad
     </div>
   </div>
 </section>
-<section class="page" id="page-katalog">
+  <section class="page" id="page-katalog">
   <div class="hero-banner"><h1>KATALOG</h1><p>Akun Roblox • Joki AFK • Jasa Bikin Web</p><div class="hero-fire"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1z"/></svg></div></div>
 
   <div id="adminPanelWrap" style="display:none">
@@ -724,7 +811,7 @@ input[type=range].calc-range::-moz-range-thumb{width:18px;height:18px;border-rad
     <div class="products-grid reveal" id="publicJokiList"></div>
   </div>
 </section>
-<div class="modal" id="payModal">
+  <div class="modal" id="payModal">
   <div class="modal-box">
     <div class="modal-title" id="modalTitle">DANA</div>
     <div class="modal-sub" id="modalSub">Metode Pembayaran</div>
@@ -775,7 +862,7 @@ input[type=range].calc-range::-moz-range-thumb{width:18px;height:18px;border-rad
   <button data-page="joki" type="button"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span>Joki</span></button>
   <button data-page="payment" type="button"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2z"/></svg><span>Bayar</span></button>
 </nav>
-<script>
+  <script>
 "use strict";
 var CONFIG = {
   ownerNumber: "62895622759784",
@@ -861,42 +948,89 @@ function formatFull(v){if(!isFinite(v))return "0";try{return Math.round(v).toLoc
 function formatDate(d){if(!(d instanceof Date)||isNaN(d.getTime()))return "-";try{return new Intl.DateTimeFormat("id-ID",{day:"2-digit",month:"2-digit",year:"numeric"}).format(d);}catch(e){var dd=d.getDate(),mm=d.getMonth()+1,yy=d.getFullYear();return (dd<10?"0"+dd:dd)+"/"+(mm<10?"0"+mm:mm)+"/"+yy;}}
 function formatTime(d){if(!(d instanceof Date)||isNaN(d.getTime()))return "-";try{return new Intl.DateTimeFormat("id-ID",{hour:"2-digit",minute:"2-digit"}).format(d);}catch(e){var h=d.getHours(),m=d.getMinutes();return (h<10?"0"+h:h)+":"+(m<10?"0"+m:m);}}
 function formatDuration(h){if(!isFinite(h)||h<=0)return "0 jam";var tm=Math.round(h*60),d=Math.floor(tm/1440),rm=tm%1440,hh=Math.floor(rm/60),mm=rm%60,p=[];if(d>0)p.push(d+" hari");if(hh>0)p.push(hh+" jam");if(mm>0)p.push(mm+" menit");return p.join(" ")||"0 jam";}
-function updateTrailInfo(){var t=$("trail"),b=$("trailInfo");if(!t||!b)return;var x=TRAILS[Number(t.value)]||TRAILS[0];b.innerHTML='<div class="info-main">'+x.name+'</div><div class="info-sub">×'+formatDecimal(x.multiplier)+'</div>';}
-function updateTreadmillInfo(){var t=$("treadmill"),b=$("treadmillInfo");if(!t||!b)return;var x=TREADMILLS[Number(t.value)]||TREADMILLS[0];b.innerHTML='<div class="info-main">'+x.name+'</div><div class="info-sub">+'+formatShort(x.bonus)+'</div>';}
+  function updateTrailInfo(){
+  var t=$("trail"),b=$("trailInfo");if(!t||!b)return;
+  if(t.value===""){b.innerHTML='<div class="info-main">-</div><div class="info-sub">Pilih dulu</div>';return;}
+  var x=TRAILS[Number(t.value)]||TRAILS[0];
+  b.innerHTML='<div class="info-main">'+x.name+'</div><div class="info-sub">×'+formatDecimal(x.multiplier)+'</div>';
+}
+function updateTreadmillInfo(){
+  var t=$("treadmill"),b=$("treadmillInfo");if(!t||!b)return;
+  if(t.value===""){b.innerHTML='<div class="info-main">-</div><div class="info-sub">Pilih dulu</div>';return;}
+  var x=TREADMILLS[Number(t.value)]||TREADMILLS[0];
+  b.innerHTML='<div class="info-main">'+x.name+'</div><div class="info-sub">+'+formatShort(x.bonus)+'</div>';
+}
 function getStartDate(){var d=$("startDate"),t=$("startTime");if(!d||!t)return null;var dv=d.value,tv=t.value||"00:00";if(!dv)return null;var dp=dv.split("-").map(Number),tp=tv.split(":").map(Number);if(dp.length!==3)return null;var r=new Date(dp[0],dp[1]-1,dp[2],isFinite(tp[0])?tp[0]:0,isFinite(tp[1])?tp[1]:0,0,0);return isNaN(r.getTime())?null:r;}
 function getDurationHours(){var d=Math.max(0,parseNumber($("days")?$("days").value:0));var h=Math.max(0,parseNumber($("hours")?$("hours").value:0));return d*24+h;}
+
 var _lastFinalValue = "";
 function calculate(){
   if(!$("finalSpeed"))return;
-  var sa=parseNumber($("speedAwal")?$("speedAwal").value:0);
-  var tr=TRAILS[Number($("trail")?$("trail").value:10)]||TRAILS[10];
-  var tm=TREADMILLS[Number($("treadmill")?$("treadmill").value:11)]||TREADMILLS[11];
-  var mp=parseMultiplier($("multiplayer")?$("multiplayer").value:1);
-  var dh=getDurationHours(),ds=dh*3600;
-  var sps=tm.bonus*(tr.multiplier+mp-1);
-  var spd=sps*CALIBRATION;
-  var gain=spd*ds;
-  var fs=sa+gain;
-  var sd=getStartDate();
-  var fd=(sd&&dh>0)?new Date(sd.getTime()+dh*3600*1000):null;
-  var newVal=formatShort(fs);
-  $("finalSpeed").textContent=newVal;
+  var trailEl = $("trail");
+  var treadEl = $("treadmill");
+  if(!trailEl || trailEl.value==="" || !treadEl || treadEl.value===""){
+    $("finalSpeed").textContent = "0";
+    if($("durationResult"))$("durationResult").textContent = "0 jam";
+    if($("secondsResult"))$("secondsResult").textContent = "0 s";
+    if($("startDateResult"))$("startDateResult").textContent = "-";
+    if($("finishDateResult"))$("finishDateResult").textContent = "-";
+    if($("afkTotal"))$("afkTotal").textContent = "+0";
+    if($("summaryStart"))$("summaryStart").textContent = "0";
+    if($("summaryEnd"))$("summaryEnd").textContent = "0";
+    if($("summaryTotal"))$("summaryTotal").textContent = "0";
+    if($("timeStart"))$("timeStart").textContent = "-";
+    if($("timeEnd"))$("timeEnd").textContent = "-";
+    if($("totalDuration"))$("totalDuration").textContent = "0 detik";
+    if($("totalDurationHuman"))$("totalDurationHuman").textContent = "0 jam";
+    var ft=$("formulaText");
+    if(ft)ft.innerHTML='<div style="color:#8b8b9c;text-align:center;padding:10px">Pilih <b style="color:#ff5570">Trail</b> & <b style="color:#ff5570">Treadmill</b> dulu buat lihat hasil</div>';
+    return;
+  }
+  var sa = parseNumber($("speedAwal") ? $("speedAwal").value : 0);
+  var tr = TRAILS[Number(trailEl.value)] || TRAILS[0];
+  var tm = TREADMILLS[Number(treadEl.value)] || TREADMILLS[0];
+  var mp = parseMultiplier($("multiplayer") ? $("multiplayer").value : 1);
+  var dh = getDurationHours();
+  var ds = dh * 3600;
+  var sps = tm.bonus * (tr.multiplier + mp - 1);
+  var spd = sps * CALIBRATION;
+  var gain = spd * ds;
+  var fs = sa + gain;
+  var sd = getStartDate();
+  var fd = (sd && dh > 0) ? new Date(sd.getTime() + dh * 3600 * 1000) : null;
+  var newVal = formatShort(fs);
+  $("finalSpeed").textContent = newVal;
   if(newVal !== _lastFinalValue && newVal !== "0"){
     _lastFinalValue = newVal;
     $("finalSpeed").classList.remove("countUp");
     void $("finalSpeed").offsetWidth;
     $("finalSpeed").classList.add("countUp");
   }
-  if($("durationResult"))$("durationResult").textContent=formatDuration(dh);
-  if($("secondsResult"))$("secondsResult").textContent=formatFull(ds)+" s";
-  if($("startDateResult"))$("startDateResult").textContent=sd?formatDate(sd):"-";
-  if($("finishDateResult"))$("finishDateResult").textContent=fd?formatDate(fd):"-";
-  updateFormula(sa,tr,tm,mp,sps,spd,ds,fs);
-  updateEstimates(sa,spd,dh);
+  if($("durationResult"))$("durationResult").textContent = formatDuration(dh);
+  if($("secondsResult"))$("secondsResult").textContent = formatFull(ds) + " s";
+  if($("startDateResult"))$("startDateResult").textContent = sd ? formatDate(sd) : "-";
+  if($("finishDateResult"))$("finishDateResult").textContent = fd ? formatDate(fd) : "-";
+  if($("afkTotal"))$("afkTotal").textContent = "+" + formatShort(gain);
+  if($("summaryStart"))$("summaryStart").textContent = formatShort(sa);
+  if($("summaryEnd"))$("summaryEnd").textContent = formatShort(fs);
+  if($("summaryTotal"))$("summaryTotal").textContent = formatShort(sa + fs);
+  if($("timeStart"))$("timeStart").textContent = sd ? formatDate(sd) + " " + formatTime(sd) : "-";
+  if($("timeEnd"))$("timeEnd").textContent = fd ? formatDate(fd) + " " + formatTime(fd) : "-";
+  if($("totalDuration"))$("totalDuration").textContent = formatFull(ds) + " detik";
+  if($("totalDurationHuman"))$("totalDurationHuman").textContent = formatDuration(dh);
+  updateFormula(sa, tr, tm, mp, sps, spd, ds, fs);
+  updateEstimates(sa, spd, dh);
 }
 function updateFormula(sa,tr,tm,mp,sps,spd,ds,fs){
   var ft=$("formulaText");if(!ft)return;
-  ft.innerHTML='<div><span class="lbl">sps</span> = <span class="hl">'+formatShort(tm.bonus)+'</span> × (<span class="hl">'+formatDecimal(tr.multiplier)+'</span> + <span class="hl">'+formatDecimal(mp)+'</span> − 1) = <span class="v">'+formatShort(sps)+'</span> /step</div>'+'<div><span class="lbl">spd</span> = <span class="v">'+formatShort(sps)+'</span> × 11 = <span class="v">'+formatShort(spd)+'</span> /detik</div>'+'<div><span class="lbl">fs </span> = <span class="hl">'+formatShort(sa)+'</span> + (<span class="v">'+formatShort(spd)+'</span> × '+formatFull(ds)+') = <span class="g">'+formatShort(fs)+'</span></div>';
+  ft.innerHTML =
+    '<div><span class="lbl">trail</span> = <span class="hl">'+tr.name+' ×'+formatDecimal(tr.multiplier)+'</span></div>'+
+    '<div><span class="lbl">tread</span> = <span class="hl">'+tm.name+' +'+formatShort(tm.bonus)+'</span></div>'+
+    '<div><span class="lbl">mp</span> = <span class="hl">'+formatDecimal(mp)+'×</span></div>'+
+    '<div><span class="lbl">sps</span> = <span class="hl">'+formatShort(tm.bonus)+'</span> × (<span class="hl">'+formatDecimal(tr.multiplier)+'</span> + <span class="hl">'+formatDecimal(mp)+'</span> − 1) = <span class="v">'+formatShort(sps)+'</span> /step</div>'+
+    '<div><span class="lbl">spd</span> = <span class="v">'+formatShort(sps)+'</span> × 11 = <span class="v">'+formatShort(spd)+'</span> /detik</div>'+
+    '<div><span class="lbl">gain</span> = <span class="v">'+formatShort(spd)+'</span> × '+formatFull(ds)+' detik = <span class="g">+'+formatShort(spd*ds)+'</span></div>'+
+    '<div><span class="lbl">fs </span> = <span class="hl">'+formatShort(sa)+'</span> + <span class="g">'+formatShort(spd*ds)+'</span> = <span class="g">'+formatShort(fs)+'</span></div>';
 }
 function updateEstimates(sa,spd,dh){
   var g=$("estimateGrid");if(!g)return;
@@ -910,7 +1044,7 @@ function updateEstimates(sa,spd,dh){
     if(diff<bestDiff){bestDiff=diff;bestIdx=i;}
     c[i].classList.remove("best");
   }
-  if(bestIdx>=0 && bestDiff<0.5)c[bestIdx].classList.add("best");
+  if(bestIdx>=0 && bestDiff<0.5 && dh>0)c[bestIdx].classList.add("best");
 }
 function createEstimateCards(){
   var g=$("estimateGrid");if(!g)return;
@@ -937,13 +1071,12 @@ function createEstimateCards(){
   });
 }
 var _raf=0;
-function requestCalculation(){if(_raf)return;_raf=requestAnimationFrame(function(){_raf=0;calculate();});}
-function setDefaultDateTime(){
-  var n=new Date();
-  var y=n.getFullYear(),m=String(n.getMonth()+1).padStart(2,"0"),d=String(n.getDate()).padStart(2,"0");
-  var hh=String(n.getHours()).padStart(2,"0"),mm=String(n.getMinutes()).padStart(2,"0");
-  if($("startDate")&&!$("startDate").value)$("startDate").value=y+"-"+m+"-"+d;
-  if($("startTime")&&!$("startTime").value)$("startTime").value=hh+":"+mm;
+function requestCalculation(){
+  if(_raf)cancelAnimationFrame(_raf);
+  _raf = requestAnimationFrame(function(){
+    _raf = 0;
+    calculate();
+  });
 }
 function setupCalculator(){
   ["speedAwal","multiplayer","startDate","startTime","days","hours"].forEach(function(id){
@@ -957,9 +1090,11 @@ function setupCalculator(){
 function syncPresets(days,hours){
   var wrap=$("daysPresets");if(!wrap)return;
   var btns=wrap.querySelectorAll(".calc-preset");
+  var hasValue = (days!==""&&days!==null&&days!==undefined) || (hours!==""&&hours!==null&&hours!==undefined);
   for(var i=0;i<btns.length;i++){
     var d=btns[i].getAttribute("data-days");
     var h=btns[i].getAttribute("data-hours");
+    if(!hasValue){btns[i].classList.remove("active");continue;}
     btns[i].classList.toggle("active",d===String(days)&&h===String(hours));
   }
 }
@@ -1195,7 +1330,7 @@ function setupJoki(){
     });
   }
 }
-  var PRODUCTS_KEY="yakkzz_products_v1";
+    var PRODUCTS_KEY="yakkzz_products_v1";
 function loadProducts(){
   try{var r=SafeStorage.get(PRODUCTS_KEY);if(r)return JSON.parse(r);}catch(e){}
   return [];
@@ -1204,7 +1339,6 @@ function saveProducts(a){try{SafeStorage.set(PRODUCTS_KEY,JSON.stringify(a));}ca
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
 function openWA(number,msg){var url="https://wa.me/"+number+"?text="+encodeURIComponent(msg);var w=window.open(url,"_blank");if(!w)window.location.href=url;}
 
-/* ADMIN: RENDER SEMUA PRODUK */
 function renderAdminProducts(){
   var list=$("adminProductList");if(!list)return;
   var p=loadProducts();
@@ -1236,8 +1370,6 @@ function renderAdminProducts(){
   }
   list.innerHTML=h;
 }
-
-/* PUBLIK: PRODUK BIASA (Akun Roblox) */
 function renderPublicProducts(){
   var list=$("publicProductList");if(!list)return;
   var all=loadProducts().filter(function(x){return x.status!=="sold" && x.kategori!=="Joki AFK" && x.kategori!=="Jasa Bikin Web";});
@@ -1259,8 +1391,6 @@ function renderPublicProducts(){
   }
   list.innerHTML=h;
 }
-
-/* PUBLIK: JOKI */
 function renderJokiProducts(){
   var list=$("jokiProductList");if(!list)return;
   var p=loadProducts().filter(function(x){return x.kategori==="Joki AFK" && x.status!=="sold";});
@@ -1284,8 +1414,6 @@ function renderJokiProducts(){
   }
   list.innerHTML=h;
 }
-
-/* PUBLIK: JASA BIKIN WEB */
 function renderJasaWeb(){
   var list=$("publicJasaList");if(!list)return;
   var p=loadProducts().filter(function(x){return x.kategori==="Jasa Bikin Web" && x.status!=="sold";});
@@ -1307,8 +1435,6 @@ function renderJasaWeb(){
   }
   list.innerHTML=h;
 }
-
-/* SLOT MANAGER */
 function renderSlotManager(){
   var list=$("slotManagerList");if(!list)return;
   var p=loadProducts().filter(function(x){return x.kategori==="Joki AFK";});
@@ -1331,8 +1457,6 @@ function renderSlotManager(){
   }
   list.innerHTML=h;
 }
-
-/* SETUP KATALOG */
 function setupKatalog(){
   if($("addProductBtn")){
     $("addProductBtn").addEventListener("click",function(){
@@ -1420,8 +1544,6 @@ function setupKatalog(){
     }
   });
 }
-
-/* ADMIN OPEN */
 function setupAdmin(){
   function openAdmin(){
     var pw=prompt("Masukkan password admin:");
@@ -1448,8 +1570,6 @@ function setupAdmin(){
     }
   });
 }
-
-/* INTRO + MUSIC */
 function setupIntro(){
   var intro=$("introScreen");
   var loaderBar=$("introLoader")?$("introLoader").querySelector(".intro-loader-bar"):null;
@@ -1542,8 +1662,6 @@ function setupParticles(){
     else{spawn();}
   },intervalTime);
 }
-
-/* INIT */
 function init(){
   setupIntro();
   setupMusic();
@@ -1553,7 +1671,6 @@ function init(){
   setupReveal();
   setupAdmin();
   createEstimateCards();
-  setDefaultDateTime();
   updateTrailInfo();
   updateTreadmillInfo();
   setupCalculator();
@@ -1577,3 +1694,6 @@ if(document.readyState==="loading"){
 </script>
 </body>
 </html>
+  
+  
+  

@@ -457,7 +457,7 @@ input[type=range].calc-range::-moz-range-thumb{width:18px;height:18px;border-rad
   .product-card:hover{transform:translateY(-4px)}
   .stat-box:hover{transform:translateY(-3px)}
   .pay-card:hover{transform:translateY(-3px)}
-    }
+}
   </style>
 </head>
 <body>
@@ -575,10 +575,10 @@ input[type=range].calc-range::-moz-range-thumb{width:18px;height:18px;border-rad
   <div class="section-title reveal"><svg class="ic" viewBox="0 0 24 24"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/></svg> Layanan Kami</div>
   <div class="products-grid reveal">
     <div class="product-card" data-page="joki"><div class="product-badge"><svg viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67z"/></svg> JOKI</div><div class="product-title">Joki AFK Steal An Egg</div><div class="product-price" style="font-size:18px">Mulai Rp 5.000</div><button class="product-btn" type="button">LIHAT PAKET</button></div>
-    <div class="product-card" data-page="katalog"><div class="product-badge"><svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg> JASA WEB</div><div class="product-title">Jasa Bikin Web</div><div class="product-price" style="font-size:18px">Mulai Rp 50.000</div><button class="product-btn" type="button">LIHAT PAKET</button></div>
+    <div class="product-card" data-page="katalog"><div class="product-badge"><svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg> JASA WEB</div><div class="product-title">Jasa Bikin Web</div><div class="product-price" style="font-size:18px">Mulai Rp 7.000</div><button class="product-btn" type="button">LIHAT PAKET</button></div>
   </div>
-                                                                               </section>
-                                                                               <section class="page" id="page-calculator">
+</section>
+<section class="page" id="page-calculator">
   <div class="section-title"><svg class="ic" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Calculator AFK Speed</div>
   <div class="main-grid">
     <div>
@@ -1457,7 +1457,7 @@ function renderSlotManager(){
   }
   list.innerHTML=h;
 }
-function setupKatalog(){
+  function setupKatalog(){
   if($("addProductBtn")){
     $("addProductBtn").addEventListener("click",function(){
       var nama=($("prodName")?$("prodName").value:"").trim();
@@ -1662,7 +1662,7 @@ function setupParticles(){
     else{spawn();}
   },intervalTime);
 }
-function init(){
+  function init(){
   setupIntro();
   setupMusic();
   setupVideoFallback();
